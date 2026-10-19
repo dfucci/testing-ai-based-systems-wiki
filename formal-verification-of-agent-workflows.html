@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Formal Verification of Agent Workflows</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3f4b5a3">Where this sits in the agent-testing lifecycle</a></li>
-<li><a href="#org6bab812">The three-layer verification stack</a></li>
-<li><a href="#org8b8f41f">Why this needs a dependent-type language specifically</a></li>
-<li><a href="#org1e7a3d4">Relation to broader wiki</a></li>
-<li><a href="#org9e2f0f6">Related pages</a></li>
+<li><a href="#orgbfe5bf9">Where this sits in the agent-testing lifecycle</a></li>
+<li><a href="#org8570060">The three-layer verification stack</a></li>
+<li><a href="#orgfb2aa9f">Why this needs a dependent-type language specifically</a></li>
+<li><a href="#orgc48b854">Relation to broader wiki</a></li>
+<li><a href="#orgfbded00">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,25 +216,29 @@
 </p>
 
 <p>
-<b>Sources</b>: Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf">Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org3f4b5a3" class="outline-2">
-<h2 id="org3f4b5a3">Where this sits in the agent-testing lifecycle</h2>
-<div class="outline-text-2" id="text-org3f4b5a3">
+<div id="outline-container-orgbfe5bf9" class="outline-2">
+<h2 id="orgbfe5bf9">Where this sits in the agent-testing lifecycle</h2>
+<div class="outline-text-2" id="text-orgbfe5bf9">
 <p>
 Most of this wiki&rsquo;s agent-safety material addresses execution-time behavior: <a href="agentspec.html">AgentSpec</a>&rsquo;s <a href="runtime-enforcement.html">runtime enforcement</a> intercepts and constrains agent actions as they happen. <a href="lean4agent.html">Lean4Agent</a> addresses a different point in the lifecycle entirely — <b>before</b> execution, by formally verifying the workflow <b>specification</b> itself, and <b>after</b> execution, by localizing which step&rsquo;s behavior violated a formal assumption.
 </p>
 </div>
 </div>
-<div id="outline-container-org6bab812" class="outline-2">
-<h2 id="org6bab812">The three-layer verification stack</h2>
-<div class="outline-text-2" id="text-org6bab812">
+<div id="outline-container-org8570060" class="outline-2">
+<h2 id="org8570060">The three-layer verification stack</h2>
+<div class="outline-text-2" id="text-org8570060">
 <p>
 (source for this section: Wang et al. 2026)
 </p>
@@ -250,25 +254,25 @@ The key empirical result: this verification is <b>predictive</b> of downstream t
 </p>
 </div>
 </div>
-<div id="outline-container-org8b8f41f" class="outline-2">
-<h2 id="org8b8f41f">Why this needs a dependent-type language specifically</h2>
-<div class="outline-text-2" id="text-org8b8f41f">
+<div id="outline-container-orgfb2aa9f" class="outline-2">
+<h2 id="orgfb2aa9f">Why this needs a dependent-type language specifically</h2>
+<div class="outline-text-2" id="text-orgfb2aa9f">
 <p>
 The paper argues prior formal approaches to agent verification are each too narrow: temporal logic can&rsquo;t express data-dependent properties, SMT-backed contracts struggle with higher-order reasoning, and Hoare-style tool-call contracts only cover individual calls, not whole-workflow consistency. A dependent-type language lets a single predicate system express both per-step contracts and graph-level (whole-workflow) constraints uniformly — the ablation showing graph-level predicates catch the majority of real defects (21/40 workflows flip from failing to passing when graph-level checks are removed) is the paper&rsquo;s strongest evidence for why this expressiveness matters in practice. (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org1e7a3d4" class="outline-2">
-<h2 id="org1e7a3d4">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org1e7a3d4">
+<div id="outline-container-orgc48b854" class="outline-2">
+<h2 id="orgc48b854">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgc48b854">
 <p>
 This is a formal-methods counterpart to <a href="llm-as-judge-evaluation.html">LLM-as-judge evaluation</a> — the paper directly compares its Layer-2 verification against an LLM-judge baseline and finds the LLM judge misses implicit information flows and graph-level constraints that the predicate system catches explicitly (source: Wang et al. 2026). It also complements <a href="agent-evaluation.html">Agent Evaluation</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a>: where those pages catalogue <b>what</b> goes wrong empirically, Lean4Agent offers a mechanism to <b>prove</b> certain classes of failure cannot occur by construction, and to <b>localize</b> the ones that still do.
 </p>
 </div>
 </div>
-<div id="outline-container-org9e2f0f6" class="outline-2">
-<h2 id="org9e2f0f6">Related pages</h2>
-<div class="outline-text-2" id="text-org9e2f0f6">
+<div id="outline-container-orgfbded00" class="outline-2">
+<h2 id="orgfbded00">Related pages</h2>
+<div class="outline-text-2" id="text-orgfbded00">
 <ul class="org-ul">
 <li><a href="lean4agent.html">Lean4Agent (Wang et al. 2026)</a></li>
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
@@ -283,7 +287,7 @@ This is a formal-methods counterpart to <a href="llm-as-judge-evaluation.html">L
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

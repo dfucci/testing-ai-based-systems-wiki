@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ConcoLixir: Reactive LLM Discovery Oracles for Python Concolic Testing (Chen et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2a77bef">Motivation</a></li>
-<li><a href="#org8c24540">Approach</a></li>
-<li><a href="#org92acd09">Findings</a></li>
-<li><a href="#orga30542e">Relation to broader wiki</a></li>
-<li><a href="#org0648985">Related pages</a></li>
+<li><a href="#org45dd778">Motivation</a></li>
+<li><a href="#org950f265">Approach</a></li>
+<li><a href="#orgbd55e26">Findings</a></li>
+<li><a href="#orgf4c1770">Relation to broader wiki</a></li>
+<li><a href="#orgb716c63">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,49 +216,53 @@
 </p>
 
 <p>
-<b>Sources</b>: Chen et al. - 2026 - ConcoLixir Reactive LLM Discovery Oracles for Python Concolic Testing.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Chen et al. - 2026 - ConcoLixir Reactive LLM Discovery Oracles for Python Concolic Testing.pdf">Chen et al. - 2026 - ConcoLixir Reactive LLM Discovery Oracles for Python Concolic Testing.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-30
 </p>
 
 <hr />
-<div id="outline-container-org2a77bef" class="outline-2">
-<h2 id="org2a77bef">Motivation</h2>
-<div class="outline-text-2" id="text-org2a77bef">
+<div id="outline-container-org45dd778" class="outline-2">
+<h2 id="org45dd778">Motivation</h2>
+<div class="outline-text-2" id="text-org45dd778">
 <p>
 Concolic testing (concrete + symbolic execution) generates inputs by negating path constraints and asking an SMT solver for a satisfying input. Python breaks this cleanly in three ways: library calls can force symbolic variables to downgrade to concrete values, semantic operations (regex, checksums, parsers) are hard for solvers to invert, and exploration plateaus on already-covered paths. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org8c24540" class="outline-2">
-<h2 id="org8c24540">Approach</h2>
-<div class="outline-text-2" id="text-org8c24540">
+<div id="outline-container-org950f265" class="outline-2">
+<h2 id="org950f265">Approach</h2>
+<div class="outline-text-2" id="text-org950f265">
 <p>
 ConcoLixir is a <b>reactive</b> extension: the LLM is invoked only when the solver already failed or coverage stalled, not on every step. It plays three roles — generating initial seeds, proposing concrete inputs after solver failures, and targeting uncovered code when exploration plateaus. Critically, the LLM is explicitly <b>not</b> a correctness oracle: every candidate input is still executed concolically, and only observed coverage and collected path constraints (not the LLM&rsquo;s own judgment) guide subsequent exploration. This bounds the blast radius of LLM hallucination — a bad suggestion just wastes one execution rather than corrupting the test oracle. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org92acd09" class="outline-2">
-<h2 id="org92acd09">Findings</h2>
-<div class="outline-text-2" id="text-org92acd09">
+<div id="outline-container-orgbd55e26" class="outline-2">
+<h2 id="orgbd55e26">Findings</h2>
+<div class="outline-text-2" id="text-orgbd55e26">
 <p>
 Across synthetic, real-world, and library targets, ConcoLixir improves mean line coverage over the LLM-free concolic baseline by 8.6, 15.1, and 17.0 percentage points respectively. Gains concentrate near semantic barriers and library boundaries — exactly where solver-only concolic execution gets stuck. Full evaluation cost was $1.63 in API charges, showing the approach is cheap to run. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga30542e" class="outline-2">
-<h2 id="orga30542e">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orga30542e">
+<div id="outline-container-orgf4c1770" class="outline-2">
+<h2 id="orgf4c1770">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgf4c1770">
 <p>
 ConcoLixir is a different answer to the <a href="oracle-problem.html">oracle problem</a> than the rest of this wiki&rsquo;s LLM-as-judge or metamorphic strategies: instead of using an LLM to <b>evaluate</b> correctness, it uses an LLM to <b>discover</b> inputs while leaving the ground-truth judgment to concrete execution and coverage feedback. This &ldquo;LLM proposes, deterministic tool disposes&rdquo; pattern also appears in <a href="mumutestup.html">MuMuTestUp</a>, where LLM-generated test updates are validated by concrete compilation/coverage/mutation runs rather than trusted directly.
 </p>
 </div>
 </div>
-<div id="outline-container-org0648985" class="outline-2">
-<h2 id="org0648985">Related pages</h2>
-<div class="outline-text-2" id="text-org0648985">
+<div id="outline-container-orgb716c63" class="outline-2">
+<h2 id="orgb716c63">Related pages</h2>
+<div class="outline-text-2" id="text-orgb716c63">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="mumutestup.html">MuMuTestUp</a></li>
@@ -269,7 +273,7 @@ ConcoLixir is a different answer to the <a href="oracle-problem.html">oracle pro
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents</title>
@@ -203,26 +203,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgee75c80">Overview</a></li>
-<li><a href="#org3dca2a5">The AgentSpec Language</a>
+<li><a href="#org0cdceeb">Overview</a></li>
+<li><a href="#org20568b4">The AgentSpec Language</a>
 <ul>
-<li><a href="#orgdeb4b59">Triggers</a></li>
-<li><a href="#org5db428e">Checks (Predicates)</a></li>
-<li><a href="#orgfcb39a0">Enforcement Actions</a></li>
+<li><a href="#org0c18480">Triggers</a></li>
+<li><a href="#org872d943">Checks (Predicates)</a></li>
+<li><a href="#org2f3ae2b">Enforcement Actions</a></li>
 </ul>
 </li>
-<li><a href="#orgead45a4">Implementation</a></li>
-<li><a href="#org21d247b">Evaluation Results</a>
+<li><a href="#org686752c">Implementation</a></li>
+<li><a href="#orgc90ed24">Evaluation Results</a>
 <ul>
-<li><a href="#org7314fe7">RQ1: Expressiveness and Effectiveness</a></li>
-<li><a href="#orgc7d2742">RQ2: LLM-Generated Rules</a></li>
-<li><a href="#orge9aacb1">RQ3: Rule Generalizability</a></li>
-<li><a href="#org4215907">RQ4: Runtime Overhead</a></li>
+<li><a href="#org9231d50">RQ1: Expressiveness and Effectiveness</a></li>
+<li><a href="#org3fe047a">RQ2: LLM-Generated Rules</a></li>
+<li><a href="#org718b802">RQ3: Rule Generalizability</a></li>
+<li><a href="#org3c5e4c2">RQ4: Runtime Overhead</a></li>
 </ul>
 </li>
-<li><a href="#org57ff746">Limitations</a></li>
-<li><a href="#org9117b62">Relation to Other Approaches</a></li>
-<li><a href="#orgdebbcce">Related pages</a></li>
+<li><a href="#orgf5964b9">Limitations</a></li>
+<li><a href="#org5cda9c1">Relation to Other Approaches</a></li>
+<li><a href="#org02ed499">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -231,17 +231,21 @@
 </p>
 
 <p>
-<b>Sources</b>: Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf">Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-orgee75c80" class="outline-2">
-<h2 id="orgee75c80">Overview</h2>
-<div class="outline-text-2" id="text-orgee75c80">
+<div id="outline-container-org0cdceeb" class="outline-2">
+<h2 id="org0cdceeb">Overview</h2>
+<div class="outline-text-2" id="text-org0cdceeb">
 <p>
 LLM agents operating autonomously can take harmful, unintended actions — financial transactions, destructive file operations, traffic law violations. AgentSpec provides a declarative mechanism for constraining agent behavior at runtime without modifying the agent&rsquo;s internals. (source: Wang et al. 2025)
 </p>
@@ -251,9 +255,9 @@ Unlike post-hoc evaluation (e.g., <a href="trajeval.html">TRAJEVAL</a>) or pre-e
 </p>
 </div>
 </div>
-<div id="outline-container-org3dca2a5" class="outline-2">
-<h2 id="org3dca2a5">The AgentSpec Language</h2>
-<div class="outline-text-2" id="text-org3dca2a5">
+<div id="outline-container-org20568b4" class="outline-2">
+<h2 id="org20568b4">The AgentSpec Language</h2>
+<div class="outline-text-2" id="text-org20568b4">
 <p>
 Each rule has five parts (source: Wang et al. 2025):
 </p>
@@ -267,9 +271,9 @@ end
 </code></pre>
 </div>
 </div>
-<div id="outline-container-orgdeb4b59" class="outline-3">
-<h3 id="orgdeb4b59">Triggers</h3>
-<div class="outline-text-3" id="text-orgdeb4b59">
+<div id="outline-container-org0c18480" class="outline-3">
+<h3 id="org0c18480">Triggers</h3>
+<div class="outline-text-3" id="text-org0c18480">
 <p>
 Events that activate a rule:
 </p>
@@ -281,9 +285,9 @@ Events that activate a rule:
 </ul>
 </div>
 </div>
-<div id="outline-container-org5db428e" class="outline-3">
-<h3 id="org5db428e">Checks (Predicates)</h3>
-<div class="outline-text-3" id="text-org5db428e">
+<div id="outline-container-org872d943" class="outline-3">
+<h3 id="org872d943">Checks (Predicates)</h3>
+<div class="outline-text-3" id="text-org872d943">
 <p>
 Boolean conditions evaluated when trigger fires. Can be:
 </p>
@@ -293,9 +297,9 @@ Boolean conditions evaluated when trigger fires. Can be:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfcb39a0" class="outline-3">
-<h3 id="orgfcb39a0">Enforcement Actions</h3>
-<div class="outline-text-3" id="text-orgfcb39a0">
+<div id="outline-container-org2f3ae2b" class="outline-3">
+<h3 id="org2f3ae2b">Enforcement Actions</h3>
+<div class="outline-text-3" id="text-org2f3ae2b">
 <p>
 Actions taken when trigger fires and all predicates hold:
 </p>
@@ -308,9 +312,9 @@ Actions taken when trigger fires and all predicates hold:
 </div>
 </div>
 </div>
-<div id="outline-container-orgead45a4" class="outline-2">
-<h2 id="orgead45a4">Implementation</h2>
-<div class="outline-text-2" id="text-orgead45a4">
+<div id="outline-container-org686752c" class="outline-2">
+<h2 id="org686752c">Implementation</h2>
+<div class="outline-text-2" id="text-org686752c">
 <p>
 AgentSpec is implemented for LangChain by intercepting <code>iter_next_step</code> (source: Wang et al. 2025). Three hook points:
 </p>
@@ -325,13 +329,13 @@ The framework is architecture-agnostic: the same principles apply to AutoGen and
 </p>
 </div>
 </div>
-<div id="outline-container-org21d247b" class="outline-2">
-<h2 id="org21d247b">Evaluation Results</h2>
-<div class="outline-text-2" id="text-org21d247b">
+<div id="outline-container-orgc90ed24" class="outline-2">
+<h2 id="orgc90ed24">Evaluation Results</h2>
+<div class="outline-text-2" id="text-orgc90ed24">
 </div>
-<div id="outline-container-org7314fe7" class="outline-3">
-<h3 id="org7314fe7">RQ1: Expressiveness and Effectiveness</h3>
-<div class="outline-text-3" id="text-org7314fe7">
+<div id="outline-container-org9231d50" class="outline-3">
+<h3 id="org9231d50">RQ1: Expressiveness and Effectiveness</h3>
+<div class="outline-text-3" id="text-org9231d50">
 <p>
 Evaluated on three agent types (source: Wang et al. 2025):
 </p>
@@ -379,9 +383,9 @@ Safe task success drops only slightly for embodied agents (58.62% → 54.26%).
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7d2742" class="outline-3">
-<h3 id="orgc7d2742">RQ2: LLM-Generated Rules</h3>
-<div class="outline-text-3" id="text-orgc7d2742">
+<div id="outline-container-org3fe047a" class="outline-3">
+<h3 id="org3fe047a">RQ2: LLM-Generated Rules</h3>
+<div class="outline-text-3" id="text-org3fe047a">
 <p>
 Using OpenAI o1 to auto-generate AgentSpec rules (source: Wang et al. 2025):
 </p>
@@ -396,17 +400,17 @@ LLM-generated rules tend to over-fit to provided examples and may miss broadly-s
 </p>
 </div>
 </div>
-<div id="outline-container-orge9aacb1" class="outline-3">
-<h3 id="orge9aacb1">RQ3: Rule Generalizability</h3>
-<div class="outline-text-3" id="text-orge9aacb1">
+<div id="outline-container-org718b802" class="outline-3">
+<h3 id="org718b802">RQ3: Rule Generalizability</h3>
+<div class="outline-text-3" id="text-org718b802">
 <p>
 Single rules cover many instances: one embodied-agent rule (Figure 7 in paper) prevents 96 risky scenarios. Rules share predicates across risk categories. (source: Wang et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org4215907" class="outline-3">
-<h3 id="org4215907">RQ4: Runtime Overhead</h3>
-<div class="outline-text-3" id="text-org4215907">
+<div id="outline-container-org3c5e4c2" class="outline-3">
+<h3 id="org3c5e4c2">RQ4: Runtime Overhead</h3>
+<div class="outline-text-3" id="text-org3c5e4c2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -445,9 +449,9 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </div>
 </div>
 </div>
-<div id="outline-container-org57ff746" class="outline-2">
-<h2 id="org57ff746">Limitations</h2>
-<div class="outline-text-2" id="text-org57ff746">
+<div id="outline-container-orgf5964b9" class="outline-2">
+<h2 id="orgf5964b9">Limitations</h2>
+<div class="outline-text-2" id="text-orgf5964b9">
 <ul class="org-ul">
 <li><b>Deterministic enforcement only</b>: no probabilistic or trajectory-based safety analysis; cannot reason about long-term consequences of current actions</li>
 <li><b>No future-state estimation</b>: cannot detect when immediate preconditions are safe but risky states are likely later</li>
@@ -459,9 +463,9 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </p>
 </div>
 </div>
-<div id="outline-container-org9117b62" class="outline-2">
-<h2 id="org9117b62">Relation to Other Approaches</h2>
-<div class="outline-text-2" id="text-org9117b62">
+<div id="outline-container-org5cda9c1" class="outline-2">
+<h2 id="org5cda9c1">Relation to Other Approaches</h2>
+<div class="outline-text-2" id="text-org5cda9c1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -511,9 +515,9 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </p>
 </div>
 </div>
-<div id="outline-container-orgdebbcce" class="outline-2">
-<h2 id="orgdebbcce">Related pages</h2>
-<div class="outline-text-2" id="text-orgdebbcce">
+<div id="outline-container-org02ed499" class="outline-2">
+<h2 id="org02ed499">Related pages</h2>
+<div class="outline-text-2" id="text-org02ed499">
 <ul class="org-ul">
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
 <li><a href="agent-safety.html">Agent Safety</a></li>
@@ -526,7 +530,7 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

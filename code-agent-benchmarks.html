@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Code Agent Benchmarks</title>
@@ -203,23 +203,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc7c6d2b">Capability Benchmarks</a>
+<li><a href="#org71d5c9c">Capability Benchmarks</a>
 <ul>
-<li><a href="#org2a40e17">SWE-bench Verified</a></li>
-<li><a href="#orga4e9b9b">PolyBench Verified</a></li>
-<li><a href="#org3d33056">DevBench</a></li>
+<li><a href="#org6dba579">SWE-bench Verified</a></li>
+<li><a href="#orgb889298">PolyBench Verified</a></li>
+<li><a href="#org08e156f">DevBench</a></li>
 </ul>
 </li>
-<li><a href="#orgf2ba705">Safety Benchmarks</a>
+<li><a href="#orga7dee71">Safety Benchmarks</a>
 <ul>
-<li><a href="#orgfe003f6">RedCode-Exec</a></li>
-<li><a href="#org8a6832a">SafeAgentBench</a></li>
-<li><a href="#org288e51e">FixDrive</a></li>
+<li><a href="#orgbc55873">RedCode-Exec</a></li>
+<li><a href="#orgabb9ad8">SafeAgentBench</a></li>
+<li><a href="#org3d38ade">FixDrive</a></li>
 </ul>
 </li>
-<li><a href="#org96b0660">Agent Architectures Evaluated</a></li>
-<li><a href="#orgb91dfb8">Models Evaluated (from TRAJEVAL)</a></li>
-<li><a href="#orgd1119bb">Related pages</a></li>
+<li><a href="#org6bfd2b0">Agent Architectures Evaluated</a></li>
+<li><a href="#org9cabdf4">Models Evaluated (from TRAJEVAL)</a></li>
+<li><a href="#org382f0ca">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,21 +228,26 @@
 </p>
 
 <p>
-<b>Sources</b>: Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf; Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
+<li><a href="../raw/Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf">Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-05-04
 </p>
 
 <hr />
-<div id="outline-container-orgc7c6d2b" class="outline-2">
-<h2 id="orgc7c6d2b">Capability Benchmarks</h2>
-<div class="outline-text-2" id="text-orgc7c6d2b">
+<div id="outline-container-org71d5c9c" class="outline-2">
+<h2 id="org71d5c9c">Capability Benchmarks</h2>
+<div class="outline-text-2" id="text-org71d5c9c">
 </div>
-<div id="outline-container-org2a40e17" class="outline-3">
-<h3 id="org2a40e17">SWE-bench Verified</h3>
-<div class="outline-text-3" id="text-org2a40e17">
+<div id="outline-container-org6dba579" class="outline-3">
+<h3 id="org6dba579">SWE-bench Verified</h3>
+<div class="outline-text-3" id="text-org6dba579">
 <p>
 500 real-world GitHub issues from 12 Python repositories with human-verified patches. The primary benchmark for measuring agent ability to resolve software engineering tasks. Pass@1 rates for top agents: GPT-5 ~66-67%, Qwen-Coder-480B ~61%.
 </p>
@@ -252,9 +257,9 @@ Used in <a href="trajeval.html">TRAJEVAL</a> to analyze 9,500 trajectories acros
 </p>
 </div>
 </div>
-<div id="outline-container-orga4e9b9b" class="outline-3">
-<h3 id="orga4e9b9b">PolyBench Verified</h3>
-<div class="outline-text-3" id="text-orga4e9b9b">
+<div id="outline-container-orgb889298" class="outline-3">
+<h3 id="orgb889298">PolyBench Verified</h3>
+<div class="outline-text-3" id="text-orgb889298">
 <p>
 382 multilingual issues across Python, Java, JavaScript, and TypeScript from 20 repositories. Tests cross-language generalization. Tasks are harder: GPT-5 achieves only ~39% Pass@1 vs. ~67% on SWE-bench.
 </p>
@@ -264,22 +269,22 @@ Key finding: agents need ~25% more tool invocations on PolyBench than SWE-bench,
 </p>
 </div>
 </div>
-<div id="outline-container-org3d33056" class="outline-3">
-<h3 id="org3d33056">DevBench</h3>
-<div class="outline-text-3" id="text-org3d33056">
+<div id="outline-container-org08e156f" class="outline-3">
+<h3 id="org08e156f">DevBench</h3>
+<div class="outline-text-3" id="text-org08e156f">
 <p>
 Developer-informed benchmark for code generation models (Golnari et al., 2026). Provides development environment metrics but lacks stage-wise decomposition and <a href="golden-context.html">golden context</a> comparison.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf2ba705" class="outline-2">
-<h2 id="orgf2ba705">Safety Benchmarks</h2>
-<div class="outline-text-2" id="text-orgf2ba705">
+<div id="outline-container-orga7dee71" class="outline-2">
+<h2 id="orga7dee71">Safety Benchmarks</h2>
+<div class="outline-text-2" id="text-orga7dee71">
 </div>
-<div id="outline-container-orgfe003f6" class="outline-3">
-<h3 id="orgfe003f6">RedCode-Exec</h3>
-<div class="outline-text-3" id="text-orgfe003f6">
+<div id="outline-container-orgbc55873" class="outline-3">
+<h3 id="orgbc55873">RedCode-Exec</h3>
+<div class="outline-text-3" id="text-orgbc55873">
 <p>
 750 risky code execution scenarios across 25 vulnerability categories, each with 30 test cases. Categories include: post sensitive files online, untrusted installation, delete sensitive files, reverse shell creation, unsafe deserialization, cryptographic predictability, etc.
 </p>
@@ -289,26 +294,26 @@ Used to evaluate <a href="agentspec.html">AgentSpec</a> on the CodeAct code agen
 </p>
 </div>
 </div>
-<div id="outline-container-org8a6832a" class="outline-3">
-<h3 id="org8a6832a">SafeAgentBench</h3>
-<div class="outline-text-3" id="text-org8a6832a">
+<div id="outline-container-orgabb9ad8" class="outline-3">
+<h3 id="orgabb9ad8">SafeAgentBench</h3>
+<div class="outline-text-3" id="text-orgabb9ad8">
 <p>
 Benchmark for embodied agent safety. 250 unsafe scenarios across 10 hazard categories (fire, electrical shock, explosion, poisoning, slip, liquid damage, breakage, appliances misuse, property damage, small items damage) plus safe scenarios. Used to evaluate AgentSpec on a robotic arm agent. (source: AgentSpec paper)
 </p>
 </div>
 </div>
-<div id="outline-container-org288e51e" class="outline-3">
-<h3 id="org288e51e">FixDrive</h3>
-<div class="outline-text-3" id="text-org288e51e">
+<div id="outline-container-org3d38ade" class="outline-3">
+<h3 id="org3d38ade">FixDrive</h3>
+<div class="outline-text-3" id="text-org3d38ade">
 <p>
 Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8 scenarios covering collision, traffic signal violations (Laws 38, 44, 46, 53), and journey completion. Used to evaluate AgentSpec on the Apollo autonomous driving system. (source: AgentSpec paper)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org96b0660" class="outline-2">
-<h2 id="org96b0660">Agent Architectures Evaluated</h2>
-<div class="outline-text-2" id="text-org96b0660">
+<div id="outline-container-org6bfd2b0" class="outline-2">
+<h2 id="org6bfd2b0">Agent Architectures Evaluated</h2>
+<div class="outline-text-2" id="text-org6bfd2b0">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -366,9 +371,9 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </table>
 </div>
 </div>
-<div id="outline-container-orgb91dfb8" class="outline-2">
-<h2 id="orgb91dfb8">Models Evaluated (from TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-orgb91dfb8">
+<div id="outline-container-org9cabdf4" class="outline-2">
+<h2 id="org9cabdf4">Models Evaluated (from TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-org9cabdf4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -422,9 +427,9 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </table>
 </div>
 </div>
-<div id="outline-container-orgd1119bb" class="outline-2">
-<h2 id="orgd1119bb">Related pages</h2>
-<div class="outline-text-2" id="text-orgd1119bb">
+<div id="outline-container-org382f0ca" class="outline-2">
+<h2 id="org382f0ca">Related pages</h2>
+<div class="outline-text-2" id="text-org382f0ca">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="agentspec.html">AgentSpec</a></li>
@@ -436,7 +441,7 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

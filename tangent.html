@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tangent: An Empirical Study of Testing Practices for LLM-Based Agent Applications (Pan et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge2ec335">Motivation</a></li>
-<li><a href="#org86d3964">Method</a></li>
-<li><a href="#org2c52598">Findings</a></li>
-<li><a href="#orgf341398">23-pattern taxonomy</a></li>
-<li><a href="#org0f1d115">Related pages</a></li>
+<li><a href="#org5332625">Motivation</a></li>
+<li><a href="#orgae2bac2">Method</a></li>
+<li><a href="#orgafcf779">Findings</a></li>
+<li><a href="#org049bf0e">23-pattern taxonomy</a></li>
+<li><a href="#orgc4ab7cc">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,33 +216,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf">Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-19
 </p>
 
 <hr />
-<div id="outline-container-orge2ec335" class="outline-2">
-<h2 id="orge2ec335">Motivation</h2>
-<div class="outline-text-2" id="text-orge2ec335">
+<div id="outline-container-org5332625" class="outline-2">
+<h2 id="org5332625">Motivation</h2>
+<div class="outline-text-2" id="text-org5332625">
 <p>
 Almost nothing is empirically known about how developers actually <b>test</b> LLM-based agents (planning, tool use, memory, multi-agent coordination), as opposed to how they&rsquo;re <b>benchmarked</b>. Prior work focuses on task-completion benchmarks, not test design (levels, objectives, data, assertions). (source: Pan et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org86d3964" class="outline-2">
-<h2 id="org86d3964">Method</h2>
-<div class="outline-text-2" id="text-org86d3964">
+<div id="outline-container-orgae2bac2" class="outline-2">
+<h2 id="orgae2bac2">Method</h2>
+<div class="outline-text-2" id="text-orgae2bac2">
 <p>
 Mined 1,190 GitHub Python repos using LangChain, LangGraph, MCP → 209 repos with tests → 240 modules, 2,572 manually labeled test methods (Cohen&rsquo;s kappa 0.92). Complemented with structured interviews of 10 senior IBM practitioners (5-29 years experience). Released the &ldquo;Tangent Dataset&rdquo; (1,723 agents, 4,111 tools, 240 labeled modules) publicly.
 </p>
 </div>
 </div>
-<div id="outline-container-org2c52598" class="outline-2">
-<h2 id="org2c52598">Findings</h2>
-<div class="outline-text-2" id="text-org2c52598">
+<div id="outline-container-orgafcf779" class="outline-2">
+<h2 id="orgafcf779">Findings</h2>
+<div class="outline-text-2" id="text-orgafcf779">
 <p>
 See <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> for the full synthesis against Magalhães et al. 2025&rsquo;s independent case study. Headline numbers:
 </p>
@@ -257,9 +261,9 @@ See <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> for
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf341398" class="outline-2">
-<h2 id="orgf341398">23-pattern taxonomy</h2>
-<div class="outline-text-2" id="text-orgf341398">
+<div id="outline-container-org049bf0e" class="outline-2">
+<h2 id="org049bf0e">23-pattern taxonomy</h2>
+<div class="outline-text-2" id="text-org049bf0e">
 <p>
 Four categories: test fixtures (mock agent/tool/environment), test data (mocked/real/synthetic/dummy), test objectives (agent/tool, interaction, scenario, end-to-end), assertions (state/output/memory/reasoning/environment). Also proposes an extended testability theory (Freeman&rsquo;s observability/controllability, extended to agent memory, tool selection, delegation, reasoning traces), and flags a <b>dual-interface mocking challenge</b>: tools expose both a machine API and a natural-language description that shapes LLM reasoning — mocking must simulate both.
 </p>
@@ -269,9 +273,9 @@ Future directions proposed: property-based/metamorphic testing for agents, fault
 </p>
 </div>
 </div>
-<div id="outline-container-org0f1d115" class="outline-2">
-<h2 id="org0f1d115">Related pages</h2>
-<div class="outline-text-2" id="text-org0f1d115">
+<div id="outline-container-orgc4ab7cc" class="outline-2">
+<h2 id="orgc4ab7cc">Related pages</h2>
+<div class="outline-text-2" id="text-orgc4ab7cc">
 <ul class="org-ul">
 <li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
 <li><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software (Magalhães et al. 2025)</a></li>
@@ -285,7 +289,7 @@ Future directions proposed: property-based/metamorphic testing for agents, fault
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

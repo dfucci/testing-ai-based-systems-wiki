@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing the Untestable? An Empirical Study on Testing LLM-Powered Software (Magalhães et al. 2025)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6b64380">Motivation</a></li>
-<li><a href="#org4a3b7a3">Method</a></li>
-<li><a href="#orgb152604">Findings</a></li>
-<li><a href="#org3f60364">Limitation</a></li>
-<li><a href="#orga255089">Related pages</a></li>
+<li><a href="#org29c5aa8">Motivation</a></li>
+<li><a href="#org0659b3d">Method</a></li>
+<li><a href="#orge109897">Findings</a></li>
+<li><a href="#org46b0e01">Limitation</a></li>
+<li><a href="#org4f44f33">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,33 +216,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub>
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Magalhaes_et_al_2025.pdf">Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-19
 </p>
 
 <hr />
-<div id="outline-container-org6b64380" class="outline-2">
-<h2 id="org6b64380">Motivation</h2>
-<div class="outline-text-2" id="text-org6b64380">
+<div id="outline-container-org29c5aa8" class="outline-2">
+<h2 id="org29c5aa8">Motivation</h2>
+<div class="outline-text-2" id="text-org29c5aa8">
 <p>
 LLM-powered systems are increasingly core components in real applications, but non-deterministic, prompt-sensitive, drift-prone behavior breaks standard testing assumptions (e.g. regression-test reliability). Existing literature evaluates model performance in isolation, not how full systems integrating LLMs are actually tested during development. (source: Magalhães et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org4a3b7a3" class="outline-2">
-<h2 id="org4a3b7a3">Method</h2>
-<div class="outline-text-2" id="text-org4a3b7a3">
+<div id="outline-container-org0659b3d" class="outline-2">
+<h2 id="org0659b3d">Method</h2>
+<div class="outline-text-2" id="text-org0659b3d">
 <p>
 Exploratory/descriptive qualitative case study (Runeson &amp; Höst methodology) analyzing 99 individual student reflection reports from 21 team projects in a third-year undergraduate software architecture course — teams built and publicly deployed real LLM-integrated apps (SQL persistence, mandatory LLM feature). Hybrid human+GPT-4.0-assisted thematic analysis across four dimensions: type of testing, LLM behavior, testing challenges, lessons learned, verified by two researchers.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb152604" class="outline-2">
-<h2 id="orgb152604">Findings</h2>
-<div class="outline-text-2" id="text-orgb152604">
+<div id="outline-container-orge109897" class="outline-2">
+<h2 id="orge109897">Findings</h2>
+<div class="outline-text-2" id="text-orge109897">
 <p>
 See <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> for synthesis against Tangent&rsquo;s independent large-scale study. Headline points:
 </p>
@@ -254,17 +258,17 @@ See <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> for
 </ul>
 </div>
 </div>
-<div id="outline-container-org3f60364" class="outline-2">
-<h2 id="org3f60364">Limitation</h2>
-<div class="outline-text-2" id="text-org3f60364">
+<div id="outline-container-org46b0e01" class="outline-2">
+<h2 id="org46b0e01">Limitation</h2>
+<div class="outline-text-2" id="text-org46b0e01">
 <p>
 Participants are students in a simulated setting, not professional developers — findings are transferable but not statistically generalizable to industry practice. (Tangent&rsquo;s independent, industry-grounded study reaching similar conclusions is a useful corroboration despite this limitation.)
 </p>
 </div>
 </div>
-<div id="outline-container-orga255089" class="outline-2">
-<h2 id="orga255089">Related pages</h2>
-<div class="outline-text-2" id="text-orga255089">
+<div id="outline-container-org4f44f33" class="outline-2">
+<h2 id="org4f44f33">Related pages</h2>
+<div class="outline-text-2" id="text-org4f44f33">
 <ul class="org-ul">
 <li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
 <li><a href="tangent.html">Tangent (Pan et al. 2026)</a></li>
@@ -275,7 +279,7 @@ Participants are students in a simulated setting, not professional developers �
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

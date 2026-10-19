@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Test-Aware Mutant Generation (Kiele et al. 2026)</title>
@@ -203,20 +203,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga4a9264">Idea</a></li>
-<li><a href="#org40f8666">Setup</a></li>
-<li><a href="#org799f5ed">Results</a>
+<li><a href="#org3ff37c7">Idea</a></li>
+<li><a href="#org6e7c857">Setup</a></li>
+<li><a href="#org41070ca">Results</a>
 <ul>
-<li><a href="#org8a80632">Effectiveness</a></li>
-<li><a href="#org163d495">Subtlety — no clear difference</a></li>
-<li><a href="#org587084f">What the &ldquo;Undetected&rdquo; mutants are</a></li>
-<li><a href="#org7797e54">Cost</a></li>
-<li><a href="#orga2756d8">Iterative prompting narrows the gap</a></li>
+<li><a href="#org4b90bd8">Effectiveness</a></li>
+<li><a href="#org1a1e158">Subtlety — no clear difference</a></li>
+<li><a href="#org5432dec">What the &ldquo;Undetected&rdquo; mutants are</a></li>
+<li><a href="#org80ae1a5">Cost</a></li>
+<li><a href="#orgb96df60">Iterative prompting narrows the gap</a></li>
 </ul>
 </li>
-<li><a href="#org3e2fda9">Caveats and source inconsistencies</a></li>
-<li><a href="#orgce65298">Relation to broader wiki</a></li>
-<li><a href="#orgd95bda4">Related pages</a></li>
+<li><a href="#orgec6cafd">Caveats and source inconsistencies</a></li>
+<li><a href="#orgb7ac125">Relation to broader wiki</a></li>
+<li><a href="#org6c0ec07">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -225,25 +225,29 @@
 </p>
 
 <p>
-<b>Sources</b>: Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf (ESEM 2026, LIPIcs 49:1-49:20)
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf">Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf</a> (ESEM 2026, LIPIcs 49:1-49:20)</li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-orga4a9264" class="outline-2">
-<h2 id="orga4a9264">Idea</h2>
-<div class="outline-text-2" id="text-orga4a9264">
+<div id="outline-container-org3ff37c7" class="outline-2">
+<h2 id="org3ff37c7">Idea</h2>
+<div class="outline-text-2" id="text-org3ff37c7">
 <p>
 Prior LLM-based mutant generators (LLMorpheus, BugFarm, µBERT, LEAM) are <b>test-blind</b>: the model sees only the source code, so it cannot target what the existing tests already cover and often produces mutants that the base suite kills trivially or that are equivalent to the original. Kiele et al. frame mutant generation as an <b>adversarial task</b>: given the problem statement P, canonical solution C and base tests T<sub>base</sub>, produce a mutant C&rsquo; that keeps the function signature, passes T<sub>base</sub>, and fails at least one test of a hidden oracle T<sub>oracle</sub>. One mutant per problem/model/prompt, no compilation or execution feedback. (source: Kiele et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org40f8666" class="outline-2">
-<h2 id="org40f8666">Setup</h2>
-<div class="outline-text-2" id="text-org40f8666">
+<div id="outline-container-org6e7c857" class="outline-2">
+<h2 id="org6e7c857">Setup</h2>
+<div class="outline-text-2" id="text-org6e7c857">
 <ul class="org-ul">
 <li><b>Benchmarks</b>: EvalPlus-extended HumanEval (164 problems) and MBPP (378 problems). Base tests are the original developer-style tests (7.7 per HumanEval problem, 3 per MBPP problem); the extended EvalPlus suites (80× and 35× more tests) act as an automated oracle, so a mutant that passes the base tests but fails an extended test is a <b>verified, non-equivalent fault</b> without manual review.</li>
 <li><b>Four mutually exclusive outcomes</b>: Invalid (does not compile / times out), Rejected (killed by a base test), Success (survives base, caught by oracle), Undetected (survives both).</li>
@@ -253,13 +257,13 @@ Prior LLM-based mutant generators (LLMorpheus, BugFarm, µBERT, LEAM) are <b>tes
 </ul>
 </div>
 </div>
-<div id="outline-container-org799f5ed" class="outline-2">
-<h2 id="org799f5ed">Results</h2>
-<div class="outline-text-2" id="text-org799f5ed">
+<div id="outline-container-org41070ca" class="outline-2">
+<h2 id="org41070ca">Results</h2>
+<div class="outline-text-2" id="text-org41070ca">
 </div>
-<div id="outline-container-org8a80632" class="outline-3">
-<h3 id="org8a80632">Effectiveness</h3>
-<div class="outline-text-3" id="text-org8a80632">
+<div id="outline-container-org4b90bd8" class="outline-3">
+<h3 id="org4b90bd8">Effectiveness</h3>
+<div class="outline-text-3" id="text-org4b90bd8">
 <p>
 Success rate with <code>agent1-ta</code> vs. <code>agent1-tb</code> (Gemini 3.1 Pro): HumanEval 87.8% (144/164) vs. 12.2% (20/164), MBPP 79.1% (299/378) vs. 23.0% (87/378) — up to a 7× gain. mutmut reaches 4.4% (126/2,841) on HumanEval and 5.7% (195/3,427) on MBPP; almost every LLM configuration beats it, even test-blind (exceptions: <code>agent2-tb</code> with Gemini 3.1 Pro at 4.3% and GPT 4.1 Mini at 3.0% on HumanEval). GPT 5.1 Codex Mini goes from 11.6% to 81.1% (<code>agent1</code>) and 7.9% to 82.3% (<code>agent2</code>). Even the weakest model, GPT 4.1 Mini, improves from 5.5% to 31.7% (<code>agent1</code>). The shift is from <b>Rejected</b> to <b>Success</b>: without seeing the tests, models make changes the base assertions already catch. (source: Kiele et al. 2026)
 </p>
@@ -269,17 +273,17 @@ Model capability matters more than prompt wording for the Invalid rate: the smal
 </p>
 </div>
 </div>
-<div id="outline-container-org163d495" class="outline-3">
-<h3 id="org163d495">Subtlety — no clear difference</h3>
-<div class="outline-text-3" id="text-org163d495">
+<div id="outline-container-org1a1e158" class="outline-3">
+<h3 id="org1a1e158">Subtlety — no clear difference</h3>
+<div class="outline-text-3" id="text-org1a1e158">
 <p>
 Subtlety is the oracle kill rate: the fraction of extended tests a mutant fails (lower = narrower fault). Test-aware medians sit around 10-30%, comparable to test-blind, and the paper states it is &ldquo;not clear&rdquo; that LLM mutants are more or less subtle than mutmut&rsquo;s. The gain from test-awareness is therefore <b>yield at comparable subtlety</b>, not subtler bugs. (source: Kiele et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org587084f" class="outline-3">
-<h3 id="org587084f">What the &ldquo;Undetected&rdquo; mutants are</h3>
-<div class="outline-text-3" id="text-org587084f">
+<div id="outline-container-org5432dec" class="outline-3">
+<h3 id="org5432dec">What the &ldquo;Undetected&rdquo; mutants are</h3>
+<div class="outline-text-3" id="text-org5432dec">
 <p>
 For the best setting (Gemini 3.1 Pro, <code>agent1-ta</code>) all 65 Undetected mutants (9 HumanEval, 56 MBPP) were hand-labeled by one author:
 </p>
@@ -336,26 +340,26 @@ So only 9 of 65 (13.8%) were genuine generator failures; most &ldquo;survivors&r
 </p>
 </div>
 </div>
-<div id="outline-container-org7797e54" class="outline-3">
-<h3 id="org7797e54">Cost</h3>
-<div class="outline-text-3" id="text-org7797e54">
+<div id="outline-container-org80ae1a5" class="outline-3">
+<h3 id="org80ae1a5">Cost</h3>
+<div class="outline-text-3" id="text-org80ae1a5">
 <p>
 Per generated candidate, an LLM mutant is roughly 7-12× slower than a mutmut mutant (GPT 5.1 Codex Mini <code>agent1-ta</code>: 29.7 s/problem on HumanEval, 16.4 s on MBPP, vs. ~2.4 s per mutmut mutant). Per <b>verified</b> fault the ranking reverses: 36.6 s (HumanEval) and 22.5 s (MBPP) for the LLM vs. 54.0 s and 41.9 s for mutmut. Test-aware prompting is also cheaper in tokens per verified mutant than test-blind for every model except GPT 4.1 Mini, because fewer generations are wasted. (source: Kiele et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga2756d8" class="outline-3">
-<h3 id="orga2756d8">Iterative prompting narrows the gap</h3>
-<div class="outline-text-3" id="text-orga2756d8">
+<div id="outline-container-orgb96df60" class="outline-3">
+<h3 id="orgb96df60">Iterative prompting narrows the gap</h3>
+<div class="outline-text-3" id="text-orgb96df60">
 <p>
 Allowing up to two retries with execution feedback (error message for Invalid, the failing base-test I/O for Rejected, &ldquo;try a different approach&rdquo; for Undetected) lifts Gemini 3.1 Pro <code>agent1-tb</code> from 12.2% to 83.5% and <code>agent1-ta</code> to 98.2% (161/164); <code>agent2-ta</code> reaches 99.4% (163/164, from 130). Test-aware needs far fewer attempts (1.19-1.24 per HumanEval problem vs. 2.27-2.46 for test-blind). Single-shot test-awareness captures most of the achievable gain; iteration converts the remaining 10-15%.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3e2fda9" class="outline-2">
-<h2 id="org3e2fda9">Caveats and source inconsistencies</h2>
-<div class="outline-text-2" id="text-org3e2fda9">
+<div id="outline-container-orgec6cafd" class="outline-2">
+<h2 id="orgec6cafd">Caveats and source inconsistencies</h2>
+<div class="outline-text-2" id="text-orgec6cafd">
 <ul class="org-ul">
 <li><b>Internal discrepancy</b>: the abstract reports a 87.7% HumanEval verified-fault rate; the body text and Table 4 give 87.8% (144/164). This page uses 87.8%.</li>
 <li>One mutant per task at temperature 0; the authors note temperature 0 does not guarantee exact reproducibility.</li>
@@ -365,17 +369,17 @@ Allowing up to two retries with execution feedback (error message for Invalid, t
 </ul>
 </div>
 </div>
-<div id="outline-container-orgce65298" class="outline-2">
-<h2 id="orgce65298">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgce65298">
+<div id="outline-container-orgb7ac125" class="outline-2">
+<h2 id="orgb7ac125">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgb7ac125">
 <p>
 Adds a third LLM-era role for mutation testing alongside <a href="intent-based-mutation-testing.html">intent-based mutant generation</a> and <a href="mumutestup.html">mutation-guided assertion feedback</a>: <b>generation conditioned on the existing test suite</b>, so the mutants specifically probe that suite&rsquo;s gaps. See <a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a>. The 49/65 true-oracle-gap finding is another instance of the lesson in <a href="oracle-problem.html">The Oracle Problem</a> and <a href="audit-feedback-driven-evolution.html">Auditing Feedback-Driven Evolution</a>: a stand-in oracle (here EvalPlus&rsquo;s extended tests) is weaker than assumed, though here the weakness understates the method rather than inflating it. Its Success definition (survives the base tests, caught by an oracle) is a mutant-side analogue of the potential-vs-effective split in <a href="oracle-conversion.html">Oracle Conversion</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd95bda4" class="outline-2">
-<h2 id="orgd95bda4">Related pages</h2>
-<div class="outline-text-2" id="text-orgd95bda4">
+<div id="outline-container-org6c0ec07" class="outline-2">
+<h2 id="org6c0ec07">Related pages</h2>
+<div class="outline-text-2" id="text-org6c0ec07">
 <ul class="org-ul">
 <li><a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a></li>
 <li><a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing (Hamidi et al. 2025)</a></li>
@@ -390,7 +394,7 @@ Adds a third LLM-era role for mutation testing alongside <a href="intent-based-m
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

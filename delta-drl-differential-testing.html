@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Learning from the Test: Self-Referential Differential Testing for Deep RL Agents (He et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc30c5c7">Motivation</a></li>
-<li><a href="#org3c4df3b">Approach</a></li>
-<li><a href="#org78a714a">Findings</a></li>
-<li><a href="#orgc6a9b42">Relation to broader wiki</a></li>
-<li><a href="#org70f5e47">Related pages</a></li>
+<li><a href="#org86c0261">Motivation</a></li>
+<li><a href="#org057bdd1">Approach</a></li>
+<li><a href="#orgb300659">Findings</a></li>
+<li><a href="#org41e8049">Relation to broader wiki</a></li>
+<li><a href="#org8e508cb">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,25 +216,29 @@
 </p>
 
 <p>
-<b>Sources</b>: He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf">He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-30
 </p>
 
 <hr />
-<div id="outline-container-orgc30c5c7" class="outline-2">
-<h2 id="orgc30c5c7">Motivation</h2>
-<div class="outline-text-2" id="text-orgc30c5c7">
+<div id="outline-container-org86c0261" class="outline-2">
+<h2 id="org86c0261">Motivation</h2>
+<div class="outline-text-2" id="text-org86c0261">
 <p>
 DRL testing has focused on safety-critical failures (crashes, catastrophic actions), largely ignoring <b>optimality</b> bugs — cases where an agent behaves safely but sub-optimally, causing efficiency loss, economic cost, or user distrust. Optimality has an especially hard version of the <a href="oracle-problem.html">test oracle problem</a>: there&rsquo;s no ground-truth &ldquo;correct&rdquo; reward for an arbitrary state in most environments, so you can&rsquo;t just check output against a known-good answer. (source: He et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org3c4df3b" class="outline-2">
-<h2 id="org3c4df3b">Approach</h2>
-<div class="outline-text-2" id="text-org3c4df3b">
+<div id="outline-container-org057bdd1" class="outline-2">
+<h2 id="org057bdd1">Approach</h2>
+<div class="outline-text-2" id="text-org057bdd1">
 <p>
 Delta (Differential Testing for DRL Agents) is a two-phase, <b>self-referential</b> framework:
 </p>
@@ -248,25 +252,25 @@ The oracle here is &ldquo;self-referential&rdquo; — the reference (challenger)
 </p>
 </div>
 </div>
-<div id="outline-container-org78a714a" class="outline-2">
-<h2 id="org78a714a">Findings</h2>
-<div class="outline-text-2" id="text-org78a714a">
+<div id="outline-container-orgb300659" class="outline-2">
+<h2 id="orgb300659">Findings</h2>
+<div class="outline-text-2" id="text-orgb300659">
 <p>
 Across five environments, Delta uncovered an average of 2,518 optimality issues per environment, outperforming baseline methods by 50.2%. BCQ-trained challengers were the most effective at surfacing optimality issues among the three offline RL algorithms tested. Safety-testing data, originally collected for a different purpose, proved valuable for training competent challenger agents — a byproduct reuse of testing artifacts. (source: He et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6a9b42" class="outline-2">
-<h2 id="orgc6a9b42">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgc6a9b42">
+<div id="outline-container-org41e8049" class="outline-2">
+<h2 id="org41e8049">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org41e8049">
 <p>
 Delta is a distinct answer to the <a href="oracle-problem.html">oracle problem</a> from anything else in this wiki: rather than a relation-based oracle (<a href="metamorphic-testing.html">metamorphic testing</a>), a generated oracle (<a href="reag.html">REAG</a>), or a learned discriminator (<a href="focal-oracle-prediction.html">FOCAL</a>), it constructs its comparison target <b>from the system under test&rsquo;s own execution data</b>. This self-referential move is worth contrasting with <a href="audit-feedback-driven-evolution.html">Liang et al. 2026</a>&rsquo;s finding that single-reference pseudo-oracles built from <b>one</b> accepted program can badly inflate apparent gains in LLM test-generation loops — Delta&rsquo;s self-reference is validated empirically (measured optimality gap against a real trained challenger), not assumed correct by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-org70f5e47" class="outline-2">
-<h2 id="org70f5e47">Related pages</h2>
-<div class="outline-text-2" id="text-org70f5e47">
+<div id="outline-container-org8e508cb" class="outline-2">
+<h2 id="org8e508cb">Related pages</h2>
+<div class="outline-text-2" id="text-org8e508cb">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="focal-oracle-prediction.html">FOCAL (Zhao et al. 2026)</a></li>
@@ -278,7 +282,7 @@ Delta is a distinct answer to the <a href="oracle-problem.html">oracle problem</
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

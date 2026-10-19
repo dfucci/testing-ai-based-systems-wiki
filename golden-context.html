@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Golden Context</title>
@@ -203,17 +203,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf647b15">Definition</a></li>
-<li><a href="#orgd01797f">Two-Tier Hierarchy</a>
+<li><a href="#orgdb8398f">Definition</a></li>
+<li><a href="#org5178915">Two-Tier Hierarchy</a>
 <ul>
-<li><a href="#orga39cff0">Tier 0 (Core)</a></li>
-<li><a href="#org2c6a133">Tier 1 (Extended)</a></li>
-<li><a href="#org4fda155">How tiers are used</a></li>
+<li><a href="#orgb06ac12">Tier 0 (Core)</a></li>
+<li><a href="#org321337c">Tier 1 (Extended)</a></li>
+<li><a href="#org40a6b86">How tiers are used</a></li>
 </ul>
 </li>
-<li><a href="#orge17219a">Extraction Methodology</a></li>
-<li><a href="#orgf199969">Implications for Agent Evaluation</a></li>
-<li><a href="#orgad82a5a">Related pages</a></li>
+<li><a href="#org4dcc4e2">Extraction Methodology</a></li>
+<li><a href="#org612b440">Implications for Agent Evaluation</a></li>
+<li><a href="#org0b5c8c6">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -222,17 +222,21 @@
 </p>
 
 <p>
-<b>Sources</b>: Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-orgf647b15" class="outline-2">
-<h2 id="orgf647b15">Definition</h2>
-<div class="outline-text-2" id="text-orgf647b15">
+<div id="outline-container-orgdb8398f" class="outline-2">
+<h2 id="orgdb8398f">Definition</h2>
+<div class="outline-text-2" id="text-orgdb8398f">
 <p>
 Given a ground-truth reference patch P*, the golden context G = (F*, H*) where:
 </p>
@@ -250,13 +254,13 @@ This allows <a href="trajectory-analysis.html">trajectory analysis</a> without m
 </p>
 </div>
 </div>
-<div id="outline-container-orgd01797f" class="outline-2">
-<h2 id="orgd01797f">Two-Tier Hierarchy</h2>
-<div class="outline-text-2" id="text-orgd01797f">
+<div id="outline-container-org5178915" class="outline-2">
+<h2 id="org5178915">Two-Tier Hierarchy</h2>
+<div class="outline-text-2" id="text-org5178915">
 </div>
-<div id="outline-container-orga39cff0" class="outline-3">
-<h3 id="orga39cff0">Tier 0 (Core)</h3>
-<div class="outline-text-3" id="text-orga39cff0">
+<div id="outline-container-orgb06ac12" class="outline-3">
+<h3 id="orgb06ac12">Tier 0 (Core)</h3>
+<div class="outline-text-3" id="text-orgb06ac12">
 <p>
 Files and functions explicitly modified in P*. Represents the minimal modification footprint.
 </p>
@@ -265,9 +269,9 @@ Files and functions explicitly modified in P*. Represents the minimal modificati
 </ul>
 </div>
 </div>
-<div id="outline-container-org2c6a133" class="outline-3">
-<h3 id="org2c6a133">Tier 1 (Extended)</h3>
-<div class="outline-text-3" id="text-org2c6a133">
+<div id="outline-container-org321337c" class="outline-3">
+<h3 id="org321337c">Tier 1 (Extended)</h3>
+<div class="outline-text-3" id="text-org321337c">
 <p>
 Tier 0 augmented with one-hop structural dependencies extracted via static analysis:
 </p>
@@ -283,9 +287,9 @@ Tier 0 augmented with one-hop structural dependencies extracted via static analy
 </p>
 </div>
 </div>
-<div id="outline-container-org4fda155" class="outline-3">
-<h3 id="org4fda155">How tiers are used</h3>
-<div class="outline-text-3" id="text-org4fda155">
+<div id="outline-container-org40a6b86" class="outline-3">
+<h3 id="org40a6b86">How tiers are used</h3>
+<div class="outline-text-3" id="text-org40a6b86">
 <ul class="org-ul">
 <li><b>Recall</b> metrics computed against Tier 0 (strict measure: did agent find essential code?)</li>
 <li><b>Precision</b> metrics benefit from Tier 1 context (exploration of structurally related elements is reasonable, not wasteful)</li>
@@ -297,9 +301,9 @@ This hierarchical design distinguishes meaningful exploration from truly redunda
 </div>
 </div>
 </div>
-<div id="outline-container-orge17219a" class="outline-2">
-<h2 id="orge17219a">Extraction Methodology</h2>
-<div class="outline-text-2" id="text-orge17219a">
+<div id="outline-container-org4dcc4e2" class="outline-2">
+<h2 id="org4dcc4e2">Extraction Methodology</h2>
+<div class="outline-text-2" id="text-org4dcc4e2">
 <p>
 From a unified diff (source: Kim et al. 2026):
 </p>
@@ -310,9 +314,9 @@ From a unified diff (source: Kim et al. 2026):
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf199969" class="outline-2">
-<h2 id="orgf199969">Implications for Agent Evaluation</h2>
-<div class="outline-text-2" id="text-orgf199969">
+<div id="outline-container-org612b440" class="outline-2">
+<h2 id="org612b440">Implications for Agent Evaluation</h2>
+<div class="outline-text-2" id="text-org612b440">
 <p>
 The golden context exposes a tension in current agents: they achieve high recall (finding required context) but extremely low precision (examining far more than needed). On average agents examine 8–12× more files than in F* and 17–25× more functions than in H*. (source: Kim et al. 2026)
 </p>
@@ -322,9 +326,9 @@ High recall without high precision means agents are correct about <b>what</b> to
 </p>
 </div>
 </div>
-<div id="outline-container-orgad82a5a" class="outline-2">
-<h2 id="orgad82a5a">Related pages</h2>
-<div class="outline-text-2" id="text-orgad82a5a">
+<div id="outline-container-org0b5c8c6" class="outline-2">
+<h2 id="org0b5c8c6">Related pages</h2>
+<div class="outline-text-2" id="text-org0b5c8c6">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
@@ -336,7 +340,7 @@ High recall without high precision means agents are correct about <b>what</b> to
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

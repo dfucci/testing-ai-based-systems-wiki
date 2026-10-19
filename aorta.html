@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AORTA: Automated Robustness Testing for LLM-Based NLP Software (Xiao et al. 2025)</title>
@@ -203,12 +203,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org986cd23">Motivation</a></li>
-<li><a href="#org597d160">AORTA framework</a></li>
-<li><a href="#org21b684f">Adaptive Beam Search (ABS)</a></li>
-<li><a href="#org0131942">Results</a></li>
-<li><a href="#org272cd4b">Relation to broader wiki</a></li>
-<li><a href="#orgec003e7">Related pages</a></li>
+<li><a href="#org723d74c">Motivation</a></li>
+<li><a href="#org08a5e54">AORTA framework</a></li>
+<li><a href="#org89cf1de">Adaptive Beam Search (ABS)</a></li>
+<li><a href="#org31ca9e9">Results</a></li>
+<li><a href="#org02b1220">Relation to broader wiki</a></li>
+<li><a href="#org37023b5">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -217,33 +217,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf">Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-19
 </p>
 
 <hr />
-<div id="outline-container-org986cd23" class="outline-2">
-<h2 id="org986cd23">Motivation</h2>
-<div class="outline-text-2" id="text-org986cd23">
+<div id="outline-container-org723d74c" class="outline-2">
+<h2 id="org723d74c">Motivation</h2>
+<div class="outline-text-2" id="text-org723d74c">
 <p>
 LLM-based NLP software (financial sentiment analysis, toxic-content moderation, etc.) relies on prompt+example input, not trained weights — no automated robustness-testing framework existed for the <b>combined</b> prompt+example input space. Prior work tested prompts and examples separately, or reused DNN-testing methods that transferred poorly. (source: Xiao et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org597d160" class="outline-2">
-<h2 id="org597d160">AORTA framework</h2>
-<div class="outline-text-2" id="text-org597d160">
+<div id="outline-container-org08a5e54" class="outline-2">
+<h2 id="org08a5e54">AORTA framework</h2>
+<div class="outline-text-2" id="text-org08a5e54">
 <p>
 Reframes robustness testing as combinatorial optimization over four modular components: goal function, perturbation, constraint, search method. Operates black-box (API-only), jointly perturbs `[Prompt, example]`, and integrates 17 existing DNN-testing methods plus its own new search method.
 </p>
 </div>
 </div>
-<div id="outline-container-org21b684f" class="outline-2">
-<h2 id="org21b684f">Adaptive Beam Search (ABS)</h2>
-<div class="outline-text-2" id="text-org21b684f">
+<div id="outline-container-org89cf1de" class="outline-2">
+<h2 id="org89cf1de">Adaptive Beam Search (ABS)</h2>
+<div class="outline-text-2" id="text-org89cf1de">
 <p>
 Uses beam search guided by Word Importance Ranking, with two innovations:
 </p>
@@ -253,9 +257,9 @@ Uses beam search guided by Word Importance Ranking, with two innovations:
 </ul>
 </div>
 </div>
-<div id="outline-container-org0131942" class="outline-2">
-<h2 id="org0131942">Results</h2>
-<div class="outline-text-2" id="text-org0131942">
+<div id="outline-container-org31ca9e9" class="outline-2">
+<h2 id="org31ca9e9">Results</h2>
+<div class="outline-text-2" id="text-org31ca9e9">
 <p>
 5 threat models (Mistral-7B, Llama2-13B, InternLM2-20B, Yi-34B, Llama2-70B) × 3 datasets (Financial Phrasebank, AG&rsquo;s News, MR) vs. 5 baselines (PWWS, TextFooler, TextBugger, CheckList, StressTest):
 </p>
@@ -268,9 +272,9 @@ Uses beam search guided by Word Importance Ranking, with two innovations:
 </ul>
 </div>
 </div>
-<div id="outline-container-org272cd4b" class="outline-2">
-<h2 id="org272cd4b">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org272cd4b">
+<div id="outline-container-org02b1220" class="outline-2">
+<h2 id="org02b1220">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org02b1220">
 <p>
 Extends adversarial/robustness testing (Szegedy et al., TextAttack, PWWS, TextFooler, CheckList) from DNN classifiers to LLM-based software, arguing against prompt-only robustness work (e.g. PromptBench) — prompt and example must be tested jointly. See <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a> for the framing relative to MMT4NL&rsquo;s perturbation-based MRs.
 </p>
@@ -280,9 +284,9 @@ Extends adversarial/robustness testing (Szegedy et al., TextAttack, PWWS, TextFo
 </p>
 </div>
 </div>
-<div id="outline-container-orgec003e7" class="outline-2">
-<h2 id="orgec003e7">Related pages</h2>
-<div class="outline-text-2" id="text-orgec003e7">
+<div id="outline-container-org37023b5" class="outline-2">
+<h2 id="org37023b5">Related pages</h2>
+<div class="outline-text-2" id="text-org37023b5">
 <ul class="org-ul">
 <li><a href="abfs.html">ABFS (Xiao et al. 2026)</a></li>
 <li><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></li>
@@ -294,7 +298,7 @@ Extends adversarial/robustness testing (Szegedy et al., TextAttack, PWWS, TextFo
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Adversarial Robustness Testing</title>
@@ -203,12 +203,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org11ff999">Local vs. global robustness</a></li>
-<li><a href="#orgff14aa1">AORTA / Adaptive Beam Search (Xiao et al. 2025)</a></li>
-<li><a href="#org16f38e4">ABFS / Best-First Search (Xiao et al. 2026)</a></li>
-<li><a href="#org350f396">Relation to metamorphic testing</a></li>
-<li><a href="#orgd54bcc4">Safety-refusal robustness: consistency testing vs. attack optimization</a></li>
-<li><a href="#orga7eef39">Related pages</a></li>
+<li><a href="#org5b590c6">Local vs. global robustness</a></li>
+<li><a href="#org6b41529">AORTA / Adaptive Beam Search (Xiao et al. 2025)</a></li>
+<li><a href="#org1220694">ABFS / Best-First Search (Xiao et al. 2026)</a></li>
+<li><a href="#orged4523e">Relation to metamorphic testing</a></li>
+<li><a href="#orgd6a4022">Safety-refusal robustness: consistency testing vs. attack optimization</a></li>
+<li><a href="#org4047683">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -217,25 +217,33 @@
 </p>
 
 <p>
-<b>Sources</b>: Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf; Xiao et al. - 2026 - ABFS Natural robustness testing for LLM-based NLP software.pdf; Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf; Racharak et al. - 2026 - Test It Before You Trust It Applying Software Testing for Trustworthy In-context Learning.pdf; Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf">Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf</a></li>
+<li><a href="../raw/Xiao et al. - 2026 - ABFS Natural robustness testing for LLM-based NLP software.pdf">Xiao et al. - 2026 - ABFS Natural robustness testing for LLM-based NLP software.pdf</a></li>
+<li><a href="../raw/Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf">Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf</a></li>
+<li><a href="../raw/Racharak et al. - 2026 - Test It Before You Trust It Applying Software Testing for Trustworthy In-context Learning.pdf">Racharak et al. - 2026 - Test It Before You Trust It Applying Software Testing for Trustworthy In-context Learning.pdf</a></li>
+<li><a href="../raw/Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf">Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org11ff999" class="outline-2">
-<h2 id="org11ff999">Local vs. global robustness</h2>
-<div class="outline-text-2" id="text-org11ff999">
+<div id="outline-container-org5b590c6" class="outline-2">
+<h2 id="org5b590c6">Local vs. global robustness</h2>
+<div class="outline-text-2" id="text-org5b590c6">
 <p>
 Zhang et al. 2022 formalize the distinction (after Katz et al.): <b>local</b> robustness holds if no perturbation within a bound around a given input changes the output; <b>global</b> robustness holds if this is true for (almost) all inputs. Most testing techniques, including those below, are local — they search for a specific counterexample near a specific input. (source: Zhang et al. 2022)
 </p>
 </div>
 </div>
-<div id="outline-container-orgff14aa1" class="outline-2">
-<h2 id="orgff14aa1">AORTA / Adaptive Beam Search (Xiao et al. 2025)</h2>
-<div class="outline-text-2" id="text-orgff14aa1">
+<div id="outline-container-org6b41529" class="outline-2">
+<h2 id="org6b41529">AORTA / Adaptive Beam Search (Xiao et al. 2025)</h2>
+<div class="outline-text-2" id="text-org6b41529">
 <p>
 First automated black-box robustness-testing framework for the <b>combined</b> prompt+example input space of LLM-based NLP software (prior work perturbed prompts and examples separately). Frames testing as combinatorial optimization over goal function / perturbation / constraint / search method.
 </p>
@@ -253,9 +261,9 @@ Result: 86.1% average attack success rate vs. 68.2% for the best baseline (PWWS)
 </p>
 </div>
 </div>
-<div id="outline-container-org16f38e4" class="outline-2">
-<h2 id="org16f38e4">ABFS / Best-First Search (Xiao et al. 2026)</h2>
-<div class="outline-text-2" id="text-org16f38e4">
+<div id="outline-container-org1220694" class="outline-2">
+<h2 id="org1220694">ABFS / Best-First Search (Xiao et al. 2026)</h2>
+<div class="outline-text-2" id="text-org1220694">
 <p>
 Same group, same joint prompt+example framing and goal/perturbation/constraint/search decomposition as AORTA, with the search method changed:
 </p>
@@ -270,25 +278,25 @@ Result: average success rate 74.425% vs 68.177% for the best baseline (PWWS), av
 </p>
 </div>
 </div>
-<div id="outline-container-org350f396" class="outline-2">
-<h2 id="org350f396">Relation to metamorphic testing</h2>
-<div class="outline-text-2" id="text-org350f396">
+<div id="outline-container-orged4523e" class="outline-2">
+<h2 id="orged4523e">Relation to metamorphic testing</h2>
+<div class="outline-text-2" id="text-orged4523e">
 <p>
 MMT4NL&rsquo;s &ldquo;Robustness&rdquo; and &ldquo;Fairness&rdquo; MR categories (Racharak et al. 2026) are effectively lightweight, manually-constructed adversarial perturbations (typos, gender/race swaps) evaluated as pass/fail against a metamorphic relation rather than an optimization objective. Adversarial search (AORTA) and <a href="metamorphic-testing.html">metamorphic testing</a> are two ends of the same spectrum: MT checks a <b>specific</b>, human-defined invariance; adversarial search <b>hunts</b> for any input-space direction that breaks the model. (cross-reference, not directly stated in either source)
 </p>
 </div>
 </div>
-<div id="outline-container-orgd54bcc4" class="outline-2">
-<h2 id="orgd54bcc4">Safety-refusal robustness: consistency testing vs. attack optimization</h2>
-<div class="outline-text-2" id="text-orgd54bcc4">
+<div id="outline-container-orgd6a4022" class="outline-2">
+<h2 id="orgd6a4022">Safety-refusal robustness: consistency testing vs. attack optimization</h2>
+<div class="outline-text-2" id="text-orgd6a4022">
 <p>
 <a href="lest.html">LEST (Moshood et al. 2026)</a> perturbs safety-critical prompts too, but with a different objective from AORTA/ABFS and from jailbreak fuzzers (PAIR, TAP, AutoDAN, FuzzLLM, and others it cites). Its mutations are generated independently of the target model&rsquo;s responses — no loop optimizes toward compliance — and the question is whether <b>documented</b> refusal behavior stays invariant under meaning-preserving edits (lexical substitution, modifier insertion/deletion, person conversion, paraphrase, identity swap). The perturbation constraints echo the ones above (grammaticality, perplexity within 2× of the seed, embedding similarity ≥0.80 then ≥0.85) but the success test differs: a candidate counts as a failure only after humans confirm it still asks for the same harmful thing and the response genuinely complies. Results: both models refuse over 95% of unmodified seeds; of 312 automatically flagged Refuse→Comply flips, 19 (6.1%) were validated, spread over five of seven operators. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga7eef39" class="outline-2">
-<h2 id="orga7eef39">Related pages</h2>
-<div class="outline-text-2" id="text-orga7eef39">
+<div id="outline-container-org4047683" class="outline-2">
+<h2 id="org4047683">Related pages</h2>
+<div class="outline-text-2" id="text-org4047683">
 <ul class="org-ul">
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="aorta.html">AORTA (Xiao et al. 2025)</a></li>
@@ -303,7 +311,7 @@ MMT4NL&rsquo;s &ldquo;Robustness&rdquo; and &ldquo;Fairness&rdquo; MR categories
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>METTLE: Metamorphic Testing for Unsupervised ML</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdd070ad">Motivation</a></li>
-<li><a href="#orgf6e0883">Approach</a></li>
-<li><a href="#orgbebc84f">Results</a></li>
-<li><a href="#orgaf7edcb">Relation to broader wiki</a></li>
-<li><a href="#orgdb49f6d">Related pages</a></li>
+<li><a href="#org6e06fe5">Motivation</a></li>
+<li><a href="#orgefad39b">Approach</a></li>
+<li><a href="#org02966c1">Results</a></li>
+<li><a href="#orgd1f2214">Relation to broader wiki</a></li>
+<li><a href="#org028b26b">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,25 +216,29 @@
 </p>
 
 <p>
-<b>Sources</b>: METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub>
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/METTLE_A_METamorphic_Testing_Approach_to_Assessing_and_Validating_Unsupervised_Machine_Learning_Systems.pdf">METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub></a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-19
 </p>
 
 <hr />
-<div id="outline-container-orgdd070ad" class="outline-2">
-<h2 id="orgdd070ad">Motivation</h2>
-<div class="outline-text-2" id="text-orgdd070ad">
+<div id="outline-container-org6e06fe5" class="outline-2">
+<h2 id="org6e06fe5">Motivation</h2>
+<div class="outline-text-2" id="text-org6e06fe5">
 <p>
 Validating clustering (unsupervised ML) is hard for two reasons: there&rsquo;s no ground truth to check against (the <a href="oracle-problem.html">oracle problem</a>), and existing validation techniques (external/internal indices) evaluate a clustering result only statically — they ignore how results <b>should</b> change when the input dataset is transformed, even though users have intuitive expectations about that dynamic behavior. (source: METTLE)
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6e0883" class="outline-2">
-<h2 id="orgf6e0883">Approach</h2>
-<div class="outline-text-2" id="text-orgf6e0883">
+<div id="outline-container-orgefad39b" class="outline-2">
+<h2 id="orgefad39b">Approach</h2>
+<div class="outline-text-2" id="text-orgefad39b">
 <p>
 Users (not necessarily ML experts) define <a href="metamorphic-testing.html">metamorphic relations</a> (MRs) between an original dataset/clustering and a transformed follow-up dataset/clustering. The paper contributes 11 generic MRs across 6 categories: object ordering, cluster distinctness (shrinking/mirroring), object density, attribute manipulation, coordinate transforms (rotation/scaling), and outlier handling.
 </p>
@@ -252,9 +256,9 @@ MR compliance becomes a <b>property-oriented adequacy criterion</b> (see <a href
 </p>
 </div>
 </div>
-<div id="outline-container-orgbebc84f" class="outline-2">
-<h2 id="orgbebc84f">Results</h2>
-<div class="outline-text-2" id="text-orgbebc84f">
+<div id="outline-container-org02966c1" class="outline-2">
+<h2 id="org02966c1">Results</h2>
+<div class="outline-text-2" id="text-org02966c1">
 <p>
 Six Weka clustering systems tested (k-means, x-means, EM, agglomerative nesting, farthest-first, DBSCAN) across 11 MRs × 100 trials. K-means was most sensitive (violated 9/11 MRs); agglomerative nesting was most robust (3 violations). Five recurring violation patterns identified: BORDER, MERGE&amp;SPLIT, SPLIT, NOISE, NUM. Root causes traced to concrete implementation details — e.g. min-max normalization caused <b>all</b> systems to violate a rotation-invariance MR despite rotation invariance being mathematically expected, and k-means/EM got trapped in local optima.
 </p>
@@ -264,17 +268,17 @@ A 15-participant user study (7 application domains) found users could define dom
 </p>
 </div>
 </div>
-<div id="outline-container-orgaf7edcb" class="outline-2">
-<h2 id="orgaf7edcb">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgaf7edcb">
+<div id="outline-container-orgd1f2214" class="outline-2">
+<h2 id="orgd1f2214">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgd1f2214">
 <p>
 Fills a real gap flagged by <a href="ml-testing-survey.html">Zhang et al. 2022</a>: only 3/144 surveyed papers address unsupervised learning testing at all. Extends prior MT work on supervised classifiers, search engines, and deep-learning image classifiers (DeepTest/DeepRoad) into the unsupervised setting.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdb49f6d" class="outline-2">
-<h2 id="orgdb49f6d">Related pages</h2>
-<div class="outline-text-2" id="text-orgdb49f6d">
+<div id="outline-container-org028b26b" class="outline-2">
+<h2 id="org028b26b">Related pages</h2>
+<div class="outline-text-2" id="text-org028b26b">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
@@ -286,7 +290,7 @@ Fills a real gap flagged by <a href="ml-testing-survey.html">Zhang et al. 2022</
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

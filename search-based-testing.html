@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Search-Based Testing for LLM Applications</title>
@@ -235,13 +235,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1bf4423">Problem: exhaustive feature-combination coverage doesn&rsquo;t scale</a></li>
-<li><a href="#orga121f6d">Formalization</a></li>
-<li><a href="#orgddd0853">STELLAR: feature-encoded genetic optimization for failure detection</a></li>
-<li><a href="#orgd37348f">STELLAR-D/DS: diversity as an explicit search objective</a></li>
-<li><a href="#org7f8c899">Effectiveness vs. diversity trade-off (empirical)</a></li>
-<li><a href="#org5e95071">Relation to diversity-based test <b>selection</b></a></li>
-<li><a href="#orgb9b780f">Related pages</a></li>
+<li><a href="#org757de38">Problem: exhaustive feature-combination coverage doesn&rsquo;t scale</a></li>
+<li><a href="#org9a91435">Formalization</a></li>
+<li><a href="#org07e7de6">STELLAR: feature-encoded genetic optimization for failure detection</a></li>
+<li><a href="#org906a79a">STELLAR-D/DS: diversity as an explicit search objective</a></li>
+<li><a href="#orgb275212">Effectiveness vs. diversity trade-off (empirical)</a></li>
+<li><a href="#org76f2391">Relation to diversity-based test <b>selection</b></a></li>
+<li><a href="#org91c8bb6">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -250,33 +250,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf">Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org1bf4423" class="outline-2">
-<h2 id="org1bf4423">Problem: exhaustive feature-combination coverage doesn&rsquo;t scale</h2>
-<div class="outline-text-2" id="text-org1bf4423">
+<div id="outline-container-org757de38" class="outline-2">
+<h2 id="org757de38">Problem: exhaustive feature-combination coverage doesn&rsquo;t scale</h2>
+<div class="outline-text-2" id="text-org757de38">
 <p>
 Coverage-matrix approaches (e.g. ASTRAL) enumerate combinations of discretized input features (content, style, perturbation) and try to cover them systematically. This explodes combinatorially: testing robustness across 8 feature types with ≥5 values each yields over 390,000 combinations — at 5s/test, more than 20 days of continuous execution for one configuration. Search-based testing instead frames generation as an optimization problem, using a fitness function to guide the search toward failure-revealing regions of the input space rather than trying to cover all of it. (source: Sorokin et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga121f6d" class="outline-2">
-<h2 id="orga121f6d">Formalization</h2>
-<div class="outline-text-2" id="text-orga121f6d">
+<div id="outline-container-org9a91435" class="outline-2">
+<h2 id="org9a91435">Formalization</h2>
+<div class="outline-text-2" id="text-org9a91435">
 <p>
 A search-based testing problem for an LLM application is a tuple \(P = (AUT, D, F, O)\): \(AUT\) is the application under test; \(D \subseteq \mathbb{R}^n\) is the search domain (a feature vector); \(F\) is a vector-valued fitness function scoring a candidate input&rsquo;s ability to expose faulty behavior; \(O\) is an oracle deciding whether a given input is failure-inducing. Feature values are <b>ordinal</b> (rating scores — mapped to a normalized index) or <b>categorical</b> (venue type — mapped to a raw index), so genetic operators can manipulate them numerically. (source: Sorokin et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgddd0853" class="outline-2">
-<h2 id="orgddd0853">STELLAR: feature-encoded genetic optimization for failure detection</h2>
-<div class="outline-text-2" id="text-orgddd0853">
+<div id="outline-container-org07e7de6" class="outline-2">
+<h2 id="org07e7de6">STELLAR: feature-encoded genetic optimization for failure detection</h2>
+<div class="outline-text-2" id="text-org07e7de6">
 <p>
 STELLAR (the predecessor framework, same author group) runs a standard genetic-algorithm loop over feature vectors:
 </p>
@@ -293,9 +297,9 @@ STELLAR optimizes exclusively for failure detection, so the search concentrates 
 </p>
 </div>
 </div>
-<div id="outline-container-orgd37348f" class="outline-2">
-<h2 id="orgd37348f">STELLAR-D/DS: diversity as an explicit search objective</h2>
-<div class="outline-text-2" id="text-orgd37348f">
+<div id="outline-container-org906a79a" class="outline-2">
+<h2 id="org906a79a">STELLAR-D/DS: diversity as an explicit search objective</h2>
+<div class="outline-text-2" id="text-org906a79a">
 <p>
 STELLAR-D extends the loop with an <b>archive</b> \(A\) of previously-found failing inputs and a <b>repopulation</b> operator, inspired by DeepJanus&rsquo;s archive + repopulation mechanism for finding failure-region boundaries in deep learning systems:
 </p>
@@ -315,9 +319,9 @@ STELLAR-D extends the loop with an <b>archive</b> \(A\) of previously-found fail
 </p>
 </div>
 </div>
-<div id="outline-container-org7f8c899" class="outline-2">
-<h2 id="org7f8c899">Effectiveness vs. diversity trade-off (empirical)</h2>
-<div class="outline-text-2" id="text-org7f8c899">
+<div id="outline-container-orgb275212" class="outline-2">
+<h2 id="orgb275212">Effectiveness vs. diversity trade-off (empirical)</h2>
+<div class="outline-text-2" id="text-orgb275212">
 <p>
 Evaluated across 3 case studies (safety, navigation, car control), 5 systems under test, 8 LLMs, 18 configurations, and over 1M executed tests:
 </p>
@@ -334,17 +338,17 @@ Evaluated across 3 case studies (safety, navigation, car control), 5 systems und
 </p>
 </div>
 </div>
-<div id="outline-container-org5e95071" class="outline-2">
-<h2 id="org5e95071">Relation to diversity-based test <b>selection</b></h2>
-<div class="outline-text-2" id="text-org5e95071">
+<div id="outline-container-org76f2391" class="outline-2">
+<h2 id="org76f2391">Relation to diversity-based test <b>selection</b></h2>
+<div class="outline-text-2" id="text-org76f2391">
 <p>
 This is a distinct mechanism from <a href="test-selection-prioritization.html">Test Selection and Prioritization</a>&rsquo;s Adaptive Random Testing approach: ART-style methods (Yoon et al. 2025) <b>select</b> which already-generated candidate to run next from a fixed pool, maximizing distance to already-selected tests. STELLAR-D instead uses diversity as a <b>generation-time</b> objective inside the genetic search itself — the archive and repopulation operator actively steer what new candidates get synthesized, not just which existing ones get run. The two strategies address different cost bottlenecks: ART helps when the number of LLM <b>queries</b> is the constraint; search-based diversity helps when the goal is broadening the <b>range of failure types</b> a fixed search budget can uncover.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb9b780f" class="outline-2">
-<h2 id="orgb9b780f">Related pages</h2>
-<div class="outline-text-2" id="text-orgb9b780f">
+<div id="outline-container-org91c8bb6" class="outline-2">
+<h2 id="org91c8bb6">Related pages</h2>
+<div class="outline-text-2" id="text-org91c8bb6">
 <ul class="org-ul">
 <li><a href="stellar-d.html">STELLAR-D (Sorokin et al. 2026)</a></li>
 <li><a href="test-selection-prioritization.html">Test Selection and Prioritization</a></li>
@@ -357,7 +361,7 @@ This is a distinct mechanism from <a href="test-selection-prioritization.html">T
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

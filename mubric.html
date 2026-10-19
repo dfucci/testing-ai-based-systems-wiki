@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mubric — Mutation Testing-Guided Rubric Generation for LLM Evaluation (Yang et al. 2026)</title>
@@ -203,25 +203,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5918b54">Idea</a></li>
-<li><a href="#orgbd4ef32">Method</a>
+<li><a href="#org3baf075">Idea</a></li>
+<li><a href="#org14b153b">Method</a>
 <ul>
-<li><a href="#org967f95e">Stage 1 — build reusable mutation operators (once)</a></li>
-<li><a href="#orgc99e1b3">Stage 2 — mutation-guided refinement (per task)</a></li>
+<li><a href="#org71a0e96">Stage 1 — build reusable mutation operators (once)</a></li>
+<li><a href="#orge68fc68">Stage 2 — mutation-guided refinement (per task)</a></li>
 </ul>
 </li>
-<li><a href="#org9ecd013">Evaluation</a>
+<li><a href="#org393abe5">Evaluation</a>
 <ul>
-<li><a href="#orga4211c3">RQ1 — overall accuracy</a></li>
-<li><a href="#org8224c79">RQ2 — ablation (Gemini-2.5-flash-lite only, for cost)</a></li>
-<li><a href="#org275d43e">RQ3 — which operators get used</a></li>
-<li><a href="#org4b6ba75">Threshold sensitivity</a></li>
+<li><a href="#orgca6a90d">RQ1 — overall accuracy</a></li>
+<li><a href="#org4a20ba4">RQ2 — ablation (Gemini-2.5-flash-lite only, for cost)</a></li>
+<li><a href="#org33481b8">RQ3 — which operators get used</a></li>
+<li><a href="#org5c57e2d">Threshold sensitivity</a></li>
 </ul>
 </li>
-<li><a href="#org74256de">Worked examples (appendix)</a></li>
-<li><a href="#orga77f49a">Caveats</a></li>
-<li><a href="#orgcaec7c1">Relation to broader wiki</a></li>
-<li><a href="#orgc5aa4eb">Related pages</a></li>
+<li><a href="#orga0258a4">Worked examples (appendix)</a></li>
+<li><a href="#org988d53e">Caveats</a></li>
+<li><a href="#orga3c2e69">Relation to broader wiki</a></li>
+<li><a href="#orge698416">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -230,29 +230,33 @@
 </p>
 
 <p>
-<b>Sources</b>: Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf (arXiv:2609.37322v1, 29 Sep 2026)
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf">Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf</a> (arXiv:2609.37322v1, 29 Sep 2026)</li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org5918b54" class="outline-2">
-<h2 id="org5918b54">Idea</h2>
-<div class="outline-text-2" id="text-org5918b54">
+<div id="outline-container-org3baf075" class="outline-2">
+<h2 id="org3baf075">Idea</h2>
+<div class="outline-text-2" id="text-org3baf075">
 <p>
 Rubric-based evaluation scores an LLM response against task-specific weighted criteria R<sub>x</sub> = {(r<sub>i</sub>, w<sub>i</sub>)} using an LLM judge. Existing rubric generators build criteria from the task description (TICK, Dynamic), from model responses (RLCF), or from multiple evaluator roles (MRRG). Mubric adds a different feedback signal borrowed from mutation testing: if a rubric captures an important quality requirement, then injecting the corresponding defect into an otherwise high-quality response should <b>lower its score</b>. A defect that does not lower the score exposes a rubric gap — the analogue of a surviving mutant. (source: Yang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgbd4ef32" class="outline-2">
-<h2 id="orgbd4ef32">Method</h2>
-<div class="outline-text-2" id="text-orgbd4ef32">
+<div id="outline-container-org14b153b" class="outline-2">
+<h2 id="org14b153b">Method</h2>
+<div class="outline-text-2" id="text-org14b153b">
 </div>
-<div id="outline-container-org967f95e" class="outline-3">
-<h3 id="org967f95e">Stage 1 — build reusable mutation operators (once)</h3>
-<div class="outline-text-3" id="text-org967f95e">
+<div id="outline-container-org71a0e96" class="outline-3">
+<h3 id="org71a0e96">Stage 1 — build reusable mutation operators (once)</h3>
+<div class="outline-text-3" id="text-org71a0e96">
 <ol class="org-ol">
 <li>Sample 1,000 tasks with preferred/dispreferred response pairs from OpenRubrics.</li>
 <li>An LLM lists the concrete defects in each dispreferred response (wrong fact, faulty reasoning step, omitted requirement, violated instruction).</li>
@@ -265,9 +269,9 @@ Result: <b>201 operators</b>. Largest transformation types: Omit 34, Distort For
 </p>
 </div>
 </div>
-<div id="outline-container-orgc99e1b3" class="outline-3">
-<h3 id="orgc99e1b3">Stage 2 — mutation-guided refinement (per task)</h3>
-<div class="outline-text-3" id="text-orgc99e1b3">
+<div id="outline-container-orge68fc68" class="outline-3">
+<h3 id="orge68fc68">Stage 2 — mutation-guided refinement (per task)</h3>
+<div class="outline-text-3" id="text-orge68fc68">
 <ol class="org-ol">
 <li>Generate an initial rubric from the task description alone, and a reference response with another LLM.</li>
 <li>An LLM <b>selector</b> picks applicable operators and locations; each is applied independently to the reference response.</li>
@@ -283,16 +287,16 @@ Result: <b>201 operators</b>. Largest transformation types: Omit 34, Distort For
 </div>
 </div>
 </div>
-<div id="outline-container-org9ecd013" class="outline-2">
-<h2 id="org9ecd013">Evaluation</h2>
-<div class="outline-text-2" id="text-org9ecd013">
+<div id="outline-container-org393abe5" class="outline-2">
+<h2 id="org393abe5">Evaluation</h2>
+<div class="outline-text-2" id="text-org393abe5">
 <p>
 703 tasks: RubricBench STEM, Code and Chat (150 each), all 124 IF tasks (Safety excluded), plus 129 RM-Bench Chat tasks; none overlap the operator-mining data. Metric: accuracy at picking the preferred response of a pair by higher rubric score. Rubric generator and judge are the same backbone — GPT-5.4-mini or Gemini-2.5-flash-lite — while Mubric&rsquo;s selector/verifier/refiner use a fixed GPT-5.4.
 </p>
 </div>
-<div id="outline-container-orga4211c3" class="outline-3">
-<h3 id="orga4211c3">RQ1 — overall accuracy</h3>
-<div class="outline-text-3" id="text-orga4211c3">
+<div id="outline-container-orgca6a90d" class="outline-3">
+<h3 id="orgca6a90d">RQ1 — overall accuracy</h3>
+<div class="outline-text-3" id="text-orgca6a90d">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -340,9 +344,9 @@ Mubric is best in 8 of 10 dataset×LLM settings, significantly better than the s
 </p>
 </div>
 </div>
-<div id="outline-container-org8224c79" class="outline-3">
-<h3 id="org8224c79">RQ2 — ablation (Gemini-2.5-flash-lite only, for cost)</h3>
-<div class="outline-text-3" id="text-org8224c79">
+<div id="outline-container-org4a20ba4" class="outline-3">
+<h3 id="org4a20ba4">RQ2 — ablation (Gemini-2.5-flash-lite only, for cost)</h3>
+<div class="outline-text-3" id="text-org4a20ba4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -385,26 +389,26 @@ Generic LLM revision makes rubrics <b>worse</b> than not refining (-2.56pp vs. I
 </p>
 </div>
 </div>
-<div id="outline-container-org275d43e" class="outline-3">
-<h3 id="org275d43e">RQ3 — which operators get used</h3>
-<div class="outline-text-3" id="text-org275d43e">
+<div id="outline-container-org33481b8" class="outline-3">
+<h3 id="org33481b8">RQ3 — which operators get used</h3>
+<div class="outline-text-3" id="text-org33481b8">
 <p>
 Selection follows the domain: Code is dominated by Logical Correctness (70% of aspect selections, Break Logic the top transformation at 31%); STEM by Factuality (43%) and Fabricate (34%); IF by Comprehension (48%) with Distort Form (28%) and Omit (26%) leading; the two Chat sets share the same top three aspects but differ in weight (RB-Chat favors Comprehension 51%, RM-Chat Factuality 56%).
 </p>
 </div>
 </div>
-<div id="outline-container-org4b6ba75" class="outline-3">
-<h3 id="org4b6ba75">Threshold sensitivity</h3>
-<div class="outline-text-3" id="text-org4b6ba75">
+<div id="outline-container-org5c57e2d" class="outline-3">
+<h3 id="org5c57e2d">Threshold sensitivity</h3>
+<div class="outline-text-3" id="text-org5c57e2d">
 <p>
 On RM-Chat with Gemini, six of seven threshold settings give identical accuracy (42.64%); only the strictest item threshold (δ<sub>item</sub> = 4) drops it, to 41.86%.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org74256de" class="outline-2">
-<h2 id="org74256de">Worked examples (appendix)</h2>
-<div class="outline-text-2" id="text-org74256de">
+<div id="outline-container-orga0258a4" class="outline-2">
+<h2 id="orga0258a4">Worked examples (appendix)</h2>
+<div class="outline-text-2" id="text-orga0258a4">
 <ul class="org-ul">
 <li><b>False factual claim in a tahini recipe</b> (Fabricate × Factuality): initial rubric scores the mutant 100 (same as the reference); the refined rubric adds a factual-accuracy item and the mutant falls to 87.50.</li>
 <li><b>Arithmetic error in a words-spoken-per-day estimate</b> (Break Logic × Logical Robustness): the initial rubric <b>already contained</b> a &ldquo;no calculation errors&rdquo; item, yet the judge gave full credit; rewording the item to demand correct <b>intermediate</b> calculations drops the mutant to 82.35. Having the criterion is not enough; its wording has to make the check explicit enough for the judge to act on.</li>
@@ -412,9 +416,9 @@ On RM-Chat with Gemini, six of seven threshold settings give identical accuracy 
 </ul>
 </div>
 </div>
-<div id="outline-container-orga77f49a" class="outline-2">
-<h2 id="orga77f49a">Caveats</h2>
-<div class="outline-text-2" id="text-orga77f49a">
+<div id="outline-container-org988d53e" class="outline-2">
+<h2 id="org988d53e">Caveats</h2>
+<div class="outline-text-2" id="text-org988d53e">
 <ul class="org-ul">
 <li>Stated in the paper: ablation covers a single backbone for budget reasons; Safety-category tasks are excluded because they depend on external policy; mutations are made by an LLM, and validity is checked by an LLM verifier.</li>
 <li>My reading, not stated in the paper: Mubric&rsquo;s auxiliary components run on GPT-5.4, a stronger model than either backbone, while baselines receive only the small backbone. Direct-Refine (same refiner, no mutation feedback) partly controls for this, but the cross-method comparison is not backbone-matched.</li>
@@ -423,17 +427,17 @@ On RM-Chat with Gemini, six of seven threshold settings give identical accuracy 
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcaec7c1" class="outline-2">
-<h2 id="orgcaec7c1">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgcaec7c1">
+<div id="outline-container-orga3c2e69" class="outline-2">
+<h2 id="orga3c2e69">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orga3c2e69">
 <p>
 Extends mutation testing to a new object under test: not a program or a test suite for code, but the <b>evaluator itself</b> (rubric + judge). The mutation target is the response, and the surviving-mutant signal measures rubric adequacy — an analogue of mutation score in <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a> — which the refiner then uses as active feedback, like <a href="mumutestup.html">MuMuTestUp</a> uses surviving mutants. This makes it a verification step for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a> that complements the statistical approach of <a href="reag.html">REAG</a>&rsquo;s cascade (calibrate the verdict) with a structural one (probe whether the criteria can notice defects at all). See <a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5aa4eb" class="outline-2">
-<h2 id="orgc5aa4eb">Related pages</h2>
-<div class="outline-text-2" id="text-orgc5aa4eb">
+<div id="outline-container-orge698416" class="outline-2">
+<h2 id="orge698416">Related pages</h2>
+<div class="outline-text-2" id="text-orge698416">
 <ul class="org-ul">
 <li><a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a></li>
 <li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
@@ -447,7 +451,7 @@ Extends mutation testing to a new object under test: not a program or a test sui
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

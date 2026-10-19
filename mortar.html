@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MORTAR: Multi-turn Metamorphic Testing for LLM-based Dialogue Systems (Guo et al. 2026)</title>
@@ -203,10 +203,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org32c65b3">Motivation</a></li>
-<li><a href="#org372a824">Approach</a></li>
-<li><a href="#orgd584d59">Relation to broader wiki</a></li>
-<li><a href="#org1613d15">Related pages</a></li>
+<li><a href="#org33da091">Motivation</a></li>
+<li><a href="#orgaec8123">Approach</a></li>
+<li><a href="#orgec21844">Relation to broader wiki</a></li>
+<li><a href="#org0ffe0b3">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -215,41 +215,45 @@
 </p>
 
 <p>
-<b>Sources</b>: Guo et al. - 2026 - MORTAR Multi-turn Metamorphic Testing for LLM-based Dialogue Systems.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Guo et al. - 2026 - MORTAR Multi-turn Metamorphic Testing for LLM-based Dialogue Systems.pdf">Guo et al. - 2026 - MORTAR Multi-turn Metamorphic Testing for LLM-based Dialogue Systems.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-30
 </p>
 
 <hr />
-<div id="outline-container-org32c65b3" class="outline-2">
-<h2 id="org32c65b3">Motivation</h2>
-<div class="outline-text-2" id="text-org32c65b3">
+<div id="outline-container-org33da091" class="outline-2">
+<h2 id="org33da091">Motivation</h2>
+<div class="outline-text-2" id="text-org33da091">
 <p>
 Prior metamorphic testing for LLMs (e.g. <a href="mmt4nl.html">MMT4NL</a>, <a href="metamorphic-testing-llms.html">LLMorph</a>) operates on single-turn input/output pairs. But real dialogue systems are used in multi-turn conversations where later turns depend on earlier context (e.g. &ldquo;Who was in charge?&rdquo; only makes sense given an earlier reference story). Multi-turn interaction has its own, harder oracle problem: a correct answer to a follow-up question depends on which prior turns were perturbed, how state propagates across turns, and whether a perturbation should or shouldn&rsquo;t change downstream answers. No prior MT approach directly targets this. (source: Guo et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org372a824" class="outline-2">
-<h2 id="org372a824">Approach</h2>
-<div class="outline-text-2" id="text-org372a824">
+<div id="outline-container-orgaec8123" class="outline-2">
+<h2 id="orgaec8123">Approach</h2>
+<div class="outline-text-2" id="text-orgaec8123">
 <p>
 MORTAR formalizes multi-turn test cases as perturbations applied at two levels: <b>character-level</b> (e.g. typos within a single turn, &ldquo;H0w many kittens&hellip;&rdquo;) and <b>dialogue-level</b> (e.g. reordering or altering which turns are asked, changing what history is available when a later question is asked). It defines metamorphic relations over the resulting conversation graph — checking that answers remain consistent across the source and perturbed multi-turn conversations wherever the perturbation shouldn&rsquo;t have changed the answer, and mitigating the oracle problem without requiring ground-truth dialogue transcripts. (source: Guo et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgd584d59" class="outline-2">
-<h2 id="orgd584d59">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgd584d59">
+<div id="outline-container-orgec21844" class="outline-2">
+<h2 id="orgec21844">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgec21844">
 <p>
 MORTAR is the multi-turn generalization of the single-turn metamorphic relation pattern used throughout this wiki (see <a href="metamorphic-testing.html">Metamorphic Testing</a>). It&rsquo;s a useful complement to <a href="mmt4nl.html">MMT4NL</a>&rsquo;s perturbation taxonomy (synonym, negation, coreference, etc.) — MMT4NL&rsquo;s perturbations could plausibly be applied <b>within</b> a MORTAR dialogue turn, while MORTAR&rsquo;s dialogue-level perturbations address a structural dimension (multi-turn state/context dependency) that single-turn MT cannot express at all.
 </p>
 </div>
 </div>
-<div id="outline-container-org1613d15" class="outline-2">
-<h2 id="org1613d15">Related pages</h2>
-<div class="outline-text-2" id="text-org1613d15">
+<div id="outline-container-org0ffe0b3" class="outline-2">
+<h2 id="org0ffe0b3">Related pages</h2>
+<div class="outline-text-2" id="text-org0ffe0b3">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="mmt4nl.html">MMT4NL (Racharak 2026)</a></li>
@@ -261,7 +265,7 @@ MORTAR is the multi-turn generalization of the single-turn metamorphic relation 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

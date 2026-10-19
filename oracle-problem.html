@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Oracle Problem in ML/AI Testing</title>
@@ -203,13 +203,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org877e216">Definition</a></li>
-<li><a href="#org05035dd">Why it gets worse for LLMs</a></li>
-<li><a href="#org10028cc">Solution strategies documented in this wiki</a></li>
-<li><a href="#orgc307425">Known pitfall: naive single-reference pseudo-oracles</a></li>
-<li><a href="#orgd567ad0">Known pitfall: correct oracles can still fail to convert opportunity into detection</a></li>
-<li><a href="#org4275bd8">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</a></li>
-<li><a href="#org67f9eb2">Related pages</a></li>
+<li><a href="#orga4ab818">Definition</a></li>
+<li><a href="#org0a29714">Why it gets worse for LLMs</a></li>
+<li><a href="#orgf5b5fe0">Solution strategies documented in this wiki</a></li>
+<li><a href="#org0b43a28">Known pitfall: naive single-reference pseudo-oracles</a></li>
+<li><a href="#org79941c9">Known pitfall: correct oracles can still fail to convert opportunity into detection</a></li>
+<li><a href="#org32116e5">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</a></li>
+<li><a href="#org81b265d">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -218,17 +218,32 @@
 </p>
 
 <p>
-<b>Sources</b>: Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf; Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf; Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf; METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub>; Wang et al. - 2026 - Requirements-Augmented Generation for Trustworthy Acceptance Testing of LLM-Based Software.pdf; Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub>; He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf; Zhao et al. - 2026 - Fail-Aware and Explainable Test Oracle Prediction.pdf; Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf; Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf; Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf; Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf">Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf</a></li>
+<li><a href="../raw/Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf">Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf</a></li>
+<li><a href="../raw/Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf">Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf</a></li>
+<li><a href="../raw/METTLE_A_METamorphic_Testing_Approach_to_Assessing_and_Validating_Unsupervised_Machine_Learning_Systems.pdf">METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub></a></li>
+<li><a href="../raw/Wang et al. - 2026 - Requirements-Augmented Generation for Trustworthy Acceptance Testing of LLM-Based Software.pdf">Wang et al. - 2026 - Requirements-Augmented Generation for Trustworthy Acceptance Testing of LLM-Based Software.pdf</a></li>
+<li><a href="../raw/Magalhaes_et_al_2025.pdf">Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></a></li>
+<li><a href="../raw/He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf">He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf</a></li>
+<li><a href="../raw/Zhao et al. - 2026 - Fail-Aware and Explainable Test Oracle Prediction.pdf">Zhao et al. - 2026 - Fail-Aware and Explainable Test Oracle Prediction.pdf</a></li>
+<li><a href="../raw/Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf">Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf</a></li>
+<li><a href="../raw/Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf">Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf</a></li>
+<li><a href="../raw/Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf">Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf</a></li>
+<li><a href="../raw/Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf">Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org877e216" class="outline-2">
-<h2 id="org877e216">Definition</h2>
-<div class="outline-text-2" id="text-org877e216">
+<div id="outline-container-orga4ab818" class="outline-2">
+<h2 id="orga4ab818">Definition</h2>
+<div class="outline-text-2" id="text-orga4ab818">
 <p>
 Traditional testing (Weyuker&rsquo;s oracle problem, cited in Zhang 2022) checks actual output against an expected output computed independently of the system under test. For ML systems this independent computation usually does not exist — the model <b>is</b> the specification. (source: Zhang et al. 2022)
 </p>
@@ -238,9 +253,9 @@ Riccio et al. 2020 found the oracle problem the <b>most</b>-studied open problem
 </p>
 </div>
 </div>
-<div id="outline-container-org05035dd" class="outline-2">
-<h2 id="org05035dd">Why it gets worse for LLMs</h2>
-<div class="outline-text-2" id="text-org05035dd">
+<div id="outline-container-org0a29714" class="outline-2">
+<h2 id="org0a29714">Why it gets worse for LLMs</h2>
+<div class="outline-text-2" id="text-org0a29714">
 <p>
 Three compounding factors, per Terragni 2026 and Magalhães et al. 2025:
 </p>
@@ -255,9 +270,9 @@ Magalhães et al. 2025 found student developers responding to this by falling ba
 </p>
 </div>
 </div>
-<div id="outline-container-org10028cc" class="outline-2">
-<h2 id="org10028cc">Solution strategies documented in this wiki</h2>
-<div class="outline-text-2" id="text-org10028cc">
+<div id="outline-container-orgf5b5fe0" class="outline-2">
+<h2 id="orgf5b5fe0">Solution strategies documented in this wiki</h2>
+<div class="outline-text-2" id="text-orgf5b5fe0">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -337,25 +352,25 @@ REAG (Wang et al. 2026) is notable for explicitly treating oracle <b>correctness
 </p>
 </div>
 </div>
-<div id="outline-container-orgc307425" class="outline-2">
-<h2 id="orgc307425">Known pitfall: naive single-reference pseudo-oracles</h2>
-<div class="outline-text-2" id="text-orgc307425">
+<div id="outline-container-org0b43a28" class="outline-2">
+<h2 id="org0b43a28">Known pitfall: naive single-reference pseudo-oracles</h2>
+<div class="outline-text-2" id="text-org0b43a28">
 <p>
 A recurring shortcut in LLM test-generation pipelines is executing a generated input on <b>one</b> accepted/reference program and treating its output as ground truth. <a href="audit-feedback-driven-evolution.html">Liang et al. 2026</a> show this can badly mislead evaluation, not just individual test cases: on their benchmarks, a model&rsquo;s own generated expected output agreed with a multi-program consensus panel only 27.79-58.90% of the time, and using a single reference inflated the apparent gain of an iterative &ldquo;self-evolving&rdquo; test generator by 9.46-14.85 percentage points versus panel-audited ground truth — after auditing, an equal-budget independent-resampling baseline often beat the &ldquo;evolving&rdquo; method outright. The lesson generalizes: a single unverified stand-in oracle doesn&rsquo;t just produce isolated false positives, it can systematically bias <b>comparisons between testing methods</b>. <a href="focal-oracle-prediction.html">FOCAL</a>&rsquo;s companion finding — that high aggregate accuracy can coexist with near-zero FAIL-class recall — is the same warning from the metric side rather than the oracle-construction side.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd567ad0" class="outline-2">
-<h2 id="orgd567ad0">Known pitfall: correct oracles can still fail to convert opportunity into detection</h2>
-<div class="outline-text-2" id="text-orgd567ad0">
+<div id="outline-container-org79941c9" class="outline-2">
+<h2 id="org79941c9">Known pitfall: correct oracles can still fail to convert opportunity into detection</h2>
+<div class="outline-text-2" id="text-org79941c9">
 <p>
 Even once the naive single-reference pitfall above is fixed by auditing against a multi-program consensus, a second and distinct gap remains: <a href="oracle-conversion.html">Liang et al. 2026 (oracle conversion)</a> show a specification-based test generator can find a genuinely fault-revealing input (&ldquo;potential kill&rdquo;) yet still predict the wrong expected output for it, so the fault goes undetected (&ldquo;effective kill&rdquo; &lt; &ldquo;potential kill&rdquo;). Training the model to be more <b>correct</b> (reward correctness only) actually shrinks the pool of discriminative inputs it chooses in the first place — a joint reward that credits both correctness and potential kill is needed to avoid trading one for the other. This is a training-time/measurement-time instance of the oracle problem: the oracle here is trustworthy, but converting a good test input into a correct expected output is itself a nontrivial reasoning task that can silently fail.
 </p>
 </div>
 </div>
-<div id="outline-container-org4275bd8" class="outline-2">
-<h2 id="org4275bd8">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</h2>
-<div class="outline-text-2" id="text-org4275bd8">
+<div id="outline-container-org32116e5" class="outline-2">
+<h2 id="org32116e5">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</h2>
+<div class="outline-text-2" id="text-org32116e5">
 <p>
 Using a larger held-out test suite as ground truth avoids the single-reference problem above, but it is still a proxy. <a href="test-aware-mutants.html">Kiele et al. 2026</a> score LLM-generated mutants against EvalPlus&rsquo;s extended HumanEval/MBPP tests and then hand-classified the 65 mutants that survived even those: 49 (75.4%) were real edge-case bugs the oracle never tests (e.g. an empty-substring input), 9 (13.8%) equivalent, 7 (10.8%) bugs only under under-specified task descriptions. The effect on that paper&rsquo;s numbers is the opposite of the single-reference case: the oracle&rsquo;s gaps <b>understate</b> the method&rsquo;s success rate rather than inflating it. (source: Kiele et al. 2026)
 </p>
@@ -365,9 +380,9 @@ A different failure of automated verdicts appears in <a href="lest.html">LEST</a
 </p>
 </div>
 </div>
-<div id="outline-container-org67f9eb2" class="outline-2">
-<h2 id="org67f9eb2">Related pages</h2>
-<div class="outline-text-2" id="text-org67f9eb2">
+<div id="outline-container-org81b265d" class="outline-2">
+<h2 id="org81b265d">Related pages</h2>
+<div class="outline-text-2" id="text-org81b265d">
 <ul class="org-ul">
 <li><a href="test-aware-mutants.html">Test-Aware Mutant Generation (Kiele et al. 2026)</a></li>
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
@@ -388,7 +403,7 @@ A different failure of automated verdicts appears in <a href="lest.html">LEST</a
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

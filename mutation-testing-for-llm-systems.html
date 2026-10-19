@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mutation Testing for LLM Systems</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbfab743">Four distinct roles</a></li>
-<li><a href="#org5ade986">Why both matter together</a></li>
-<li><a href="#org767d9ca">Conditioning on the existing suite, and mutating the evaluator</a></li>
-<li><a href="#org34cf562">Relation to broader wiki</a></li>
-<li><a href="#org057d19c">Related pages</a></li>
+<li><a href="#orgddd8523">Four distinct roles</a></li>
+<li><a href="#org107d0d2">Why both matter together</a></li>
+<li><a href="#org3f8e768">Conditioning on the existing suite, and mutating the evaluator</a></li>
+<li><a href="#orgf8dd34d">Relation to broader wiki</a></li>
+<li><a href="#org4adf8a5">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,17 +216,24 @@
 </p>
 
 <p>
-<b>Sources</b>: Hamidi et al. - 2025 - Intent-Based Mutation Testing From Naturally Written Programming Intents to Mutants.pdf; Tian et al. - 2026 - MuMuTestUp Mutation-based Multi-Agent Test Case Update.pdf; Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf; Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Hamidi et al. - 2025 - Intent-Based Mutation Testing From Naturally Written Programming Intents to Mutants.pdf">Hamidi et al. - 2025 - Intent-Based Mutation Testing From Naturally Written Programming Intents to Mutants.pdf</a></li>
+<li><a href="../raw/Tian et al. - 2026 - MuMuTestUp Mutation-based Multi-Agent Test Case Update.pdf">Tian et al. - 2026 - MuMuTestUp Mutation-based Multi-Agent Test Case Update.pdf</a></li>
+<li><a href="../raw/Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf">Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf</a></li>
+<li><a href="../raw/Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf">Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-orgbfab743" class="outline-2">
-<h2 id="orgbfab743">Four distinct roles</h2>
-<div class="outline-text-2" id="text-orgbfab743">
+<div id="outline-container-orgddd8523" class="outline-2">
+<h2 id="orgddd8523">Four distinct roles</h2>
+<div class="outline-text-2" id="text-orgddd8523">
 <p>
 Classic mutation testing injects small syntactic changes (mutants) into a program and measures what fraction a test suite kills (the mutation score), used as a proxy for assertion strength. Four 2025-2026 papers extend this into the LLM era in different directions:
 </p>
@@ -276,9 +283,9 @@ Classic mutation testing injects small syntactic changes (mutants) into a progra
 </table>
 </div>
 </div>
-<div id="outline-container-org5ade986" class="outline-2">
-<h2 id="org5ade986">Why both matter together</h2>
-<div class="outline-text-2" id="text-org5ade986">
+<div id="outline-container-org107d0d2" class="outline-2">
+<h2 id="org107d0d2">Why both matter together</h2>
+<div class="outline-text-2" id="text-org107d0d2">
 <p>
 Hamidi et al. show 55% of intent-based mutants are not subsumed by traditional syntax-based mutants — meaning a test suite scoring 100% on traditional mutation testing can still miss real specification-level faults. MuMuTestUp&rsquo;s ablation shows that dropping mutation-guided feedback costs 8.99 points of mutation score specifically (with only a modest coverage change), confirming mutation score captures something coverage-based feedback alone does not: assertion <b>discriminative power</b>, not just code <b>reachability</b>.
 </p>
@@ -288,9 +295,9 @@ Together they suggest mutation testing&rsquo;s role is shifting: instead of bein
 </p>
 </div>
 </div>
-<div id="outline-container-org767d9ca" class="outline-2">
-<h2 id="org767d9ca">Conditioning on the existing suite, and mutating the evaluator</h2>
-<div class="outline-text-2" id="text-org767d9ca">
+<div id="outline-container-org3f8e768" class="outline-2">
+<h2 id="org3f8e768">Conditioning on the existing suite, and mutating the evaluator</h2>
+<div class="outline-text-2" id="text-org3f8e768">
 <p>
 Kiele et al. 2026 add the observation that a mutant generator becomes far more useful when it can see what the tests already check: the same LLMs go from 12.2% to 87.8% verified faults (HumanEval, Gemini 3.1 Pro) by adding the base tests to one prompt, at comparable fault subtlety — the gain is yield, not subtler bugs. Their manual review of the 65 mutants that survived even the extended EvalPlus oracle found 49 (75.4%) were genuine oracle gaps rather than equivalent mutants, so the &ldquo;oracle&rdquo; used to score mutant quality was itself incomplete. (source: Kiele et al. 2026)
 </p>
@@ -304,17 +311,17 @@ Across these two, the shared point is that surviving mutants are most valuable a
 </p>
 </div>
 </div>
-<div id="outline-container-org34cf562" class="outline-2">
-<h2 id="org34cf562">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org34cf562">
+<div id="outline-container-orgf8dd34d" class="outline-2">
+<h2 id="orgf8dd34d">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgf8dd34d">
 <p>
 Mutation score is one of the <a href="test-adequacy-criteria.html">test adequacy criteria</a> this wiki tracks alongside neuron coverage and MR-compliance — Hamidi et al. and Tian et al. were the first LLM-agent-era instances of that criterion in this wiki; Kiele et al. and Yang et al. (see above) later extended it to suite-targeted mutant generation and to rubric adequacy. The &ldquo;LLM proposes, deterministic tool disposes&rdquo; pattern in MuMuTestUp (mutation testing gates what the LLM is allowed to accept as a valid update) parallels <a href="concolixir.html">ConcoLixir</a>&rsquo;s use of concrete execution to gate LLM-proposed inputs.
 </p>
 </div>
 </div>
-<div id="outline-container-org057d19c" class="outline-2">
-<h2 id="org057d19c">Related pages</h2>
-<div class="outline-text-2" id="text-org057d19c">
+<div id="outline-container-org4adf8a5" class="outline-2">
+<h2 id="org4adf8a5">Related pages</h2>
+<div class="outline-text-2" id="text-org4adf8a5">
 <ul class="org-ul">
 <li><a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing (Hamidi et al. 2025)</a></li>
 <li><a href="test-aware-mutants.html">Test-Aware Mutant Generation (Kiele et al. 2026)</a></li>
@@ -329,7 +336,7 @@ Mutation score is one of the <a href="test-adequacy-criteria.html">test adequacy
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

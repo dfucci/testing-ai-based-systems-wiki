@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LLM Agent Testing Practice (Empirical Findings)</title>
@@ -203,10 +203,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1f37b95">Three studies, converging findings</a></li>
-<li><a href="#orgd90ed6d">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
-<li><a href="#orgad093aa">Relation to existing wiki content</a></li>
-<li><a href="#org3c9f864">Related pages</a></li>
+<li><a href="#org3ebe068">Three studies, converging findings</a></li>
+<li><a href="#orgc5319cc">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
+<li><a href="#org733d474">Relation to existing wiki content</a></li>
+<li><a href="#org5921716">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -215,17 +215,24 @@
 </p>
 
 <p>
-<b>Sources</b>: Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf; Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub>; Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf; Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf">Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf</a></li>
+<li><a href="../raw/Magalhaes_et_al_2025.pdf">Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></a></li>
+<li><a href="../raw/Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf">Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf</a></li>
+<li><a href="../raw/Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf">Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org1f37b95" class="outline-2">
-<h2 id="org1f37b95">Three studies, converging findings</h2>
-<div class="outline-text-2" id="text-org1f37b95">
+<div id="outline-container-org3ebe068" class="outline-2">
+<h2 id="org3ebe068">Three studies, converging findings</h2>
+<div class="outline-text-2" id="text-org3ebe068">
 <p>
 <a href="tangent.html">Tangent</a> (Pan et al. 2026) mined 1,190 GitHub repos using LangChain/LangGraph/MCP down to 2,572 manually labeled tests across 240 modules, plus structured interviews with 10 senior industry practitioners. <a href="testing-untestable-llm-software.html">Magalhães et al. 2025</a> ran a qualitative case study on 99 student reflection reports from 21 team projects building real LLM-integrated apps. <a href="qa-practices-gaps-agents.html">Dai et al. 2026</a> coded repository-visible QA artifacts (not just tests) across 157 popular open-source agent projects against a four-layer execution-surface/safeguard/testing/risk-scenario rubric. Different methods, same conclusions (source: Pan et al. 2026; Magalhães et al. 2025; Dai et al. 2026):
 </p>
@@ -242,25 +249,25 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd90ed6d" class="outline-2">
-<h2 id="orgd90ed6d">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
-<div class="outline-text-2" id="text-orgd90ed6d">
+<div id="outline-container-orgc5319cc" class="outline-2">
+<h2 id="orgc5319cc">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
+<div class="outline-text-2" id="text-orgc5319cc">
 <p>
 Four categories: test fixtures (mock agent/tool/environment), test data (mocked/real/synthetic/dummy), test objectives (agent/tool, interaction, scenario, e2e), assertions (state/output/memory/reasoning/environment) (source: Pan et al. 2026). A useful checklist against which any new agent-testing technique in this wiki can be positioned.
 </p>
 </div>
 </div>
-<div id="outline-container-orgad093aa" class="outline-2">
-<h2 id="orgad093aa">Relation to existing wiki content</h2>
-<div class="outline-text-2" id="text-orgad093aa">
+<div id="outline-container-org733d474" class="outline-2">
+<h2 id="org733d474">Relation to existing wiki content</h2>
+<div class="outline-text-2" id="text-org733d474">
 <p>
 This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a> (from TRAJEVAL): those pages describe <b>diagnosing</b> agent failures after the fact via trajectory decomposition; this page describes what developers actually <b>write as tests</b> beforehand. TRAJEVAL&rsquo;s finding that agents over-explore (4-8% precision) is a failure mode invisible to the shallow unit tests Tangent documents — neither source tests for it directly today. (cross-reference, not directly stated in either source)
 </p>
 </div>
 </div>
-<div id="outline-container-org3c9f864" class="outline-2">
-<h2 id="org3c9f864">Related pages</h2>
-<div class="outline-text-2" id="text-org3c9f864">
+<div id="outline-container-org5921716" class="outline-2">
+<h2 id="org5921716">Related pages</h2>
+<div class="outline-text-2" id="text-org5921716">
 <ul class="org-ul">
 <li><a href="tangent.html">Tangent (Pan et al. 2026)</a></li>
 <li><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software (Magalhães et al. 2025)</a></li>
@@ -277,7 +284,7 @@ This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

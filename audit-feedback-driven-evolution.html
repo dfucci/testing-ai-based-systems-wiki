@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation (Liang et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9a0be6b">Motivation</a></li>
-<li><a href="#orgaa95062">Method</a></li>
-<li><a href="#orga5f8abe">Findings</a></li>
-<li><a href="#org9d7d113">Relation to broader wiki</a></li>
-<li><a href="#org4e53de4">Related pages</a></li>
+<li><a href="#orge749c91">Motivation</a></li>
+<li><a href="#orgd1db211">Method</a></li>
+<li><a href="#org19f0018">Findings</a></li>
+<li><a href="#org43c93f3">Relation to broader wiki</a></li>
+<li><a href="#org0692684">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,33 +216,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf">Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org9a0be6b" class="outline-2">
-<h2 id="org9a0be6b">Motivation</h2>
-<div class="outline-text-2" id="text-org9a0be6b">
+<div id="outline-container-orge749c91" class="outline-2">
+<h2 id="orge749c91">Motivation</h2>
+<div class="outline-text-2" id="text-orge749c91">
 <p>
 Recent LLM test-generation systems use execution feedback to look self-verifying: generate an input, run it on some program, treat the observed output as correct, and iterate/refine (&ldquo;evolve&rdquo;) based on that feedback. But this is a shortcut version of the <a href="oracle-problem.html">test oracle problem</a> — the &ldquo;accepted program&rdquo; used to produce the reference output may itself accept out-of-domain inputs, fail on valid corner cases, or encode behavior the specification leaves undefined. If so, apparent evolutionary &ldquo;progress&rdquo; may just mean the system got better at agreeing with one flawed reference, not at generating genuinely valid, fault-revealing tests. (source: Liang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgaa95062" class="outline-2">
-<h2 id="orgaa95062">Method</h2>
-<div class="outline-text-2" id="text-orgaa95062">
+<div id="outline-container-orgd1db211" class="outline-2">
+<h2 id="orgd1db211">Method</h2>
+<div class="outline-text-2" id="text-orgd1db211">
 <p>
 The authors audit this failure mode on 142 development, 114 locked-external, and 138 held-out (qualification-amended) competitive-programming tasks, across two models and three seeds, using a panel of multiple independently-accepted programs (rather than one) as ground truth wherever they agree. Six research questions probe: how often the model&rsquo;s generated expected output agrees with the accepted-program panel (RQ1); how much a single-reference oracle inflates apparent evolutionary gains versus the panel-audited truth (RQ2); whether audited evolution actually beats a one-shot or equal-slot resampling baseline (RQ3); which fault types concentrate disconfirmed detections (RQ4); whether a blinded human semantic audit supports the &ldquo;invalid input&rdquo; explanation for panel disagreement (RQ5); and whether behavior-aligned feedback shows any residual value versus a density-matched placebo once these biases are controlled for (RQ6). (source: Liang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga5f8abe" class="outline-2">
-<h2 id="orga5f8abe">Findings</h2>
-<div class="outline-text-2" id="text-orga5f8abe">
+<div id="outline-container-org19f0018" class="outline-2">
+<h2 id="org19f0018">Findings</h2>
+<div class="outline-text-2" id="text-org19f0018">
 <ul class="org-ul">
 <li><b>RQ1</b>: Even on inputs where the panel agrees, the model&rsquo;s own generated expected output matches the panel only 27.79-58.90% of the time depending on model/cohort — i.e., using the model&rsquo;s own single generated output as ground truth is unreliable most of the time.</li>
 <li><b>RQ2</b>: A single-reference oracle inflates the apparent gain of an &ldquo;Evolve&rdquo; method over a one-shot baseline by 9.46-14.85 percentage points; after panel-based audit, the same frozen test archives show near-zero or even negative gains on the development cohort.</li>
@@ -255,9 +259,9 @@ The authors audit this failure mode on 142 development, 114 locked-external, and
 </p>
 </div>
 </div>
-<div id="outline-container-org9d7d113" class="outline-2">
-<h2 id="org9d7d113">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org9d7d113">
+<div id="outline-container-org43c93f3" class="outline-2">
+<h2 id="org43c93f3">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org43c93f3">
 <p>
 This paper is a direct cautionary case study for the <a href="oracle-problem.html">oracle problem</a> as it appears in <b>automated test/oracle generation pipelines themselves</b>: it shows that a naive single-reference pseudo-oracle doesn&rsquo;t just produce isolated false positives/negatives, it can systematically bias comparative evaluation of testing methods in a way that looks like genuine feedback-driven improvement. It complements <a href="delta-drl-differential-testing.html">Delta</a>&rsquo;s self-referential approach (which validates its self-derived reference empirically rather than assuming it&rsquo;s correct) and <a href="focal-oracle-prediction.html">FOCAL</a>&rsquo;s explicit framing of learned oracle quality as separate from raw accuracy (fail-aware metrics). Methodologically, it&rsquo;s a rare example in this wiki of a paper auditing <b>the evaluation methodology of other testing tools</b>, rather than proposing a new testing technique itself.
 </p>
@@ -267,9 +271,9 @@ Same author group&rsquo;s follow-up, <a href="oracle-conversion.html">Oracle Con
 </p>
 </div>
 </div>
-<div id="outline-container-org4e53de4" class="outline-2">
-<h2 id="org4e53de4">Related pages</h2>
-<div class="outline-text-2" id="text-org4e53de4">
+<div id="outline-container-org0692684" class="outline-2">
+<h2 id="org0692684">Related pages</h2>
+<div class="outline-text-2" id="text-org0692684">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="delta-drl-differential-testing.html">Delta (He et al. 2026)</a></li>
@@ -282,7 +286,7 @@ Same author group&rsquo;s follow-up, <a href="oracle-conversion.html">Oracle Con
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

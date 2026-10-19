@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Oracle Conversion in Specification-Based Test Generation (Liang et al. 2026)</title>
@@ -235,11 +235,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2518c86">Motivation</a></li>
-<li><a href="#org5d21c70">Method</a></li>
-<li><a href="#orgc18941d">Findings</a></li>
-<li><a href="#org527acf2">Relation to broader wiki</a></li>
-<li><a href="#orgbc34b03">Related pages</a></li>
+<li><a href="#org5b52a38">Motivation</a></li>
+<li><a href="#orgf7796b8">Method</a></li>
+<li><a href="#org3ab3d9d">Findings</a></li>
+<li><a href="#org48c2402">Relation to broader wiki</a></li>
+<li><a href="#org0a2e7ed">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -248,17 +248,21 @@
 </p>
 
 <p>
-<b>Sources</b>: Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf (arXiv:2609.05879v1, 5 Sep 2026)
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf">Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf</a> (arXiv:2609.05879v1, 5 Sep 2026)</li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org2518c86" class="outline-2">
-<h2 id="org2518c86">Motivation</h2>
-<div class="outline-text-2" id="text-org2518c86">
+<div id="outline-container-org5b52a38" class="outline-2">
+<h2 id="org5b52a38">Motivation</h2>
+<div class="outline-text-2" id="text-org5b52a38">
 <p>
 Specification-based test generation gives a model a natural-language requirement (no reference implementation, no example I/O) and asks it to emit a small suite of ~5 stdin/stdout test cases in one shot. This interface creates two independent ways to fail: a test&rsquo;s <b>input</b> can be uninteresting (every candidate implementation, correct or wrong, produces the same output), or its <b>expected output</b> can be wrong even though the input itself would have been fault-revealing under a correct output. Prior systems (UTGen, UTRL, CURE) reward correctness and/or discrimination but don&rsquo;t cleanly separate <b>which</b> opportunities a joint generator finds from <b>how many it actually converts</b> once its own reward changes the inputs it chooses. (source: Liang et al. 2026)
 </p>
@@ -268,9 +272,9 @@ This is a direct companion to <a href="audit-feedback-driven-evolution.html">Lia
 </p>
 </div>
 </div>
-<div id="outline-container-org5d21c70" class="outline-2">
-<h2 id="org5d21c70">Method</h2>
-<div class="outline-text-2" id="text-org5d21c70">
+<div id="outline-container-orgf7796b8" class="outline-2">
+<h2 id="orgf7796b8">Method</h2>
+<div class="outline-text-2" id="text-orgf7796b8">
 <ul class="org-ul">
 <li><b>Task</b>: natural-language spec → JSON suite of ≤5 (input, output) pairs, no execution feedback at inference time.</li>
 <li><b>Potential kill</b> \(O_q\): union, over reference-valid inputs in the suite, of wrong programs whose output disagrees with the audited consensus — i.e. what the suite <b>could</b> detect if every predicted output were correct.</li>
@@ -288,9 +292,9 @@ This is a direct companion to <a href="audit-feedback-driven-evolution.html">Lia
 </p>
 </div>
 </div>
-<div id="outline-container-orgc18941d" class="outline-2">
-<h2 id="orgc18941d">Findings</h2>
-<div class="outline-text-2" id="text-orgc18941d">
+<div id="outline-container-org3ab3d9d" class="outline-2">
+<h2 id="org3ab3d9d">Findings</h2>
+<div class="outline-text-2" id="text-org3ab3d9d">
 <ul class="org-ul">
 <li><b>RQ1 (joint improvement)</b>: at step 75, Additive improves full correctness from Base&rsquo;s 28.59% to 42.54% (+13.94pp), input kill 24.06%→25.27% (+1.22pp), effective kill 12.23%→14.15% (+1.92pp), OCE 49.70%→56.51%. All three seeds improve jointly, though one seed&rsquo;s input-kill gain is only +0.02pp — a real but modest, not dramatic, joint improvement.</li>
 <li><b>RQ2 (the central trade-off)</b>: NoKill (correctness-only reward) reaches the <b>highest</b> full correctness (47.04%) and full kill (14.36%) of any 50-step arm — but its input kill (21.60%) falls <b>below</b> Base (24.06%) in every seed. Optimizing correctness alone narrows the model toward easier, less fault-discriminating inputs. Additive-50 is the only arm improving all four central metrics (C, O, K, BTS) over Base simultaneously, though it is not the best on any single metric — no single composite score suffices; suite-level union accounting (OCE) is needed alongside it.</li>
@@ -305,17 +309,17 @@ This is a direct companion to <a href="audit-feedback-driven-evolution.html">Lia
 </p>
 </div>
 </div>
-<div id="outline-container-org527acf2" class="outline-2">
-<h2 id="org527acf2">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org527acf2">
+<div id="outline-container-org48c2402" class="outline-2">
+<h2 id="org48c2402">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org48c2402">
 <p>
 This paper names and operationalizes a specific failure mode inside the <a href="oracle-problem.html">oracle problem</a>: even with a <b>trustworthy</b> audited oracle (unlike the naive single-reference pseudo-oracles <a href="audit-feedback-driven-evolution.html">Liang et al.&rsquo;s earlier paper</a> warns against), a test generator can still fail to convert discovered fault-revealing inputs into correct expected outputs. It gives <a href="test-adequacy-criteria.html">mutation-style kill-score</a> work a sharper vocabulary — potential vs. effective kill — for a problem that&rsquo;s usually reported as a single conflated &ldquo;kill rate.&rdquo; It&rsquo;s also a cautionary data point for <a href="agent-skill-coverage.html">test-adequacy</a>/RL-from-execution-feedback work generally: reward shaping that only rewards correctness can silently trade away discriminative power, a dynamic worth checking for in any RL-for-test-generation setup, not just this one.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc34b03" class="outline-2">
-<h2 id="orgbc34b03">Related pages</h2>
-<div class="outline-text-2" id="text-orgbc34b03">
+<div id="outline-container-org0a2e7ed" class="outline-2">
+<h2 id="org0a2e7ed">Related pages</h2>
+<div class="outline-text-2" id="text-org0a2e7ed">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="audit-feedback-driven-evolution.html">Auditing Feedback-Driven Evolution (Liang et al. 2026)</a></li>
@@ -329,7 +333,7 @@ This paper names and operationalizes a specific failure mode inside the <a href=
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

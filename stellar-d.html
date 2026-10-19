@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>STELLAR-D — Diversity-Guided Search-Based Testing of LLM Applications (Sorokin et al. 2026)</title>
@@ -203,17 +203,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge211692">Evaluation setup</a></li>
-<li><a href="#org8e182d5">Results</a>
+<li><a href="#org0054415">Evaluation setup</a></li>
+<li><a href="#orgcadb40a">Results</a>
 <ul>
-<li><a href="#org7da4d1d">RQ0 — judge evaluation</a></li>
-<li><a href="#org3d5f3d4">RQ1 — effectiveness</a></li>
-<li><a href="#orgc8b4e42">RQ2 — diversity</a></li>
-<li><a href="#org2957ee3">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</a></li>
+<li><a href="#orgb4c5d44">RQ0 — judge evaluation</a></li>
+<li><a href="#orgdf87c33">RQ1 — effectiveness</a></li>
+<li><a href="#orgde1a737">RQ2 — diversity</a></li>
+<li><a href="#org0afc540">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</a></li>
 </ul>
 </li>
-<li><a href="#org4249eb6">Relation to broader wiki</a></li>
-<li><a href="#org9d3fad0">Related pages</a></li>
+<li><a href="#org31c46b2">Relation to broader wiki</a></li>
+<li><a href="#org9b75c91">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -222,8 +222,12 @@
 </p>
 
 <p>
-<b>Sources</b>: Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf (arXiv:2609.23209v1, 19 Sep 2026)
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf">Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf</a> (arXiv:2609.23209v1, 19 Sep 2026)</li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
@@ -234,9 +238,9 @@
 <p>
 See <a href="search-based-testing.html">Search-Based Testing for LLM Applications</a> for the full technical writeup of the method (feature encoding, genetic operators, archive/repopulation mechanism, NSGA-II) and the headline effectiveness/diversity trade-off results.
 </p>
-<div id="outline-container-orge211692" class="outline-2">
-<h2 id="orge211692">Evaluation setup</h2>
-<div class="outline-text-2" id="text-orge211692">
+<div id="outline-container-org0054415" class="outline-2">
+<h2 id="org0054415">Evaluation setup</h2>
+<div class="outline-text-2" id="text-org0054415">
 <p>
 Three case studies, five systems under test, eight LLMs, 18 configurations, &gt;1M executed tests, ~48 GPU-days total:
 </p>
@@ -256,37 +260,37 @@ Baselines: Random Search (RS), T-wise combinatorial (4-wise), ASTRAL (SafeQA onl
 </p>
 </div>
 </div>
-<div id="outline-container-org8e182d5" class="outline-2">
-<h2 id="org8e182d5">Results</h2>
-<div class="outline-text-2" id="text-org8e182d5">
+<div id="outline-container-orgcadb40a" class="outline-2">
+<h2 id="orgcadb40a">Results</h2>
+<div class="outline-text-2" id="text-orgcadb40a">
 </div>
-<div id="outline-container-org7da4d1d" class="outline-3">
-<h3 id="org7da4d1d">RQ0 — judge evaluation</h3>
-<div class="outline-text-3" id="text-org7da4d1d">
+<div id="outline-container-orgb4c5d44" class="outline-3">
+<h3 id="orgb4c5d44">RQ0 — judge evaluation</h3>
+<div class="outline-text-3" id="text-orgb4c5d44">
 <p>
 GPT-4o-mini gave the best accuracy/cost/latency balance as the LLM-judge oracle across all three domains (F1 0.79 SafeQA binary, 0.71 NaviQA, 0.96 CarQA); multi-sample (3-shot ensembled) prompting did not improve results enough to justify its extra cost. Human-annotation agreement (Fleiss&rsquo; κ) was substantial for the Request-orientedness (0.62) and Proactivity (0.69) judge dimensions, only moderate for Directness (0.43) — perceived verbosity/clarity is more subjective than the other dimensions. (source: Sorokin et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org3d5f3d4" class="outline-3">
-<h3 id="org3d5f3d4">RQ1 — effectiveness</h3>
-<div class="outline-text-3" id="text-org3d5f3d4">
+<div id="outline-container-orgdf87c33" class="outline-3">
+<h3 id="orgdf87c33">RQ1 — effectiveness</h3>
+<div class="outline-text-3" id="text-orgdf87c33">
 <p>
 Guided search (any STELLAR variant) detects significantly more failures than random/combinatorial baselines in the majority of the 18 configurations. Non-diversified STELLAR finds the most failures overall (e.g. SafeQA/DeepSeek-V2-16B: 412.33 avg failures vs. 230.17 for STELLAR-D, 250.68 for STELLAR-DS, 198.67 for ASTRAL, 193.67 T-wise, 198.00 Random). STELLAR-D and STELLAR-DS perform comparably to each other across configurations. In CarQA-II, guided approaches don&rsquo;t significantly beat non-guided baselines for most model configurations — the one case study where the effect is weaker.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc8b4e42" class="outline-3">
-<h3 id="orgc8b4e42">RQ2 — diversity</h3>
-<div class="outline-text-3" id="text-orgc8b4e42">
+<div id="outline-container-orgde1a737" class="outline-3">
+<h3 id="orgde1a737">RQ2 — diversity</h3>
+<div class="outline-text-3" id="text-orgde1a737">
 <p>
 STELLAR-DS (greedy repopulation) achieves the highest coverage in 4 of 5 systems, with SafeQA the exception (STELLAR-D performs best there, 60% vs. STELLAR-DS&rsquo;s 58%); the largest single-system coverage gain over plain STELLAR is +11 percentage points on NaviQA-I (75%→86%). Overall, STELLAR-DS reaches 78% average coverage (matching random sampling&rsquo;s 78%) and 89% average entropy (matching random sampling, exceeding STELLAR&rsquo;s 85%), while STELLAR-D trails slightly behind DS on both metrics. Greedy vs. uniform repopulation shows no significant difference in raw failure-detection effectiveness, but up to a 3-percentage-point diversity (coverage/entropy) advantage for greedy sampling.
 </p>
 </div>
 </div>
-<div id="outline-container-org2957ee3" class="outline-3">
-<h3 id="org2957ee3">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</h3>
-<div class="outline-text-3" id="text-org2957ee3">
+<div id="outline-container-org0afc540" class="outline-3">
+<h3 id="org0afc540">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</h3>
+<div class="outline-text-3" id="text-org0afc540">
 <p>
 Failures were LLM-summarized, embedded, hierarchically clustered, and reviewed with a BMW domain expert (7 years, conversational-assistant testing), who confirmed all proposed types as realistic and merged related clusters into six, ordered by frequency:
 </p>
@@ -306,17 +310,17 @@ Failures were LLM-summarized, embedded, hierarchically clustered, and reviewed w
 </div>
 </div>
 </div>
-<div id="outline-container-org4249eb6" class="outline-2">
-<h2 id="org4249eb6">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org4249eb6">
+<div id="outline-container-org31c46b2" class="outline-2">
+<h2 id="org31c46b2">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org31c46b2">
 <p>
 STELLAR-D&rsquo;s judge-selection results (RQ0) are an independent empirical data point for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>: across three unrelated domains, a mid-tier model (GPT-4o-mini) beat larger/more expensive judges (GPT-4o, GPT-5-Chat) on the accuracy/cost trade-off, and multi-sample ensembling wasn&rsquo;t worth its extra cost — consistent with that page&rsquo;s point that judge selection benefits from empirical validation rather than defaulting to &ldquo;the strongest available model.&rdquo; The paper&rsquo;s baseline comparison against ASTRAL (coverage-matrix test generation, no feedback loop) and its DeepJanus-inspired archive/repopulation design are discussed in <a href="search-based-testing.html">the concept hub</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org9d3fad0" class="outline-2">
-<h2 id="org9d3fad0">Related pages</h2>
-<div class="outline-text-2" id="text-org9d3fad0">
+<div id="outline-container-org9b75c91" class="outline-2">
+<h2 id="org9b75c91">Related pages</h2>
+<div class="outline-text-2" id="text-org9b75c91">
 <ul class="org-ul">
 <li><a href="search-based-testing.html">Search-Based Testing for LLM Applications</a></li>
 <li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
@@ -328,7 +332,7 @@ STELLAR-D&rsquo;s judge-selection results (RQ0) are an independent empirical dat
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Explanation-Guided Metamorphic Testing of Specialized Language Models (Chen et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9b9ffbe">Motivation</a></li>
-<li><a href="#orgc7a9d99">Method</a></li>
-<li><a href="#org63b7886">Findings</a></li>
-<li><a href="#org491abcc">Relation to broader wiki</a></li>
-<li><a href="#org56e7a1b">Related pages</a></li>
+<li><a href="#org6087138">Motivation</a></li>
+<li><a href="#org42d6c66">Method</a></li>
+<li><a href="#orga6a837d">Findings</a></li>
+<li><a href="#org194ac5c">Relation to broader wiki</a></li>
+<li><a href="#org91669c9">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,33 +216,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf">Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org9b9ffbe" class="outline-2">
-<h2 id="org9b9ffbe">Motivation</h2>
-<div class="outline-text-2" id="text-org9b9ffbe">
+<div id="outline-container-org6087138" class="outline-2">
+<h2 id="org6087138">Motivation</h2>
+<div class="outline-text-2" id="text-org6087138">
 <p>
 Task-specialized language models (issue triaging, document classification) are increasingly embedded in software engineering workflows, but there is little empirical evidence on how to test their robustness under semantics-preserving perturbations. Heuristic mutation (random synonym swap, random token deletion) wastes effort mutating tokens the model doesn&rsquo;t actually attend to, and risks generating semantically invalid variants that look like bugs but are actually broken test cases. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7a9d99" class="outline-2">
-<h2 id="orgc7a9d99">Method</h2>
-<div class="outline-text-2" id="text-orgc7a9d99">
+<div id="outline-container-org42d6c66" class="outline-2">
+<h2 id="org42d6c66">Method</h2>
+<div class="outline-text-2" id="text-org42d6c66">
 <p>
 A large-scale empirical study across three datasets, four model architectures, and 20 testing configurations combining: attribution-based token prioritization (use explainability methods to find which tokens the model&rsquo;s prediction depends on), LLM-driven mutation (perturb exactly those tokens), and automated semantic verification (a gate that rejects mutations which no longer preserve the original label/meaning) — compared against heuristic mutation baselines. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org63b7886" class="outline-2">
-<h2 id="org63b7886">Findings</h2>
-<div class="outline-text-2" id="text-org63b7886">
+<div id="outline-container-orga6a837d" class="outline-2">
+<h2 id="orga6a837d">Findings</h2>
+<div class="outline-text-2" id="text-orga6a837d">
 <ul class="org-ul">
 <li>Explanation-guided mutation generates 2.30x more <b>verified</b> failure-inducing test cases than heuristic mutation.</li>
 <li>The semantic-verification gate substantially improves mutation validity — among gate-accepted variants, human annotation confirms high label-preservation precision, addressing metamorphic testing&rsquo;s classic false-positive problem (see <a href="metamorphic-testing.html">Metamorphic Testing</a>&rsquo;s &ldquo;known limitation&rdquo; section).</li>
@@ -254,9 +258,9 @@ A large-scale empirical study across three datasets, four model architectures, a
 </p>
 </div>
 </div>
-<div id="outline-container-org491abcc" class="outline-2">
-<h2 id="org491abcc">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org491abcc">
+<div id="outline-container-org194ac5c" class="outline-2">
+<h2 id="org194ac5c">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org194ac5c">
 <p>
 This paper directly answers a gap left open by prior <a href="metamorphic-testing.html">metamorphic testing</a> work in this wiki (e.g. <a href="mmt4nl.html">MMT4NL</a>, <a href="metamorphic-testing-llms.html">LLMorph</a>): those apply MRs uniformly across all tokens/inputs, whereas explanation-guided MT targets the <b>specific</b> tokens a model is known to be sensitive to, making mutation both more efficient and more likely to expose genuine (not accidental) failures. It also addresses the false-positive/semantic-drift problem that <a href="metamorphic-testing-llms.html">Terragni 2026</a> and <a href="lgmt.html">LGMT</a> both flag as MT&rsquo;s chief weakness for NLP, via its automated semantic-verification gate.
 </p>
@@ -266,9 +270,9 @@ This paper directly answers a gap left open by prior <a href="metamorphic-testin
 </p>
 </div>
 </div>
-<div id="outline-container-org56e7a1b" class="outline-2">
-<h2 id="org56e7a1b">Related pages</h2>
-<div class="outline-text-2" id="text-org56e7a1b">
+<div id="outline-container-org91669c9" class="outline-2">
+<h2 id="org91669c9">Related pages</h2>
+<div class="outline-text-2" id="text-org91669c9">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="mmt4nl.html">MMT4NL (Racharak 2026)</a></li>
@@ -282,7 +286,7 @@ This paper directly answers a gap left open by prior <a href="metamorphic-testin
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

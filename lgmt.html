@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LGMT: Logic-Grounded Metamorphic Testing for LLM Reasoning Reliability (Zhou et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org18d0873">Motivation</a></li>
-<li><a href="#org5be8250">Approach</a></li>
-<li><a href="#org3a62080">Findings</a></li>
-<li><a href="#orgcdb2100">Relation to broader wiki</a></li>
-<li><a href="#orgc2964d4">Related pages</a></li>
+<li><a href="#org3713ed8">Motivation</a></li>
+<li><a href="#org8188405">Approach</a></li>
+<li><a href="#orgc30ce64">Findings</a></li>
+<li><a href="#orgf4132d0">Relation to broader wiki</a></li>
+<li><a href="#org880b16b">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -216,33 +216,37 @@
 </p>
 
 <p>
-<b>Sources</b>: Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf">Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-08-30
 </p>
 
 <hr />
-<div id="outline-container-org18d0873" class="outline-2">
-<h2 id="org18d0873">Motivation</h2>
-<div class="outline-text-2" id="text-org18d0873">
+<div id="outline-container-org3713ed8" class="outline-2">
+<h2 id="org3713ed8">Motivation</h2>
+<div class="outline-text-2" id="text-org3713ed8">
 <p>
 Static logical-reasoning benchmarks (FOLIO, LogicBench, LogiQA) suffer the classic <a href="oracle-problem.html">test oracle problem</a> (labeling is expensive and doesn&rsquo;t scale) plus data contamination risk. Prior metamorphic testing for LLMs/NLP relies on <b>lexical</b> perturbations (synonym substitution, paraphrasing), which the paper shows introduce <b>semantic drift</b>: a hypernym substitution like &ldquo;car&rdquo; -&gt; &ldquo;vehicle&rdquo; is not strictly truth-preserving (a &ldquo;four-wheeled vehicle&rdquo; needn&rsquo;t be a car), so when a model correctly changes its answer under this drift, naive lexical MT wrongly flags it as an inconsistency (a false positive). (source: Zhou et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org5be8250" class="outline-2">
-<h2 id="org5be8250">Approach</h2>
-<div class="outline-text-2" id="text-org5be8250">
+<div id="outline-container-org8188405" class="outline-2">
+<h2 id="org8188405">Approach</h2>
+<div class="outline-text-2" id="text-org8188405">
 <p>
 LGMT derives its 20 metamorphic relations directly from <b>formally verified</b> FOL equivalence laws (De Morgan&rsquo;s laws, contraposition, quantifier transformations, implication elimination, etc.), organized into four granularities: formula-level (MR-E: canonical rewrite rules that provably preserve logical equivalence), symbol-level (MR-S: renaming constants/predicates), premise-level (MR-P: reordering/duplicating/fusing premises), and conclusion-level (MR-C: e.g. double negation of the conclusion). Because each transformation is provably logic-preserving by construction, the correct model response must remain identical between source and follow-up — any divergence is a genuine reasoning inconsistency, not an artifact of an ambiguous paraphrase. Source test cases (premise-conclusion pairs) are drawn from FOLIO, LogicNLI, and ProverQA; the framework generated 76,298 candidate metamorphic groups, of which 3,091 were sampled for evaluation across six LLMs (GPT-5.2, Claude 4.5 Sonnet, Llama 3.3, DeepSeek Chat, o4-mini, DeepSeek Reasoner) under four prompting strategies. (source: Zhou et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org3a62080" class="outline-2">
-<h2 id="org3a62080">Findings</h2>
-<div class="outline-text-2" id="text-org3a62080">
+<div id="outline-container-orgc30ce64" class="outline-2">
+<h2 id="orgc30ce64">Findings</h2>
+<div class="outline-text-2" id="text-orgc30ce64">
 <ul class="org-ul">
 <li>All six evaluated models show substantial Metamorphic Oracle Violation Rates (MVR 20.84-29.44%), with no consistent correlation to overall model strength or reasoning-oriented design (DeepSeek Reasoner has the <b>highest</b> MVR at 29.44% despite being reasoning-optimized).</li>
 <li>A manual audit of 360 sampled violations found an empirical False Report Rate of only 1.38% — LGMT&rsquo;s violations are highly reliable, not test-generation artifacts.</li>
@@ -256,17 +260,17 @@ LGMT derives its 20 metamorphic relations directly from <b>formally verified</b>
 </p>
 </div>
 </div>
-<div id="outline-container-orgcdb2100" class="outline-2">
-<h2 id="orgcdb2100">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgcdb2100">
+<div id="outline-container-orgf4132d0" class="outline-2">
+<h2 id="orgf4132d0">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgf4132d0">
 <p>
 LGMT directly resolves the &ldquo;known limitation: false positives&rdquo; problem flagged on the <a href="metamorphic-testing.html">Metamorphic Testing</a> page — by grounding MRs in formally-proven FOL equivalences rather than informal lexical rules, it structurally rules out the semantic-drift false positives that limited Terragni 2026&rsquo;s true-positive rate to ~62%. It is a sibling approach to <a href="explanation-guided-mt.html">Explanation-Guided Metamorphic Testing</a> (which uses a semantic-verification <b>gate</b> to filter out invalid lexical mutations after the fact) — LGMT instead prevents invalid mutations from being generated in the first place, by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc2964d4" class="outline-2">
-<h2 id="orgc2964d4">Related pages</h2>
-<div class="outline-text-2" id="text-orgc2964d4">
+<div id="outline-container-org880b16b" class="outline-2">
+<h2 id="org880b16b">Related pages</h2>
+<div class="outline-text-2" id="text-org880b16b">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="explanation-guided-mt.html">Explanation-Guided Metamorphic Testing (Chen et al. 2026)</a></li>
@@ -279,7 +283,7 @@ LGMT directly resolves the &ldquo;known limitation: false positives&rdquo; probl
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>

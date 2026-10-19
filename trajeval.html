@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:22 -->
+<!-- 2026-10-19 Mon 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TRAJEVAL: Decomposing Code Agent Trajectories for Fine-Grained Diagnosis</title>
@@ -203,26 +203,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4bf4cbc">Overview</a></li>
-<li><a href="#org96a2ae0">Three-Stage Decomposition</a>
+<li><a href="#org5d0a67b">Overview</a></li>
+<li><a href="#org1558ad6">Three-Stage Decomposition</a>
 <ul>
-<li><a href="#orgd6f1954">Stage 1: Search (File-Level)</a></li>
-<li><a href="#org5e7d481">Stage 2: Read (Function-Level)</a></li>
-<li><a href="#org1542325">Stage 3: Edit (Function-Level)</a></li>
+<li><a href="#org4696d69">Stage 1: Search (File-Level)</a></li>
+<li><a href="#org9a42dbd">Stage 2: Read (Function-Level)</a></li>
+<li><a href="#orgb03343a">Stage 3: Edit (Function-Level)</a></li>
 </ul>
 </li>
-<li><a href="#orga146f06">Key Empirical Findings</a>
+<li><a href="#org382324b">Key Empirical Findings</a>
 <ul>
-<li><a href="#org8cb100c">Universal over-exploration</a></li>
-<li><a href="#orgf153c03">Recall predicts success; precision does not</a></li>
-<li><a href="#org53f1981">Distinct model failure modes</a></li>
-<li><a href="#orgc6660b8">Actionable diagnostics</a></li>
+<li><a href="#orgb1ab266">Universal over-exploration</a></li>
+<li><a href="#org23fc6b3">Recall predicts success; precision does not</a></li>
+<li><a href="#orgb0df9ba">Distinct model failure modes</a></li>
+<li><a href="#org7d0ab64">Actionable diagnostics</a></li>
 </ul>
 </li>
-<li><a href="#orga7a8963">Prediction Accuracy</a></li>
-<li><a href="#orgc48ffc4">Experimental Scope</a></li>
-<li><a href="#org3a23668">Relation to Prior Work</a></li>
-<li><a href="#org03a52b4">Related pages</a></li>
+<li><a href="#org7bc0e02">Prediction Accuracy</a></li>
+<li><a href="#org5777ba0">Experimental Scope</a></li>
+<li><a href="#org65901c9">Relation to Prior Work</a></li>
+<li><a href="#orga75be86">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -231,17 +231,21 @@
 </p>
 
 <p>
-<b>Sources</b>: Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf
+<b>Sources</b>:
 </p>
+
+<ul class="org-ul">
+<li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
+</ul>
 
 <p>
 <b>Last updated</b>: 2026-10-18
 </p>
 
 <hr />
-<div id="outline-container-org4bf4cbc" class="outline-2">
-<h2 id="org4bf4cbc">Overview</h2>
-<div class="outline-text-2" id="text-org4bf4cbc">
+<div id="outline-container-org5d0a67b" class="outline-2">
+<h2 id="org5d0a67b">Overview</h2>
+<div class="outline-text-2" id="text-org5d0a67b">
 <p>
 TRAJEVAL addresses a fundamental limitation of outcome-based evaluation: Pass@1 collapses entire execution into a single binary signal, making it impossible to identify <b>where</b> or <b>why</b> an agent fails. (source: Kim et al. 2026)
 </p>
@@ -251,16 +255,16 @@ The framework decomposes agent trajectories into three sequential stages and com
 </p>
 </div>
 </div>
-<div id="outline-container-org96a2ae0" class="outline-2">
-<h2 id="org96a2ae0">Three-Stage Decomposition</h2>
-<div class="outline-text-2" id="text-org96a2ae0">
+<div id="outline-container-org1558ad6" class="outline-2">
+<h2 id="org1558ad6">Three-Stage Decomposition</h2>
+<div class="outline-text-2" id="text-org1558ad6">
 <p>
 (source for all three stages: Kim et al. 2026)
 </p>
 </div>
-<div id="outline-container-orgd6f1954" class="outline-3">
-<h3 id="orgd6f1954">Stage 1: Search (File-Level)</h3>
-<div class="outline-text-3" id="text-orgd6f1954">
+<div id="outline-container-org4696d69" class="outline-3">
+<h3 id="org4696d69">Stage 1: Search (File-Level)</h3>
+<div class="outline-text-3" id="text-org4696d69">
 <p>
 Measures the agent&rsquo;s ability to localize the relevant files.
 </p>
@@ -271,9 +275,9 @@ Measures the agent&rsquo;s ability to localize the relevant files.
 </ul>
 </div>
 </div>
-<div id="outline-container-org5e7d481" class="outline-3">
-<h3 id="org5e7d481">Stage 2: Read (Function-Level)</h3>
-<div class="outline-text-3" id="text-org5e7d481">
+<div id="outline-container-org9a42dbd" class="outline-3">
+<h3 id="org9a42dbd">Stage 2: Read (Function-Level)</h3>
+<div class="outline-text-3" id="text-org9a42dbd">
 <p>
 Measures whether the agent examined the relevant functions within those files.
 </p>
@@ -284,9 +288,9 @@ Measures whether the agent examined the relevant functions within those files.
 </ul>
 </div>
 </div>
-<div id="outline-container-org1542325" class="outline-3">
-<h3 id="org1542325">Stage 3: Edit (Function-Level)</h3>
-<div class="outline-text-3" id="text-org1542325">
+<div id="outline-container-orgb03343a" class="outline-3">
+<h3 id="orgb03343a">Stage 3: Edit (Function-Level)</h3>
+<div class="outline-text-3" id="text-orgb03343a">
 <p>
 Measures whether the agent&rsquo;s modifications targeted the correct code locations.
 </p>
@@ -302,57 +306,57 @@ Edit metrics capture <b>localization accuracy</b> only. Semantic correctness is 
 </div>
 </div>
 </div>
-<div id="outline-container-orga146f06" class="outline-2">
-<h2 id="orga146f06">Key Empirical Findings</h2>
-<div class="outline-text-2" id="text-orga146f06">
+<div id="outline-container-org382324b" class="outline-2">
+<h2 id="org382324b">Key Empirical Findings</h2>
+<div class="outline-text-2" id="text-org382324b">
 <p>
 (source for this section: Kim et al. 2026)
 </p>
 </div>
-<div id="outline-container-org8cb100c" class="outline-3">
-<h3 id="org8cb100c">Universal over-exploration</h3>
-<div class="outline-text-3" id="text-org8cb100c">
+<div id="outline-container-orgb1ab266" class="outline-3">
+<h3 id="orgb1ab266">Universal over-exploration</h3>
+<div class="outline-text-3" id="text-orgb1ab266">
 <p>
 Across all models and architectures, precision is uniformly low (4–8%). Agents examine 8–12× more files and 17–25× more functions than necessary. Current agents trade efficiency for coverage.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf153c03" class="outline-3">
-<h3 id="orgf153c03">Recall predicts success; precision does not</h3>
-<div class="outline-text-3" id="text-orgf153c03">
+<div id="outline-container-org23fc6b3" class="outline-3">
+<h3 id="org23fc6b3">Recall predicts success; precision does not</h3>
+<div class="outline-text-3" id="text-org23fc6b3">
 <p>
 Logistic regression coefficients: edit recall (β̄=1.22) &gt; search recall (β̄=0.90) &gt; read recall (β̄=0.78). Precision coefficients are near zero across all stages. An agent that reads every file but edits the right location succeeds; an efficient agent that edits the wrong location fails.
 </p>
 </div>
 </div>
-<div id="outline-container-org53f1981" class="outline-3">
-<h3 id="org53f1981">Distinct model failure modes</h3>
-<div class="outline-text-3" id="text-org53f1981">
+<div id="outline-container-orgb0df9ba" class="outline-3">
+<h3 id="orgb0df9ba">Distinct model failure modes</h3>
+<div class="outline-text-3" id="text-orgb0df9ba">
 <p>
 Different models exhibit diagnosably distinct failure patterns — see <a href="agent-failure-modes.html">Agent Failure Modes</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6660b8" class="outline-3">
-<h3 id="orgc6660b8">Actionable diagnostics</h3>
-<div class="outline-text-3" id="text-orgc6660b8">
+<div id="outline-container-org7d0ab64" class="outline-3">
+<h3 id="org7d0ab64">Actionable diagnostics</h3>
+<div class="outline-text-3" id="text-org7d0ab64">
 <p>
 Real-time feedback (&ldquo;you are examining relevant code for this issue&rdquo;) injected when agents view golden-context files improves Pass@1 by 2.2–4.6 percentage points while reducing token costs by 20–31%.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga7a8963" class="outline-2">
-<h2 id="orga7a8963">Prediction Accuracy</h2>
-<div class="outline-text-2" id="text-orga7a8963">
+<div id="outline-container-org7bc0e02" class="outline-2">
+<h2 id="org7bc0e02">Prediction Accuracy</h2>
+<div class="outline-text-2" id="text-org7bc0e02">
 <p>
 Six trajectory features (P<sub>s</sub>, R<sub>s</sub>, P<sub>r</sub>, R<sub>r</sub>, P<sub>e</sub>, R<sub>e</sub>) fed to a per-model logistic regression classifier predict model-level Pass@1 within 0.87–2.1% MAE. Ranking correlation ρ ≥ 0.886 is preserved under repository-held-out and language-held-out distribution shifts. (source: Kim et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgc48ffc4" class="outline-2">
-<h2 id="orgc48ffc4">Experimental Scope</h2>
-<div class="outline-text-2" id="text-orgc48ffc4">
+<div id="outline-container-org5777ba0" class="outline-2">
+<h2 id="org5777ba0">Experimental Scope</h2>
+<div class="outline-text-2" id="text-org5777ba0">
 <p>
 Evaluated 16,758 trajectories across (source: Kim et al. 2026):
 </p>
@@ -363,17 +367,17 @@ Evaluated 16,758 trajectories across (source: Kim et al. 2026):
 </ul>
 </div>
 </div>
-<div id="outline-container-org3a23668" class="outline-2">
-<h2 id="org3a23668">Relation to Prior Work</h2>
-<div class="outline-text-2" id="text-org3a23668">
+<div id="outline-container-org65901c9" class="outline-2">
+<h2 id="org65901c9">Relation to Prior Work</h2>
+<div class="outline-text-2" id="text-org65901c9">
 <p>
 Traditional <a href="code-agent-benchmarks.html">benchmarks</a> measure outputs. TRAJEVAL measures process. It complements agent development by explaining <b>why</b> one agent outperforms another, not just <b>that</b> it does. (source: Kim et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org03a52b4" class="outline-2">
-<h2 id="org03a52b4">Related pages</h2>
-<div class="outline-text-2" id="text-org03a52b4">
+<div id="outline-container-orga75be86" class="outline-2">
+<h2 id="orga75be86">Related pages</h2>
+<div class="outline-text-2" id="text-orga75be86">
 <ul class="org-ul">
 <li><a href="golden-context.html">Golden Context</a></li>
 <li><a href="agent-failure-modes.html">Agent Failure Modes</a></li>
@@ -386,7 +390,7 @@ Traditional <a href="code-agent-benchmarks.html">benchmarks</a> measure outputs.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:22</p>
+<p class="date">Created: 2026-10-19 Mon 09:39</p>
 </div>
 </body>
 </html>
