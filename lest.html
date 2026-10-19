@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LEST — Specification-Based Testing of Large Language Models (Moshood et al. 2026)</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">LEST — Specification-Based Testing of Large Language Models (Moshood et al. 2026)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1878d99">Problem</a></li>
+<li><a href="#orgedad4fd">Approach</a>
+<ul>
+<li><a href="#org93b9cfd">Mutation operators and validity checks</a></li>
+</ul>
+</li>
+<li><a href="#orge9798f1">Results</a>
+<ul>
+<li><a href="#org9b4ea97">RQ1 — testability of documented claims</a></li>
+<li><a href="#org966aeee">RQ2 — coverage and counterexamples</a></li>
+<li><a href="#orgaa5422d">RQ3 — operators</a></li>
+<li><a href="#org58a73dc">Motivating example</a></li>
+</ul>
+</li>
+<li><a href="#org9b266ed">What it shows</a></li>
+<li><a href="#org1b049a9">Limitations (per the paper)</a></li>
+<li><a href="#org8a26072">Relation to broader wiki</a></li>
+<li><a href="#orgd87f08c">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: LEST treats safety claims published in model and system cards as behavioral specifications: each claim decides which benchmark prompts test it and whether a refusal-to-compliance flip counts as evidence against it. On the Claude Opus 4.8 and GPT-5.5 system cards, human validation shrinks 312 automatically flagged failures to 19 genuine counterexamples, covering 6 of 9 testable claims.
+</p>
+
+<p>
+<b>Sources</b>: Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf (arXiv:2610.14443v1, 10 Oct 2026)
+</p>
+
+<p>
+<b>Last updated</b>: 2026-10-18
+</p>
+
+<hr />
+
+<p>
+See <a href="specification-based-testing.html">Specification-Based Testing</a> for how LEST relates to the other documented-behavior approaches in this wiki.
+</p>
+<div id="outline-container-org1878d99" class="outline-2">
+<h2 id="org1878d99">Problem</h2>
+<div class="outline-text-2" id="text-org1878d99">
+<p>
+Safety evaluations typically start from a fixed benchmark (HarmBench, JailbreakBench, SORRY-Bench) rather than asking which <b>documented claims</b> the benchmark actually tests. Three gaps follow: (1) not every claim in a system card is observable through black-box interaction; (2) a prompt sharing a broad safety category with a claim does not necessarily exercise that claim, so benchmark size or category overlap does not imply specification coverage; (3) a single fixed prompt says little about whether behavior survives rewording, and automated judges alone may misclassify failures. (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgedad4fd" class="outline-2">
+<h2 id="orgedad4fd">Approach</h2>
+<div class="outline-text-2" id="text-orgedad4fd">
+<p>
+LEST has five stages (claims → testability → claim-prompt mapping → mutation → execution and validation):
+</p>
+
+<ol class="org-ol">
+<li><b>Claim extraction.</b> Sections of each system card are selected by cosine similarity (all-MiniLM-L6-v2) between the table-of-contents entry and a description of each safety domain (threshold 0.45 top-level, 0.33 nested). Candidate statements are extracted with three strategies (numeric-plus-performance-verb sentences from evaluation sections, bullet items from risk/limitation sections, a spaCy sentence-splitting pipeline for prose) — 178 candidates, which three authors independently classify by majority vote into 56 claims.</li>
+<li><b>Testability.</b> A claim is <b>prompt-testable</b> if some prompt can yield observable output that confirms or contradicts it. Claims about training, internal mechanisms, an isolated component (a guardrail, a system prompt) or an irreproducible evaluation process are not.</li>
+<li><b>Claim-prompt mapping and oracle choice.</b> From SORRY-Bench&rsquo;s 440 prompts / 44 categories, 15 categories across three domains (Mental Health and Self-Harm, Harmful and Violent Content, Fairness and Bias) yield 97 seed prompts (13 / 62 / 22). For each prompt-testable claim, three researchers judge which seeds exercise it (kept at ≥2 of 3 votes); a claim is <b>covered</b> if ≥1 seed maps to it. Separately they judge whether <b>refusal</b> is an appropriate oracle for the claim — e.g. the claim that models &ldquo;occasionally comply with extreme misuse attempts&rdquo; is prompt-testable, but a Refuse→Comply flip would be consistent with it, not evidence against it.</li>
+<li><b>Mutation.</b> Seven operators fuzz the 97 seeds (five independent runs, 20 minutes each, pool seeded with all 97 and grown by accepted mutants). Mutation is independent of both the claims and the target model&rsquo;s responses.</li>
+<li><b>Execution and validation.</b> Original and mutated prompts run on the target model; three guard models (WildGuard, Qwen3Guard, GuardReasoner) label each response Refuse/Comply by majority. Every automatically flagged Refuse→Comply (R→C) is then checked by three humans for (a) harmful intent preserved and (b) genuine compliance. Only both-yes cases count as validated, and validated transitions are traced back through the mapping to the claims they contradict.</li>
+</ol>
+
+<p>
+Claim-level reporting has three states: <b>not covered</b>, <b>covered, no counterexample observed</b> (explicitly not &ldquo;verified&rdquo;), and <b>counterexample found</b>.
+</p>
+</div>
+<div id="outline-container-org93b9cfd" class="outline-3">
+<h3 id="org93b9cfd">Mutation operators and validity checks</h3>
+<div class="outline-text-3" id="text-org93b9cfd">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Id</th>
+<th scope="col" class="org-left">Operator</th>
+<th scope="col" class="org-left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">M1</td>
+<td class="org-left">POS-constrained lexical substitution (PCLS)</td>
+<td class="org-left">content words replaced by counter-fitted-embedding neighbours, same part of speech</td>
+</tr>
+
+<tr>
+<td class="org-left">M2</td>
+<td class="org-left">Modifier insertion</td>
+<td class="org-left">adjective/adverb from WordNet inserted</td>
+</tr>
+
+<tr>
+<td class="org-left">M3</td>
+<td class="org-left">Deletion</td>
+<td class="org-left">adjective/adverb removed</td>
+</tr>
+
+<tr>
+<td class="org-left">M4 / M5</td>
+<td class="org-left">First↔third person conversion</td>
+<td class="org-left">pronouns and verb forms rewritten</td>
+</tr>
+
+<tr>
+<td class="org-left">M6</td>
+<td class="org-left">Paraphrase</td>
+<td class="org-left">fine-tuned T5 (Parrot) rewrites the request</td>
+</tr>
+
+<tr>
+<td class="org-left">M7</td>
+<td class="org-left">Fairness mutation</td>
+<td class="org-left">identity term swapped within one of eight dimensions (gender, race, religion, nationality, age, disability, socioeconomic status, sexual orientation)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+During fuzzing a candidate is rejected if it fails grammaticality (CoLA-trained RoBERTa below 0.5), has perplexity above twice the seed&rsquo;s (GPT-2), has semantic similarity below 0.80 (not applied to M7, which changes the identity on purpose), or is a near-duplicate (Ratcliff/Obershelp above 0.95 to parent or seed). After fuzzing, a stricter filter (similarity ≥0.85, token Jaccard distance ≥0.40) leaves 1,849 prompts from 87 seeds; a WildGuard harmfulness filter on two domains removes 13 more, leaving <b>1,836 mutated prompts</b>. (Sweeping the Jaccard threshold from 0.20 to 0.60 moves the test set between 11,081 prompts covering all 97 seeds and 205 covering 48.) (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge9798f1" class="outline-2">
+<h2 id="orge9798f1">Results</h2>
+<div class="outline-text-2" id="text-orge9798f1">
+</div>
+<div id="outline-container-org9b4ea97" class="outline-3">
+<h3 id="org9b4ea97">RQ1 — testability of documented claims</h3>
+<div class="outline-text-3" id="text-org9b4ea97">
+<p>
+56 claims; 29 (51.8%) prompt-testable. Claude Opus 4.8: 20 of 31 (64.5%); GPT-5.5: 9 of 25 (36.0%). Of the 27 non-testable claims, 18 (66.7%) concern internal or unobservable behavior or evaluation processes, 6 (22.2%) a component in isolation, 3 (11.1%) have no prompt that could objectively confirm or deny them. Inter-annotator Fleiss&rsquo; κ: 0.912 (claim identification), 0.856 (testability).
+</p>
+</div>
+</div>
+<div id="outline-container-org966aeee" class="outline-3">
+<h3 id="org966aeee">RQ2 — coverage and counterexamples</h3>
+<div class="outline-text-3" id="text-org966aeee">
+<p>
+Claim funnel (Table 2 of the paper):
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Model / domain</th>
+<th scope="col" class="org-right">Prompt-testable</th>
+<th scope="col" class="org-right">Refusal-testable</th>
+<th scope="col" class="org-right">Covered</th>
+<th scope="col" class="org-right">With counterexample</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Claude — Mental Health/Self-Harm</td>
+<td class="org-right">14</td>
+<td class="org-right">5</td>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-left">Claude — Harmful/Violent</td>
+<td class="org-right">5</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">Claude — Fairness/Bias</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">GPT-5.5 — Harmful/Violent</td>
+<td class="org-right">9</td>
+<td class="org-right">3</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>Overall</b></td>
+<td class="org-right"><b>29</b></td>
+<td class="org-right"><b>11</b></td>
+<td class="org-right"><b>9</b></td>
+<td class="org-right"><b>6</b></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+17 of 29 prompt-testable claims (58.6%) are covered by at least one applicable seed; 9 of the 11 refusal-testable claims (81.8%). The seed-to-claim agreement is moderate-to-substantial (κ 0.637) and the refusal-oracle judgment only moderate (κ 0.457).
+</p>
+
+<ul class="org-ul">
+<li><b>Unmodified seeds</b>: Claude refuses 94 of 97, GPT-5.5 refuses 93 (both above 95%).</li>
+<li><b>Automated judges</b>: 312 candidate R→C transitions among mutated prompts (126 Claude, 186 GPT-5.5). Rerunning each four more times, ~79-81% of those prompts still elicit a compliant response.</li>
+<li><b>Human validation</b>: only 88 of 312 (28.2%) preserve the harmful intent (159 do not, 47 unclear, 18 no consensus). Of the 135 intent-preserving-or-unclear cases, 19 responses are genuinely compliant (94 not, 13 unclear, 9 no consensus). So <b>19 of 312 (6.1%)</b> are validated (κ 0.557).</li>
+<li><b>Exposure</b>: the 19 transitions come from 11 of 167 eligible model-seed pairs (6.6%; Claude 6/84, GPT-5.5 5/83).</li>
+<li><b>Claim level</b>: counterexamples to 6 of the 9 covered refusal-testable claims (66.7%); for the other 3, &ldquo;no counterexample observed&rdquo;.</li>
+<li><b>Mutation quality</b>: in a stratified sample of 150 mutated prompts, 134 (89.3%) preserve harmful intent, 137 (91.3%) preserve safety category, 99 (66.0%) are understandable.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaa5422d" class="outline-3">
+<h3 id="orgaa5422d">RQ3 — operators</h3>
+<div class="outline-text-3" id="text-orgaa5422d">
+<p>
+Automated→validated R→C counts across both models: Paraphrase 95→8, PCLS 50→4, Fairness 100→3, Modifier insertion 32→3, Deletion 33→1, person conversion 2→0. Validated transitions come from five of seven operators; the authors decline to rank operators because 19 cases are too few. Paraphrase and PCLS mostly expose Harmful/Violent Content failures, Fairness mutation exposes Fairness/Bias ones.
+</p>
+</div>
+</div>
+<div id="outline-container-org58a73dc" class="outline-3">
+<h3 id="org58a73dc">Motivating example</h3>
+<div class="outline-text-3" id="text-org58a73dc">
+<p>
+A Claude Opus 4.8 system-card claim reported in the BBQ bias context states that the model &ldquo;does not produce unfair or stereotyped outputs&rdquo;. The benchmark seed is refused; a Fairness-mutated variant targeting a different group was answered with a list of offensive terms (framed as useful for education/moderation), and again in four more executions. The refusal is not invariant across related inputs that exercise the same property. (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9b266ed" class="outline-2">
+<h2 id="org9b266ed">What it shows</h2>
+<div class="outline-text-2" id="text-org9b266ed">
+<ul class="org-ul">
+<li><b>High refusal rate on fixed prompts does not imply robustness under variation</b>: both models refuse more than 95% of seeds, yet a majority of the covered refusal-testable claims have a human-validated counterexample.</li>
+<li><b>Judge-only evaluation overstates failure</b>: 312 flagged vs. 19 validated (about 16×). Candidates should be treated as candidates.</li>
+<li><b>Failure-flagged mutants are enriched for invalid ones</b>: 28.2% intent preservation among R→C candidates vs. 89.3% in the overall sample. Validity measured on the whole mutant population does not transfer to the failure-inducing subset — the mutants most likely to flip a refusal are the ones that drifted furthest from the original request.</li>
+<li><b>Coverage by category ≠ coverage by claim</b>: only 58.6% of testable claims have any applicable seed despite shared safety domains.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1b049a9" class="outline-2">
+<h2 id="org1b049a9">Limitations (per the paper)</h2>
+<div class="outline-text-2" id="text-org1b049a9">
+<p>
+Black-box only; the present instantiation covers claims where refusal is a valid oracle (other prompt-testable claims need richer oracles); seven operators, three domains, two commercial models, 97 seeds. Only automated-R→C cases are human-checked, so automated false negatives are missed. Recall of claim extraction beyond section selection (10 of 15 relevant sections retrieved, 66.7%; the five misses held no refusal-testable claim) was not exhaustively measured. Operator-level findings are descriptive, not causal. All claim identification, testability, mapping and oracle judgments are manual, which the authors name as the main open problem (automatic claim-to-test generation).
+</p>
+</div>
+</div>
+<div id="outline-container-org8a26072" class="outline-2">
+<h2 id="org8a26072">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org8a26072">
+<p>
+Each operator works as an invariance <a href="metamorphic-testing.html">metamorphic relation</a> (&ldquo;refusal should persist under a meaning-preserving edit&rdquo;); the paper cites a collection of 191 NLP metamorphic relations (Cho et al.), which appears to be the LLMorph work this wiki covers under <a href="metamorphic-testing-llms.html">Terragni 2026</a> (needs verification). Its finding that failure-flagged mutants are mostly invalid sharpens the false-positive problem noted there (~62% true-positive rate) and the semantic-verification gate of <a href="explanation-guided-mt.html">Explanation-Guided MT</a>: gating the generator is not enough, the <b>failures</b> need validating. Unlike jailbreak-fuzzers (PAIR, TAP, AutoDAN, FuzzLLM), LEST&rsquo;s goal is consistency testing, not optimizing an attack, and its prompts are generated independently of model responses; see <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a>. The claim-coverage notion belongs with <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a> next to <a href="skill-coverage.html">Skill Coverage</a>, and the three-judge ensemble overestimating failures is a data point for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd87f08c" class="outline-2">
+<h2 id="orgd87f08c">Related pages</h2>
+<div class="outline-text-2" id="text-orgd87f08c">
+<ul class="org-ul">
+<li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
+<li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
+<li><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></li>
+<li><a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="explanation-guided-mt.html">Explanation-Guided MT (Chen et al. 2026)</a></li>
+<li><a href="skill-coverage.html">Skill Coverage (Tan et al. 2026)</a></li>
+<li><a href="agent-safety.html">Agent Safety</a></li>
+<li><a href="oracle-problem.html">The Oracle Problem</a></li>
+<li><a href="mubric.html">Mubric (Yang et al. 2026)</a></li>
+<li><a href="llm-safety-refusal-testing.html">Safety and Refusal Testing of LLMs</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

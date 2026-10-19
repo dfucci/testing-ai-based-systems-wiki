@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wiki Log</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Wiki Log</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb443caf">2026-05-04 — Initial ingest of two sources</a></li>
+<li><a href="#org2fdea1a">2026-08-19 — Ingest of 10 sources on ML/LLM testing and V&amp;V</a></li>
+<li><a href="#org1121c31">2026-08-30 — Ingest of 12 new sources</a></li>
+<li><a href="#org7b2aa69">2026-08-30 — Wiki lint fixes (post-12-paper ingest)</a></li>
+<li><a href="#org55709c8">2026-09-20 — Ingest of 1 new source (QA Practices/Gaps in AI Agents)</a></li>
+<li><a href="#org540ccf6">2026-09-07 — Ingest of 1 new source (ABFS)</a></li>
+<li><a href="#org84a70fa">2026-09-14 — Ingest of 1 new source (Oracle Conversion)</a></li>
+<li><a href="#orgb5d6076">2026-09-14 — Wiki lint (post-oracle-conversion ingest)</a></li>
+<li><a href="#org8251a90">2026-09-28 — Ingest of 1 new source (STELLAR-D)</a></li>
+<li><a href="#org5229b81">2026-10-18 — Ingest of 3 new sources (Kiele, Yang, Moshood)</a></li>
+<li><a href="#orgbc57be0">2026-10-18 — Wiki lint (post-Kiele/Yang/Moshood ingest)</a></li>
+<li><a href="#org205a086">2026-10-18 — Lint follow-up: citations, backlinks, safety concept page, two factual fixes</a></li>
+</ul>
+</div>
+</div>
+<p>
+Append-only record of all wiki operations.
+</p>
+
+<hr />
+<div id="outline-container-orgb443caf" class="outline-2">
+<h2 id="orgb443caf">2026-05-04 — Initial ingest of two sources</h2>
+<div class="outline-text-2" id="text-orgb443caf">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</li>
+<li>Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="trajeval.html">trajeval.org</a> — summary of TRAJEVAL paper</li>
+<li><a href="agentspec.html">agentspec.org</a> — summary of AgentSpec paper</li>
+<li><a href="trajectory-analysis.html">trajectory-analysis.org</a> — trajectory analysis concept</li>
+<li><a href="golden-context.html">golden-context.org</a> — golden context concept from TRAJEVAL</li>
+<li><a href="agent-failure-modes.html">agent-failure-modes.org</a> — failure mode taxonomy (search/read/edit failures)</li>
+<li><a href="runtime-enforcement.html">runtime-enforcement.org</a> — runtime enforcement concept from AgentSpec</li>
+<li><a href="agent-safety.html">agent-safety.org</a> — LLM agent safety landscape</li>
+<li><a href="agent-evaluation.html">agent-evaluation.org</a> — agent evaluation metrics and methodology</li>
+<li><a href="code-agent-benchmarks.html">code-agent-benchmarks.org</a> — benchmark descriptions (SWE-bench, PolyBench, RedCode, SafeAgentBench, FixDrive)</li>
+<li><a href="index.html">index.org</a> — table of contents (created)</li>
+<li><a href="log.html">log.org</a> — this log (created)</li>
+</ul>
+
+<hr />
+</div>
+</div>
+<div id="outline-container-org2fdea1a" class="outline-2">
+<h2 id="org2fdea1a">2026-08-19 — Ingest of 10 sources on ML/LLM testing and V&amp;V</h2>
+<div class="outline-text-2" id="text-org2fdea1a">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub></li>
+<li>Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></li>
+<li>Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf</li>
+<li>Racharak et al. - 2026 - Test It Before You Trust It Applying Software Testing for Trustworthy In-context Learning.pdf</li>
+<li>Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf</li>
+<li>Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf</li>
+<li>Wang et al. - 2026 - Requirements-Augmented Generation for Trustworthy Acceptance Testing of LLM-Based Software.pdf</li>
+<li>Xiao et al. - 2025 - Assessing the Robustness of LLM-based NLP Software via Automated Testing.pdf</li>
+<li>Yoon<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></li>
+<li>Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="mettle.html">mettle.org</a> — METTLE paper summary</li>
+<li><a href="testing-untestable-llm-software.html">testing-untestable-llm-software.org</a> — Magalhães et al. paper summary</li>
+<li><a href="tangent.html">tangent.org</a> — Tangent paper summary</li>
+<li><a href="mmt4nl.html">mmt4nl.org</a> — Racharak et al. / MMT4NL paper summary</li>
+<li><a href="ml-testing-mapping-study.html">ml-testing-mapping-study.org</a> — Riccio et al. 2020 paper summary</li>
+<li><a href="metamorphic-testing-llms.html">metamorphic-testing-llms.org</a> — Terragni 2026 paper summary</li>
+<li><a href="reag.html">reag.org</a> — Wang et al. 2026 / REAG paper summary</li>
+<li><a href="aorta.html">aorta.org</a> — Xiao et al. 2025 / AORTA paper summary</li>
+<li><a href="adaptive-random-testing-prompts.html">adaptive-random-testing-prompts.org</a> — Yoon et al. 2025 paper summary</li>
+<li><a href="ml-testing-survey.html">ml-testing-survey.org</a> — Zhang et al. 2022 paper summary</li>
+<li><a href="oracle-problem.html">oracle-problem.org</a> — cross-cutting concept, oracle problem in ML/AI testing</li>
+<li><a href="metamorphic-testing.html">metamorphic-testing.org</a> — cross-cutting concept, metamorphic testing hub</li>
+<li><a href="adversarial-robustness-testing.html">adversarial-robustness-testing.org</a> — cross-cutting concept, robustness/adversarial testing</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — cross-cutting concept, test adequacy for ML</li>
+<li><a href="mls-testing-levels.html">mls-testing-levels.org</a> — concept, ML-system testing levels/access levels (Riccio taxonomy)</li>
+<li><a href="llm-agent-testing-practice.html">llm-agent-testing-practice.org</a> — concept, synthesis of Tangent + Magalhães empirical findings</li>
+<li><a href="llm-as-judge-evaluation.html">llm-as-judge-evaluation.org</a> — concept, LLM-as-judge with confidence calibration</li>
+<li><a href="test-selection-prioritization.html">test-selection-prioritization.org</a> — concept, diversity-based test selection</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="agent-evaluation.html">agent-evaluation.org</a> — added evaluation-without-ground-truth section, links to REAG/LLM-as-judge/Tangent</li>
+<li><a href="trajectory-analysis.html">trajectory-analysis.org</a> — added relation to written test suites, link to Tangent findings</li>
+<li><a href="agent-failure-modes.html">agent-failure-modes.org</a> — added link to LLM Agent Testing Practice</li>
+<li><a href="index.html">index.org</a> — reorganized into subsections, added all 18 new pages</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1121c31" class="outline-2">
+<h2 id="org1121c31">2026-08-30 — Ingest of 12 new sources</h2>
+<div class="outline-text-2" id="text-org1121c31">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Chen et al. - 2026 - ConcoLixir Reactive LLM Discovery Oracles for Python Concolic Testing.pdf</li>
+<li>Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf</li>
+<li>Guo et al. - 2026 - MORTAR Multi-turn Metamorphic Testing for LLM-based Dialogue Systems.pdf</li>
+<li>Hamidi et al. - 2025 - Intent-Based Mutation Testing From Naturally Written Programming Intents to Mutants.pdf</li>
+<li>He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf</li>
+<li>Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf</li>
+<li>Ren et al. - 2026 - Fine-grained approach to metamorphic slicing Enhancing fault localization in the absence of oracle.pdf</li>
+<li>Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf</li>
+<li>Tian et al. - 2026 - MuMuTestUp Mutation-based Multi-Agent Test Case Update.pdf</li>
+<li>Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf</li>
+<li>Zhao et al. - 2026 - Fail-Aware and Explainable Test Oracle Prediction.pdf</li>
+<li>Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="concolixir.html">concolixir.org</a> — ConcoLixir paper summary</li>
+<li><a href="explanation-guided-mt.html">explanation-guided-mt.org</a> — Explanation-Guided Metamorphic Testing paper summary</li>
+<li><a href="mortar.html">mortar.org</a> — MORTAR paper summary</li>
+<li><a href="intent-based-mutation-testing.html">intent-based-mutation-testing.org</a> — Intent-Based Mutation Testing paper summary</li>
+<li><a href="delta-drl-differential-testing.html">delta-drl-differential-testing.org</a> — Delta / self-referential differential testing for DRL paper summary</li>
+<li><a href="audit-feedback-driven-evolution.html">audit-feedback-driven-evolution.org</a> — Liang et al. auditing paper summary</li>
+<li><a href="metamorphic-slicing.html">metamorphic-slicing.org</a> — Ren et al. metamorphic slicing paper summary</li>
+<li><a href="skill-coverage.html">skill-coverage.org</a> — Tan et al. Skill Coverage paper summary</li>
+<li><a href="mumutestup.html">mumutestup.org</a> — MuMuTestUp paper summary</li>
+<li><a href="lean4agent.html">lean4agent.org</a> — Lean4Agent paper summary</li>
+<li><a href="focal-oracle-prediction.html">focal-oracle-prediction.org</a> — FOCAL paper summary</li>
+<li><a href="lgmt.html">lgmt.org</a> — LGMT paper summary</li>
+<li><a href="mutation-testing-for-llm-systems.html">mutation-testing-for-llm-systems.org</a> — cross-cutting concept, mutation testing&rsquo;s two roles in the LLM era</li>
+<li><a href="agent-skill-coverage.html">agent-skill-coverage.org</a> — cross-cutting concept, adequacy criterion for agent skill documents</li>
+<li><a href="formal-verification-of-agent-workflows.html">formal-verification-of-agent-workflows.org</a> — cross-cutting concept, dependent-type verification of agent workflows</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="metamorphic-testing.html">metamorphic-testing.org</a> — added MORTAR/Explanation-Guided-MT/LGMT to instances table, added fault-localization-after-violation section (Ren et al.), expanded false-positives note</li>
+<li><a href="oracle-problem.html">oracle-problem.org</a> — added self-referential differential testing and learned discriminative oracle strategy rows, added &ldquo;known pitfall: naive single-reference pseudo-oracles&rdquo; section (Liang et al.)</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — added mutation-score-in-the-LLM-era section, partially filled the previously-flagged agent-adequacy gap with Skill Coverage</li>
+<li><a href="runtime-enforcement.html">runtime-enforcement.org</a> — added Lean4Agent as a design-time formal-verification counterpart to runtime enforcement</li>
+<li><a href="agent-evaluation.html">agent-evaluation.org</a> — added formal-verification and skill-coverage as alternatives to benchmark-outcome scores</li>
+<li><a href="index.html">index.org</a> — added all 12 new paper pages (new &ldquo;Oracle construction and auditing&rdquo; subsection) and 3 new concept pages</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7b2aa69" class="outline-2">
+<h2 id="org7b2aa69">2026-08-30 — Wiki lint fixes (post-12-paper ingest)</h2>
+<div class="outline-text-2" id="text-org7b2aa69">
+<p>
+Full lint of all 44 pages found 4 contradictions, 1 weak orphan, 2 missing-link gaps; 0 format violations, 0 broken links, 0 outdated-claim issues beyond what was already caveated.
+</p>
+
+<p>
+<b>Fixes applied:</b>
+</p>
+<ul class="org-ul">
+<li><a href="oracle-problem.html">oracle-problem.org</a> — corrected Riccio et al. 2020 stat: oracle problem is the <b>most</b>-studied open problem (13/70, 19%), not &ldquo;second only to adequacy&rdquo;; linked the differential/cross-referencing row to distinguish it from Delta&rsquo;s self-referential variant</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — corrected the matching Riccio stat: adequacy criteria is second-most-studied open problem (12/70, 17%), not &ldquo;most-studied (24/70)&rdquo; — the 24 figure is a separate &ldquo;any paper using an adequacy criterion&rdquo; count, now noted as such</li>
+<li><a href="agent-evaluation.html">agent-evaluation.org</a> — scoped the &ldquo;perfect ranking correlation (ρ=1.00)&rdquo; TRAJEVAL claim to the SWE-Agent/SWE-bench configuration specifically; noted the overall floor across all configs is ρ≥0.886 (dipping to 0.94 for PolyBench repo-held-out)</li>
+<li><a href="trajectory-analysis.html">trajectory-analysis.org</a> — annotated the &ldquo;GPT-5-nano vs Qwen-30B&rdquo; bash-token claim as the source paper&rsquo;s own appendix shorthand, distinct from TRAJEVAL&rsquo;s seven main evaluated models</li>
+<li><a href="agentspec.html">agentspec.org</a> — fixed RQ2 duplicate-statistic bug: 95.56% precision / 70.96% recall applies only to the Embodied agent (source, Table 6); Code agent&rsquo;s actual RQ2 result is 87.26% enforced, AV is 62.50% (5/8)</li>
+<li><a href="test-selection-prioritization.html">test-selection-prioritization.org</a> — added backlink to <a href="adaptive-random-testing-prompts.html">Adaptive Testing (Yoon 2025)</a>, its only worked instance, to fix a weak-orphan flag</li>
+</ul>
+
+<p>
+<b>Not changed:</b> the &ldquo;LLM proposes, deterministic tool disposes&rdquo; pattern shared by ConcoLixir/MuMuTestUp/mutation-testing-for-llm-systems.org has no dedicated hub page — flagged as nice-to-have, left as cross-links for now.
+</p>
+</div>
+</div>
+<div id="outline-container-org55709c8" class="outline-2">
+<h2 id="org55709c8">2026-09-20 — Ingest of 1 new source (QA Practices/Gaps in AI Agents)</h2>
+<div class="outline-text-2" id="text-org55709c8">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf (arXiv:2609.17698v1, 15 Sep 2026)</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="qa-practices-gaps-agents.html">qa-practices-gaps-agents.org</a> — Dai et al. paper summary. Repo-artifact study of 157 open-source LLM-agent projects, four-layer coding rubric (execution surfaces / safeguards / testing artifacts / risk scenarios), eight risk-chain templates. Headline: only 8/157 (5.1%) projects have adversarial/prompt-injection/red-team test paths; safeguards widely present but inconsistently applied across equivalent action routes to the same capability.</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="llm-agent-testing-practice.html">llm-agent-testing-practice.org</a> — added as third converging empirical study alongside Tangent and Magalhães; added two new bullet findings (adversarial-test absence at repo scale, safeguards not traveling with the action); added source, related-pages links, bumped date</li>
+<li><a href="agent-safety.html">agent-safety.org</a> — added &ldquo;Repo-Level QA Evidence&rdquo; section distinguishing Dai et al.&rsquo;s repo-visible-evidence framing from AgentSpec&rsquo;s runtime-enforcement framing; added risk-chain summary and the &ldquo;bind safeguard to protected asset, not interface&rdquo; implication; added source, related-pages links, bumped date</li>
+<li><a href="index.html">index.org</a> — added Dai 2026 row under &ldquo;Code agents&rdquo;</li>
+</ul>
+
+<p>
+<b>Not changed:</b> no new concept page for the &ldquo;risk chain&rdquo; vocabulary itself — folded into agent-safety.org since it&rsquo;s a reframing of that page&rsquo;s existing risk-taxonomy scope, not a distinct concept.
+</p>
+</div>
+</div>
+<div id="outline-container-org540ccf6" class="outline-2">
+<h2 id="org540ccf6">2026-09-07 — Ingest of 1 new source (ABFS)</h2>
+<div class="outline-text-2" id="text-org540ccf6">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Xiao et al. - 2026 - ABFS Natural robustness testing for LLM-based NLP software.pdf (arXiv:2503.01319v1, 3 Mar 2025)</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="abfs.html">abfs.org</a> — ABFS paper summary. Successor to AORTA from the same group: joint prompt+example black-box robustness testing of LLM NLP text classifiers, Best-First Search over a confidence-keyed priority queue + adaptive Word Importance Ranking, WordNet synonym transformation space. RQ1 success 74.425% vs 68.177% PWWS; RQ2 ~585s/case faster; RQ3 ablation (WordNet &gt; random/GloVe, BFS &gt; greedy); RQ4 better cross-scale transfer.</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="aorta.html">aorta.org</a> — added &ldquo;Successor: ABFS&rdquo; note and related-pages link</li>
+<li><a href="adversarial-robustness-testing.html">adversarial-robustness-testing.org</a> — added ABFS / Best-First Search section alongside the AORTA/ABS one; added source and related-pages link</li>
+<li><a href="index.html">index.org</a> — added ABFS row under &ldquo;Robustness and test generation&rdquo;</li>
+</ul>
+
+<p>
+<b>Not changed:</b> oracle-problem.org (per user; ABFS&rsquo;s argument against static offline datasets left in abfs.org only). No new concept page — joint prompt+example robustness testing already covered by adversarial-robustness-testing.org + aorta.org.
+</p>
+</div>
+</div>
+<div id="outline-container-org84a70fa" class="outline-2">
+<h2 id="org84a70fa">2026-09-14 — Ingest of 1 new source (Oracle Conversion)</h2>
+<div class="outline-text-2" id="text-org84a70fa">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf (arXiv:2609.05879v1, 5 Sep 2026)</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="oracle-conversion.html">oracle-conversion.org</a> — Liang et al. paper summary. Same author group/TC-Bench audit lineage as <a href="audit-feedback-driven-evolution.html">audit-feedback-driven-evolution.org</a>. Splits a suite&rsquo;s fault-detection opportunity into potential kill (input could detect a fault, if output were correct) vs. effective kill (does detect it, given the model&rsquo;s own predicted output); trains an Additive-GRPO reward jointly on both plus correctness. Key result: correctness-only reward (NoKill) reaches the highest correctness/full-kill but drops input-kill below baseline — optimizing correctness alone narrows the model to less-discriminative inputs; Additive is the only arm improving correctness, input kill, effective kill, and BTS jointly (step 75 vs Base: C 28.59%→42.54%, O 24.06%→25.27%, K 12.23%→14.15%, OCE 49.70%→56.51%).</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="oracle-problem.html">oracle-problem.org</a> — added source, added &ldquo;Known pitfall: correct oracles can still fail to convert opportunity into detection&rdquo; section, added related-pages link</li>
+<li><a href="audit-feedback-driven-evolution.html">audit-feedback-driven-evolution.org</a> — added forward cross-link to the follow-up paper, bumped date</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — added source, added &ldquo;Potential vs. effective kill: decomposing mutation-style scores&rdquo; section, added related-pages link</li>
+<li><a href="index.html">index.org</a> — added oracle-conversion.org row under &ldquo;Oracle construction and auditing&rdquo;</li>
+</ul>
+
+<p>
+<b>Not changed:</b> no update to metamorphic-testing.org or agent-evaluation.org — this paper&rsquo;s RL-training/reward-decomposition angle is closer to test-adequacy-criteria.org&rsquo;s kill-score discussion than to those pages&rsquo; existing content.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb5d6076" class="outline-2">
+<h2 id="orgb5d6076">2026-09-14 — Wiki lint (post-oracle-conversion ingest)</h2>
+<div class="outline-text-2" id="text-orgb5d6076">
+<p>
+Full lint of all 44 content pages: format compliance, broken links, orphans, missing-from-index, cross-page contradictions.
+</p>
+
+<p>
+<b>Findings:</b> 0 broken links, 0 missing-from-index, 0 format violations, 0 total orphans (every page has ≥1 inbound content link). 3 factual errors self-introduced while writing oracle-conversion.org, 1 missing-backlink gap.
+</p>
+
+<p>
+<b>Fixes applied:</b>
+</p>
+<ul class="org-ul">
+<li><a href="oracle-conversion.html">oracle-conversion.org</a> — corrected RQ3 crossover stat: swapping the <b>oracle policy</b> on fixed inputs (NoKill→FullKill) <b>improves</b> accuracy by +1.18pp (had this reversed as &ldquo;swapping oracle&hellip; +3.81pp&rdquo;); the 3.81pp figure is actually the <b>cost</b> of moving to FullKill&rsquo;s harder inputs with the oracle held fixed</li>
+<li><a href="oracle-conversion.html">oracle-conversion.org</a> — corrected RQ4 stat: full kill improves step 50→75 for only 1 of 3 seeds (seed 103, 11.92%→14.68%), not &ldquo;2/3 seeds&rdquo; as first written; seeds 101 and 102 both regress</li>
+<li><a href="oracle-conversion.html">oracle-conversion.org</a> — corrected cross-model reference stat: the GPT-5.6-proxy figure &ldquo;95.80%&rdquo; is its OCE, not its success rate (success is actually 99.30%); rewrote using O/K/OCE directly</li>
+<li><a href="mmt4nl.html">mmt4nl.org</a> and <a href="metamorphic-testing-llms.html">metamorphic-testing-llms.org</a> — added backlinks to <a href="mortar.html">MORTAR</a>, which discusses its relation to both but wasn&rsquo;t linked back from either (mortar.org had only 1 inbound content link)</li>
+</ul>
+
+<p>
+<b>Not changed:</b> adaptive-random-testing-prompts.org&rsquo;s single inbound link is intentional (already resolved 2026-08-30, hub-and-stub pattern); no new concept pages needed (GRPO, kill-rate/potential-effective-kill vocabulary each appear in ≤2 pages, below the threshold for a dedicated hub).
+</p>
+</div>
+</div>
+<div id="outline-container-org8251a90" class="outline-2">
+<h2 id="org8251a90">2026-09-28 — Ingest of 1 new source (STELLAR-D)</h2>
+<div class="outline-text-2" id="text-org8251a90">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf (arXiv:2609.23209v1, 19 Sep 2026)</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="search-based-testing.html">search-based-testing.org</a> — new concept hub. Genetic-algorithm framing of LLM-app test generation: feature-vector encoding, STELLAR&rsquo;s crossover/mutation/duplicate-elimination, and STELLAR-D/DS&rsquo;s archive + repopulation diversity extension (inspired by DeepJanus). Full technical writeup + effectiveness/diversity trade-off results.</li>
+<li><a href="stellar-d.html">stellar-d.org</a> — paper-summary stub (hub-and-stub pattern, mirrors adaptive-random-testing-prompts.org). Paper-specific RQ0-RQ2 results (judge selection, effectiveness, diversity) and the 6-type qualitative failure taxonomy from the CarQA/BMW expert interview.</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="test-selection-prioritization.html">test-selection-prioritization.org</a> — added related-pages link to search-based-testing.org, distinguishing selection-time diversity (ART) from generation-time diversity (archive/repopulation)</li>
+<li><a href="llm-as-judge-evaluation.html">llm-as-judge-evaluation.org</a> — added source, added &ldquo;Judge selection benefits from empirical benchmarking&rdquo; section (STELLAR-D&rsquo;s 8-judge/3-domain comparison, GPT-4o-mini best balance, per-dimension human-agreement kappas), added related-pages link</li>
+<li><a href="index.html">index.org</a> — added stellar-d.org row under &ldquo;Robustness and test generation&rdquo;; added search-based-testing.org row under &ldquo;Testing theory and oracles&rdquo;</li>
+</ul>
+
+<p>
+<b>Not changed:</b> oracle-problem.org (paper&rsquo;s failure oracle is a standard LLM-judge, already covered under the existing &ldquo;LLM-as-judge&rdquo; strategy row — no new oracle-construction strategy introduced). No standalone page for predecessor STELLAR (per user decision — covered by citation within stellar-d.org and search-based-testing.org; its PDF isn&rsquo;t in raw/).
+</p>
+</div>
+</div>
+<div id="outline-container-org5229b81" class="outline-2">
+<h2 id="org5229b81">2026-10-18 — Ingest of 3 new sources (Kiele, Yang, Moshood)</h2>
+<div class="outline-text-2" id="text-org5229b81">
+<p>
+<b>Sources ingested:</b>
+</p>
+<ul class="org-ul">
+<li>Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf (ESEM 2026, LIPIcs 49)</li>
+<li>Yang et al. - 2026 - Mubric Mutation Testing-Guided Rubric Generation for LLM Evaluation.pdf (arXiv:2609.37322v1, 29 Sep 2026)</li>
+<li>Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf (arXiv:2610.14443v1, 10 Oct 2026)</li>
+</ul>
+
+<p>
+<b>Pages created:</b>
+</p>
+<ul class="org-ul">
+<li><a href="test-aware-mutants.html">test-aware-mutants.org</a> — Kiele summary. Single-prompt &ldquo;evade the base tests&rdquo; mutant generation; verified-fault rate 87.8% (HumanEval) / 79.1% (MBPP) test-aware vs. 12.2% / 23.0% test-blind vs. 4.4% / 5.7% mutmut (Gemini 3.1 Pro, <code>agent1</code>); subtlety comparable; 49 of 65 surviving mutants were genuine EvalPlus oracle gaps; cost per verified fault lower than mutmut despite 7-12x slower per candidate; iterative retries reach 98.2%. Notes an abstract/body discrepancy (87.7% vs. 87.8%).</li>
+<li><a href="mubric.html">mubric.org</a> — Yang summary. 201 mined mutation operators over preferred/dispreferred response pairs; mutate a reference response, refine the rubric where the defect is not penalized (δ<sub>total</sub> 8, δ<sub>item</sub> 2); 57.27% vs. 49.78% over 703 tasks; ablation shows mutation feedback, not generic revision, drives the gain. Flags (as inferences / needs verification) the stronger auxiliary model and unspecified tie handling.</li>
+<li><a href="lest.html">lest.org</a> — Moshood summary. Claim extraction → testability → claim-prompt mapping → 7 mutation operators → 3-guard-model labeling → human validation; 56 claims / 29 testable / 17 covered / 11 refusal-testable / 9 covered / 6 with counterexample; 312 automated R→C flags vs. 19 validated (6.1%); intent preserved in 28.2% of flagged vs. 89.3% of sampled mutants.</li>
+<li><a href="specification-based-testing.html">specification-based-testing.org</a> — new concept hub (per user decision). Four recurring questions for spec-driven testing; comparison table across LEST, REAG, Skill Coverage, Oracle Conversion, Lean4Agent; AgentSpec noted as runtime counterpart.</li>
+</ul>
+
+<p>
+<b>Pages updated (cross-links added):</b>
+</p>
+<ul class="org-ul">
+<li><a href="mutation-testing-for-llm-systems.html">mutation-testing-for-llm-systems.org</a> — two roles → four; added Kiele and Mubric rows, new &ldquo;Conditioning on the existing suite, and mutating the evaluator&rdquo; section</li>
+<li><a href="llm-as-judge-evaluation.html">llm-as-judge-evaluation.org</a> — added &ldquo;Rubric-based judging&rdquo; (Mubric) and &ldquo;Automated judges overstate failures&rdquo; (LEST) sections</li>
+<li><a href="oracle-problem.html">oracle-problem.org</a> — two new strategy rows (held-out stronger suite; claim-specific oracle) and a &ldquo;stronger oracle is still incomplete&rdquo; pitfall section (EvalPlus 49/65; LEST judge ensemble 312→19)</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — added &ldquo;Adequacy of what? Suites, rubrics, and documented claims&rdquo; section</li>
+<li><a href="metamorphic-testing.html">metamorphic-testing.org</a> — added LEST row and validity-gating-on-the-failure-subset caution</li>
+<li><a href="explanation-guided-mt.html">explanation-guided-mt.org</a> — added LEST cross-reference on semantic-gate limits (flagged as inference)</li>
+<li><a href="adversarial-robustness-testing.html">adversarial-robustness-testing.org</a> — added &ldquo;Safety-refusal robustness: consistency testing vs. attack optimization&rdquo; section</li>
+<li><a href="agent-safety.html">agent-safety.org</a> — added section on testing documented model safety claims</li>
+<li><a href="reag.html">reag.org</a>, <a href="skill-coverage.html">skill-coverage.org</a> — added related link to the new hub; bumped date</li>
+<li><a href="index.html">index.org</a> — added test-aware-mutants row (Robustness and test generation), mubric row (Oracle construction and auditing), new &ldquo;Safety and specification testing&rdquo; section with lest row, specification-based-testing row and updated mutation row under Core Concepts</li>
+</ul>
+
+<p>
+<b>Contradictions / notes:</b> Kiele abstract gives 87.7% vs. body/Table 4 87.8% (this wiki uses 87.8%). Kiele hypothesizes LLMut&rsquo;s weaker test-inclusive result came from passive-context prompting — untested, marked needs verification. LEST cites a 191-MR NLP collection (Cho et al.) that appears to be the LLMorph work covered via Terragni 2026 — marked needs verification.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbc57be0" class="outline-2">
+<h2 id="orgbc57be0">2026-10-18 — Wiki lint (post-Kiele/Yang/Moshood ingest)</h2>
+<div class="outline-text-2" id="text-orgbc57be0">
+<p>
+Full lint of all 51 content pages: format compliance, broken/self links, orphans, index completeness, Sources↔raw/ consistency, org table/bracket structure, cross-page number consistency, stale wording, and a verbatim check of every percentage on the three new paper pages against extracted source text.
+</p>
+
+<p>
+<b>Findings:</b> 0 format violations, 0 broken or self links, 0 missing-from-index, 0 duplicate index rows, 0 structure errors. All 31 raw PDFs are cited in some page&rsquo;s Sources and every cited Sources file exists in raw/. Headline numbers agree across pages (Lean4Agent 11.94% = mean of 14.80% and 9.07%; Skill Coverage 39.90-43.98%; Dai 5.1%; Tangent 2,572 / 23 patterns; Riccio 13/70, 12/70, 24/70). All percentages on test-aware-mutants.org, mubric.org and lest.org appear in their sources, or are table cells printed without &ldquo;%&rdquo; or labeled cross-references.
+</p>
+
+<p>
+<b>Fixes applied (stale wording introduced by the ingest):</b>
+</p>
+<ul class="org-ul">
+<li><a href="mutation-testing-for-llm-systems.html">mutation-testing-for-llm-systems.org</a> — &ldquo;these two papers are the first … instances&rdquo; rewritten to name Hamidi/Tian as first and Kiele/Yang as later extensions</li>
+<li><a href="test-adequacy-criteria.html">test-adequacy-criteria.org</a> — &ldquo;two 2025-2026 papers extend it&rdquo; now points to the two later 2026 extensions; Summary line widened to cover mutation score and documented-spec coverage</li>
+<li><a href="llm-as-judge-evaluation.html">llm-as-judge-evaluation.org</a> — Summary line widened to cover rubric probing and human validation of flagged failures</li>
+<li><a href="index.html">index.org</a> — descriptions for test-adequacy-criteria and llm-as-judge-evaluation updated</li>
+</ul>
+
+<p>
+<b>Left for user decision (not changed):</b>
+</p>
+<ul class="org-ul">
+<li>9 single-source pages have no inline &ldquo;(source: …)&rdquo; citations (agent-failure-modes, agent-skill-coverage, agentspec, formal-verification-of-agent-workflows, golden-context, llm-agent-testing-practice, ml-testing-mapping-study, ml-testing-survey, trajeval); the Sources header covers them but inline style differs from the other 42 pages</li>
+<li>one-way Related-pages links involving the new pages (reciprocal backlinks missing from mumutestup, intent-based-mutation-testing, oracle-conversion, audit-feedback-driven-evolution, lean4agent, agentspec, formal-verification-of-agent-workflows, reag, lest→oracle-problem)</li>
+<li>watch item: SORRY-Bench appears in 3 pages (stellar-d, lest, agent-safety) and LLM safety-refusal testing in ~10; not yet a dedicated concept page</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org205a086" class="outline-2">
+<h2 id="org205a086">2026-10-18 — Lint follow-up: citations, backlinks, safety concept page, two factual fixes</h2>
+<div class="outline-text-2" id="text-org205a086">
+<p>
+Applied the three items left open by the lint above, plus a numeric audit of every page against its cited PDF text.
+</p>
+
+<p>
+<b>Inline citations added</b> (single-source pages now use &ldquo;(source: …)&rdquo; like the rest of the wiki): <a href="agent-failure-modes.html">agent-failure-modes.org</a>, <a href="agent-skill-coverage.html">agent-skill-coverage.org</a> (also added Pan et al. 2026 to its Sources, since the page cites it), <a href="agentspec.html">agentspec.org</a>, <a href="golden-context.html">golden-context.org</a>, <a href="trajeval.html">trajeval.org</a>, <a href="formal-verification-of-agent-workflows.html">formal-verification-of-agent-workflows.org</a>, <a href="llm-agent-testing-practice.html">llm-agent-testing-practice.org</a> (per-bullet attribution; added Riccio et al. 2020 to its Sources), <a href="ml-testing-mapping-study.html">ml-testing-mapping-study.org</a>, <a href="ml-testing-survey.html">ml-testing-survey.org</a>. Wiki-authored interpretation and cross-references are marked as such rather than attributed to the source.
+</p>
+
+<p>
+<b>Backlinks added</b> for the new pages: mumutestup, intent-based-mutation-testing, oracle-conversion, audit-feedback-driven-evolution, lean4agent, agentspec, formal-verification-of-agent-workflows, reag, skill-coverage, lest (→ oracle-problem, mubric), llm-as-judge-evaluation (→ mutation-testing-for-llm-systems), oracle-problem and agent-safety (↔ specification-based-testing).
+</p>
+
+<p>
+<b>New concept page:</b> <a href="llm-safety-refusal-testing.html">llm-safety-refusal-testing.org</a> — model-level safety/refusal testing across STELLAR-D&rsquo;s SafeQA study and LEST (SORRY-Bench seeds, feedback-driven vs. response-independent generation, judge reliability and human validation, failure diversity vs. claim coverage), with Dai et al. 2026 for repo-level adversarial-test prevalence and a &ldquo;gaps in this wiki&rdquo; list. Linked from stellar-d, search-based-testing, lest, adversarial-robustness-testing, agent-safety, qa-practices-gaps-agents, llm-as-judge-evaluation, metamorphic-testing, specification-based-testing; index row added under &ldquo;Safety and specification testing&rdquo;.
+</p>
+
+<p>
+<b>Factual errors found and fixed (numeric audit):</b>
+</p>
+<ul class="org-ul">
+<li><a href="stellar-d.html">stellar-d.org</a> — RQ1 example gave Random = 100.67 failures for SafeQA/DeepSeek-V2-16B; the source&rsquo;s Table 5 gives 198.00 ± 12.08. Corrected.</li>
+<li><a href="ml-testing-survey.html">ml-testing-survey.org</a> — share of papers in SE venues was 38.1%; Zhang et al. state 38.2 percent. Corrected.</li>
+</ul>
+
+<p>
+<b>Source inconsistency recorded:</b> Sorokin et al.&rsquo;s text lists GPT-5-Chat among the six SafeQA models, but Table 5 has DeepSeek-V2-16B in that slot and no GPT-5-Chat row. Noted on <a href="stellar-d.html">stellar-d.org</a>; unresolved in the source.
+</p>
+
+<p>
+<b>Audit method and limits:</b> every decimal and percentage on every page with a Sources header was searched in the extracted text of its cited PDFs. Residual misses were checked by hand: AORTA 68.2 (source 68.177, rounding), FOCAL 81.99 (Table III 0.8199), cross-reference figures from LEST on two pages, and the AgentSpec figures, which could not be text-searched because that PDF&rsquo;s font encoding is garbled — they were verified by reading the evaluation pages (58.62→54.26%, 95.56%/70.96%, 87.26%, 62.50%, 1.42/2.83/1.11 ms, 25.4 s/9.82 s, 96 scenarios per rule all match). Integer counts without &ldquo;%&rdquo; were not systematically checked.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

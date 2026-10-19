@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agent Evaluation</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Agent Evaluation</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd972e40">Outcome-Based Metrics</a>
+<ul>
+<li><a href="#orgdcb7a06">Pass@k</a></li>
+<li><a href="#orgb6249ca">CodeBLEU</a></li>
+<li><a href="#orgcea3fb1">Efficiency metrics</a></li>
+</ul>
+</li>
+<li><a href="#org9d1e8c7">Process-Based Metrics (TRAJEVAL)</a></li>
+<li><a href="#orgd52dc5e">Safety-Oriented Evaluation</a></li>
+<li><a href="#orgdac7914">Generalization Evaluation</a></li>
+<li><a href="#orgc2d87df">Benchmarks</a></li>
+<li><a href="#orgb2a5075">Limitations of Current Evaluation</a></li>
+<li><a href="#orgb25fa0b">Evaluation Without Ground Truth</a></li>
+<li><a href="#orgc37103a">Formal and Adequacy-Based Alternatives to Benchmark Scores</a></li>
+<li><a href="#org160a874">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: Agent evaluation encompasses the metrics, benchmarks, and methodologies used to assess the capability, safety, and efficiency of LLM-based autonomous agents — with a growing shift from outcome-only to process-aware evaluation.
+</p>
+
+<p>
+<b>Sources</b>: Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf; Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf; Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf
+</p>
+
+<p>
+<b>Last updated</b>: 2026-08-30
+</p>
+
+<hr />
+<div id="outline-container-orgd972e40" class="outline-2">
+<h2 id="orgd972e40">Outcome-Based Metrics</h2>
+<div class="outline-text-2" id="text-orgd972e40">
+</div>
+<div id="outline-container-orgdcb7a06" class="outline-3">
+<h3 id="orgdcb7a06">Pass@k</h3>
+<div class="outline-text-3" id="text-orgdcb7a06">
+<p>
+Probability of generating a correct solution within k attempts. Standard metric for code agents on SWE-bench. Collapses entire execution into a binary signal — passes or fails. Cannot reveal where or why an agent failed.
+</p>
+
+<p>
+(source: Chen, 2021, cited in TRAJEVAL)
+</p>
+</div>
+</div>
+<div id="outline-container-orgb6249ca" class="outline-3">
+<h3 id="orgb6249ca">CodeBLEU</h3>
+<div class="outline-text-3" id="text-orgb6249ca">
+<p>
+Measures syntactic and semantic similarity of generated code to reference. Operates on outputs, not process. Does not capture whether agent explored the right code regions.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcea3fb1" class="outline-3">
+<h3 id="orgcea3fb1">Efficiency metrics</h3>
+<div class="outline-text-3" id="text-orgcea3fb1">
+<p>
+Token consumption, latency, cost per solution. Measure operational costs but not behavioral quality.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9d1e8c7" class="outline-2">
+<h2 id="org9d1e8c7">Process-Based Metrics (TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-org9d1e8c7">
+<p>
+<a href="trajeval.html">TRAJEVAL</a> introduces stage-wise precision and recall metrics that measure <b>how</b> agents arrive at solutions:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Metric</th>
+<th scope="col" class="org-left">What it measures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Search P/R</td>
+<td class="org-left">File localization accuracy/coverage</td>
+</tr>
+
+<tr>
+<td class="org-left">Read P/R</td>
+<td class="org-left">Function comprehension accuracy/coverage</td>
+</tr>
+
+<tr>
+<td class="org-left">Edit P/R</td>
+<td class="org-left">Modification targeting accuracy/coverage</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Key finding: these 6 features predict model-level Pass@1 within 0.87–2.1% MAE, demonstrating that process metrics carry strong predictive signal. (source: TRAJEVAL paper)
+</p>
+</div>
+</div>
+<div id="outline-container-orgd52dc5e" class="outline-2">
+<h2 id="orgd52dc5e">Safety-Oriented Evaluation</h2>
+<div class="outline-text-2" id="text-orgd52dc5e">
+<p>
+For <a href="agent-safety.html">agent safety</a>, evaluation focuses on whether agents execute harmful actions. Key benchmarks:
+</p>
+
+<ul class="org-ul">
+<li><b>RedCode-Exec</b>: 750 risky code scenarios across 25 vulnerability categories (source: AgentSpec paper)</li>
+<li><b>SafeAgentBench</b>: embodied agent safety, 250 scenarios across 10 hazard categories</li>
+<li><b>FixDrive</b>: autonomous vehicle law-violation scenarios</li>
+</ul>
+
+<p>
+Safety evaluation uses enforcement rate (fraction of risky actions successfully blocked) and false positive rate (safe actions incorrectly blocked).
+</p>
+</div>
+</div>
+<div id="outline-container-orgdac7914" class="outline-2">
+<h2 id="orgdac7914">Generalization Evaluation</h2>
+<div class="outline-text-2" id="text-orgdac7914">
+<p>
+TRAJEVAL identifies three increasingly challenging distribution shifts:
+</p>
+
+<ol class="org-ol">
+<li><b>Instance-held-out</b>: random 60/40 split (in-distribution)</li>
+<li><b>Repository-held-out</b>: train on 60% of repos, test on unseen ones (cross-codebase)</li>
+<li><b>Language-held-out</b>: train on Python/JS, test on TypeScript/Java (cross-language)</li>
+</ol>
+
+<p>
+Results: for the SWE-Agent/SWE-bench configuration specifically, trajectory features maintain perfect ranking correlation (ρ=1.00) under both repo-held-out shift (MAE 1.20%→2.73%) and language-held-out shift on PolyBench (MAE up to 8.83%) — ranking correlation stays perfect even as absolute MAE degrades. Across all agent/benchmark configurations tested, the reported floor is ρ≥0.886 (some configs, e.g. PolyBench repo-held-out, dip to ρ=0.94), so &ldquo;perfect&rdquo; ranking preservation is the common case, not a universal guarantee. (source: Kim et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgc2d87df" class="outline-2">
+<h2 id="orgc2d87df">Benchmarks</h2>
+<div class="outline-text-2" id="text-orgc2d87df">
+<p>
+See <a href="code-agent-benchmarks.html">Code Agent Benchmarks</a> for details on SWE-bench, PolyBench, RedCode-Exec, SafeAgentBench, and FixDrive.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb2a5075" class="outline-2">
+<h2 id="orgb2a5075">Limitations of Current Evaluation</h2>
+<div class="outline-text-2" id="text-orgb2a5075">
+<ul class="org-ul">
+<li><b>Binary outcomes hide failure structure</b>: models with same Pass@1 may fail in completely different ways</li>
+<li><b>Reference-patch assumption</b>: trajectory metrics assume reference patches represent canonical solutions (TRAJEVAL validates this: 93.3% of multi-solved instances show exact function-level convergence)</li>
+<li><b>Architecture dependence</b>: agent architectures with different tool primitives make cross-agent comparison complex</li>
+<li><b>Safety vs. capability trade-off</b>: safety benchmarks measure constraint enforcement, not whether safe alternatives were found</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb25fa0b" class="outline-2">
+<h2 id="orgb25fa0b">Evaluation Without Ground Truth</h2>
+<div class="outline-text-2" id="text-orgb25fa0b">
+<p>
+For agent outputs with no fixed correct answer, <a href="reag.html">REAG</a> proposes requirements-grounded oracle generation plus a confidence-calibrated <a href="llm-as-judge-evaluation.html">LLM-as-judge cascade</a> (conformal risk control, abstention on low confidence) as an alternative to fixed benchmarks. Empirically, <a href="tangent.html">Tangent</a> finds most real-world agent test suites still rely on shallow unit assertions rather than this kind of behavior-level evaluation — see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc37103a" class="outline-2">
+<h2 id="orgc37103a">Formal and Adequacy-Based Alternatives to Benchmark Scores</h2>
+<div class="outline-text-2" id="text-orgc37103a">
+<p>
+<a href="lean4agent.html">Lean4Agent</a> shows that a design-time formal-verification pass on the workflow specification itself is predictive of downstream benchmark performance (11.94% average gain for verification-passing workflows) — an evaluation signal available <b>before</b> running any benchmark task. See <a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a>.
+</p>
+
+<p>
+Separately, <a href="skill-coverage.html">Skill Coverage</a> evaluates agent <b>skill documents</b> rather than task outcomes: it shows that passing a benchmark task and thoroughly exercising the skill guidance behind it are different things — SkillsBench executions cover only 39.90-43.98% of documented skill behavior despite high task pass rates. See <a href="agent-skill-coverage.html">Agent Skill Coverage</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org160a874" class="outline-2">
+<h2 id="org160a874">Related pages</h2>
+<div class="outline-text-2" id="text-org160a874">
+<ul class="org-ul">
+<li><a href="trajeval.html">TRAJEVAL</a></li>
+<li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
+<li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
+<li><a href="agent-safety.html">Agent Safety</a></li>
+<li><a href="agent-failure-modes.html">Agent Failure Modes</a></li>
+<li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
+<li><a href="reag.html">REAG</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="oracle-problem.html">The Oracle Problem</a></li>
+<li><a href="lean4agent.html">Lean4Agent</a></li>
+<li><a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a></li>
+<li><a href="skill-coverage.html">Skill Coverage</a></li>
+<li><a href="agent-skill-coverage.html">Agent Skill Coverage</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agent Safety</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Agent Safety</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga259fe4">Problem Space</a></li>
+<li><a href="#orgf1058ec">Safety Risk Taxonomy</a></li>
+<li><a href="#org5ff0b9d">Approaches to Safety</a>
+<ul>
+<li><a href="#org2026bb0">Pre-execution risk assessment</a></li>
+<li><a href="#org0b0bb4f">Rule-based runtime enforcement</a></li>
+<li><a href="#orge8d06b6">Training-time alignment</a></li>
+<li><a href="#org7207ba7">Post-hoc evaluation</a></li>
+</ul>
+</li>
+<li><a href="#org63b2c95">Key Empirical Results</a></li>
+<li><a href="#org4f8c7a6">LLM-Generated Safety Rules</a></li>
+<li><a href="#orgc7b257b">Repo-Level QA Evidence (Dai et al. 2026)</a></li>
+<li><a href="#org1151623">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</a></li>
+<li><a href="#orgd1ca276">Open Problems</a></li>
+<li><a href="#org5400010">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: Agent safety concerns the mechanisms by which LLM-based autonomous agents are prevented from taking harmful, unintended, or policy-violating actions across diverse deployment domains.
+</p>
+
+<p>
+<b>Sources</b>: Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf; Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf; Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf
+</p>
+
+<p>
+<b>Last updated</b>: 2026-10-18
+</p>
+
+<hr />
+<div id="outline-container-orga259fe4" class="outline-2">
+<h2 id="orga259fe4">Problem Space</h2>
+<div class="outline-text-2" id="text-orga259fe4">
+<p>
+LLM agents operating autonomously introduce safety risks that differ from traditional software:
+</p>
+
+<ul class="org-ul">
+<li><b>Emergent behavior</b>: agents may take sequences of individually plausible actions that collectively produce harmful outcomes</li>
+<li><b>Misaligned intent</b>: autonomous decision-making can diverge from user expectations in novel situations</li>
+<li><b>Irreversibility</b>: destructive file operations, financial transactions, physical actions (robotic, AV) cannot be undone</li>
+<li><b>Domain diversity</b>: the same agent technology is deployed in code execution, healthcare, finance, robotics, and autonomous vehicles — each with different risk profiles</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf1058ec" class="outline-2">
+<h2 id="orgf1058ec">Safety Risk Taxonomy</h2>
+<div class="outline-text-2" id="text-orgf1058ec">
+<p>
+From the AgentSpec evaluation (source: Wang et al. - 2025):
+</p>
+
+<p>
+<b>Code execution risks:</b> posting sensitive files online, untrusted installation, crawling risky websites, copying/listing sensitive files, writing risky content, delete operations, reverse shell creation, side channel vulnerabilities, unsafe deserialization, cryptographic predictability
+</p>
+
+<p>
+<b>Embodied agent risks:</b> fire hazard, electrical shock, explosion, poisoning/ingestion, slip hazard, liquid/spill damage, breakage and dropping, appliances misuse, property damage, damage to small items
+</p>
+
+<p>
+<b>Autonomous vehicle risks:</b> collision, traffic law violations (red light, speed, lane laws)
+</p>
+</div>
+</div>
+<div id="outline-container-org5ff0b9d" class="outline-2">
+<h2 id="org5ff0b9d">Approaches to Safety</h2>
+<div class="outline-text-2" id="text-org5ff0b9d">
+</div>
+<div id="outline-container-org2026bb0" class="outline-3">
+<h3 id="org2026bb0">Pre-execution risk assessment</h3>
+<div class="outline-text-3" id="text-org2026bb0">
+<p>
+LLM-based sandboxes (e.g., ToolEmu) simulate potential outcomes before execution. Identifies risks but offers no enforcement mechanism; susceptible to adversarial manipulation.
+</p>
+</div>
+</div>
+<div id="outline-container-org0b0bb4f" class="outline-3">
+<h3 id="org0b0bb4f">Rule-based runtime enforcement</h3>
+<div class="outline-text-3" id="text-org0b0bb4f">
+<p>
+<a href="runtime-enforcement.html">Runtime enforcement</a> systems like <a href="agentspec.html">AgentSpec</a> enforce predefined constraints at execution time. High reliability (&gt;90% unsafe execution prevention) but requires rule specification effort.
+</p>
+</div>
+</div>
+<div id="outline-container-orge8d06b6" class="outline-3">
+<h3 id="orge8d06b6">Training-time alignment</h3>
+<div class="outline-text-3" id="text-orge8d06b6">
+<p>
+Model fine-tuning and RLHF aim to make models refuse unsafe instructions. Does not generalize reliably across deployment contexts; susceptible to jailbreaking.
+</p>
+</div>
+</div>
+<div id="outline-container-org7207ba7" class="outline-3">
+<h3 id="org7207ba7">Post-hoc evaluation</h3>
+<div class="outline-text-3" id="text-org7207ba7">
+<p>
+Trajectory analysis tools like <a href="trajeval.html">TRAJEVAL</a> identify what went wrong. Useful for diagnosis and iterative improvement but reactive rather than preventive.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org63b2c95" class="outline-2">
+<h2 id="org63b2c95">Key Empirical Results</h2>
+<div class="outline-text-2" id="text-org63b2c95">
+<p>
+From AgentSpec evaluation:
+</p>
+<ul class="org-ul">
+<li>&gt;90% of unsafe code executions prevented</li>
+<li>100% of hazardous embodied agent actions eliminated (across 10 hazard categories)</li>
+<li>100% AV law compliance in FixDrive scenarios</li>
+<li>Safe task success rate drops only slightly: 58.62% → 54.26% for embodied agents</li>
+</ul>
+
+<p>
+The safety–capability trade-off appears manageable: significant safety gains at modest capability cost.
+</p>
+</div>
+</div>
+<div id="outline-container-org4f8c7a6" class="outline-2">
+<h2 id="org4f8c7a6">LLM-Generated Safety Rules</h2>
+<div class="outline-text-2" id="text-org4f8c7a6">
+<p>
+AgentSpec demonstrates LLMs can auto-generate safety rules from domain descriptions. OpenAI o1 achieves:
+</p>
+<ul class="org-ul">
+<li>95.56% precision (rarely flags safe actions as unsafe)</li>
+<li>70.96% recall (misses ~29% of risky scenarios)</li>
+</ul>
+
+<p>
+The precision-recall asymmetry means LLM-generated rules are conservative but incomplete. Manual rules needed for comprehensive coverage.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc7b257b" class="outline-2">
+<h2 id="orgc7b257b">Repo-Level QA Evidence (Dai et al. 2026)</h2>
+<div class="outline-text-2" id="text-orgc7b257b">
+<p>
+AgentSpec&rsquo;s risk taxonomy above is enforcement-focused: a fixed rule set applied at runtime. <a href="qa-practices-gaps-agents.html">Dai et al. 2026</a> instead surveys <b>repository-visible evidence</b> of safety intent across 157 popular open-source agent projects, without validating runtime effectiveness. It reframes safety risk as eight end-to-end <b>risk chains</b> (untrusted input or model decision → sensitive action/asset/persistent state): secret-to-tool, workspace-to-persistent-state, extension-to-authority, mode-switch-to-privilege, runtime-code, model-to-process, session-to-action, untrusted-context-to-action.
+</p>
+
+<p>
+Two practice families interrupt these chains in practice: <b>chain-interruption</b> (approval at the privileged-action transition, sandboxing to contain execution/state effects, secret-redaction to stop propagation) and <b>systematic risk-avoidance</b> (scoping allowed tools/modes upfront, reviewable extension/runtime authority, scoped browser sessions). Coverage is broad but inconsistent: the same safeguard family (e.g. secret management) is missing for 26-36% of projects exposing the matching risk chain, and only 5.1% of all 157 projects have any adversarial/red-team <b>test</b> path — safeguards exist more often than tests that would catch their removal or bypass.
+</p>
+
+<p>
+Key implication for this page&rsquo;s framing: safety mechanisms should be bound to the <b>protected action or asset</b>, not the interface — the same boundary (a secret, a file, a shell command) needs to hold whether the route in is CLI, API, MCP, or browser, which AgentSpec-style rule sets don&rsquo;t guarantee unless rules are written per-route.
+</p>
+</div>
+</div>
+<div id="outline-container-org1151623" class="outline-2">
+<h2 id="org1151623">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</h2>
+<div class="outline-text-2" id="text-org1151623">
+<p>
+The approaches above concern agent actions. <a href="lest.html">LEST</a> tests a different layer: the safety claims a provider publishes for a <b>model</b> in its system card (refusal of harmful requests, avoiding encouragement of self-harm, avoiding stereotyped outputs). Only 29 of 56 claims across the Claude Opus 4.8 and GPT-5.5 system cards were prompt-testable through black-box interaction; both models refuse over 95% of unmodified SORRY-Bench seed prompts, yet human-validated Refuse→Comply flips under mutated prompts contradict 6 of the 9 covered refusal-testable claims. This is a documentation-to-test gap rather than an enforcement gap; it loosely parallels Dai et al.&rsquo;s finding that safeguards in agent repositories are far more common than tests that would catch their bypass (cross-reference, not stated in either source). See <a href="specification-based-testing.html">Specification-Based Testing</a>. (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1ca276" class="outline-2">
+<h2 id="orgd1ca276">Open Problems</h2>
+<div class="outline-text-2" id="text-orgd1ca276">
+<ul class="org-ul">
+<li><b>Long-term consequence reasoning</b>: current enforcement is local (immediate action) rather than trajectory-level</li>
+<li><b>Rule completeness</b>: unknown unsafe scenarios have no rules; coverage gap is inherent</li>
+<li><b>Adversarial robustness</b>: rules can be defeated by prompt injection or context manipulation</li>
+<li><b>Cross-domain generalization</b>: rules designed for one domain may not transfer</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5400010" class="outline-2">
+<h2 id="org5400010">Related pages</h2>
+<div class="outline-text-2" id="text-org5400010">
+<ul class="org-ul">
+<li><a href="agentspec.html">AgentSpec</a></li>
+<li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
+<li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
+<li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
+<li><a href="qa-practices-gaps-agents.html">QA Practices and Gaps in AI Agents (Dai et al. 2026)</a></li>
+<li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
+<li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
+<li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
+<li><a href="llm-safety-refusal-testing.html">Safety and Refusal Testing of LLMs</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

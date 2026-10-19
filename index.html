@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Testing AI-enabled software systems Wiki Index</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Testing AI-enabled software systems Wiki Index</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6e844bf">Paper Summaries</a>
+<ul>
+<li><a href="#org40dc002">Code agents</a></li>
+<li><a href="#org3569adb">Metamorphic testing</a></li>
+<li><a href="#org294a00e">Robustness and test generation</a></li>
+<li><a href="#orgb09994c">Safety and specification testing</a></li>
+<li><a href="#org9344532">Oracle construction and auditing</a></li>
+<li><a href="#orgc082137">Foundational surveys</a></li>
+</ul>
+</li>
+<li><a href="#org3bd9047">Core Concepts</a>
+<ul>
+<li><a href="#org0698fa4">Agents</a></li>
+<li><a href="#org4a965d9">Testing theory and oracles</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Research knowledge base on verification, validation, and testing of software systems with AI components.
+</p>
+
+<hr />
+<div id="outline-container-org6e844bf" class="outline-2">
+<h2 id="org6e844bf">Paper Summaries</h2>
+<div class="outline-text-2" id="text-org6e844bf">
+</div>
+<div id="outline-container-org40dc002" class="outline-3">
+<h3 id="org40dc002">Code agents</h3>
+<div class="outline-text-3" id="text-org40dc002">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="trajeval.html">TRAJEVAL</a></td>
+<td class="org-left">Diagnostic framework decomposing code agent trajectories into Search/Read/Edit stages with precision/recall metrics</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agentspec.html">AgentSpec</a></td>
+<td class="org-left">DSL for customizable runtime enforcement of safety constraints on LLM agents</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="tangent.html">Tangent</a></td>
+<td class="org-left">Empirical study of 2,572 real GitHub agent tests + 10 practitioner interviews; 23-pattern testing taxonomy</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="lean4agent.html">Lean4Agent (Wang 2026)</a></td>
+<td class="org-left">Lean4 dependent-type verification of agent workflow specs + trajectory-level failure localization</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="skill-coverage.html">Skill Coverage (Tan 2026)</a></td>
+<td class="org-left">Test adequacy metric for agent skill documents; SkillsBench covers only 39.90-43.98% of documented behavior</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="qa-practices-gaps-agents.html">QA Practices and Gaps in AI Agents (Dai 2026)</a></td>
+<td class="org-left">157-repo study of execution surfaces/safeguards/testing/risk chains; only 5.1% of projects have adversarial tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org3569adb" class="outline-3">
+<h3 id="org3569adb">Metamorphic testing</h3>
+<div class="outline-text-3" id="text-org3569adb">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="mettle.html">METTLE</a></td>
+<td class="org-left">Metamorphic testing for unsupervised clustering systems, reclustering-percentage metric</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="metamorphic-testing-llms.html">Metamorphic Testing for LLMs (Terragni 2026)</a></td>
+<td class="org-left">Position paper + LLMorph framework, 191 MRs surveyed, 560K tests run</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mmt4nl.html">MMT4NL (Racharak 2026)</a></td>
+<td class="org-left">9 metamorphic relation types for in-context-learning trustworthiness</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mortar.html">MORTAR (Guo 2026)</a></td>
+<td class="org-left">Multi-turn metamorphic testing for LLM dialogue systems; char-level + dialogue-level perturbation</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="explanation-guided-mt.html">Explanation-Guided MT (Chen 2026)</a></td>
+<td class="org-left">Attribution-prioritized mutation + semantic-verification gate; 2.30x more verified failures</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="lgmt.html">LGMT (Zhou 2026)</a></td>
+<td class="org-left">MRs derived from proven FOL equivalence laws; MVR 20.84-29.44% across 6 LLMs, FRR 1.38%</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="metamorphic-slicing.html">Metamorphic Slicing (Ren 2026)</a></td>
+<td class="org-left">Fine-grained fault localization within MR-violating groups when no oracle exists</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org294a00e" class="outline-3">
+<h3 id="org294a00e">Robustness and test generation</h3>
+<div class="outline-text-3" id="text-org294a00e">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="aorta.html">AORTA (Xiao 2025)</a></td>
+<td class="org-left">Black-box adversarial robustness testing jointly perturbing prompt+example, Adaptive Beam Search</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="abfs.html">ABFS (Xiao 2026)</a></td>
+<td class="org-left">AORTA successor; Best-First Search over a confidence-keyed priority queue + adaptive WIR; +6.248pp success rate, PPL 8.161 lower</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="reag.html">REAG (Wang 2026)</a></td>
+<td class="org-left">Requirements-grounded oracle generation + calibrated LLM-judge cascade for acceptance testing</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="adaptive-random-testing-prompts.html">Adaptive Testing (Yoon 2025)</a></td>
+<td class="org-left">Diversity-based test selection for prompt templates under a query budget</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="concolixir.html">ConcoLixir (Chen 2026)</a></td>
+<td class="org-left">LLM as reactive &ldquo;discovery oracle&rdquo; for Python concolic testing; +8.6-17.0pp line coverage</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing (Hamidi 2025)</a></td>
+<td class="org-left">Mutate NL intent, not syntax; 55% of mutants not subsumed by traditional mutation</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mumutestup.html">MuMuTestUp (Tian 2026)</a></td>
+<td class="org-left">Mutation-guided multi-agent framework for updating outdated test cases across PRs</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="stellar-d.html">STELLAR-D (Sorokin 2026)</a></td>
+<td class="org-left">Genetic search-based LLM-app test generation with an archive-based diversity objective; greedy repopulation best balances failure detection and diversity</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="test-aware-mutants.html">Test-Aware Mutants (Kiele 2026)</a></td>
+<td class="org-left">LLM sees the base tests and must write a subtle bug that passes them; 87.8% verified-fault rate on HumanEval vs. 12.2% test-blind, 4.4% mutmut</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgb09994c" class="outline-3">
+<h3 id="orgb09994c">Safety and specification testing</h3>
+<div class="outline-text-3" id="text-orgb09994c">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="lest.html">LEST (Moshood 2026)</a></td>
+<td class="org-left">Safety claims in system cards as black-box specs; 29/56 claims prompt-testable, 312 flagged Refuse→Comply flips shrink to 19 human-validated</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="llm-safety-refusal-testing.html">Safety and Refusal Testing of LLMs</a></td>
+<td class="org-left">Concept page: how STELLAR-D&rsquo;s SafeQA and LEST test model-level safety — SORRY-Bench seeds, judges, human validation, claim coverage vs. failure diversity</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org9344532" class="outline-3">
+<h3 id="org9344532">Oracle construction and auditing</h3>
+<div class="outline-text-3" id="text-org9344532">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="delta-drl-differential-testing.html">Delta (He 2026)</a></td>
+<td class="org-left">Self-referential differential testing for DRL optimality bugs via an offline-RL-trained challenger</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="focal-oracle-prediction.html">FOCAL (Zhao 2026)</a></td>
+<td class="org-left">Learned discriminative PASS/FAIL oracle; exposes hidden failure-detection blind spots in baselines</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="audit-feedback-driven-evolution.html">Auditing Feedback-Driven Evolution (Liang 2026)</a></td>
+<td class="org-left">Shows single-reference pseudo-oracles inflate apparent LLM test-generation gains by 9-15pp</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="oracle-conversion.html">Oracle Conversion (Liang 2026)</a></td>
+<td class="org-left">Splits potential vs. effective kill; correctness-only reward narrows discriminative-input selection</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mubric.html">Mubric (Yang 2026)</a></td>
+<td class="org-left">Mutation testing applied to rubrics: inject defects into a reference response, refine rubrics that fail to penalize them; 57.27% vs. 49.78% best baseline</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgc082137" class="outline-3">
+<h3 id="orgc082137">Foundational surveys</h3>
+<div class="outline-text-3" id="text-orgc082137">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="ml-testing-survey.html">ML Testing Survey (Zhang 2022)</a></td>
+<td class="org-left">144-paper survey, 4-axis taxonomy (workflow/properties/components/scenario)</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="ml-testing-mapping-study.html">ML Systems Testing Mapping Study (Riccio 2020)</a></td>
+<td class="org-left">70-paper mapping, testing-level/access-level/oracle-type taxonomy</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software (Magalhães 2025)</a></td>
+<td class="org-left">Qualitative case study, 21 student teams building LLM apps</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org3bd9047" class="outline-2">
+<h2 id="org3bd9047">Core Concepts</h2>
+<div class="outline-text-2" id="text-org3bd9047">
+</div>
+<div id="outline-container-org0698fa4" class="outline-3">
+<h3 id="org0698fa4">Agents</h3>
+<div class="outline-text-3" id="text-org0698fa4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="trajectory-analysis.html">Trajectory Analysis</a></td>
+<td class="org-left">Methods for studying agent execution sequences to diagnose failures and predict outcomes</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="golden-context.html">Golden Context</a></td>
+<td class="org-left">Minimal code elements an agent must find/modify to solve a task, derived from reference patches</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agent-failure-modes.html">Agent Failure Modes</a></td>
+<td class="org-left">Taxonomy of search/read/edit failures in code agents with model-specific patterns</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="runtime-enforcement.html">Runtime Enforcement</a></td>
+<td class="org-left">Intercepting and constraining LLM agent actions during execution</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agent-safety.html">Agent Safety</a></td>
+<td class="org-left">Mechanisms for preventing harmful or policy-violating agent actions</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agent-evaluation.html">Agent Evaluation</a></td>
+<td class="org-left">Metrics and methodologies for assessing agent capability, safety, and efficiency</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></td>
+<td class="org-left">SWE-bench, PolyBench, RedCode-Exec, SafeAgentBench, FixDrive benchmark descriptions</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></td>
+<td class="org-left">Empirical findings on how developers actually test LLM agents (Tangent + Magalhães)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4a965d9" class="outline-3">
+<h3 id="org4a965d9">Testing theory and oracles</h3>
+<div class="outline-text-3" id="text-org4a965d9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Page</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="oracle-problem.html">The Oracle Problem</a></td>
+<td class="org-left">Why ML/LLM systems lack ground-truth oracles, and the solution strategies used across this wiki</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="metamorphic-testing.html">Metamorphic Testing</a></td>
+<td class="org-left">Relation oracles: checking systematic input↔output relationships instead of fixed correctness</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="test-adequacy-criteria.html">Test Adequacy Criteria</a></td>
+<td class="org-left">&ldquo;When have we tested enough?&rdquo; — neuron coverage, surprise adequacy, MR-compliance, mutation score, skill and claim coverage</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mls-testing-levels.html">ML-System Testing Levels and Access Levels</a></td>
+<td class="org-left">Input/model/integration/system levels; black/white/data-box access</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></td>
+<td class="org-left">Perturbation-based testing to find inputs that flip model output</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></td>
+<td class="org-left">Using calibrated LLM judges as oracles when no ground truth exists; rubric adequacy via mutation, and why judge-only verdicts overstate failures</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="test-selection-prioritization.html">Test Selection and Prioritization</a></td>
+<td class="org-left">Diversity-based selection of which candidate tests to run under a budget</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="search-based-testing.html">Search-Based Testing for LLM Applications</a></td>
+<td class="org-left">Genetic-algorithm test generation over discretized input features; archive-based diversity as a generation-time objective</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a></td>
+<td class="org-left">Four LLM-era roles for mutation testing: mutants from intent, test-aware mutants, mutation-guided assertion feedback, and mutating responses to probe rubrics</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specification-based-testing.html">Specification-Based Testing</a></td>
+<td class="org-left">Documents (safety claims, requirements, skill docs, task descriptions) as the source of tests, oracles and coverage; compares LEST, REAG, Skill Coverage, Oracle Conversion, Lean4Agent</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agent-skill-coverage.html">Agent Skill Coverage</a></td>
+<td class="org-left">Test adequacy criterion for agent skill documents, decoupling &ldquo;was this exercised&rdquo; from &ldquo;did it succeed&rdquo;</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a></td>
+<td class="org-left">Dependent-type (Lean4) proof of workflow properties pre-execution + trajectory-level failure localization</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:23</p>
+</div>
+</body>
+</html>

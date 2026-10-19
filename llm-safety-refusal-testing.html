@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Safety and Refusal Testing of LLMs</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Safety and Refusal Testing of LLMs</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4d0ccc9">Scope</a></li>
+<li><a href="#orgf520e2b">Shared ingredients</a>
+<ul>
+<li><a href="#org852d0ed">Seed taxonomy — SORRY-Bench</a></li>
+<li><a href="#org8e509da">How prompts are generated</a></li>
+<li><a href="#org9f0467c">How a failure is decided</a></li>
+</ul>
+</li>
+<li><a href="#org24aab26">Side by side</a></li>
+<li><a href="#org660c9af">Findings that recur</a>
+<ul>
+<li><a href="#orgfba94a2">Guided or varied inputs find failures that fixed benchmarks miss</a></li>
+<li><a href="#orgba5c499">Automated verdicts need validation</a></li>
+<li><a href="#orgdd5879c">Counting failures and covering claims are different adequacy notions</a></li>
+<li><a href="#orgc31383e">Adversarial testing is rare in practice</a></li>
+</ul>
+</li>
+<li><a href="#orgb37620b">Gaps in this wiki</a></li>
+<li><a href="#org75da25d">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: How the sources in this wiki test whether a model safely refuses or handles harmful requests — a feedback-driven generator (STELLAR-D&rsquo;s SafeQA study) and a documentation-driven mutation tester (LEST) — and the recurring lessons about seed overlap, judge reliability, and validating apparent failures.
+</p>
+
+<p>
+<b>Sources</b>: Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf; Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf; Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf
+</p>
+
+<p>
+<b>Last updated</b>: 2026-10-18
+</p>
+
+<hr />
+<div id="outline-container-org4d0ccc9" class="outline-2">
+<h2 id="org4d0ccc9">Scope</h2>
+<div class="outline-text-2" id="text-org4d0ccc9">
+<p>
+This page covers <b>model-level</b> safety testing: given a model (or an application that wraps one), find prompts that elicit unsafe output or non-refusal, and judge whether the response is actually a failure. It is distinct from <a href="agent-safety.html">Agent Safety</a>, which concerns constraining the <b>actions</b> of an agent (AgentSpec-style runtime enforcement) rather than the text a model returns. Only two sources here test refusal behavior directly; a third (Dai et al.) shows how rarely comparable tests exist in agent repositories.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf520e2b" class="outline-2">
+<h2 id="orgf520e2b">Shared ingredients</h2>
+<div class="outline-text-2" id="text-orgf520e2b">
+</div>
+<div id="outline-container-org852d0ed" class="outline-3">
+<h3 id="org852d0ed">Seed taxonomy — SORRY-Bench</h3>
+<div class="outline-text-3" id="text-org852d0ed">
+<p>
+Both direct tests start from the same safety taxonomy. STELLAR-D&rsquo;s SafeQA case study follows ASTRAL&rsquo;s discretization: 13 SORRY-Bench categories as content features, plus style features (persuasion, expression, politeness, slang, anthropomorphism) and perturbation features (word deletions, filler words, homophonic substitutions, character-level noise and typos). (source: Sorokin et al. 2026) LEST selects 15 of SORRY-Bench&rsquo;s 44 categories across three domains (Mental Health and Self-Harm, Harmful and Violent Content, Fairness and Bias) and keeps 97 seed prompts for which refusal is the expected behavior. (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org8e509da" class="outline-3">
+<h3 id="org8e509da">How prompts are generated</h3>
+<div class="outline-text-3" id="text-org8e509da">
+<ul class="org-ul">
+<li><b>Feedback-driven (STELLAR-D)</b>: a genetic algorithm over discretized feature vectors; an LLM instantiates each vector into a prompt (with five malicious examples retrieved from BeaverTails by RAG), and a continuous 0-1 safety score from an LLM judge is the fitness to minimize. See <a href="search-based-testing.html">Search-Based Testing</a>. (source: Sorokin et al. 2026)</li>
+<li><b>Response-independent mutation (LEST)</b>: seven operators (lexical substitution, modifier insertion/deletion, person conversion, paraphrase, identity swap) fuzz fixed seeds; no loop optimizes toward compliance. (source: Moshood et al. 2026)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9f0467c" class="outline-3">
+<h3 id="org9f0467c">How a failure is decided</h3>
+<div class="outline-text-3" id="text-org9f0467c">
+<ul class="org-ul">
+<li>STELLAR-D uses an LLM judge — continuous during search, a binary GPT-4o-mini oracle (ASTRAL&rsquo;s prompt template) afterward to count failures. The judge was benchmarked across eight LLMs on 1,000 BeaverTails question-answer pairs; see <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>. (source: Sorokin et al. 2026)</li>
+<li>LEST labels each response Refuse/Comply by majority of three guard models, then has three humans check every flagged Refuse→Comply flip for preserved harmful intent and genuine compliance. (source: Moshood et al. 2026)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org24aab26" class="outline-2">
+<h2 id="org24aab26">Side by side</h2>
+<div class="outline-text-2" id="text-org24aab26">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&nbsp;</th>
+<th scope="col" class="org-left">STELLAR-D (SafeQA)</th>
+<th scope="col" class="org-left">LEST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Question asked</td>
+<td class="org-left">Which inputs make the model produce unsafe responses, and how diverse are the failures found?</td>
+<td class="org-left">Do documented safety claims hold under input variation, and which claims does a benchmark even exercise?</td>
+</tr>
+
+<tr>
+<td class="org-left">Test source</td>
+<td class="org-left">Feature-space search</td>
+<td class="org-left">Benchmark seeds mutated; claims mapped to seeds by humans</td>
+</tr>
+
+<tr>
+<td class="org-left">Uses model feedback while generating</td>
+<td class="org-left">Yes (judge score as fitness)</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">Failure oracle</td>
+<td class="org-left">LLM judge (binary GPT-4o-mini)</td>
+<td class="org-left">3-guard-model majority, then human validation</td>
+</tr>
+
+<tr>
+<td class="org-left">Adequacy notion</td>
+<td class="org-left">Failure diversity (coverage, entropy of failure features)</td>
+<td class="org-left">Claim coverage (17 of 29 prompt-testable claims have an applicable seed)</td>
+</tr>
+
+<tr>
+<td class="org-left">Headline result</td>
+<td class="org-left">Guided search finds more failures than random and combinatorial baselines</td>
+<td class="org-left">312 automated flips shrink to 19 validated; 6 of 9 covered refusal claims contradicted</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+(source: Sorokin et al. 2026; Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org660c9af" class="outline-2">
+<h2 id="org660c9af">Findings that recur</h2>
+<div class="outline-text-2" id="text-org660c9af">
+</div>
+<div id="outline-container-orgfba94a2" class="outline-3">
+<h3 id="orgfba94a2">Guided or varied inputs find failures that fixed benchmarks miss</h3>
+<div class="outline-text-3" id="text-orgfba94a2">
+<p>
+On SafeQA, STELLAR variants detect more failures than random, T-wise and ASTRAL baselines (Table 5): e.g. for GPT-4o, 216.17 failures for STELLAR vs. 77.00 for random and 73.00 for ASTRAL; for DeepSeek-V2-16B, 412.33 vs. 198.00 and 198.67. (source: Sorokin et al. 2026; see the inconsistency note on <a href="stellar-d.html">STELLAR-D</a> about which models SafeQA covered.) In LEST, both models refuse over 95% of the unmodified seeds, yet validated mutations contradict 6 of the 9 covered refusal-testable claims. Different mechanisms, same conclusion: a high pass rate on a fixed prompt set says little about robustness. (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgba5c499" class="outline-3">
+<h3 id="orgba5c499">Automated verdicts need validation</h3>
+<div class="outline-text-3" id="text-orgba5c499">
+<p>
+LEST&rsquo;s judge-only count of 312 failures falls to 19 after human review, mainly because most flips came from mutations that no longer asked for the same harmful thing (28.2% preserved intent) or from responses the guards called compliant but humans did not. STELLAR-D&rsquo;s SafeQA failure counts rest on an LLM judge whose binary F1 was 0.79 in the paper&rsquo;s judge benchmark. Whether SafeQA&rsquo;s counts would shrink similarly under human review is not tested in either source (cross-reference, not stated in either paper). (source: Moshood et al. 2026; Sorokin et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgdd5879c" class="outline-3">
+<h3 id="orgdd5879c">Counting failures and covering claims are different adequacy notions</h3>
+<div class="outline-text-3" id="text-orgdd5879c">
+<p>
+STELLAR-D measures how varied the failures it found are; LEST measures how much of a model&rsquo;s <b>documented</b> behavior any test touches. They answer complementary questions, and neither alone says whether the model is safe. See <a href="specification-based-testing.html">Specification-Based Testing</a> and <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc31383e" class="outline-3">
+<h3 id="orgc31383e">Adversarial testing is rare in practice</h3>
+<div class="outline-text-3" id="text-orgc31383e">
+<p>
+At the repository level, only 8 of 157 popular open-source agent projects (5.1%) contain prompt-injection, adversarial or red-team test paths, and 97.8% of projects lacking that practice lack it entirely. This concerns agent projects rather than model testing, but it shows how little of the testing described above is routine. (source: Dai et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb37620b" class="outline-2">
+<h2 id="orgb37620b">Gaps in this wiki</h2>
+<div class="outline-text-2" id="text-orgb37620b">
+<ul class="org-ul">
+<li>No source here tests refusal in multi-turn dialogue (the closest, <a href="mortar.html">MORTAR</a>, tests multi-turn dialogue systems generally, not safety refusals specifically) or in agentic tool-use settings.</li>
+<li>Jailbreak optimizers (PAIR, TAP, AutoDAN, FuzzLLM and others) appear only as work cited in LEST; none has a raw source here, so their reported effectiveness is not covered.</li>
+<li>Refusal is the only oracle LEST instantiates; claims about over-refusal, factual accuracy of safety advice or supportiveness need richer oracles and are untested here.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org75da25d" class="outline-2">
+<h2 id="org75da25d">Related pages</h2>
+<div class="outline-text-2" id="text-org75da25d">
+<ul class="org-ul">
+<li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
+<li><a href="stellar-d.html">STELLAR-D (Sorokin et al. 2026)</a></li>
+<li><a href="search-based-testing.html">Search-Based Testing for LLM Applications</a></li>
+<li><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></li>
+<li><a href="agent-safety.html">Agent Safety</a></li>
+<li><a href="qa-practices-gaps-agents.html">QA Practices and Gaps in AI Agents (Dai et al. 2026)</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
+<li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

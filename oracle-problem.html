@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Oracle Problem in ML/AI Testing</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">The Oracle Problem in ML/AI Testing</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org877e216">Definition</a></li>
+<li><a href="#org05035dd">Why it gets worse for LLMs</a></li>
+<li><a href="#org10028cc">Solution strategies documented in this wiki</a></li>
+<li><a href="#orgc307425">Known pitfall: naive single-reference pseudo-oracles</a></li>
+<li><a href="#orgd567ad0">Known pitfall: correct oracles can still fail to convert opportunity into detection</a></li>
+<li><a href="#org4275bd8">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</a></li>
+<li><a href="#org67f9eb2">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: The oracle problem is the difficulty of deciding whether a test&rsquo;s output is correct when no pre-existing ground truth exists — the central obstacle to testing ML and LLM-based systems.
+</p>
+
+<p>
+<b>Sources</b>: Zhang et al. - 2022 - Machine Learning Testing Survey, Landscapes and Horizons.pdf; Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf; Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf; METTLE<sub>A</sub><sub>METamorphic</sub><sub>Testing</sub><sub>Approach</sub><sub>to</sub><sub>Assessing</sub><sub>and</sub><sub>Validating</sub><sub>Unsupervised</sub><sub>Machine</sub><sub>Learning</sub><sub>Systems.pdf</sub>; Wang et al. - 2026 - Requirements-Augmented Generation for Trustworthy Acceptance Testing of LLM-Based Software.pdf; Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub>; He et al. - 2026 - Learning from the Test Self-Referential Differential Testing for Deep RL Agents.pdf; Zhao et al. - 2026 - Fail-Aware and Explainable Test Oracle Prediction.pdf; Liang et al. - 2026 - Auditing and Decomposing Feedback-Driven Evolution in LLM Test Generation under the Oracle Problem.pdf; Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf; Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf; Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf
+</p>
+
+<p>
+<b>Last updated</b>: 2026-10-18
+</p>
+
+<hr />
+<div id="outline-container-org877e216" class="outline-2">
+<h2 id="org877e216">Definition</h2>
+<div class="outline-text-2" id="text-org877e216">
+<p>
+Traditional testing (Weyuker&rsquo;s oracle problem, cited in Zhang 2022) checks actual output against an expected output computed independently of the system under test. For ML systems this independent computation usually does not exist — the model <b>is</b> the specification. (source: Zhang et al. 2022)
+</p>
+
+<p>
+Riccio et al. 2020 found the oracle problem the <b>most</b>-studied open problem in their mapping (13/70 mapped studies, 19%), just ahead of test adequacy criteria (12/70, 17%). (source: Riccio et al. 2020)
+</p>
+</div>
+</div>
+<div id="outline-container-org05035dd" class="outline-2">
+<h2 id="org05035dd">Why it gets worse for LLMs</h2>
+<div class="outline-text-2" id="text-org05035dd">
+<p>
+Three compounding factors, per Terragni 2026 and Magalhães et al. 2025:
+</p>
+<ul class="org-ul">
+<li>Outputs are open-ended — many phrasings can be equally correct, so exact-match labeling doesn&rsquo;t scale.</li>
+<li>Behavior is sensitive to phrasing/prompt, so labeled examples go stale as prompts evolve.</li>
+<li>Deployment context shifts continuously (new personas, new domains), so a fixed labeled test set can&rsquo;t stay representative.</li>
+</ul>
+
+<p>
+Magalhães et al. 2025 found student developers responding to this by falling back on tolerance-based, qualitative pass criteria rather than strict assertions — the oracle problem surfaces as a practical engineering pain point, not just a theoretical one. (source: Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub>)
+</p>
+</div>
+</div>
+<div id="outline-container-org10028cc" class="outline-2">
+<h2 id="org10028cc">Solution strategies documented in this wiki</h2>
+<div class="outline-text-2" id="text-org10028cc">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Strategy</th>
+<th scope="col" class="org-left">Mechanism</th>
+<th scope="col" class="org-left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="metamorphic-testing.html">Metamorphic testing</a></td>
+<td class="org-left">Relation oracle instead of ground-truth oracle</td>
+<td class="org-left"><a href="mettle.html">METTLE</a>, <a href="metamorphic-testing-llms.html">LLMorph</a>, <a href="mmt4nl.html">MMT4NL</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Requirements-grounded generation</td>
+<td class="org-left">Retrieve requirements/personas to synthesize an executable oracle</td>
+<td class="org-left"><a href="reag.html">REAG</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="llm-as-judge-evaluation.html">LLM-as-judge</a></td>
+<td class="org-left">Use a (calibrated) LLM to assess output quality</td>
+<td class="org-left"><a href="reag.html">REAG</a>&rsquo;s cascade judgment</td>
+</tr>
+
+<tr>
+<td class="org-left">Differential/cross-referencing</td>
+<td class="org-left">Compare independent implementations or models</td>
+<td class="org-left">noted in Zhang 2022, Riccio 2020 — no dedicated instance page yet; distinct from <a href="delta-drl-differential-testing.html">Delta</a>&rsquo;s self-referential variant below, which compares the system against a comparator trained on its <b>own</b> data rather than an independent implementation</td>
+</tr>
+
+<tr>
+<td class="org-left">Domain-specific failure oracle</td>
+<td class="org-left">Hand-coded rules for known failure signatures (e.g., collision in AV)</td>
+<td class="org-left">noted in Riccio 2020</td>
+</tr>
+
+<tr>
+<td class="org-left">Self-referential differential testing</td>
+<td class="org-left">Train a comparator from the system-under-test&rsquo;s own execution data</td>
+<td class="org-left"><a href="delta-drl-differential-testing.html">Delta</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Learned discriminative oracle</td>
+<td class="org-left">Train a classifier to directly predict PASS/FAIL, bypassing assertion synthesis</td>
+<td class="org-left"><a href="focal-oracle-prediction.html">FOCAL</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Held-out stronger test suite as oracle</td>
+<td class="org-left">Split an existing strong suite into a few &ldquo;base&rdquo; tests and a hidden remainder; a mutant that passes the base tests but fails the remainder counts as a verified fault</td>
+<td class="org-left"><a href="test-aware-mutants.html">Test-aware mutants</a> (EvalPlus extended tests)</td>
+</tr>
+
+<tr>
+<td class="org-left">Claim-specific oracle from a specification</td>
+<td class="org-left">Each documented claim decides whether refusal (or another behavior) is valid evidence against it; automated labels are candidates until human-validated</td>
+<td class="org-left"><a href="lest.html">LEST</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+REAG (Wang et al. 2026) is notable for explicitly treating oracle <b>correctness</b> as unverified-by-default — its cascade judgment step exists because a generated oracle can itself hallucinate or retrieve irrelevant constraints. This is a second-order oracle problem: verifying the verifier. (source: Wang et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgc307425" class="outline-2">
+<h2 id="orgc307425">Known pitfall: naive single-reference pseudo-oracles</h2>
+<div class="outline-text-2" id="text-orgc307425">
+<p>
+A recurring shortcut in LLM test-generation pipelines is executing a generated input on <b>one</b> accepted/reference program and treating its output as ground truth. <a href="audit-feedback-driven-evolution.html">Liang et al. 2026</a> show this can badly mislead evaluation, not just individual test cases: on their benchmarks, a model&rsquo;s own generated expected output agreed with a multi-program consensus panel only 27.79-58.90% of the time, and using a single reference inflated the apparent gain of an iterative &ldquo;self-evolving&rdquo; test generator by 9.46-14.85 percentage points versus panel-audited ground truth — after auditing, an equal-budget independent-resampling baseline often beat the &ldquo;evolving&rdquo; method outright. The lesson generalizes: a single unverified stand-in oracle doesn&rsquo;t just produce isolated false positives, it can systematically bias <b>comparisons between testing methods</b>. <a href="focal-oracle-prediction.html">FOCAL</a>&rsquo;s companion finding — that high aggregate accuracy can coexist with near-zero FAIL-class recall — is the same warning from the metric side rather than the oracle-construction side.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd567ad0" class="outline-2">
+<h2 id="orgd567ad0">Known pitfall: correct oracles can still fail to convert opportunity into detection</h2>
+<div class="outline-text-2" id="text-orgd567ad0">
+<p>
+Even once the naive single-reference pitfall above is fixed by auditing against a multi-program consensus, a second and distinct gap remains: <a href="oracle-conversion.html">Liang et al. 2026 (oracle conversion)</a> show a specification-based test generator can find a genuinely fault-revealing input (&ldquo;potential kill&rdquo;) yet still predict the wrong expected output for it, so the fault goes undetected (&ldquo;effective kill&rdquo; &lt; &ldquo;potential kill&rdquo;). Training the model to be more <b>correct</b> (reward correctness only) actually shrinks the pool of discriminative inputs it chooses in the first place — a joint reward that credits both correctness and potential kill is needed to avoid trading one for the other. This is a training-time/measurement-time instance of the oracle problem: the oracle here is trustworthy, but converting a good test input into a correct expected output is itself a nontrivial reasoning task that can silently fail.
+</p>
+</div>
+</div>
+<div id="outline-container-org4275bd8" class="outline-2">
+<h2 id="org4275bd8">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</h2>
+<div class="outline-text-2" id="text-org4275bd8">
+<p>
+Using a larger held-out test suite as ground truth avoids the single-reference problem above, but it is still a proxy. <a href="test-aware-mutants.html">Kiele et al. 2026</a> score LLM-generated mutants against EvalPlus&rsquo;s extended HumanEval/MBPP tests and then hand-classified the 65 mutants that survived even those: 49 (75.4%) were real edge-case bugs the oracle never tests (e.g. an empty-substring input), 9 (13.8%) equivalent, 7 (10.8%) bugs only under under-specified task descriptions. The effect on that paper&rsquo;s numbers is the opposite of the single-reference case: the oracle&rsquo;s gaps <b>understate</b> the method&rsquo;s success rate rather than inflating it. (source: Kiele et al. 2026)
+</p>
+
+<p>
+A different failure of automated verdicts appears in <a href="lest.html">LEST</a> (Moshood et al. 2026): an ensemble of three guard models flagged 312 refusal-to-compliance flips, but human review confirmed 19 (6.1%) — the automated oracle&rsquo;s false-positive rate, not its coverage, is the weakness. The same paper also shows that the oracle is claim-dependent: for a claim saying a model occasionally complies with misuse, a refusal-to-compliance flip is consistent with the claim and so is not a valid failure signal; agreement on which claims admit a refusal oracle was only moderate (κ = 0.457). (source: Moshood et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org67f9eb2" class="outline-2">
+<h2 id="org67f9eb2">Related pages</h2>
+<div class="outline-text-2" id="text-org67f9eb2">
+<ul class="org-ul">
+<li><a href="test-aware-mutants.html">Test-Aware Mutant Generation (Kiele et al. 2026)</a></li>
+<li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
+<li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
+<li><a href="reag.html">REAG</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="ml-testing-survey.html">ML Testing Survey (Zhang 2022)</a></li>
+<li><a href="ml-testing-mapping-study.html">ML Systems Testing Mapping Study (Riccio 2020)</a></li>
+<li><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software</a></li>
+<li><a href="delta-drl-differential-testing.html">Delta (He et al. 2026)</a></li>
+<li><a href="focal-oracle-prediction.html">FOCAL (Zhao et al. 2026)</a></li>
+<li><a href="audit-feedback-driven-evolution.html">Auditing Feedback-Driven Evolution (Liang et al. 2026)</a></li>
+<li><a href="oracle-conversion.html">Oracle Conversion (Liang et al. 2026)</a></li>
+<li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>

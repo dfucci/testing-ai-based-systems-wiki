@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-19 Mon 09:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>STELLAR-D — Diversity-Guided Search-Based Testing of LLM Applications (Sorokin et al. 2026)</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">STELLAR-D — Diversity-Guided Search-Based Testing of LLM Applications (Sorokin et al. 2026)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge211692">Evaluation setup</a></li>
+<li><a href="#org8e182d5">Results</a>
+<ul>
+<li><a href="#org7da4d1d">RQ0 — judge evaluation</a></li>
+<li><a href="#org3d5f3d4">RQ1 — effectiveness</a></li>
+<li><a href="#orgc8b4e42">RQ2 — diversity</a></li>
+<li><a href="#org2957ee3">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</a></li>
+</ul>
+</li>
+<li><a href="#org4249eb6">Relation to broader wiki</a></li>
+<li><a href="#org9d3fad0">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: Adds failure diversity as an explicit search objective to STELLAR, a genetic-algorithm test generator for LLM-based applications, via an archive of past failures and a repopulation operator — the greedy-sampling variant (STELLAR-DS) matches random sampling&rsquo;s failure diversity while retaining much higher failure-detection effectiveness.
+</p>
+
+<p>
+<b>Sources</b>: Sorokin et al. - 2026 - Diversity-Guided Search-Based Testing of Large Lan.pdf (arXiv:2609.23209v1, 19 Sep 2026)
+</p>
+
+<p>
+<b>Last updated</b>: 2026-10-18
+</p>
+
+<hr />
+
+<p>
+See <a href="search-based-testing.html">Search-Based Testing for LLM Applications</a> for the full technical writeup of the method (feature encoding, genetic operators, archive/repopulation mechanism, NSGA-II) and the headline effectiveness/diversity trade-off results.
+</p>
+<div id="outline-container-orge211692" class="outline-2">
+<h2 id="orge211692">Evaluation setup</h2>
+<div class="outline-text-2" id="text-orge211692">
+<p>
+Three case studies, five systems under test, eight LLMs, 18 configurations, &gt;1M executed tests, ~48 GPU-days total:
+</p>
+
+<ul class="org-ul">
+<li><b>SafeQA</b>: does a standalone LLM produce unsafe responses to malicious prompts (SORRY-bench categories, BeaverTails-derived judge)? Six LLMs tested (GPT-4o, GPT-5-Chat, DeepSeek-V4-Pro, Qwen3-8B, Gemma4-E4B, GPT-OSS-120B).</li>
+<li><b>NaviQA-I/II</b>: RAG-based in-car venue-recommendation assistant — I is open-source (static Yelp dataset), II is BMW&rsquo;s industrial prototype (dynamic API retrieval + vehicle-state/manual access).</li>
+<li><b>CarQA-I/II</b>: LLM-driven car-function control (windows, lights, climate, seat heating) — I open-source, II an industrial BMW prototype.</li>
+</ul>
+
+<p>
+<b>Source inconsistency</b>: the paper&rsquo;s text lists GPT-5-Chat among the six SafeQA models, but its Table 5 SafeQA rows show DeepSeek-V2-16B (and no GPT-5-Chat row); the DeepSeek-V2-16B figures quoted under RQ1 below come from Table 5. Which model was actually run is unresolved in the source.
+</p>
+
+<p>
+Baselines: Random Search (RS), T-wise combinatorial (4-wise), ASTRAL (SafeQA only — its coverage-matrix approach doesn&rsquo;t extend to the larger NaviQA/CarQA feature spaces).
+</p>
+</div>
+</div>
+<div id="outline-container-org8e182d5" class="outline-2">
+<h2 id="org8e182d5">Results</h2>
+<div class="outline-text-2" id="text-org8e182d5">
+</div>
+<div id="outline-container-org7da4d1d" class="outline-3">
+<h3 id="org7da4d1d">RQ0 — judge evaluation</h3>
+<div class="outline-text-3" id="text-org7da4d1d">
+<p>
+GPT-4o-mini gave the best accuracy/cost/latency balance as the LLM-judge oracle across all three domains (F1 0.79 SafeQA binary, 0.71 NaviQA, 0.96 CarQA); multi-sample (3-shot ensembled) prompting did not improve results enough to justify its extra cost. Human-annotation agreement (Fleiss&rsquo; κ) was substantial for the Request-orientedness (0.62) and Proactivity (0.69) judge dimensions, only moderate for Directness (0.43) — perceived verbosity/clarity is more subjective than the other dimensions. (source: Sorokin et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org3d5f3d4" class="outline-3">
+<h3 id="org3d5f3d4">RQ1 — effectiveness</h3>
+<div class="outline-text-3" id="text-org3d5f3d4">
+<p>
+Guided search (any STELLAR variant) detects significantly more failures than random/combinatorial baselines in the majority of the 18 configurations. Non-diversified STELLAR finds the most failures overall (e.g. SafeQA/DeepSeek-V2-16B: 412.33 avg failures vs. 230.17 for STELLAR-D, 250.68 for STELLAR-DS, 198.67 for ASTRAL, 193.67 T-wise, 198.00 Random). STELLAR-D and STELLAR-DS perform comparably to each other across configurations. In CarQA-II, guided approaches don&rsquo;t significantly beat non-guided baselines for most model configurations — the one case study where the effect is weaker.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc8b4e42" class="outline-3">
+<h3 id="orgc8b4e42">RQ2 — diversity</h3>
+<div class="outline-text-3" id="text-orgc8b4e42">
+<p>
+STELLAR-DS (greedy repopulation) achieves the highest coverage in 4 of 5 systems, with SafeQA the exception (STELLAR-D performs best there, 60% vs. STELLAR-DS&rsquo;s 58%); the largest single-system coverage gain over plain STELLAR is +11 percentage points on NaviQA-I (75%→86%). Overall, STELLAR-DS reaches 78% average coverage (matching random sampling&rsquo;s 78%) and 89% average entropy (matching random sampling, exceeding STELLAR&rsquo;s 85%), while STELLAR-D trails slightly behind DS on both metrics. Greedy vs. uniform repopulation shows no significant difference in raw failure-detection effectiveness, but up to a 3-percentage-point diversity (coverage/entropy) advantage for greedy sampling.
+</p>
+</div>
+</div>
+<div id="outline-container-org2957ee3" class="outline-3">
+<h3 id="org2957ee3">Qualitative failure taxonomy (CarQA, GPT-5, all seeds)</h3>
+<div class="outline-text-3" id="text-org2957ee3">
+<p>
+Failures were LLM-summarized, embedded, hierarchically clustered, and reviewed with a BMW domain expert (7 years, conversational-assistant testing), who confirmed all proposed types as realistic and merged related clusters into six, ordered by frequency:
+</p>
+
+<ol class="org-ol">
+<li><b>Partially ignored requests</b> (most common) — multi-component or perturbed requests where some sub-actions silently don&rsquo;t execute.</li>
+<li><b>On/off bias</b> — system defaults toward switching/keeping a component <b>off</b> rather than correctly interpreting the requested state change.</li>
+<li><b>Unnecessary clarification questions</b> — system asks for confirmation instead of executing an unambiguous request.</li>
+<li><b>Unrequested executions</b> — system changes state of components the user never mentioned.</li>
+<li><b>Incorrect confirmation</b> — system reports a change succeeded when it was not actually applied to the car state.</li>
+<li><b>Guard-railing false positives</b> (least common) — a valid device-control request is refused because slang phrasing (e.g. &ldquo;kill the fan&rdquo;) is misclassified as malicious.</li>
+</ol>
+
+<p>
+(source: Sorokin et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4249eb6" class="outline-2">
+<h2 id="org4249eb6">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org4249eb6">
+<p>
+STELLAR-D&rsquo;s judge-selection results (RQ0) are an independent empirical data point for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>: across three unrelated domains, a mid-tier model (GPT-4o-mini) beat larger/more expensive judges (GPT-4o, GPT-5-Chat) on the accuracy/cost trade-off, and multi-sample ensembling wasn&rsquo;t worth its extra cost — consistent with that page&rsquo;s point that judge selection benefits from empirical validation rather than defaulting to &ldquo;the strongest available model.&rdquo; The paper&rsquo;s baseline comparison against ASTRAL (coverage-matrix test generation, no feedback loop) and its DeepJanus-inspired archive/repopulation design are discussed in <a href="search-based-testing.html">the concept hub</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org9d3fad0" class="outline-2">
+<h2 id="org9d3fad0">Related pages</h2>
+<div class="outline-text-2" id="text-org9d3fad0">
+<ul class="org-ul">
+<li><a href="search-based-testing.html">Search-Based Testing for LLM Applications</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="test-selection-prioritization.html">Test Selection and Prioritization</a></li>
+<li><a href="llm-safety-refusal-testing.html">Safety and Refusal Testing of LLMs</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-19 Mon 09:22</p>
+</div>
+</body>
+</html>
