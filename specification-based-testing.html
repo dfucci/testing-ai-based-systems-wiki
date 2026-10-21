@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Specification-Based Testing of AI Systems</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,17 +203,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgad70234">Core pattern</a></li>
-<li><a href="#org0738157">Instances in this wiki</a></li>
-<li><a href="#orgb0c6b0b">What the comparison shows</a>
+<li><a href="#org06380a7">Core pattern</a></li>
+<li><a href="#org24c820e">Instances in this wiki</a></li>
+<li><a href="#org7fa8b99">What the comparison shows</a>
 <ul>
-<li><a href="#orgf9487b3">Coverage of documented behavior is lower than task success suggests</a></li>
-<li><a href="#org78694a0">The oracle depends on the specification element</a></li>
-<li><a href="#org8c0b026">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</a></li>
-<li><a href="#org94e03dc">Translation from specification to test is still manual</a></li>
+<li><a href="#orgda20cd8">Coverage of documented behavior is lower than task success suggests</a></li>
+<li><a href="#orge08d3d2">The oracle depends on the specification element</a></li>
+<li><a href="#org9ac6c3d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</a></li>
+<li><a href="#org2d4e7c2">Translation from specification to test is still manual</a></li>
 </ul>
 </li>
-<li><a href="#org50c2e20">Related pages</a></li>
+<li><a href="#org8e25d23">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -238,9 +238,9 @@
 </p>
 
 <hr />
-<div id="outline-container-orgad70234" class="outline-2">
-<h2 id="orgad70234">Core pattern</h2>
-<div class="outline-text-2" id="text-orgad70234">
+<div id="outline-container-org06380a7" class="outline-2">
+<h2 id="org06380a7">Core pattern</h2>
+<div class="outline-text-2" id="text-org06380a7">
 <p>
 Four questions recur whenever a specification drives testing:
 </p>
@@ -257,9 +257,9 @@ The approaches below answer these differently.
 </p>
 </div>
 </div>
-<div id="outline-container-org0738157" class="outline-2">
-<h2 id="org0738157">Instances in this wiki</h2>
-<div class="outline-text-2" id="text-org0738157">
+<div id="outline-container-org24c820e" class="outline-2">
+<h2 id="org24c820e">Instances in this wiki</h2>
+<div class="outline-text-2" id="text-org24c820e">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -331,46 +331,46 @@ The approaches below answer these differently.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb0c6b0b" class="outline-2">
-<h2 id="orgb0c6b0b">What the comparison shows</h2>
-<div class="outline-text-2" id="text-orgb0c6b0b">
+<div id="outline-container-org7fa8b99" class="outline-2">
+<h2 id="org7fa8b99">What the comparison shows</h2>
+<div class="outline-text-2" id="text-org7fa8b99">
 </div>
-<div id="outline-container-orgf9487b3" class="outline-3">
-<h3 id="orgf9487b3">Coverage of documented behavior is lower than task success suggests</h3>
-<div class="outline-text-3" id="text-orgf9487b3">
+<div id="outline-container-orgda20cd8" class="outline-3">
+<h3 id="orgda20cd8">Coverage of documented behavior is lower than task success suggests</h3>
+<div class="outline-text-3" id="text-orgda20cd8">
 <p>
 Skill Coverage finds that benchmark runs exercise only about 40-44% of a skill&rsquo;s documented constraints; LEST finds that 58.6% of prompt-testable safety claims have any applicable benchmark prompt, even though both models pass over 95% of the unmodified prompts. The units differ (constraints in a skill document vs. claims in a system card), so the figures are not comparable as numbers. The shared lesson is that pass rate on a benchmark and coverage of the specification are separate quantities. (source: Tan et al. 2026; Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org78694a0" class="outline-3">
-<h3 id="org78694a0">The oracle depends on the specification element</h3>
-<div class="outline-text-3" id="text-org78694a0">
+<div id="outline-container-orge08d3d2" class="outline-3">
+<h3 id="orge08d3d2">The oracle depends on the specification element</h3>
+<div class="outline-text-3" id="text-orge08d3d2">
 <p>
 LEST shows that a prompt-testable claim does not automatically have a refusal oracle: a claim saying the model occasionally complies with misuse makes a Refuse→Comply flip consistent with the claim. Oracle applicability had the lowest annotator agreement of any LEST step (κ = 0.457). REAG makes a related point from the other side: a generated oracle can itself be wrong, so its judge needs calibration (see <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>). (source: Moshood et al. 2026; Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org8c0b026" class="outline-3">
-<h3 id="org8c0b026">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</h3>
-<div class="outline-text-3" id="text-org8c0b026">
+<div id="outline-container-org9ac6c3d" class="outline-3">
+<h3 id="org9ac6c3d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</h3>
+<div class="outline-text-3" id="text-org9ac6c3d">
 <p>
 LEST reports three claim states — not covered, covered with no counterexample observed, counterexample found — and says the middle state is not verification. This keeps absence of failure from being read as presence of coverage, which is the same distinction <a href="test-adequacy-criteria.html">test adequacy</a> draws between &ldquo;tests passed&rdquo; and &ldquo;tests were sufficient&rdquo;.
 </p>
 </div>
 </div>
-<div id="outline-container-org94e03dc" class="outline-3">
-<h3 id="org94e03dc">Translation from specification to test is still manual</h3>
-<div class="outline-text-3" id="text-org94e03dc">
+<div id="outline-container-org2d4e7c2" class="outline-3">
+<h3 id="org2d4e7c2">Translation from specification to test is still manual</h3>
+<div class="outline-text-3" id="text-org2d4e7c2">
 <p>
 All of LEST&rsquo;s claim identification, testability, claim-to-prompt mapping and oracle-applicability judgments were manual (three annotators, κ 0.457-0.912). In REAG, retrieval precision rather than oracle generation quality is the dominant bottleneck for oracle correctness. Automating the specification-to-test step is the open problem both identify. (source: Moshood et al. 2026; Wang et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org50c2e20" class="outline-2">
-<h2 id="org50c2e20">Related pages</h2>
-<div class="outline-text-2" id="text-org50c2e20">
+<div id="outline-container-org8e25d23" class="outline-2">
+<h2 id="org8e25d23">Related pages</h2>
+<div class="outline-text-2" id="text-org8e25d23">
 <ul class="org-ul">
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="reag.html">REAG (Wang et al. 2026)</a></li>
@@ -389,7 +389,7 @@ All of LEST&rsquo;s claim identification, testability, claim-to-prompt mapping a
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

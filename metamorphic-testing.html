@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Metamorphic Testing</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,12 +203,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd586e8b">Core idea</a></li>
-<li><a href="#orgdfdb63f">Instances in this wiki</a></li>
-<li><a href="#org2399808">Downstream: fault localization after a violation</a></li>
-<li><a href="#org8ceafa2">Common failure pattern across instances</a></li>
-<li><a href="#org597b4eb">Known limitation: false positives</a></li>
-<li><a href="#org2803dcd">Related pages</a></li>
+<li><a href="#orge10a06d">Core idea</a></li>
+<li><a href="#org06b4d25">Instances in this wiki</a></li>
+<li><a href="#org7622b17">Downstream: fault localization after a violation</a></li>
+<li><a href="#org9510139">Common failure pattern across instances</a></li>
+<li><a href="#org558b731">Known limitation: false positives</a></li>
+<li><a href="#orgb315283">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -237,9 +237,9 @@
 </p>
 
 <hr />
-<div id="outline-container-orgd586e8b" class="outline-2">
-<h2 id="orgd586e8b">Core idea</h2>
-<div class="outline-text-2" id="text-orgd586e8b">
+<div id="outline-container-orge10a06d" class="outline-2">
+<h2 id="orge10a06d">Core idea</h2>
+<div class="outline-text-2" id="text-orge10a06d">
 <p>
 Originally proposed by Chen, Cheung &amp; Yiu (1998). Instead of asking &ldquo;is this output correct?&rdquo;, MT asks &ldquo;given this systematic change to the input, how must the output change (or stay the same)?&rdquo; (source: Terragni 2026)
 </p>
@@ -256,9 +256,9 @@ Riccio et al. 2020 found the metamorphic oracle the most common oracle type acro
 </p>
 </div>
 </div>
-<div id="outline-container-orgdfdb63f" class="outline-2">
-<h2 id="orgdfdb63f">Instances in this wiki</h2>
-<div class="outline-text-2" id="text-orgdfdb63f">
+<div id="outline-container-org06b4d25" class="outline-2">
+<h2 id="org06b4d25">Instances in this wiki</h2>
+<div class="outline-text-2" id="text-org06b4d25">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -322,25 +322,25 @@ Riccio et al. 2020 found the metamorphic oracle the most common oracle type acro
 </table>
 </div>
 </div>
-<div id="outline-container-org2399808" class="outline-2">
-<h2 id="org2399808">Downstream: fault localization after a violation</h2>
-<div class="outline-text-2" id="text-org2399808">
+<div id="outline-container-org7622b17" class="outline-2">
+<h2 id="org7622b17">Downstream: fault localization after a violation</h2>
+<div class="outline-text-2" id="text-org7622b17">
 <p>
 Detecting an MR violation only tells you <b>that</b> something is wrong. <a href="metamorphic-slicing.html">Metamorphic slicing (Ren et al. 2026)</a> addresses <b>where</b>: a fine-grained weighting scheme over statements covered by source-only, follow-up-only, or shared test cases within a violating group substitutes for the pass/fail labels that spectrum-based fault localization normally needs but which don&rsquo;t exist here.
 </p>
 </div>
 </div>
-<div id="outline-container-org8ceafa2" class="outline-2">
-<h2 id="org8ceafa2">Common failure pattern across instances</h2>
-<div class="outline-text-2" id="text-org8ceafa2">
+<div id="outline-container-org9510139" class="outline-2">
+<h2 id="org9510139">Common failure pattern across instances</h2>
+<div class="outline-text-2" id="text-org9510139">
 <p>
 The original three instances (METTLE, LLMorph, MMT4NL) all report that MT catches faults invisible to accuracy-style metrics: models score highly on unperturbed benchmarks yet violate MRs at meaningful rates (18% average / up to 80% for LLMorph; pass rates dropping to 60% under negation for MMT4NL; 9/11 MRs violated by k-means for METTLE). LGMT reproduces the same pattern for logical reasoning specifically: static accuracy of 65-74% drops to 52-61% once consistency under logic-preserving transformation is required. The common lesson: static accuracy hides behavioral fragility that only shows up under systematic input transformation.
 </p>
 </div>
 </div>
-<div id="outline-container-org597b4eb" class="outline-2">
-<h2 id="org597b4eb">Known limitation: false positives</h2>
-<div class="outline-text-2" id="text-org597b4eb">
+<div id="outline-container-org558b731" class="outline-2">
+<h2 id="org558b731">Known limitation: false positives</h2>
+<div class="outline-text-2" id="text-org558b731">
 <p>
 MT for NLP/LLMs suffers semantic ambiguity — a &ldquo;violation&rdquo; may reflect legitimate linguistic variation rather than a bug. Terragni 2026 reports a true-positive rate of ~62% on manually reviewed violations, comparable to prior traditional NLP MT work, not worse. (source: Terragni 2026)
 </p>
@@ -354,9 +354,9 @@ Two 2026 approaches attack this limitation directly, from opposite ends: Explana
 </p>
 </div>
 </div>
-<div id="outline-container-org2803dcd" class="outline-2">
-<h2 id="org2803dcd">Related pages</h2>
-<div class="outline-text-2" id="text-org2803dcd">
+<div id="outline-container-orgb315283" class="outline-2">
+<h2 id="orgb315283">Related pages</h2>
+<div class="outline-text-2" id="text-orgb315283">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="mettle.html">METTLE</a></li>
@@ -376,7 +376,7 @@ Two 2026 approaches attack this limitation directly, from opposite ends: Explana
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

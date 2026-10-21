@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Test Selection and Prioritization</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,10 +203,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org692602d">Problem: LLM queries are too expensive to test exhaustively</a></li>
-<li><a href="#org084a561">Adaptive Random Testing (ART) adapted for prompts</a></li>
-<li><a href="#orgc5a8c24">Results</a></li>
-<li><a href="#org696fd59">Related pages</a></li>
+<li><a href="#org7c6acbb">Problem: LLM queries are too expensive to test exhaustively</a></li>
+<li><a href="#orgb0dcdc5">Adaptive Random Testing (ART) adapted for prompts</a></li>
+<li><a href="#orgc32f85f">Results</a></li>
+<li><a href="#org3013486">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -227,17 +227,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org692602d" class="outline-2">
-<h2 id="org692602d">Problem: LLM queries are too expensive to test exhaustively</h2>
-<div class="outline-text-2" id="text-org692602d">
+<div id="outline-container-org7c6acbb" class="outline-2">
+<h2 id="org7c6acbb">Problem: LLM queries are too expensive to test exhaustively</h2>
+<div class="outline-text-2" id="text-org7c6acbb">
 <p>
 Prompt-testing tools (promptfoo, TruLens, LangSmith, Giskard, DeepEval, ChainForge) let developers run test cases against a prompt template but don&rsquo;t help decide <b>which</b> cases to run first under a limited budget. (source: Yoon et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org084a561" class="outline-2">
-<h2 id="org084a561">Adaptive Random Testing (ART) adapted for prompts</h2>
-<div class="outline-text-2" id="text-org084a561">
+<div id="outline-container-orgb0dcdc5" class="outline-2">
+<h2 id="orgb0dcdc5">Adaptive Random Testing (ART) adapted for prompts</h2>
+<div class="outline-text-2" id="text-orgb0dcdc5">
 <p>
 Classical ART generates new random inputs maximizing distance from previously-run tests. Yoon et al. 2025 adapt it to <b>select</b> (not generate) from an existing candidate pool, iteratively picking the input maximizing minimum distance to already-selected tests.
 </p>
@@ -251,17 +251,17 @@ Three distance metrics compared: Normalized Compression Distance (NCD), 2-gram c
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5a8c24" class="outline-2">
-<h2 id="orgc5a8c24">Results</h2>
-<div class="outline-text-2" id="text-orgc5a8c24">
+<div id="outline-container-orgc32f85f" class="outline-2">
+<h2 id="orgc32f85f">Results</h2>
+<div class="outline-text-2" id="text-orgc32f85f">
 <p>
 Tested on 46 prompt templates (BIG-Bench Hard, P3) against GPT-4o/GPT-4o-mini. ART with NCD improved APFD (Average Percentage of Failure Detection) by 7.24% on average over random selection (up to 34.3%), matching or beating Test Set Diameter (TSDm) while running ~25x faster (67s vs. 1,648s for 500/1000-input selection) since ART scales with selection-set size, not pool size squared. The selective reference set variant improved results further across all distance metrics. (source: Yoon et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org696fd59" class="outline-2">
-<h2 id="org696fd59">Related pages</h2>
-<div class="outline-text-2" id="text-org696fd59">
+<div id="outline-container-org3013486" class="outline-2">
+<h2 id="org3013486">Related pages</h2>
+<div class="outline-text-2" id="text-org3013486">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
@@ -273,7 +273,7 @@ Tested on 46 prompt templates (BIG-Bench Hard, P3) against GPT-4o/GPT-4o-mini. A
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Code Agent Benchmarks</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,23 +203,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org71d5c9c">Capability Benchmarks</a>
+<li><a href="#org54407ef">Capability Benchmarks</a>
 <ul>
-<li><a href="#org6dba579">SWE-bench Verified</a></li>
-<li><a href="#orgb889298">PolyBench Verified</a></li>
-<li><a href="#org08e156f">DevBench</a></li>
+<li><a href="#org2960b39">SWE-bench Verified</a></li>
+<li><a href="#orge15352c">PolyBench Verified</a></li>
+<li><a href="#orgcca0bc9">DevBench</a></li>
 </ul>
 </li>
-<li><a href="#orga7dee71">Safety Benchmarks</a>
+<li><a href="#org1f50cc9">Safety Benchmarks</a>
 <ul>
-<li><a href="#orgbc55873">RedCode-Exec</a></li>
-<li><a href="#orgabb9ad8">SafeAgentBench</a></li>
-<li><a href="#org3d38ade">FixDrive</a></li>
+<li><a href="#org752256c">RedCode-Exec</a></li>
+<li><a href="#org0c61b49">SafeAgentBench</a></li>
+<li><a href="#org263920e">FixDrive</a></li>
 </ul>
 </li>
-<li><a href="#org6bfd2b0">Agent Architectures Evaluated</a></li>
-<li><a href="#org9cabdf4">Models Evaluated (from TRAJEVAL)</a></li>
-<li><a href="#org382f0ca">Related pages</a></li>
+<li><a href="#orgb52b05a">Agent Architectures Evaluated</a></li>
+<li><a href="#orge0c09c7">Models Evaluated (from TRAJEVAL)</a></li>
+<li><a href="#org0b269c8">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -241,13 +241,13 @@
 </p>
 
 <hr />
-<div id="outline-container-org71d5c9c" class="outline-2">
-<h2 id="org71d5c9c">Capability Benchmarks</h2>
-<div class="outline-text-2" id="text-org71d5c9c">
+<div id="outline-container-org54407ef" class="outline-2">
+<h2 id="org54407ef">Capability Benchmarks</h2>
+<div class="outline-text-2" id="text-org54407ef">
 </div>
-<div id="outline-container-org6dba579" class="outline-3">
-<h3 id="org6dba579">SWE-bench Verified</h3>
-<div class="outline-text-3" id="text-org6dba579">
+<div id="outline-container-org2960b39" class="outline-3">
+<h3 id="org2960b39">SWE-bench Verified</h3>
+<div class="outline-text-3" id="text-org2960b39">
 <p>
 500 real-world GitHub issues from 12 Python repositories with human-verified patches. The primary benchmark for measuring agent ability to resolve software engineering tasks. Pass@1 rates for top agents: GPT-5 ~66-67%, Qwen-Coder-480B ~61%.
 </p>
@@ -257,9 +257,9 @@ Used in <a href="trajeval.html">TRAJEVAL</a> to analyze 9,500 trajectories acros
 </p>
 </div>
 </div>
-<div id="outline-container-orgb889298" class="outline-3">
-<h3 id="orgb889298">PolyBench Verified</h3>
-<div class="outline-text-3" id="text-orgb889298">
+<div id="outline-container-orge15352c" class="outline-3">
+<h3 id="orge15352c">PolyBench Verified</h3>
+<div class="outline-text-3" id="text-orge15352c">
 <p>
 382 multilingual issues across Python, Java, JavaScript, and TypeScript from 20 repositories. Tests cross-language generalization. Tasks are harder: GPT-5 achieves only ~39% Pass@1 vs. ~67% on SWE-bench.
 </p>
@@ -269,22 +269,22 @@ Key finding: agents need ~25% more tool invocations on PolyBench than SWE-bench,
 </p>
 </div>
 </div>
-<div id="outline-container-org08e156f" class="outline-3">
-<h3 id="org08e156f">DevBench</h3>
-<div class="outline-text-3" id="text-org08e156f">
+<div id="outline-container-orgcca0bc9" class="outline-3">
+<h3 id="orgcca0bc9">DevBench</h3>
+<div class="outline-text-3" id="text-orgcca0bc9">
 <p>
 Developer-informed benchmark for code generation models (Golnari et al., 2026). Provides development environment metrics but lacks stage-wise decomposition and <a href="golden-context.html">golden context</a> comparison.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga7dee71" class="outline-2">
-<h2 id="orga7dee71">Safety Benchmarks</h2>
-<div class="outline-text-2" id="text-orga7dee71">
+<div id="outline-container-org1f50cc9" class="outline-2">
+<h2 id="org1f50cc9">Safety Benchmarks</h2>
+<div class="outline-text-2" id="text-org1f50cc9">
 </div>
-<div id="outline-container-orgbc55873" class="outline-3">
-<h3 id="orgbc55873">RedCode-Exec</h3>
-<div class="outline-text-3" id="text-orgbc55873">
+<div id="outline-container-org752256c" class="outline-3">
+<h3 id="org752256c">RedCode-Exec</h3>
+<div class="outline-text-3" id="text-org752256c">
 <p>
 750 risky code execution scenarios across 25 vulnerability categories, each with 30 test cases. Categories include: post sensitive files online, untrusted installation, delete sensitive files, reverse shell creation, unsafe deserialization, cryptographic predictability, etc.
 </p>
@@ -294,26 +294,26 @@ Used to evaluate <a href="agentspec.html">AgentSpec</a> on the CodeAct code agen
 </p>
 </div>
 </div>
-<div id="outline-container-orgabb9ad8" class="outline-3">
-<h3 id="orgabb9ad8">SafeAgentBench</h3>
-<div class="outline-text-3" id="text-orgabb9ad8">
+<div id="outline-container-org0c61b49" class="outline-3">
+<h3 id="org0c61b49">SafeAgentBench</h3>
+<div class="outline-text-3" id="text-org0c61b49">
 <p>
 Benchmark for embodied agent safety. 250 unsafe scenarios across 10 hazard categories (fire, electrical shock, explosion, poisoning, slip, liquid damage, breakage, appliances misuse, property damage, small items damage) plus safe scenarios. Used to evaluate AgentSpec on a robotic arm agent. (source: AgentSpec paper)
 </p>
 </div>
 </div>
-<div id="outline-container-org3d38ade" class="outline-3">
-<h3 id="org3d38ade">FixDrive</h3>
-<div class="outline-text-3" id="text-org3d38ade">
+<div id="outline-container-org263920e" class="outline-3">
+<h3 id="org263920e">FixDrive</h3>
+<div class="outline-text-3" id="text-org263920e">
 <p>
 Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8 scenarios covering collision, traffic signal violations (Laws 38, 44, 46, 53), and journey completion. Used to evaluate AgentSpec on the Apollo autonomous driving system. (source: AgentSpec paper)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6bfd2b0" class="outline-2">
-<h2 id="org6bfd2b0">Agent Architectures Evaluated</h2>
-<div class="outline-text-2" id="text-org6bfd2b0">
+<div id="outline-container-orgb52b05a" class="outline-2">
+<h2 id="orgb52b05a">Agent Architectures Evaluated</h2>
+<div class="outline-text-2" id="text-orgb52b05a">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -371,9 +371,9 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </table>
 </div>
 </div>
-<div id="outline-container-org9cabdf4" class="outline-2">
-<h2 id="org9cabdf4">Models Evaluated (from TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-org9cabdf4">
+<div id="outline-container-orge0c09c7" class="outline-2">
+<h2 id="orge0c09c7">Models Evaluated (from TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-orge0c09c7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -427,9 +427,9 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </table>
 </div>
 </div>
-<div id="outline-container-org382f0ca" class="outline-2">
-<h2 id="org382f0ca">Related pages</h2>
-<div class="outline-text-2" id="text-org382f0ca">
+<div id="outline-container-org0b269c8" class="outline-2">
+<h2 id="org0b269c8">Related pages</h2>
+<div class="outline-text-2" id="text-org0b269c8">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="agentspec.html">AgentSpec</a></li>
@@ -441,7 +441,7 @@ Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>REAG: Requirements-Augmented Generation for Trustworthy Acceptance Testing (Wang et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org34a08bc">Motivation</a></li>
-<li><a href="#org3faafb9">Two mechanisms</a></li>
-<li><a href="#orgdd4caa3">Case study results (NutriScore, nutrition-advisory app)</a></li>
-<li><a href="#org5d74289">Relation to broader wiki</a></li>
-<li><a href="#org9dd602d">Related pages</a></li>
+<li><a href="#org19f9e6f">Motivation</a></li>
+<li><a href="#orga2fdcc7">Two mechanisms</a></li>
+<li><a href="#org662add1">Case study results (NutriScore, nutrition-advisory app)</a></li>
+<li><a href="#org3aae921">Relation to broader wiki</a></li>
+<li><a href="#orgd603e7d">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,26 +228,26 @@
 </p>
 
 <hr />
-<div id="outline-container-org34a08bc" class="outline-2">
-<h2 id="org34a08bc">Motivation</h2>
-<div class="outline-text-2" id="text-org34a08bc">
+<div id="outline-container-org19f9e6f" class="outline-2">
+<h2 id="org19f9e6f">Motivation</h2>
+<div class="outline-text-2" id="text-org19f9e6f">
 <p>
 LLM-based software (LBS) behaves stochastically and context-dependently — the same query can require different valid responses depending on user persona, health profile, or operational context. This breaks two acceptance-testing assumptions: a finite set of expected outputs can&rsquo;t enumerate all valid responses (the <a href="oracle-problem.html">oracle problem</a>), and even a generated oracle can&rsquo;t be assumed correct (retrieval may pull irrelevant constraints, misinterpret intent, or hallucinate requirements). (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org3faafb9" class="outline-2">
-<h2 id="org3faafb9">Two mechanisms</h2>
-<div class="outline-text-2" id="text-org3faafb9">
+<div id="outline-container-orga2fdcc7" class="outline-2">
+<h2 id="orga2fdcc7">Two mechanisms</h2>
+<div class="outline-text-2" id="text-orga2fdcc7">
 <ol class="org-ol">
 <li><b>REAG (Requirements-Augmented Generation)</b> — a RAG variant that retrieves requirements, personas, and domain knowledge (via ICRALM scoring + adaptive top-k selection + self-reasoning trajectories) to produce executable pass/fail test oracles grounded in actual software constraints, rather than answering a question.</li>
 <li><b>Confidence-calibrated cascade judgment</b> — see <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a> for the full mechanism (3-tier judge cascade, simulated-expert confidence estimation, conformal risk control for abstention thresholds).</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgdd4caa3" class="outline-2">
-<h2 id="orgdd4caa3">Case study results (NutriScore, nutrition-advisory app)</h2>
-<div class="outline-text-2" id="text-orgdd4caa3">
+<div id="outline-container-org662add1" class="outline-2">
+<h2 id="org662add1">Case study results (NutriScore, nutrition-advisory app)</h2>
+<div class="outline-text-2" id="text-org662add1">
 <p>
 346 test scenarios, 46 personas, 246 calibration + 100 evaluation items:
 </p>
@@ -259,17 +259,17 @@ LLM-based software (LBS) behaves stochastically and context-dependently — the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d74289" class="outline-2">
-<h2 id="org5d74289">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org5d74289">
+<div id="outline-container-org3aae921" class="outline-2">
+<h2 id="org3aae921">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org3aae921">
 <p>
 Bridges classical acceptance testing (BDD/Given-When-Then, requirements traceability) with statistical guarantees for AI evaluation (conformal prediction/risk control) — positions &ldquo;verdict reliability&rdquo; as a formally-calibrated property rather than an assumption. Complements <a href="mmt4nl.html">MMT4NL</a> and <a href="metamorphic-testing-llms.html">LLMorph</a>&rsquo;s relation-based oracles with a requirements-grounded generative oracle strategy.
 </p>
 </div>
 </div>
-<div id="outline-container-org9dd602d" class="outline-2">
-<h2 id="org9dd602d">Related pages</h2>
-<div class="outline-text-2" id="text-org9dd602d">
+<div id="outline-container-orgd603e7d" class="outline-2">
+<h2 id="orgd603e7d">Related pages</h2>
+<div class="outline-text-2" id="text-orgd603e7d">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
@@ -283,7 +283,7 @@ Bridges classical acceptance testing (BDD/Given-When-Then, requirements traceabi
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

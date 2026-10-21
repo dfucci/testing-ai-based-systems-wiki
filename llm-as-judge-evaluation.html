@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LLM-as-Judge Evaluation</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,13 +203,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfdd9949">The reliability problem with LLM judges</a></li>
-<li><a href="#orgcf7da38">REAG&rsquo;s cascade judgment mechanism</a></li>
-<li><a href="#org176f0ed">Why abstention matters</a></li>
-<li><a href="#org6b9214f">Judge selection benefits from empirical benchmarking, not just picking the strongest model</a></li>
-<li><a href="#org5408318">Rubric-based judging: testing whether the rubric can notice defects</a></li>
-<li><a href="#org5ef412a">Automated judges overstate failures</a></li>
-<li><a href="#orgadc505e">Related pages</a></li>
+<li><a href="#orgef16c6f">The reliability problem with LLM judges</a></li>
+<li><a href="#orgcc84e59">REAG&rsquo;s cascade judgment mechanism</a></li>
+<li><a href="#orgc89d91c">Why abstention matters</a></li>
+<li><a href="#org342a13a">Judge selection benefits from empirical benchmarking, not just picking the strongest model</a></li>
+<li><a href="#orgd7c1f17">Rubric-based judging: testing whether the rubric can notice defects</a></li>
+<li><a href="#org79dd1e2">Automated judges overstate failures</a></li>
+<li><a href="#orgf06a64a">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -233,17 +233,17 @@
 </p>
 
 <hr />
-<div id="outline-container-orgfdd9949" class="outline-2">
-<h2 id="orgfdd9949">The reliability problem with LLM judges</h2>
-<div class="outline-text-2" id="text-orgfdd9949">
+<div id="outline-container-orgef16c6f" class="outline-2">
+<h2 id="orgef16c6f">The reliability problem with LLM judges</h2>
+<div class="outline-text-2" id="text-orgef16c6f">
 <p>
 An LLM judge is itself a non-deterministic, potentially hallucinating component — using it to solve the <a href="oracle-problem.html">oracle problem</a> just relocates the problem one level up: now the <b>judge&rsquo;s verdict</b> needs verification. REAG (Wang et al. 2026) treats this as a first-class design constraint rather than an assumption. (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf7da38" class="outline-2">
-<h2 id="orgcf7da38">REAG&rsquo;s cascade judgment mechanism</h2>
-<div class="outline-text-2" id="text-orgcf7da38">
+<div id="outline-container-orgcc84e59" class="outline-2">
+<h2 id="orgcc84e59">REAG&rsquo;s cascade judgment mechanism</h2>
+<div class="outline-text-2" id="text-orgcc84e59">
 <ul class="org-ul">
 <li>Three LLM judges of increasing capability/cost (Gemini-2.5-Flash-Lite → GPT-4.1-mini → Gemini-2.5-Flash) are chained; cheap judges handle easy cases, expensive ones only see escalated hard cases.</li>
 <li><b>Confidence estimation</b> via simulated expert agreement: N=5 simulated annotators with K=3 in-context examples each, rather than assuming the judge&rsquo;s raw output confidence is calibrated.</li>
@@ -252,41 +252,41 @@ An LLM judge is itself a non-deterministic, potentially hallucinating component 
 </ul>
 </div>
 </div>
-<div id="outline-container-org176f0ed" class="outline-2">
-<h2 id="org176f0ed">Why abstention matters</h2>
-<div class="outline-text-2" id="text-org176f0ed">
+<div id="outline-container-orgc89d91c" class="outline-2">
+<h2 id="orgc89d91c">Why abstention matters</h2>
+<div class="outline-text-2" id="text-orgc89d91c">
 <p>
 The cascade can <b>abstain</b> and escalate to human review rather than force a verdict — this is the key difference from naive &ldquo;ask GPT-4 if this is correct&rdquo; evaluation, which has no mechanism for saying &ldquo;I&rsquo;m not sure.&rdquo; Abstention is what makes the accuracy number (98.8%) meaningful rather than survivorship-biased.
 </p>
 </div>
 </div>
-<div id="outline-container-org6b9214f" class="outline-2">
-<h2 id="org6b9214f">Judge selection benefits from empirical benchmarking, not just picking the strongest model</h2>
-<div class="outline-text-2" id="text-org6b9214f">
+<div id="outline-container-org342a13a" class="outline-2">
+<h2 id="org342a13a">Judge selection benefits from empirical benchmarking, not just picking the strongest model</h2>
+<div class="outline-text-2" id="text-org342a13a">
 <p>
 STELLAR-D (Sorokin et al. 2026) benchmarked up to eight LLMs as failure-oracle judges across three unrelated domains (safety, navigation, car control) and found the same mid-tier model (GPT-4o-mini) gave the best accuracy/cost/latency balance in all three — beating larger/more expensive judges (GPT-4o, GPT-5-Chat) on F1 despite not being the strongest general-purpose model available. Multi-sample (3-shot ensembled) prompting did not improve results enough to justify its extra latency/cost. Human-annotation agreement (Fleiss&rsquo; κ) with the judge varied by dimension — substantial for objectively-checkable dimensions (request fulfillment, proactivity: κ 0.62/0.69) but only moderate for a more subjective one (verbosity/clarity: κ 0.43) — a reminder that not every judge dimension is equally reliable even when the overall judge model is well-chosen. (source: Sorokin et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org5408318" class="outline-2">
-<h2 id="org5408318">Rubric-based judging: testing whether the rubric can notice defects</h2>
-<div class="outline-text-2" id="text-org5408318">
+<div id="outline-container-orgd7c1f17" class="outline-2">
+<h2 id="orgd7c1f17">Rubric-based judging: testing whether the rubric can notice defects</h2>
+<div class="outline-text-2" id="text-orgd7c1f17">
 <p>
 A judge scores a response against a rubric, so judge quality depends on rubric quality as well as the model. Mubric (Yang et al. 2026) tests a rubric the way mutation testing tests a suite: inject a known defect into a good reference response and check that the score drops (by ≥8 points overall or ≥2 on a 0-4 item). Defects that go unpenalized drive rubric refinement; the refinement is kept only if it penalizes them more on re-scoring. Over 703 tasks this reaches 57.27% pairwise accuracy vs. 49.78% for the strongest of six rubric-generation baselines. In an ablation, revising the rubric with the same LLM but <b>without</b> mutation feedback was worse than not revising (45.38% vs. 47.94%). One appendix case shows the judge giving full marks to an arithmetic error even though the initial rubric already had a &ldquo;no calculation errors&rdquo; item; only rewording the item to require correct intermediate steps made the judge penalize it — a rubric criterion can exist and still fail to bite. See <a href="mubric.html">Mubric</a>. (source: Yang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org5ef412a" class="outline-2">
-<h2 id="org5ef412a">Automated judges overstate failures</h2>
-<div class="outline-text-2" id="text-org5ef412a">
+<div id="outline-container-org79dd1e2" class="outline-2">
+<h2 id="org79dd1e2">Automated judges overstate failures</h2>
+<div class="outline-text-2" id="text-org79dd1e2">
 <p>
 LEST (Moshood et al. 2026) used a majority vote of three guard models (WildGuard, Qwen3Guard, GuardReasoner) to label responses to mutated safety prompts. They flagged 312 Refuse→Comply transitions; human review confirmed only 19 (6.1%) as both intent-preserving and genuinely compliant. Most flagged cases were either mutations that no longer asked for the same harmful thing (28.2% preserved intent) or responses the guards called compliant but humans did not. The authors conclude judge labels should be treated as candidates. Annotator agreement on that validation step was itself only moderate (Fleiss&rsquo; κ 0.557). See <a href="lest.html">LEST</a>. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgadc505e" class="outline-2">
-<h2 id="orgadc505e">Related pages</h2>
-<div class="outline-text-2" id="text-orgadc505e">
+<div id="outline-container-orgf06a64a" class="outline-2">
+<h2 id="orgf06a64a">Related pages</h2>
+<div class="outline-text-2" id="text-orgf06a64a">
 <ul class="org-ul">
 <li><a href="mubric.html">Mubric (Yang et al. 2026)</a></li>
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
@@ -302,7 +302,7 @@ LEST (Moshood et al. 2026) used a majority vote of three guard models (WildGuard
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

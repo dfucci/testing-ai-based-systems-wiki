@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MuMuTestUp: Mutation-based Multi-Agent Test Case Update (Tian et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org75970aa">Motivation</a></li>
-<li><a href="#org7e86a34">Approach</a></li>
-<li><a href="#orgd94c898">Findings</a></li>
-<li><a href="#org57734c2">Relation to broader wiki</a></li>
-<li><a href="#orga2ae9ea">Related pages</a></li>
+<li><a href="#orge65b98e">Motivation</a></li>
+<li><a href="#orgf902a1e">Approach</a></li>
+<li><a href="#org8412469">Findings</a></li>
+<li><a href="#orge5eb82e">Relation to broader wiki</a></li>
+<li><a href="#org2412b95">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org75970aa" class="outline-2">
-<h2 id="org75970aa">Motivation</h2>
-<div class="outline-text-2" id="text-org75970aa">
+<div id="outline-container-orge65b98e" class="outline-2">
+<h2 id="orge65b98e">Motivation</h2>
+<div class="outline-text-2" id="text-orge65b98e">
 <p>
 When production code changes, existing tests can become outdated (fail to compile, fail at runtime, or silently lose coverage/mutation-kill capability even while still passing). Prior LLM-based test-update approaches (ReAccept, TestUpdater) focus on restoring <b>executability</b> and <b>line coverage</b>, but have three gaps: they generate weak assertions that fail to discriminate correct from buggy behavior (low mutation score), they use coarse line-coverage signals that miss branch logic, and their context retrieval relies on exact-matching which can&rsquo;t resolve LLM-hallucinated symbols. (source: Tian et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org7e86a34" class="outline-2">
-<h2 id="org7e86a34">Approach</h2>
-<div class="outline-text-2" id="text-org7e86a34">
+<div id="outline-container-orgf902a1e" class="outline-2">
+<h2 id="orgf902a1e">Approach</h2>
+<div class="outline-text-2" id="text-orgf902a1e">
 <p>
 MuMuTestUp is a four-agent pipeline: an <b>Input Preprocessing</b> agent filters irrelevant context; a <b>Test Update</b> agent performs the actual rewrite; a <b>Coordinator</b> runs the updated test, collects coverage/mutation results, and dispatches to analysis agents; and three analysis agents close the loop — <b>Error Analysis</b> (parses compile/assertion failures and locates the fault), <b>Coverage Analysis</b> (identifies uncovered lines/branches and annotates the focal method), and <b>Mutation Analysis</b> (identifies surviving mutants and instructs the LLM to strengthen assertions to kill them). A <b>Semantic Retrieval</b> agent resolves hallucinated or private symbols via embedding similarity rather than exact matching. Iteration continues until coverage/mutation thresholds are met or a max iteration count is reached. (source: Tian et al. 2026)
 </p>
@@ -248,25 +248,25 @@ The authors also build PRBench, a 571-sample pull-request-level dataset spanning
 </p>
 </div>
 </div>
-<div id="outline-container-orgd94c898" class="outline-2">
-<h2 id="orgd94c898">Findings</h2>
-<div class="outline-text-2" id="text-orgd94c898">
+<div id="outline-container-org8412469" class="outline-2">
+<h2 id="org8412469">Findings</h2>
+<div class="outline-text-2" id="text-org8412469">
 <p>
 With GPT-4.1, MuMuTestUp achieves 88.94% line coverage, 63.36% branch coverage, and 72.39% mutation score, beating the strongest baseline (TestUpdater) by 5.33%, 19.93%, and 16.66% respectively. Ablations show the Mutation Analysis agent is responsible for an 8.99-point mutation-score gain (dropping it barely changes coverage, confirming it targets assertion strength specifically, not exploration); disabling branch-coverage guidance costs 3.55 points of branch coverage; and replacing semantic retrieval with exact-matching costs 5.61 points of compilation pass rate — hallucinated-symbol resolution is a real bottleneck, not a minor detail. An n-gram overlap analysis (0.34 vs. 0.54-0.69 for baselines) suggests the gains are not primarily attributable to training-data memorization. (source: Tian et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org57734c2" class="outline-2">
-<h2 id="org57734c2">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org57734c2">
+<div id="outline-container-orge5eb82e" class="outline-2">
+<h2 id="orge5eb82e">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orge5eb82e">
 <p>
 MuMuTestUp is a concrete case of the &ldquo;LLM proposes, deterministic tool disposes&rdquo; pattern also seen in <a href="concolixir.html">ConcoLixir</a>: the LLM drafts an updated test, but only compilation, coverage, and mutation-testing results (all deterministic, executable checks) decide whether the update is accepted. Its use of mutation score as an assertion-strength signal — rather than a standalone testing criterion — is a distinct pattern from <a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing</a>&rsquo;s use of mutation to <b>generate</b> semantically novel mutants; see <a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a> for the comparison.
 </p>
 </div>
 </div>
-<div id="outline-container-orga2ae9ea" class="outline-2">
-<h2 id="orga2ae9ea">Related pages</h2>
-<div class="outline-text-2" id="text-orga2ae9ea">
+<div id="outline-container-org2412b95" class="outline-2">
+<h2 id="org2412b95">Related pages</h2>
+<div class="outline-text-2" id="text-org2412b95">
 <ul class="org-ul">
 <li><a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a></li>
 <li><a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing</a></li>
@@ -281,7 +281,7 @@ MuMuTestUp is a concrete case of the &ldquo;LLM proposes, deterministic tool dis
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

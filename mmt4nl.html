@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MMT4NL: Test It Before You Trust It (Racharak et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcaa8cdb">Motivation</a></li>
-<li><a href="#org2c47eff">The 9 perturbation/test types</a></li>
-<li><a href="#org9930320">Experiment and findings</a></li>
-<li><a href="#org8da4008">Relation to broader wiki</a></li>
-<li><a href="#org2a7457a">Related pages</a></li>
+<li><a href="#org60cb5fa">Motivation</a></li>
+<li><a href="#orge388d6e">The 9 perturbation/test types</a></li>
+<li><a href="#orgec1b6de">Experiment and findings</a></li>
+<li><a href="#orgd6e994b">Relation to broader wiki</a></li>
+<li><a href="#org84ca6f5">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-orgcaa8cdb" class="outline-2">
-<h2 id="orgcaa8cdb">Motivation</h2>
-<div class="outline-text-2" id="text-orgcaa8cdb">
+<div id="outline-container-org60cb5fa" class="outline-2">
+<h2 id="org60cb5fa">Motivation</h2>
+<div class="outline-text-2" id="text-org60cb5fa">
 <p>
 LLMs using in-context learning are sensitive to subtle input perturbations (typos, rephrasing, synonym swaps), but standard metrics (accuracy, F1) don&rsquo;t capture this fragility. The authors treat &ldquo;any LLM as software&rdquo; and apply <a href="metamorphic-testing.html">metamorphic testing</a> to evaluate ICL trustworthiness. (source: Racharak et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org2c47eff" class="outline-2">
-<h2 id="org2c47eff">The 9 perturbation/test types</h2>
-<div class="outline-text-2" id="text-org2c47eff">
+<div id="outline-container-orge388d6e" class="outline-2">
+<h2 id="orge388d6e">The 9 perturbation/test types</h2>
+<div class="outline-text-2" id="text-orge388d6e">
 <p>
 Taxonomy (synonym replacement), NER (pronoun→proper noun), Negation Handling, Vocab (unknown words), Fairness (gender/race swaps), Robustness (typos/character swaps), Temporal (time-marker changes), SRL (semantic-role-preserving rephrasing), Coreference (explicit pronoun restructuring). Formal MR definition: MR(x, f(x), P(x), P(f(x))) ⟹ g(P(x)) = P(f(x)), for input transformation f and expected output relation g.
 </p>
@@ -248,9 +248,9 @@ Core metric: <b>Pass Rate</b> = N<sub>pass</sub> / N<sub>test</sub> (complement 
 </p>
 </div>
 </div>
-<div id="outline-container-org9930320" class="outline-2">
-<h2 id="org9930320">Experiment and findings</h2>
-<div class="outline-text-2" id="text-org9930320">
+<div id="outline-container-orgec1b6de" class="outline-2">
+<h2 id="orgec1b6de">Experiment and findings</h2>
+<div class="outline-text-2" id="text-orgec1b6de">
 <p>
 GPT-4o and Gemini-2.0-Flash on sentiment analysis (Chat Sentiment) and QA (StrategyQA), zero/one/few-shot. Both models score 86-98% accuracy on original inputs but MMT4NL pass rates drop as low as 60-74% under perturbation (e.g. Gemini on Negation: 60%).
 </p>
@@ -266,17 +266,17 @@ Notable specific bugs found:
 </ul>
 </div>
 </div>
-<div id="outline-container-org8da4008" class="outline-2">
-<h2 id="org8da4008">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org8da4008">
+<div id="outline-container-orgd6e994b" class="outline-2">
+<h2 id="orgd6e994b">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgd6e994b">
 <p>
 Instantiates <a href="metamorphic-testing.html">metamorphic testing</a> specifically for ICL trustworthiness, extending CheckList&rsquo;s (Ribeiro et al.) behavioral-testing philosophy and PromptBench&rsquo;s adversarial scope. Its Fairness and Robustness categories overlap directly with <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a> — see that page for the AORTA comparison. MMT4NL&rsquo;s perturbations operate within a single turn; <a href="mortar.html">MORTAR</a> generalizes the same MR-based approach to multi-turn dialogue, where MMT4NL&rsquo;s perturbation taxonomy could plausibly be applied within a single dialogue turn.
 </p>
 </div>
 </div>
-<div id="outline-container-org2a7457a" class="outline-2">
-<h2 id="org2a7457a">Related pages</h2>
-<div class="outline-text-2" id="text-org2a7457a">
+<div id="outline-container-org84ca6f5" class="outline-2">
+<h2 id="org84ca6f5">Related pages</h2>
+<div class="outline-text-2" id="text-org84ca6f5">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="metamorphic-testing-llms.html">Metamorphic Testing for LLMs (Terragni 2026)</a></li>
@@ -289,7 +289,7 @@ Instantiates <a href="metamorphic-testing.html">metamorphic testing</a> specific
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trajectory Analysis</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,20 +203,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4de16e0">Motivation</a></li>
-<li><a href="#org265d149">Formal Definition</a></li>
-<li><a href="#org3dd904a">Approaches to Trajectory Analysis</a>
+<li><a href="#orgdcb7780">Motivation</a></li>
+<li><a href="#org4632e73">Formal Definition</a></li>
+<li><a href="#orga7f7fa2">Approaches to Trajectory Analysis</a>
 <ul>
-<li><a href="#org2177f37">Stage-wise decomposition (TRAJEVAL)</a></li>
-<li><a href="#org27c3f59">Tool use pattern analysis</a></li>
-<li><a href="#org32a80ab">Token consumption analysis</a></li>
+<li><a href="#orgd142d98">Stage-wise decomposition (TRAJEVAL)</a></li>
+<li><a href="#org801c587">Tool use pattern analysis</a></li>
+<li><a href="#orgbe98bb6">Token consumption analysis</a></li>
 </ul>
 </li>
-<li><a href="#org9b17493">Key Empirical Patterns</a></li>
-<li><a href="#org68cdc4d">Actionability</a></li>
-<li><a href="#org304d705">Contrast with Static Analysis</a></li>
-<li><a href="#org2d7b011">Relation to Written Test Suites</a></li>
-<li><a href="#orga9c96ba">Related pages</a></li>
+<li><a href="#org66ea4b2">Key Empirical Patterns</a></li>
+<li><a href="#org395a23d">Actionability</a></li>
+<li><a href="#org93e43c1">Contrast with Static Analysis</a></li>
+<li><a href="#org73f6ef7">Relation to Written Test Suites</a></li>
+<li><a href="#org1bb77ae">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -237,9 +237,9 @@
 </p>
 
 <hr />
-<div id="outline-container-org4de16e0" class="outline-2">
-<h2 id="org4de16e0">Motivation</h2>
-<div class="outline-text-2" id="text-org4de16e0">
+<div id="outline-container-orgdcb7780" class="outline-2">
+<h2 id="orgdcb7780">Motivation</h2>
+<div class="outline-text-2" id="text-orgdcb7780">
 <p>
 Outcome-only metrics (Pass@1, Pass@k) tell you <b>what</b> happened but not <b>why</b>. Two agents may both fail, but one failed to find the right file while the other found the right file but edited the wrong function. These require different interventions.
 </p>
@@ -249,9 +249,9 @@ Trajectory analysis converts unstructured execution logs into quantitative, inte
 </p>
 </div>
 </div>
-<div id="outline-container-org265d149" class="outline-2">
-<h2 id="org265d149">Formal Definition</h2>
-<div class="outline-text-2" id="text-org265d149">
+<div id="outline-container-org4632e73" class="outline-2">
+<h2 id="org4632e73">Formal Definition</h2>
+<div class="outline-text-2" id="text-org4632e73">
 <p>
 An agent trajectory is T = {(a<sub>t</sub>, o<sub>t</sub>)}<sup>n</sup><sub>t=1</sub> where:
 </p>
@@ -265,13 +265,13 @@ The agent produces a candidate patch P̂. Trajectory analysis compares T against
 </p>
 </div>
 </div>
-<div id="outline-container-org3dd904a" class="outline-2">
-<h2 id="org3dd904a">Approaches to Trajectory Analysis</h2>
-<div class="outline-text-2" id="text-org3dd904a">
+<div id="outline-container-orga7f7fa2" class="outline-2">
+<h2 id="orga7f7fa2">Approaches to Trajectory Analysis</h2>
+<div class="outline-text-2" id="text-orga7f7fa2">
 </div>
-<div id="outline-container-org2177f37" class="outline-3">
-<h3 id="org2177f37">Stage-wise decomposition (TRAJEVAL)</h3>
-<div class="outline-text-3" id="text-org2177f37">
+<div id="outline-container-orgd142d98" class="outline-3">
+<h3 id="orgd142d98">Stage-wise decomposition (TRAJEVAL)</h3>
+<div class="outline-text-3" id="text-orgd142d98">
 <p>
 <a href="trajeval.html">TRAJEVAL</a> maps trajectory events to three stages (Search → Read → Edit) and computes precision/recall at each stage against a <a href="golden-context.html">golden context</a>. This enables:
 </p>
@@ -282,26 +282,26 @@ The agent produces a candidate patch P̂. Trajectory analysis compares T against
 </ul>
 </div>
 </div>
-<div id="outline-container-org27c3f59" class="outline-3">
-<h3 id="org27c3f59">Tool use pattern analysis</h3>
-<div class="outline-text-3" id="text-org27c3f59">
+<div id="outline-container-org801c587" class="outline-3">
+<h3 id="org801c587">Tool use pattern analysis</h3>
+<div class="outline-text-3" id="text-org801c587">
 <p>
 Analyzing which tools an agent calls, in what order, and with what frequency. Reveals efficiency patterns (e.g., localization percentage — Xdfraction of tool calls that are navigation vs. modification).
 </p>
 </div>
 </div>
-<div id="outline-container-org32a80ab" class="outline-3">
-<h3 id="org32a80ab">Token consumption analysis</h3>
-<div class="outline-text-3" id="text-org32a80ab">
+<div id="outline-container-orgbe98bb6" class="outline-3">
+<h3 id="orgbe98bb6">Token consumption analysis</h3>
+<div class="outline-text-3" id="text-orgbe98bb6">
 <p>
 Measuring input/output token usage per tool reveals model-specific command strategies. For example, TRAJEVAL found GPT-5-nano generates 26× more bash output tokens than Qwen-30B, reflecting fundamentally different execution strategies. (&ldquo;GPT-5 nano&rdquo; and &ldquo;Qwen-30B&rdquo; are the paper&rsquo;s own shorthand in its appendix token table — likely GPT-5-mini/nano and Qwen3-Coder-30B tiers, distinct from the seven main models listed on the <a href="trajeval.html">TRAJEVAL</a> page.) (source: Kim et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9b17493" class="outline-2">
-<h2 id="org9b17493">Key Empirical Patterns</h2>
-<div class="outline-text-2" id="text-org9b17493">
+<div id="outline-container-org66ea4b2" class="outline-2">
+<h2 id="org66ea4b2">Key Empirical Patterns</h2>
+<div class="outline-text-2" id="text-org66ea4b2">
 <p>
 From TRAJEVAL&rsquo;s analysis of 16,758 trajectories:
 </p>
@@ -313,33 +313,33 @@ From TRAJEVAL&rsquo;s analysis of 16,758 trajectories:
 </ul>
 </div>
 </div>
-<div id="outline-container-org68cdc4d" class="outline-2">
-<h2 id="org68cdc4d">Actionability</h2>
-<div class="outline-text-2" id="text-org68cdc4d">
+<div id="outline-container-org395a23d" class="outline-2">
+<h2 id="org395a23d">Actionability</h2>
+<div class="outline-text-2" id="text-org395a23d">
 <p>
 Trajectory analysis enables real-time intervention. TRAJEVAL demonstrates that injecting confirmatory feedback when agents encounter golden-context files improves Pass@1 by 2.2–4.6pp and reduces cost by 20–31%. This shows trajectory signals are exploitable bottlenecks, not merely correlational patterns.
 </p>
 </div>
 </div>
-<div id="outline-container-org304d705" class="outline-2">
-<h2 id="org304d705">Contrast with Static Analysis</h2>
-<div class="outline-text-2" id="text-org304d705">
+<div id="outline-container-org93e43c1" class="outline-2">
+<h2 id="org93e43c1">Contrast with Static Analysis</h2>
+<div class="outline-text-2" id="text-org93e43c1">
 <p>
 Static analysis examines code structure before execution. Trajectory analysis examines agent behavior during execution. They are complementary: static analysis can inform <a href="runtime-enforcement.html">runtime enforcement</a> rules; trajectory analysis can diagnose which agent behaviors to target.
 </p>
 </div>
 </div>
-<div id="outline-container-org2d7b011" class="outline-2">
-<h2 id="org2d7b011">Relation to Written Test Suites</h2>
-<div class="outline-text-2" id="text-org2d7b011">
+<div id="outline-container-org73f6ef7" class="outline-2">
+<h2 id="org73f6ef7">Relation to Written Test Suites</h2>
+<div class="outline-text-2" id="text-org73f6ef7">
 <p>
 Trajectory analysis diagnoses failures <b>after execution</b>, from logs. It is largely orthogonal to what developers write as up-front tests: <a href="tangent.html">Tangent</a>&rsquo;s mining of 2,572 real agent tests found almost no assertions target reasoning/trajectory-level behavior (8.7%, usually presence-only) — see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>. TRAJEVAL&rsquo;s over-exploration finding (4-8% precision) is a failure mode current test suites do not check for at all.
 </p>
 </div>
 </div>
-<div id="outline-container-orga9c96ba" class="outline-2">
-<h2 id="orga9c96ba">Related pages</h2>
-<div class="outline-text-2" id="text-orga9c96ba">
+<div id="outline-container-org1bb77ae" class="outline-2">
+<h2 id="org1bb77ae">Related pages</h2>
+<div class="outline-text-2" id="text-org1bb77ae">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="golden-context.html">Golden Context</a></li>
@@ -353,7 +353,7 @@ Trajectory analysis diagnoses failures <b>after execution</b>, from logs. It is 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

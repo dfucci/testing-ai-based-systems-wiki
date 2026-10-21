@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LLM Agent Testing Practice (Empirical Findings)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,10 +203,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3ebe068">Three studies, converging findings</a></li>
-<li><a href="#orgc5319cc">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
-<li><a href="#org733d474">Relation to existing wiki content</a></li>
-<li><a href="#org5921716">Related pages</a></li>
+<li><a href="#org953998f">Three studies, converging findings</a></li>
+<li><a href="#org7c4addd">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
+<li><a href="#orgcb5540a">Relation to existing wiki content</a></li>
+<li><a href="#org4c2f54c">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -230,9 +230,9 @@
 </p>
 
 <hr />
-<div id="outline-container-org3ebe068" class="outline-2">
-<h2 id="org3ebe068">Three studies, converging findings</h2>
-<div class="outline-text-2" id="text-org3ebe068">
+<div id="outline-container-org953998f" class="outline-2">
+<h2 id="org953998f">Three studies, converging findings</h2>
+<div class="outline-text-2" id="text-org953998f">
 <p>
 <a href="tangent.html">Tangent</a> (Pan et al. 2026) mined 1,190 GitHub repos using LangChain/LangGraph/MCP down to 2,572 manually labeled tests across 240 modules, plus structured interviews with 10 senior industry practitioners. <a href="testing-untestable-llm-software.html">Magalhães et al. 2025</a> ran a qualitative case study on 99 student reflection reports from 21 team projects building real LLM-integrated apps. <a href="qa-practices-gaps-agents.html">Dai et al. 2026</a> coded repository-visible QA artifacts (not just tests) across 157 popular open-source agent projects against a four-layer execution-surface/safeguard/testing/risk-scenario rubric. Different methods, same conclusions (source: Pan et al. 2026; Magalhães et al. 2025; Dai et al. 2026):
 </p>
@@ -249,25 +249,25 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc5319cc" class="outline-2">
-<h2 id="orgc5319cc">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
-<div class="outline-text-2" id="text-orgc5319cc">
+<div id="outline-container-org7c4addd" class="outline-2">
+<h2 id="org7c4addd">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
+<div class="outline-text-2" id="text-org7c4addd">
 <p>
 Four categories: test fixtures (mock agent/tool/environment), test data (mocked/real/synthetic/dummy), test objectives (agent/tool, interaction, scenario, e2e), assertions (state/output/memory/reasoning/environment) (source: Pan et al. 2026). A useful checklist against which any new agent-testing technique in this wiki can be positioned.
 </p>
 </div>
 </div>
-<div id="outline-container-org733d474" class="outline-2">
-<h2 id="org733d474">Relation to existing wiki content</h2>
-<div class="outline-text-2" id="text-org733d474">
+<div id="outline-container-orgcb5540a" class="outline-2">
+<h2 id="orgcb5540a">Relation to existing wiki content</h2>
+<div class="outline-text-2" id="text-orgcb5540a">
 <p>
 This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a> (from TRAJEVAL): those pages describe <b>diagnosing</b> agent failures after the fact via trajectory decomposition; this page describes what developers actually <b>write as tests</b> beforehand. TRAJEVAL&rsquo;s finding that agents over-explore (4-8% precision) is a failure mode invisible to the shallow unit tests Tangent documents — neither source tests for it directly today. (cross-reference, not directly stated in either source)
 </p>
 </div>
 </div>
-<div id="outline-container-org5921716" class="outline-2">
-<h2 id="org5921716">Related pages</h2>
-<div class="outline-text-2" id="text-org5921716">
+<div id="outline-container-org4c2f54c" class="outline-2">
+<h2 id="org4c2f54c">Related pages</h2>
+<div class="outline-text-2" id="text-org4c2f54c">
 <ul class="org-ul">
 <li><a href="tangent.html">Tangent (Pan et al. 2026)</a></li>
 <li><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software (Magalhães et al. 2025)</a></li>
@@ -284,7 +284,7 @@ This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

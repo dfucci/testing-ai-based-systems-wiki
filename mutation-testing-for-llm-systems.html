@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mutation Testing for LLM Systems</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgddd8523">Four distinct roles</a></li>
-<li><a href="#org107d0d2">Why both matter together</a></li>
-<li><a href="#org3f8e768">Conditioning on the existing suite, and mutating the evaluator</a></li>
-<li><a href="#orgf8dd34d">Relation to broader wiki</a></li>
-<li><a href="#org4adf8a5">Related pages</a></li>
+<li><a href="#org11b3771">Four distinct roles</a></li>
+<li><a href="#orgf4940a4">Why both matter together</a></li>
+<li><a href="#org8a67cd4">Conditioning on the existing suite, and mutating the evaluator</a></li>
+<li><a href="#org811e65b">Relation to broader wiki</a></li>
+<li><a href="#orgd69fac9">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -231,9 +231,9 @@
 </p>
 
 <hr />
-<div id="outline-container-orgddd8523" class="outline-2">
-<h2 id="orgddd8523">Four distinct roles</h2>
-<div class="outline-text-2" id="text-orgddd8523">
+<div id="outline-container-org11b3771" class="outline-2">
+<h2 id="org11b3771">Four distinct roles</h2>
+<div class="outline-text-2" id="text-org11b3771">
 <p>
 Classic mutation testing injects small syntactic changes (mutants) into a program and measures what fraction a test suite kills (the mutation score), used as a proxy for assertion strength. Four 2025-2026 papers extend this into the LLM era in different directions:
 </p>
@@ -283,9 +283,9 @@ Classic mutation testing injects small syntactic changes (mutants) into a progra
 </table>
 </div>
 </div>
-<div id="outline-container-org107d0d2" class="outline-2">
-<h2 id="org107d0d2">Why both matter together</h2>
-<div class="outline-text-2" id="text-org107d0d2">
+<div id="outline-container-orgf4940a4" class="outline-2">
+<h2 id="orgf4940a4">Why both matter together</h2>
+<div class="outline-text-2" id="text-orgf4940a4">
 <p>
 Hamidi et al. show 55% of intent-based mutants are not subsumed by traditional syntax-based mutants — meaning a test suite scoring 100% on traditional mutation testing can still miss real specification-level faults. MuMuTestUp&rsquo;s ablation shows that dropping mutation-guided feedback costs 8.99 points of mutation score specifically (with only a modest coverage change), confirming mutation score captures something coverage-based feedback alone does not: assertion <b>discriminative power</b>, not just code <b>reachability</b>.
 </p>
@@ -295,9 +295,9 @@ Together they suggest mutation testing&rsquo;s role is shifting: instead of bein
 </p>
 </div>
 </div>
-<div id="outline-container-org3f8e768" class="outline-2">
-<h2 id="org3f8e768">Conditioning on the existing suite, and mutating the evaluator</h2>
-<div class="outline-text-2" id="text-org3f8e768">
+<div id="outline-container-org8a67cd4" class="outline-2">
+<h2 id="org8a67cd4">Conditioning on the existing suite, and mutating the evaluator</h2>
+<div class="outline-text-2" id="text-org8a67cd4">
 <p>
 Kiele et al. 2026 add the observation that a mutant generator becomes far more useful when it can see what the tests already check: the same LLMs go from 12.2% to 87.8% verified faults (HumanEval, Gemini 3.1 Pro) by adding the base tests to one prompt, at comparable fault subtlety — the gain is yield, not subtler bugs. Their manual review of the 65 mutants that survived even the extended EvalPlus oracle found 49 (75.4%) were genuine oracle gaps rather than equivalent mutants, so the &ldquo;oracle&rdquo; used to score mutant quality was itself incomplete. (source: Kiele et al. 2026)
 </p>
@@ -311,17 +311,17 @@ Across these two, the shared point is that surviving mutants are most valuable a
 </p>
 </div>
 </div>
-<div id="outline-container-orgf8dd34d" class="outline-2">
-<h2 id="orgf8dd34d">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgf8dd34d">
+<div id="outline-container-org811e65b" class="outline-2">
+<h2 id="org811e65b">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org811e65b">
 <p>
 Mutation score is one of the <a href="test-adequacy-criteria.html">test adequacy criteria</a> this wiki tracks alongside neuron coverage and MR-compliance — Hamidi et al. and Tian et al. were the first LLM-agent-era instances of that criterion in this wiki; Kiele et al. and Yang et al. (see above) later extended it to suite-targeted mutant generation and to rubric adequacy. The &ldquo;LLM proposes, deterministic tool disposes&rdquo; pattern in MuMuTestUp (mutation testing gates what the LLM is allowed to accept as a valid update) parallels <a href="concolixir.html">ConcoLixir</a>&rsquo;s use of concrete execution to gate LLM-proposed inputs.
 </p>
 </div>
 </div>
-<div id="outline-container-org4adf8a5" class="outline-2">
-<h2 id="org4adf8a5">Related pages</h2>
-<div class="outline-text-2" id="text-org4adf8a5">
+<div id="outline-container-orgd69fac9" class="outline-2">
+<h2 id="orgd69fac9">Related pages</h2>
+<div class="outline-text-2" id="text-orgd69fac9">
 <ul class="org-ul">
 <li><a href="intent-based-mutation-testing.html">Intent-Based Mutation Testing (Hamidi et al. 2025)</a></li>
 <li><a href="test-aware-mutants.html">Test-Aware Mutant Generation (Kiele et al. 2026)</a></li>
@@ -336,7 +336,7 @@ Mutation score is one of the <a href="test-adequacy-criteria.html">test adequacy
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

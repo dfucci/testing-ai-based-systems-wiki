@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Intent-Based Mutation Testing (Hamidi et al. 2025)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfdd2fdb">Motivation</a></li>
-<li><a href="#org7cc0408">Approach</a></li>
-<li><a href="#orgff523b8">Findings</a></li>
-<li><a href="#orgda3971f">Relation to broader wiki</a></li>
-<li><a href="#orgedb04ff">Related pages</a></li>
+<li><a href="#org8e11494">Motivation</a></li>
+<li><a href="#org76221c2">Approach</a></li>
+<li><a href="#orgbee6b93">Findings</a></li>
+<li><a href="#orgd3d7fb3">Relation to broader wiki</a></li>
+<li><a href="#orgb08d332">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,41 +228,41 @@
 </p>
 
 <hr />
-<div id="outline-container-orgfdd2fdb" class="outline-2">
-<h2 id="orgfdd2fdb">Motivation</h2>
-<div class="outline-text-2" id="text-orgfdd2fdb">
+<div id="outline-container-org8e11494" class="outline-2">
+<h2 id="org8e11494">Motivation</h2>
+<div class="outline-text-2" id="text-org8e11494">
 <p>
 Traditional mutation testing changes <b>how</b> a program is written (flip an operator, negate a condition), which is effective for surface-level faults but stays confined to the logic actually implemented — it can&rsquo;t easily represent faults that arise from a programmer&rsquo;s <b>misunderstanding of the specification</b> (omission faults, corner cases outside what was implemented). (source: Hamidi et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org7cc0408" class="outline-2">
-<h2 id="org7cc0408">Approach</h2>
-<div class="outline-text-2" id="text-org7cc0408">
+<div id="outline-container-org76221c2" class="outline-2">
+<h2 id="org76221c2">Approach</h2>
+<div class="outline-text-2" id="text-org76221c2">
 <p>
 Define an &ldquo;intent&rdquo; as the programmer&rsquo;s natural-language objective for a function (e.g. &ldquo;a function that computes the factorial of an integer&rdquo;). Intent-based mutation testing uses an LLM to (1) extract the intent implemented by the program under test, (2) generate mutated variants of that intent representing plausible misunderstandings or corner-case variations, and (3) implement each mutated intent as a new candidate program (the mutant). Because the mutant is generated from a <b>different specification</b>, not a syntactic edit, it can diverge from the original in ways syntax-based mutation structurally cannot reach. (source: Hamidi et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-orgff523b8" class="outline-2">
-<h2 id="orgff523b8">Findings</h2>
-<div class="outline-text-2" id="text-orgff523b8">
+<div id="outline-container-orgbee6b93" class="outline-2">
+<h2 id="orgbee6b93">Findings</h2>
+<div class="outline-text-2" id="text-orgbee6b93">
 <p>
 Evaluated on 29 programs: intent-based mutants are syntactically more complex, semantically more diverse, and meaningfully different from traditional (syntax-based) mutants — 55% of intent-based mutants are not subsumed by any traditional mutant, meaning a test suite that kills all traditional mutants can still miss these. The authors position intent-based mutation as a complement to, not a replacement for, traditional mutation testing. (source: Hamidi et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-orgda3971f" class="outline-2">
-<h2 id="orgda3971f">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgda3971f">
+<div id="outline-container-orgd3d7fb3" class="outline-2">
+<h2 id="orgd3d7fb3">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgd3d7fb3">
 <p>
 This is a direct instance of using an LLM&rsquo;s ability to interpret and reformulate natural-language specifications to attack the classic mutation-testing &ldquo;coupling effect&rdquo; assumption — that small syntactic changes stand in for all real faults. It pairs naturally with <a href="mumutestup.html">MuMuTestUp</a>, which uses (traditional) mutation testing as a signal to strengthen test <b>assertions</b> in the LLM era; see <a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a> for the synthesis of both.
 </p>
 </div>
 </div>
-<div id="outline-container-orgedb04ff" class="outline-2">
-<h2 id="orgedb04ff">Related pages</h2>
-<div class="outline-text-2" id="text-orgedb04ff">
+<div id="outline-container-orgb08d332" class="outline-2">
+<h2 id="orgb08d332">Related pages</h2>
+<div class="outline-text-2" id="text-orgb08d332">
 <ul class="org-ul">
 <li><a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a></li>
 <li><a href="mumutestup.html">MuMuTestUp</a></li>
@@ -274,7 +274,7 @@ This is a direct instance of using an LLM&rsquo;s ability to interpret and refor
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

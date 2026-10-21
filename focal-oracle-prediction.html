@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FOCAL: Fail-Aware and Explainable Test Oracle Prediction (Zhao et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge5b70e5">Motivation</a></li>
-<li><a href="#org634d457">Approach</a></li>
-<li><a href="#org4f29640">Findings</a></li>
-<li><a href="#org4c292ed">Relation to broader wiki</a></li>
-<li><a href="#orgf59ea75">Related pages</a></li>
+<li><a href="#org4a89ec7">Motivation</a></li>
+<li><a href="#org79a5245">Approach</a></li>
+<li><a href="#org3d15a27">Findings</a></li>
+<li><a href="#orga4d2eb4">Relation to broader wiki</a></li>
+<li><a href="#orgf5249fb">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-orge5b70e5" class="outline-2">
-<h2 id="orge5b70e5">Motivation</h2>
-<div class="outline-text-2" id="text-orge5b70e5">
+<div id="outline-container-org4a89ec7" class="outline-2">
+<h2 id="org4a89ec7">Motivation</h2>
+<div class="outline-text-2" id="text-org4a89ec7">
 <p>
 Automated test-<b>input</b> generation (EvoSuite, Randoop, LLM-based generators) is mature, but test <b>oracle</b> construction lags behind. Neural assertion-synthesis methods (ATLAS, AthenaTest) and LLM-based assertion generators produce syntactically valid assertions, but their training objective rewards reproducing common assertion patterns, not deciding whether the underlying behavior is actually correct — so generated assertions are often ineffective at revealing real bugs. (source: Zhao et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org634d457" class="outline-2">
-<h2 id="org634d457">Approach</h2>
-<div class="outline-text-2" id="text-org634d457">
+<div id="outline-container-org79a5245" class="outline-2">
+<h2 id="org79a5245">Approach</h2>
+<div class="outline-text-2" id="text-org79a5245">
 <p>
 FOCAL reframes the problem: instead of generating an executable assertion, train a classifier f(t, m) -&gt; {PASS, FAIL} that directly predicts whether a test prefix t passes or fails against method-under-test m. It encodes the test prefix and MUT separately with a shared CodeT5 encoder (LoRA-adapted), derives a relation-aware pair representation for PASS/FAIL classification plus a compatibility score for margin-ranking supervision. For explainability, FOCAL analyzes FAIL-predicted pairs using Integrated Gradients (IG) attribution to map evidence onto specific statements, validated via deletion/keep-only/counterfactual checks. (source: Zhao et al. 2026)
 </p>
@@ -248,9 +248,9 @@ Crucially, the paper argues for <b>fail-aware</b> metrics (precision/recall/F1 c
 </p>
 </div>
 </div>
-<div id="outline-container-org4f29640" class="outline-2">
-<h2 id="org4f29640">Findings</h2>
-<div class="outline-text-2" id="text-org4f29640">
+<div id="outline-container-org3d15a27" class="outline-2">
+<h2 id="org3d15a27">Findings</h2>
+<div class="outline-text-2" id="text-org3d15a27">
 <ul class="org-ul">
 <li><b>In-domain</b> (Defects4J-derived, mutation-constructed FAIL cases): FOCAL reaches 97.65% accuracy with 97.61% Fail F1 — strong performance when train/test distributions match.</li>
 <li><b>Unseen-project</b> (TOGA-derived, only 9.1% FAIL cases — realistically pass-dominant): the baseline SEER achieves higher overall accuracy (86.72%) than FOCAL (81.99%), but SEER&rsquo;s FAIL recall is only 2.95% and FAIL F1 only 3.87% — it is essentially blind to real failures despite looking accurate. FOCAL trades some aggregate accuracy for substantially better failure detection: FAIL precision 0.0565 -&gt; 0.1608, FAIL recall 0.0295 -&gt; 0.2332, FAIL F1 0.0387 -&gt; 0.1904, macro-F1 0.4837 -&gt; 0.5445. In absolute terms FOCAL detects 4,856 failing cases versus ~614 for SEER.</li>
@@ -263,17 +263,17 @@ Crucially, the paper argues for <b>fail-aware</b> metrics (precision/recall/F1 c
 </p>
 </div>
 </div>
-<div id="outline-container-org4c292ed" class="outline-2">
-<h2 id="org4c292ed">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org4c292ed">
+<div id="outline-container-orga4d2eb4" class="outline-2">
+<h2 id="orga4d2eb4">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orga4d2eb4">
 <p>
 FOCAL is a <b>learned discriminative oracle</b> — a third distinct strategy for the <a href="oracle-problem.html">oracle problem</a> alongside <a href="metamorphic-testing.html">metamorphic relation</a> oracles and generated/<a href="reag.html">REAG</a>-style oracles: rather than checking a relation or synthesizing an explicit assertion, it trains a model to directly predict correctness. Its core empirical finding — that aggregate accuracy on pass-dominant data can completely mask near-zero failure-detection capability — is a general methodological warning that applies well beyond test oracles; it strongly echoes <a href="audit-feedback-driven-evolution.html">Liang et al. 2026</a>&rsquo;s finding that apparent evaluation gains can be an artifact of the metric/oracle choice rather than genuine capability.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf59ea75" class="outline-2">
-<h2 id="orgf59ea75">Related pages</h2>
-<div class="outline-text-2" id="text-orgf59ea75">
+<div id="outline-container-orgf5249fb" class="outline-2">
+<h2 id="orgf5249fb">Related pages</h2>
+<div class="outline-text-2" id="text-orgf5249fb">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="audit-feedback-driven-evolution.html">Auditing Feedback-Driven Evolution (Liang et al. 2026)</a></li>
@@ -285,7 +285,7 @@ FOCAL is a <b>learned discriminative oracle</b> — a third distinct strategy fo
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

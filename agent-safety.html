@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Agent Safety</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,22 +203,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org88adad0">Problem Space</a></li>
-<li><a href="#org2a95bb3">Safety Risk Taxonomy</a></li>
-<li><a href="#org8185ad3">Approaches to Safety</a>
+<li><a href="#org5888bb7">Problem Space</a></li>
+<li><a href="#orgd32f709">Safety Risk Taxonomy</a></li>
+<li><a href="#org349a587">Approaches to Safety</a>
 <ul>
-<li><a href="#orgb395e54">Pre-execution risk assessment</a></li>
-<li><a href="#orgd1c7ca9">Rule-based runtime enforcement</a></li>
-<li><a href="#org36631e4">Training-time alignment</a></li>
-<li><a href="#orgd0e5049">Post-hoc evaluation</a></li>
+<li><a href="#org2849982">Pre-execution risk assessment</a></li>
+<li><a href="#org933a68f">Rule-based runtime enforcement</a></li>
+<li><a href="#org4ed3cd1">Training-time alignment</a></li>
+<li><a href="#orgb65b696">Post-hoc evaluation</a></li>
 </ul>
 </li>
-<li><a href="#orgeb24d5c">Key Empirical Results</a></li>
-<li><a href="#org0396609">LLM-Generated Safety Rules</a></li>
-<li><a href="#org4de4e69">Repo-Level QA Evidence (Dai et al. 2026)</a></li>
-<li><a href="#org4c44cca">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</a></li>
-<li><a href="#org13400c4">Open Problems</a></li>
-<li><a href="#org32c0bb6">Related pages</a></li>
+<li><a href="#org6b93665">Key Empirical Results</a></li>
+<li><a href="#org0186115">LLM-Generated Safety Rules</a></li>
+<li><a href="#org9dbffa1">Repo-Level QA Evidence (Dai et al. 2026)</a></li>
+<li><a href="#org06227e1">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</a></li>
+<li><a href="#orge0d675f">Open Problems</a></li>
+<li><a href="#org02f55ab">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -241,9 +241,9 @@
 </p>
 
 <hr />
-<div id="outline-container-org88adad0" class="outline-2">
-<h2 id="org88adad0">Problem Space</h2>
-<div class="outline-text-2" id="text-org88adad0">
+<div id="outline-container-org5888bb7" class="outline-2">
+<h2 id="org5888bb7">Problem Space</h2>
+<div class="outline-text-2" id="text-org5888bb7">
 <p>
 LLM agents operating autonomously introduce safety risks that differ from traditional software:
 </p>
@@ -256,9 +256,9 @@ LLM agents operating autonomously introduce safety risks that differ from tradit
 </ul>
 </div>
 </div>
-<div id="outline-container-org2a95bb3" class="outline-2">
-<h2 id="org2a95bb3">Safety Risk Taxonomy</h2>
-<div class="outline-text-2" id="text-org2a95bb3">
+<div id="outline-container-orgd32f709" class="outline-2">
+<h2 id="orgd32f709">Safety Risk Taxonomy</h2>
+<div class="outline-text-2" id="text-orgd32f709">
 <p>
 From the AgentSpec evaluation (source: Wang et al. - 2025):
 </p>
@@ -276,46 +276,46 @@ From the AgentSpec evaluation (source: Wang et al. - 2025):
 </p>
 </div>
 </div>
-<div id="outline-container-org8185ad3" class="outline-2">
-<h2 id="org8185ad3">Approaches to Safety</h2>
-<div class="outline-text-2" id="text-org8185ad3">
+<div id="outline-container-org349a587" class="outline-2">
+<h2 id="org349a587">Approaches to Safety</h2>
+<div class="outline-text-2" id="text-org349a587">
 </div>
-<div id="outline-container-orgb395e54" class="outline-3">
-<h3 id="orgb395e54">Pre-execution risk assessment</h3>
-<div class="outline-text-3" id="text-orgb395e54">
+<div id="outline-container-org2849982" class="outline-3">
+<h3 id="org2849982">Pre-execution risk assessment</h3>
+<div class="outline-text-3" id="text-org2849982">
 <p>
 LLM-based sandboxes (e.g., ToolEmu) simulate potential outcomes before execution. Identifies risks but offers no enforcement mechanism; susceptible to adversarial manipulation.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd1c7ca9" class="outline-3">
-<h3 id="orgd1c7ca9">Rule-based runtime enforcement</h3>
-<div class="outline-text-3" id="text-orgd1c7ca9">
+<div id="outline-container-org933a68f" class="outline-3">
+<h3 id="org933a68f">Rule-based runtime enforcement</h3>
+<div class="outline-text-3" id="text-org933a68f">
 <p>
 <a href="runtime-enforcement.html">Runtime enforcement</a> systems like <a href="agentspec.html">AgentSpec</a> enforce predefined constraints at execution time. High reliability (&gt;90% unsafe execution prevention) but requires rule specification effort.
 </p>
 </div>
 </div>
-<div id="outline-container-org36631e4" class="outline-3">
-<h3 id="org36631e4">Training-time alignment</h3>
-<div class="outline-text-3" id="text-org36631e4">
+<div id="outline-container-org4ed3cd1" class="outline-3">
+<h3 id="org4ed3cd1">Training-time alignment</h3>
+<div class="outline-text-3" id="text-org4ed3cd1">
 <p>
 Model fine-tuning and RLHF aim to make models refuse unsafe instructions. Does not generalize reliably across deployment contexts; susceptible to jailbreaking.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd0e5049" class="outline-3">
-<h3 id="orgd0e5049">Post-hoc evaluation</h3>
-<div class="outline-text-3" id="text-orgd0e5049">
+<div id="outline-container-orgb65b696" class="outline-3">
+<h3 id="orgb65b696">Post-hoc evaluation</h3>
+<div class="outline-text-3" id="text-orgb65b696">
 <p>
 Trajectory analysis tools like <a href="trajeval.html">TRAJEVAL</a> identify what went wrong. Useful for diagnosis and iterative improvement but reactive rather than preventive.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgeb24d5c" class="outline-2">
-<h2 id="orgeb24d5c">Key Empirical Results</h2>
-<div class="outline-text-2" id="text-orgeb24d5c">
+<div id="outline-container-org6b93665" class="outline-2">
+<h2 id="org6b93665">Key Empirical Results</h2>
+<div class="outline-text-2" id="text-org6b93665">
 <p>
 From AgentSpec evaluation:
 </p>
@@ -331,9 +331,9 @@ The safety–capability trade-off appears manageable: significant safety gains a
 </p>
 </div>
 </div>
-<div id="outline-container-org0396609" class="outline-2">
-<h2 id="org0396609">LLM-Generated Safety Rules</h2>
-<div class="outline-text-2" id="text-org0396609">
+<div id="outline-container-org0186115" class="outline-2">
+<h2 id="org0186115">LLM-Generated Safety Rules</h2>
+<div class="outline-text-2" id="text-org0186115">
 <p>
 AgentSpec demonstrates LLMs can auto-generate safety rules from domain descriptions. OpenAI o1 achieves:
 </p>
@@ -347,9 +347,9 @@ The precision-recall asymmetry means LLM-generated rules are conservative but in
 </p>
 </div>
 </div>
-<div id="outline-container-org4de4e69" class="outline-2">
-<h2 id="org4de4e69">Repo-Level QA Evidence (Dai et al. 2026)</h2>
-<div class="outline-text-2" id="text-org4de4e69">
+<div id="outline-container-org9dbffa1" class="outline-2">
+<h2 id="org9dbffa1">Repo-Level QA Evidence (Dai et al. 2026)</h2>
+<div class="outline-text-2" id="text-org9dbffa1">
 <p>
 AgentSpec&rsquo;s risk taxonomy above is enforcement-focused: a fixed rule set applied at runtime. <a href="qa-practices-gaps-agents.html">Dai et al. 2026</a> instead surveys <b>repository-visible evidence</b> of safety intent across 157 popular open-source agent projects, without validating runtime effectiveness. It reframes safety risk as eight end-to-end <b>risk chains</b> (untrusted input or model decision → sensitive action/asset/persistent state): secret-to-tool, workspace-to-persistent-state, extension-to-authority, mode-switch-to-privilege, runtime-code, model-to-process, session-to-action, untrusted-context-to-action.
 </p>
@@ -363,17 +363,17 @@ Key implication for this page&rsquo;s framing: safety mechanisms should be bound
 </p>
 </div>
 </div>
-<div id="outline-container-org4c44cca" class="outline-2">
-<h2 id="org4c44cca">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</h2>
-<div class="outline-text-2" id="text-org4c44cca">
+<div id="outline-container-org06227e1" class="outline-2">
+<h2 id="org06227e1">Testing a model&rsquo;s own documented safety claims (Moshood et al. 2026)</h2>
+<div class="outline-text-2" id="text-org06227e1">
 <p>
 The approaches above concern agent actions. <a href="lest.html">LEST</a> tests a different layer: the safety claims a provider publishes for a <b>model</b> in its system card (refusal of harmful requests, avoiding encouragement of self-harm, avoiding stereotyped outputs). Only 29 of 56 claims across the Claude Opus 4.8 and GPT-5.5 system cards were prompt-testable through black-box interaction; both models refuse over 95% of unmodified SORRY-Bench seed prompts, yet human-validated Refuse→Comply flips under mutated prompts contradict 6 of the 9 covered refusal-testable claims. This is a documentation-to-test gap rather than an enforcement gap; it loosely parallels Dai et al.&rsquo;s finding that safeguards in agent repositories are far more common than tests that would catch their bypass (cross-reference, not stated in either source). See <a href="specification-based-testing.html">Specification-Based Testing</a>. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org13400c4" class="outline-2">
-<h2 id="org13400c4">Open Problems</h2>
-<div class="outline-text-2" id="text-org13400c4">
+<div id="outline-container-orge0d675f" class="outline-2">
+<h2 id="orge0d675f">Open Problems</h2>
+<div class="outline-text-2" id="text-orge0d675f">
 <ul class="org-ul">
 <li><b>Long-term consequence reasoning</b>: current enforcement is local (immediate action) rather than trajectory-level</li>
 <li><b>Rule completeness</b>: unknown unsafe scenarios have no rules; coverage gap is inherent</li>
@@ -382,9 +382,9 @@ The approaches above concern agent actions. <a href="lest.html">LEST</a> tests a
 </ul>
 </div>
 </div>
-<div id="outline-container-org32c0bb6" class="outline-2">
-<h2 id="org32c0bb6">Related pages</h2>
-<div class="outline-text-2" id="text-org32c0bb6">
+<div id="outline-container-org02f55ab" class="outline-2">
+<h2 id="org02f55ab">Related pages</h2>
+<div class="outline-text-2" id="text-org02f55ab">
 <ul class="org-ul">
 <li><a href="agentspec.html">AgentSpec</a></li>
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
@@ -401,7 +401,7 @@ The approaches above concern agent actions. <a href="lest.html">LEST</a> tests a
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

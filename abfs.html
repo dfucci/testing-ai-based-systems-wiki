@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ABFS: Natural Robustness Testing for LLM-Based NLP Software (Xiao et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,26 +203,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd5d66a1">Motivation</a></li>
-<li><a href="#org14670a9">Method</a>
+<li><a href="#org5522889">Motivation</a></li>
+<li><a href="#orgd00bd61">Method</a>
 <ul>
-<li><a href="#org4e60cbe">Transformation space (WordNet synonyms)</a></li>
-<li><a href="#orga05bee8">Best-First Search over a priority queue</a></li>
-<li><a href="#org47bb2a0">Adaptive Word Importance Ranking</a></li>
-<li><a href="#orgaebec89">Constraints</a></li>
+<li><a href="#org39fe612">Transformation space (WordNet synonyms)</a></li>
+<li><a href="#orgdfc5588">Best-First Search over a priority queue</a></li>
+<li><a href="#org0970b7f">Adaptive Word Importance Ranking</a></li>
+<li><a href="#orgb236037">Constraints</a></li>
 </ul>
 </li>
-<li><a href="#org1202a5f">Evaluation</a>
+<li><a href="#org9d2cc94">Evaluation</a>
 <ul>
-<li><a href="#org08714ef">RQ1 — test case quality</a></li>
-<li><a href="#orgaf15cdf">RQ2 — efficiency</a></li>
-<li><a href="#org5cb19a1">RQ3 — ablation</a></li>
-<li><a href="#org73be824">RQ4 — transferability</a></li>
+<li><a href="#orgb4f4611">RQ1 — test case quality</a></li>
+<li><a href="#orge70ae8d">RQ2 — efficiency</a></li>
+<li><a href="#org957995a">RQ3 — ablation</a></li>
+<li><a href="#org2053924">RQ4 — transferability</a></li>
 </ul>
 </li>
-<li><a href="#orgcd952a4">Threats to validity</a></li>
-<li><a href="#org02eae7c">Relation to broader wiki</a></li>
-<li><a href="#orgf5aecff">Related pages</a></li>
+<li><a href="#org5b8c2ed">Threats to validity</a></li>
+<li><a href="#orgfe14247">Relation to broader wiki</a></li>
+<li><a href="#org3f120cc">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -243,111 +243,111 @@
 </p>
 
 <hr />
-<div id="outline-container-orgd5d66a1" class="outline-2">
-<h2 id="orgd5d66a1">Motivation</h2>
-<div class="outline-text-2" id="text-orgd5d66a1">
+<div id="outline-container-org5522889" class="outline-2">
+<h2 id="org5522889">Motivation</h2>
+<div class="outline-text-2" id="text-org5522889">
 <p>
 LLM-based NLP software (financial sentiment analysis, content moderation, box-office prediction) takes a preset prompt concatenated with an example as its input. Two gaps in prior robustness testing: (1) DNN-based NLP testing methods transfer poorly to LLMs — TextFooler drops from ~88% success on BERT to 38-49% on Llama2-70b; (2) generated test cases are insufficiently natural, so testing outcomes have low practical value. ABFS treats the prompt+example as a combined entity and optimizes jointly for effectiveness and naturalness. (source: Xiao et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org14670a9" class="outline-2">
-<h2 id="org14670a9">Method</h2>
-<div class="outline-text-2" id="text-org14670a9">
+<div id="outline-container-orgd00bd61" class="outline-2">
+<h2 id="orgd00bd61">Method</h2>
+<div class="outline-text-2" id="text-orgd00bd61">
 </div>
-<div id="outline-container-org4e60cbe" class="outline-3">
-<h3 id="org4e60cbe">Transformation space (WordNet synonyms)</h3>
-<div class="outline-text-3" id="text-org4e60cbe">
+<div id="outline-container-org39fe612" class="outline-3">
+<h3 id="org39fe612">Transformation space (WordNet synonyms)</h3>
+<div class="outline-text-3" id="text-org39fe612">
 <p>
 POS-tag each word in the input, retrieve its WordNet synsets, then semantically filter by cosine similarity between each candidate synonym and the original word, keeping the top k1 = 25. Synonym replacement preserves semantics while staying natural. (source: Xiao et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga05bee8" class="outline-3">
-<h3 id="orga05bee8">Best-First Search over a priority queue</h3>
-<div class="outline-text-3" id="text-orga05bee8">
+<div id="outline-container-orgdfc5588" class="outline-3">
+<h3 id="orgdfc5588">Best-First Search over a priority queue</h3>
+<div class="outline-text-3" id="text-orgdfc5588">
 <p>
 Robustness testing is cast as combinatorial optimization: minimize the threat model&rsquo;s confidence L(F([P;x]+δ), y) in the ground-truth label y subject to constraint C. ABFS maintains a min-priority queue keyed on that confidence (lower = closer to a label flip) and at each step expands the globally best node in the whole queue, not just the best local neighbor. This escapes the local optima that greedy search stalls in: the paper&rsquo;s Fig. 4 shows greedy stuck at confidence 0.714 while BFS reaches 0.497. The original input is the initial node; on termination (max query limit reached or queue empty) the best historical node is returned as I<sub>adv</sub> even if no flip was found. (source: Xiao et al. 2026, Algorithm 1)
 </p>
 </div>
 </div>
-<div id="outline-container-org47bb2a0" class="outline-3">
-<h3 id="org47bb2a0">Adaptive Word Importance Ranking</h3>
-<div class="outline-text-3" id="text-org47bb2a0">
+<div id="outline-container-org0970b7f" class="outline-3">
+<h3 id="org0970b7f">Adaptive Word Importance Ranking</h3>
+<div class="outline-text-3" id="text-org0970b7f">
 <p>
 Perturbation order is set by Word Importance Ranking (WIR) computed by sequentially deleting each word and measuring confidence change. ABFS makes WIR <b>adaptive</b>: each word&rsquo;s importance score is adjusted by the average of its historical score changes over the most recent k2 = 5 perturbation records (weight α<sub>j</sub> = 1). This smooths anomalous single-perturbation results and prioritizes words with consistently high impact, so fewer words need perturbing. (source: Xiao et al. 2026, Eq. 4-5)
 </p>
 </div>
 </div>
-<div id="outline-container-orgaebec89" class="outline-3">
-<h3 id="orgaebec89">Constraints</h3>
-<div class="outline-text-3" id="text-orgaebec89">
+<div id="outline-container-orgb236037" class="outline-3">
+<h3 id="orgb236037">Constraints</h3>
+<div class="outline-text-3" id="text-orgb236037">
 <p>
 Stop-word filtering (modifying functional words like &ldquo;of&rdquo;, &ldquo;is&rdquo; is human-detectable and unnatural) and a maximum change rate cap on the fraction of words altered. (source: Xiao et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1202a5f" class="outline-2">
-<h2 id="org1202a5f">Evaluation</h2>
-<div class="outline-text-2" id="text-org1202a5f">
+<div id="outline-container-org9d2cc94" class="outline-2">
+<h2 id="org9d2cc94">Evaluation</h2>
+<div class="outline-text-2" id="text-org9d2cc94">
 <p>
 3 datasets (Financial Phrasebank, AG&rsquo;s News, MR) x 5 threat models (Mistral-7b, Llama2-13b, InternLm2-20b, Yi-34b, Llama2-70b) x 5 baselines (CheckList, StressTest, PWWS, TextBugger, TextFooler). 1,000 examples per setting, 3 repeats, results averaged. Metrics: success rate (S-rate), change rate (C-rate), perplexity (PPL), time overhead (T-O), query number (Q-N). (source: Xiao et al. 2026)
 </p>
 </div>
-<div id="outline-container-org08714ef" class="outline-3">
-<h3 id="org08714ef">RQ1 — test case quality</h3>
-<div class="outline-text-3" id="text-org08714ef">
+<div id="outline-container-orgb4f4611" class="outline-3">
+<h3 id="orgb4f4611">RQ1 — test case quality</h3>
+<div class="outline-text-3" id="text-orgb4f4611">
 <p>
 ABFS average success rate 74.425% vs 68.177% for the best baseline PWWS (+6.248 pp). Largest gap: Llama2-13b on MR, ABFS 98.064% vs StressTest 13.273%. Naturalness: average change rate 1.009% and average perplexity 49.534 across the 15 settings, with PPL 8.161 below the best baseline; on Financial Phrasebank, C-rate 0.914% and PPL 46.548. (source: Xiao et al. 2026, Table 1)
 </p>
 </div>
 </div>
-<div id="outline-container-orgaf15cdf" class="outline-3">
-<h3 id="orgaf15cdf">RQ2 — efficiency</h3>
-<div class="outline-text-3" id="text-orgaf15cdf">
+<div id="outline-container-orge70ae8d" class="outline-3">
+<h3 id="orge70ae8d">RQ2 — efficiency</h3>
+<div class="outline-text-3" id="text-orge70ae8d">
 <p>
 Versus PWWS: average 584.565 seconds faster per successful test case and up to 264.217 fewer threat-model queries per successful case. On Llama2-13b, 159.009 s/item faster. The priority-queue structure and adaptive control cut redundant queries. (source: Xiao et al. 2026, Fig. 5-6)
 </p>
 </div>
 </div>
-<div id="outline-container-org5cb19a1" class="outline-3">
-<h3 id="org5cb19a1">RQ3 — ablation</h3>
-<div class="outline-text-3" id="text-org5cb19a1">
+<div id="outline-container-org957995a" class="outline-3">
+<h3 id="org957995a">RQ3 — ablation</h3>
+<div class="outline-text-3" id="text-org957995a">
 <ul class="org-ul">
 <li>Transformation space: WordNet synonyms beat random character insert/delete/replace (ABFS-RC), random word insert/delete/replace (ABFS-RW), and GloVe-embedding synonyms (ABFS-G) on success rate and naturalness. ABFS-RW is fastest but its success rate is on average 82.192% lower than ABFS.</li>
 <li>Search: BFS alone (w/o Ada) gives 7.815-22.633% higher effectiveness than standard greedy search (w/o BFS&amp;Ada); adaptive WIR adds further effectiveness and efficiency on top. (source: Xiao et al. 2026, Tables 2-3)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org73be824" class="outline-3">
-<h3 id="org73be824">RQ4 — transferability</h3>
-<div class="outline-text-3" id="text-org73be824">
+<div id="outline-container-org2053924" class="outline-3">
+<h3 id="org2053924">RQ4 — transferability</h3>
+<div class="outline-text-3" id="text-org2053924">
 <p>
 ABFS test cases transfer across model scales better than baselines. AG&rsquo;s News, Llama2-13b -&gt; Llama2-70b: ABFS 82.418% transfer success vs 57.732% for TextBugger. Transfer from the larger model to the smaller (70b -&gt; 13b) is generally higher than the reverse. (source: Xiao et al. 2026, Table 4)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd952a4" class="outline-2">
-<h2 id="orgcd952a4">Threats to validity</h2>
-<div class="outline-text-2" id="text-orgcd952a4">
+<div id="outline-container-org5b8c2ed" class="outline-2">
+<h2 id="org5b8c2ed">Threats to validity</h2>
+<div class="outline-text-2" id="text-org5b8c2ed">
 <p>
 Internal: hyperparameter settings (k1, k2, α<sub>j</sub>, max query count) — baselines used original-paper settings, ABFS used fixed values with only max query tuned. External: English-only; text-classification-only, though the authors argue BFS search and adaptive WIR extend to generation tasks by swapping the classification-confidence objective for perplexity or likelihood scores. (source: Xiao et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org02eae7c" class="outline-2">
-<h2 id="org02eae7c">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org02eae7c">
+<div id="outline-container-orgfe14247" class="outline-2">
+<h2 id="orgfe14247">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgfe14247">
 <p>
 ABFS and <a href="aorta.html">AORTA</a> are two search methods for the same problem: joint prompt+example robustness testing framed as combinatorial optimization over goal function / perturbation / constraint / search method. AORTA&rsquo;s Adaptive Beam Search uses an adaptive beam width plus backtracking to a historical best; ABFS replaces the beam with a full priority queue (global rather than beam-local exploration) and adds history-aware WIR. Both report ~74-86% success vs ~68% for PWWS, fewer queries, and more natural outputs. See <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a> for framing against MMT4NL&rsquo;s manually-constructed perturbation MRs. The paper also argues against static offline test datasets (data-leakage risk, fast staleness under LLM iteration) in favor of building test data by live-querying the threat model.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf5aecff" class="outline-2">
-<h2 id="orgf5aecff">Related pages</h2>
-<div class="outline-text-2" id="text-orgf5aecff">
+<div id="outline-container-org3f120cc" class="outline-2">
+<h2 id="org3f120cc">Related pages</h2>
+<div class="outline-text-2" id="text-org3f120cc">
 <ul class="org-ul">
 <li><a href="aorta.html">AORTA (Xiao et al. 2025)</a></li>
 <li><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></li>
@@ -360,7 +360,7 @@ ABFS and <a href="aorta.html">AORTA</a> are two search methods for the same prob
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

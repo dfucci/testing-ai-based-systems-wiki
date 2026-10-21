@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Machine Learning Testing: Survey, Landscapes and Horizons (Zhang et al. 2022)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,12 +203,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7225af0">Why ML testing differs from traditional testing</a></li>
-<li><a href="#org220c1c8">The four-axis taxonomy</a></li>
-<li><a href="#org59f52f9">Key findings</a></li>
-<li><a href="#orga12580a">Fairness taxonomy (notable formal apparatus)</a></li>
-<li><a href="#org9826f5c">Limitation</a></li>
-<li><a href="#orgb650c7b">Related pages</a></li>
+<li><a href="#org8ce3abe">Why ML testing differs from traditional testing</a></li>
+<li><a href="#orgada8cc8">The four-axis taxonomy</a></li>
+<li><a href="#org3358ebf">Key findings</a></li>
+<li><a href="#orgdf660e7">Fairness taxonomy (notable formal apparatus)</a></li>
+<li><a href="#org0550112">Limitation</a></li>
+<li><a href="#org436257a">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -229,17 +229,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org7225af0" class="outline-2">
-<h2 id="org7225af0">Why ML testing differs from traditional testing</h2>
-<div class="outline-text-2" id="text-org7225af0">
+<div id="outline-container-org8ce3abe" class="outline-2">
+<h2 id="org8ce3abe">Why ML testing differs from traditional testing</h2>
+<div class="outline-text-2" id="text-org8ce3abe">
 <p>
 Behavior is data-driven, not manually coded; the system evolves as new data arrives; behavior is emergent and hard to decompose into testable units; and the <a href="oracle-problem.html">oracle problem</a> is acute — there is often no pre-existing correct answer. Table 1 of the paper contrasts ML vs. traditional testing across 7 dimensions (component under test, behavior stability, test input, test oracle, adequacy criteria, false positive rate, who plays &ldquo;tester&rdquo;). (source: Zhang et al. 2022)
 </p>
 </div>
 </div>
-<div id="outline-container-org220c1c8" class="outline-2">
-<h2 id="org220c1c8">The four-axis taxonomy</h2>
-<div class="outline-text-2" id="text-org220c1c8">
+<div id="outline-container-orgada8cc8" class="outline-2">
+<h2 id="orgada8cc8">The four-axis taxonomy</h2>
+<div class="outline-text-2" id="text-orgada8cc8">
 <p>
 (source for this section: Zhang et al. 2022)
 </p>
@@ -252,9 +252,9 @@ Behavior is data-driven, not manually coded; the system evolves as new data arri
 </ol>
 </div>
 </div>
-<div id="outline-container-org59f52f9" class="outline-2">
-<h2 id="org59f52f9">Key findings</h2>
-<div class="outline-text-2" id="text-org59f52f9">
+<div id="outline-container-org3358ebf" class="outline-2">
+<h2 id="org3358ebf">Key findings</h2>
+<div class="outline-text-2" id="text-org3358ebf">
 <p>
 (source for all counts and percentages in this section: Zhang et al. 2022)
 </p>
@@ -268,9 +268,9 @@ Behavior is data-driven, not manually coded; the system evolves as new data arri
 </ul>
 </div>
 </div>
-<div id="outline-container-orga12580a" class="outline-2">
-<h2 id="orga12580a">Fairness taxonomy (notable formal apparatus)</h2>
-<div class="outline-text-2" id="text-orga12580a">
+<div id="outline-container-orgdf660e7" class="outline-2">
+<h2 id="orgdf660e7">Fairness taxonomy (notable formal apparatus)</h2>
+<div class="outline-text-2" id="text-orgdf660e7">
 <p>
 (source for this section: Zhang et al. 2022)
 </p>
@@ -280,17 +280,17 @@ Fairness through unawareness; group fairness (demographic parity, equalized odds
 </p>
 </div>
 </div>
-<div id="outline-container-org9826f5c" class="outline-2">
-<h2 id="org9826f5c">Limitation</h2>
-<div class="outline-text-2" id="text-org9826f5c">
+<div id="outline-container-org0550112" class="outline-2">
+<h2 id="org0550112">Limitation</h2>
+<div class="outline-text-2" id="text-org0550112">
 <p>
 Pre-dates the LLM era entirely — no coverage of prompt-based systems, RAG, or foundation-model-specific evaluation. Every LLM-testing paper in this wiki (<a href="mmt4nl.html">MMT4NL</a>, <a href="metamorphic-testing-llms.html">LLMorph</a>, <a href="aorta.html">AORTA</a>, <a href="reag.html">REAG</a>, <a href="tangent.html">Tangent</a>) extends this taxonomy into territory Zhang et al. couldn&rsquo;t have surveyed.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb650c7b" class="outline-2">
-<h2 id="orgb650c7b">Related pages</h2>
-<div class="outline-text-2" id="text-orgb650c7b">
+<div id="outline-container-org436257a" class="outline-2">
+<h2 id="org436257a">Related pages</h2>
+<div class="outline-text-2" id="text-org436257a">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
 <li><a href="test-adequacy-criteria.html">Test Adequacy Criteria</a></li>
@@ -303,7 +303,7 @@ Pre-dates the LLM era entirely — no coverage of prompt-based systems, RAG, or 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

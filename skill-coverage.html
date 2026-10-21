@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Skill Coverage: A Test Adequacy Metric for Agent Skills (Tan et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3a4ccc6">Motivation</a></li>
-<li><a href="#org524841c">Approach</a></li>
-<li><a href="#orga331104">Findings</a></li>
-<li><a href="#org0de8347">Relation to broader wiki</a></li>
-<li><a href="#org7e1b9c4">Related pages</a></li>
+<li><a href="#org7046fb5">Motivation</a></li>
+<li><a href="#org0976f9e">Approach</a></li>
+<li><a href="#org266dfa5">Findings</a></li>
+<li><a href="#org98f6afd">Relation to broader wiki</a></li>
+<li><a href="#org69cf2c8">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,41 +228,41 @@
 </p>
 
 <hr />
-<div id="outline-container-org3a4ccc6" class="outline-2">
-<h2 id="org3a4ccc6">Motivation</h2>
-<div class="outline-text-2" id="text-org3a4ccc6">
+<div id="outline-container-org7046fb5" class="outline-2">
+<h2 id="org7046fb5">Motivation</h2>
+<div class="outline-text-2" id="text-org7046fb5">
 <p>
 LLM agent &ldquo;skills&rdquo; (reusable procedural knowledge documents that guide agents across tasks) are evaluated almost entirely by task-level outcome — did the agent complete the task? But task success says nothing about <b>which parts of the skill document were actually exercised</b>: an agent can pass a benchmark task while ignoring most of the skill&rsquo;s documented guidance, leaving large parts of the skill effectively untested. This is the <a href="test-adequacy-criteria.html">test adequacy</a> problem, applied for the first time to agent skills specifically rather than to code or models. (source: Tan et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org524841c" class="outline-2">
-<h2 id="org524841c">Approach</h2>
-<div class="outline-text-2" id="text-org524841c">
+<div id="outline-container-org0976f9e" class="outline-2">
+<h2 id="org0976f9e">Approach</h2>
+<div class="outline-text-2" id="text-org0976f9e">
 <p>
 Skill coverage extracts observable behavior <b>constraints</b> from a skill document (documented requirements the skill is supposed to enforce or guide), then checks whether an agent trajectory provides sufficient observable evidence that each constraint was exercised. It deliberately uses a binary cover/not-cover judgment rather than an additional pass/fail outcome label — the metric measures <b>adequacy of testing</b>, not correctness of behavior, which keeps it independent from (and complementary to) task-success metrics. (source: Tan et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orga331104" class="outline-2">
-<h2 id="orga331104">Findings</h2>
-<div class="outline-text-2" id="text-orga331104">
+<div id="outline-container-org266dfa5" class="outline-2">
+<h2 id="org266dfa5">Findings</h2>
+<div class="outline-text-2" id="text-org266dfa5">
 <p>
 Applying skill coverage to SkillsBench shows existing benchmark executions cover only 39.90-43.98% of documented skill behavior constraints. That is: even on a benchmark specifically built to exercise these skills, more than half of the documented guidance is never actually tested by the existing task suite — successful task completion routinely coexists with the majority of a skill&rsquo;s documented behavior going unexercised. (source: Tan et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org0de8347" class="outline-2">
-<h2 id="org0de8347">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org0de8347">
+<div id="outline-container-org98f6afd" class="outline-2">
+<h2 id="org98f6afd">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org98f6afd">
 <p>
 This paper directly fills a gap this wiki had flagged: <a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a> previously noted (citing <a href="tangent.html">Tangent</a>) that &ldquo;neither neuron-coverage-style nor MR-compliance-style adequacy criteria have an agreed equivalent for LLM-based agent systems.&rdquo; Skill coverage is a concrete adequacy criterion purpose-built for agents, though it targets a different artifact (the skill document) than code-coverage or model-coverage criteria target (the implementation). See <a href="agent-skill-coverage.html">Agent Skill Coverage</a> for the concept-level treatment.
 </p>
 </div>
 </div>
-<div id="outline-container-org7e1b9c4" class="outline-2">
-<h2 id="org7e1b9c4">Related pages</h2>
-<div class="outline-text-2" id="text-org7e1b9c4">
+<div id="outline-container-org69cf2c8" class="outline-2">
+<h2 id="org69cf2c8">Related pages</h2>
+<div class="outline-text-2" id="text-org69cf2c8">
 <ul class="org-ul">
 <li><a href="agent-skill-coverage.html">Agent Skill Coverage</a></li>
 <li><a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a></li>
@@ -276,7 +276,7 @@ This paper directly fills a gap this wiki had flagged: <a href="test-adequacy-cr
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

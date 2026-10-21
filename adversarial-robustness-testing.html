@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Adversarial Robustness Testing</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,12 +203,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5b590c6">Local vs. global robustness</a></li>
-<li><a href="#org6b41529">AORTA / Adaptive Beam Search (Xiao et al. 2025)</a></li>
-<li><a href="#org1220694">ABFS / Best-First Search (Xiao et al. 2026)</a></li>
-<li><a href="#orged4523e">Relation to metamorphic testing</a></li>
-<li><a href="#orgd6a4022">Safety-refusal robustness: consistency testing vs. attack optimization</a></li>
-<li><a href="#org4047683">Related pages</a></li>
+<li><a href="#orgc5ed674">Local vs. global robustness</a></li>
+<li><a href="#orgf5dcd11">AORTA / Adaptive Beam Search (Xiao et al. 2025)</a></li>
+<li><a href="#orgc72e1ac">ABFS / Best-First Search (Xiao et al. 2026)</a></li>
+<li><a href="#orgba45113">Relation to metamorphic testing</a></li>
+<li><a href="#org4a84c5c">Safety-refusal robustness: consistency testing vs. attack optimization</a></li>
+<li><a href="#org8b83dea">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -233,17 +233,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org5b590c6" class="outline-2">
-<h2 id="org5b590c6">Local vs. global robustness</h2>
-<div class="outline-text-2" id="text-org5b590c6">
+<div id="outline-container-orgc5ed674" class="outline-2">
+<h2 id="orgc5ed674">Local vs. global robustness</h2>
+<div class="outline-text-2" id="text-orgc5ed674">
 <p>
 Zhang et al. 2022 formalize the distinction (after Katz et al.): <b>local</b> robustness holds if no perturbation within a bound around a given input changes the output; <b>global</b> robustness holds if this is true for (almost) all inputs. Most testing techniques, including those below, are local — they search for a specific counterexample near a specific input. (source: Zhang et al. 2022)
 </p>
 </div>
 </div>
-<div id="outline-container-org6b41529" class="outline-2">
-<h2 id="org6b41529">AORTA / Adaptive Beam Search (Xiao et al. 2025)</h2>
-<div class="outline-text-2" id="text-org6b41529">
+<div id="outline-container-orgf5dcd11" class="outline-2">
+<h2 id="orgf5dcd11">AORTA / Adaptive Beam Search (Xiao et al. 2025)</h2>
+<div class="outline-text-2" id="text-orgf5dcd11">
 <p>
 First automated black-box robustness-testing framework for the <b>combined</b> prompt+example input space of LLM-based NLP software (prior work perturbed prompts and examples separately). Frames testing as combinatorial optimization over goal function / perturbation / constraint / search method.
 </p>
@@ -261,9 +261,9 @@ Result: 86.1% average attack success rate vs. 68.2% for the best baseline (PWWS)
 </p>
 </div>
 </div>
-<div id="outline-container-org1220694" class="outline-2">
-<h2 id="org1220694">ABFS / Best-First Search (Xiao et al. 2026)</h2>
-<div class="outline-text-2" id="text-org1220694">
+<div id="outline-container-orgc72e1ac" class="outline-2">
+<h2 id="orgc72e1ac">ABFS / Best-First Search (Xiao et al. 2026)</h2>
+<div class="outline-text-2" id="text-orgc72e1ac">
 <p>
 Same group, same joint prompt+example framing and goal/perturbation/constraint/search decomposition as AORTA, with the search method changed:
 </p>
@@ -278,25 +278,25 @@ Result: average success rate 74.425% vs 68.177% for the best baseline (PWWS), av
 </p>
 </div>
 </div>
-<div id="outline-container-orged4523e" class="outline-2">
-<h2 id="orged4523e">Relation to metamorphic testing</h2>
-<div class="outline-text-2" id="text-orged4523e">
+<div id="outline-container-orgba45113" class="outline-2">
+<h2 id="orgba45113">Relation to metamorphic testing</h2>
+<div class="outline-text-2" id="text-orgba45113">
 <p>
 MMT4NL&rsquo;s &ldquo;Robustness&rdquo; and &ldquo;Fairness&rdquo; MR categories (Racharak et al. 2026) are effectively lightweight, manually-constructed adversarial perturbations (typos, gender/race swaps) evaluated as pass/fail against a metamorphic relation rather than an optimization objective. Adversarial search (AORTA) and <a href="metamorphic-testing.html">metamorphic testing</a> are two ends of the same spectrum: MT checks a <b>specific</b>, human-defined invariance; adversarial search <b>hunts</b> for any input-space direction that breaks the model. (cross-reference, not directly stated in either source)
 </p>
 </div>
 </div>
-<div id="outline-container-orgd6a4022" class="outline-2">
-<h2 id="orgd6a4022">Safety-refusal robustness: consistency testing vs. attack optimization</h2>
-<div class="outline-text-2" id="text-orgd6a4022">
+<div id="outline-container-org4a84c5c" class="outline-2">
+<h2 id="org4a84c5c">Safety-refusal robustness: consistency testing vs. attack optimization</h2>
+<div class="outline-text-2" id="text-org4a84c5c">
 <p>
 <a href="lest.html">LEST (Moshood et al. 2026)</a> perturbs safety-critical prompts too, but with a different objective from AORTA/ABFS and from jailbreak fuzzers (PAIR, TAP, AutoDAN, FuzzLLM, and others it cites). Its mutations are generated independently of the target model&rsquo;s responses — no loop optimizes toward compliance — and the question is whether <b>documented</b> refusal behavior stays invariant under meaning-preserving edits (lexical substitution, modifier insertion/deletion, person conversion, paraphrase, identity swap). The perturbation constraints echo the ones above (grammaticality, perplexity within 2× of the seed, embedding similarity ≥0.80 then ≥0.85) but the success test differs: a candidate counts as a failure only after humans confirm it still asks for the same harmful thing and the response genuinely complies. Results: both models refuse over 95% of unmodified seeds; of 312 automatically flagged Refuse→Comply flips, 19 (6.1%) were validated, spread over five of seven operators. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org4047683" class="outline-2">
-<h2 id="org4047683">Related pages</h2>
-<div class="outline-text-2" id="text-org4047683">
+<div id="outline-container-org8b83dea" class="outline-2">
+<h2 id="org8b83dea">Related pages</h2>
+<div class="outline-text-2" id="text-org8b83dea">
 <ul class="org-ul">
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="aorta.html">AORTA (Xiao et al. 2025)</a></li>
@@ -311,7 +311,7 @@ MMT4NL&rsquo;s &ldquo;Robustness&rdquo; and &ldquo;Fairness&rdquo; MR categories
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

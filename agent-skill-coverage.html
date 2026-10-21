@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Agent Skill Coverage</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,10 +203,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org408629b">The gap this fills</a></li>
-<li><a href="#orgfdf2e45">What it measures, and what it deliberately doesn&rsquo;t</a></li>
-<li><a href="#orgf89c4ff">Relation to other adequacy criteria in this wiki</a></li>
-<li><a href="#orgce1c5b0">Related pages</a></li>
+<li><a href="#orga1b2b26">The gap this fills</a></li>
+<li><a href="#org2eb12dd">What it measures, and what it deliberately doesn&rsquo;t</a></li>
+<li><a href="#orgf7e2323">Relation to other adequacy criteria in this wiki</a></li>
+<li><a href="#org1907507">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org408629b" class="outline-2">
-<h2 id="org408629b">The gap this fills</h2>
-<div class="outline-text-2" id="text-org408629b">
+<div id="outline-container-orga1b2b26" class="outline-2">
+<h2 id="orga1b2b26">The gap this fills</h2>
+<div class="outline-text-2" id="text-orga1b2b26">
 <p>
 This wiki previously noted (in <a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a>, citing <a href="tangent.html">Tangent</a>) that no accepted <a href="test-adequacy-criteria.html">test adequacy</a> standard exists for LLM-based agent systems — practitioners lean on post-deployment observability instead of a principled &ldquo;have we tested enough&rdquo; criterion. <a href="skill-coverage.html">Skill Coverage (Tan et al. 2026)</a> is the first concrete adequacy criterion purpose-built for one specific agent artifact: the skill document (a reusable procedural-knowledge specification that guides an agent across tasks). (source for the gap: Pan et al. 2026; for the criterion: Tan et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgfdf2e45" class="outline-2">
-<h2 id="orgfdf2e45">What it measures, and what it deliberately doesn&rsquo;t</h2>
-<div class="outline-text-2" id="text-orgfdf2e45">
+<div id="outline-container-org2eb12dd" class="outline-2">
+<h2 id="org2eb12dd">What it measures, and what it deliberately doesn&rsquo;t</h2>
+<div class="outline-text-2" id="text-org2eb12dd">
 <p>
 Skill coverage extracts observable behavior <b>constraints</b> from a skill document, then reports a binary cover/not-cover judgment per constraint based on whether an agent trajectory provides sufficient observable evidence it was exercised. It explicitly does <b>not</b> attach a pass/fail correctness label to each constraint — that decouples &ldquo;was this tested&rdquo; from &ldquo;did the agent do it right,&rdquo; mirroring the same decoupling code-coverage tools make between &ldquo;was this line executed&rdquo; and &ldquo;is this line correct.&rdquo; (source: Tan et al. 2026; the code-coverage analogy is this wiki&rsquo;s gloss)
 </p>
@@ -248,9 +248,9 @@ This decoupling is what exposes the core finding: on SkillsBench, task-level suc
 </p>
 </div>
 </div>
-<div id="outline-container-orgf89c4ff" class="outline-2">
-<h2 id="orgf89c4ff">Relation to other adequacy criteria in this wiki</h2>
-<div class="outline-text-2" id="text-orgf89c4ff">
+<div id="outline-container-orgf7e2323" class="outline-2">
+<h2 id="orgf7e2323">Relation to other adequacy criteria in this wiki</h2>
+<div class="outline-text-2" id="text-orgf7e2323">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -294,9 +294,9 @@ Skill coverage is unusual among these in targeting a natural-language artifact (
 </p>
 </div>
 </div>
-<div id="outline-container-orgce1c5b0" class="outline-2">
-<h2 id="orgce1c5b0">Related pages</h2>
-<div class="outline-text-2" id="text-orgce1c5b0">
+<div id="outline-container-org1907507" class="outline-2">
+<h2 id="org1907507">Related pages</h2>
+<div class="outline-text-2" id="text-org1907507">
 <ul class="org-ul">
 <li><a href="skill-coverage.html">Skill Coverage (Tan et al. 2026)</a></li>
 <li><a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a></li>
@@ -308,7 +308,7 @@ Skill coverage is unusual among these in targeting a natural-language artifact (
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

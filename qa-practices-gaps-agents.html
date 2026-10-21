@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents (Dai et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,21 +203,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4c510f3">Motivation</a></li>
-<li><a href="#orgc48de38">Method</a></li>
-<li><a href="#org4605c1b">Four-layer coding rubric</a></li>
-<li><a href="#orgc0515cb">RQ1 findings: what QA practice is visible</a>
+<li><a href="#orgb1ef93d">Motivation</a></li>
+<li><a href="#org3f953a1">Method</a></li>
+<li><a href="#org76dd2e3">Four-layer coding rubric</a></li>
+<li><a href="#org642ce6e">RQ1 findings: what QA practice is visible</a>
 <ul>
-<li><a href="#org5a16d5f">Execution surfaces (RQ1.1)</a></li>
-<li><a href="#org8a5a0cb">Safeguards (RQ1.2)</a></li>
-<li><a href="#org87400dc">Testing artifacts (RQ1.3)</a></li>
-<li><a href="#org772244d">Risk scenarios (RQ1.4)</a></li>
+<li><a href="#org9b1f213">Execution surfaces (RQ1.1)</a></li>
+<li><a href="#org6db4601">Safeguards (RQ1.2)</a></li>
+<li><a href="#org63058e0">Testing artifacts (RQ1.3)</a></li>
+<li><a href="#orgda90097">Risk scenarios (RQ1.4)</a></li>
 </ul>
 </li>
-<li><a href="#org59be1de">RQ2: undercovered QA problems</a></li>
-<li><a href="#orgd7951c7">Recommendations (source)</a></li>
-<li><a href="#org2d5123b">Relation to existing wiki content</a></li>
-<li><a href="#orgc119948">Related pages</a></li>
+<li><a href="#org9f928b1">RQ2: undercovered QA problems</a></li>
+<li><a href="#org1613bd1">Recommendations (source)</a></li>
+<li><a href="#org2189fa3">Relation to existing wiki content</a></li>
+<li><a href="#org197685f">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -238,25 +238,25 @@
 </p>
 
 <hr />
-<div id="outline-container-org4c510f3" class="outline-2">
-<h2 id="org4c510f3">Motivation</h2>
-<div class="outline-text-2" id="text-org4c510f3">
+<div id="outline-container-orgb1ef93d" class="outline-2">
+<h2 id="orgb1ef93d">Motivation</h2>
+<div class="outline-text-2" id="text-orgb1ef93d">
 <p>
 Agent QA has to ask a question conventional LLM-application QA doesn&rsquo;t: are model-influenced <b>actions</b> (shell commands, file writes, browser navigation, subagent delegation, API calls) bounded, not just whether model <b>outputs</b> are correct. Prior agent-security work (ToolEmu, AgentDojo, AgentSecurityBench) studies attacks/defenses in controlled environments; this paper instead asks what QA practice actually looks like across real, popular open-source agent repos. (source: Dai et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgc48de38" class="outline-2">
-<h2 id="orgc48de38">Method</h2>
-<div class="outline-text-2" id="text-orgc48de38">
+<div id="outline-container-org3f953a1" class="outline-2">
+<h2 id="org3f953a1">Method</h2>
+<div class="outline-text-2" id="text-org3f953a1">
 <p>
 157 GitHub repos (≥100 stars as of May 2026), filtered from 5,852 raw hits, each integrating an LLM/model-compatible API with an executable entry point and ≥1 model-mediated action surface (shell, file, browser, MCP/plugin, persistent state). Corpus: SWE automation 26.8%, personal/multichannel assistants 19.7%, coding assistants 19.1%, research/information agents 13.4%, browser/computer-use automation 12.1%, domain-specific 8.9%. Reviewers manually coded repository-visible artifacts (docs, source, config, tests, deployment files) against an inductively-developed four-layer rubric; labels record that a reviewable mechanism/test <b>exists</b>, not that it is runtime-effective. No inter-rater agreement was computed (open coding refined through reviewer consensus, not a fixed codebook).
 </p>
 </div>
 </div>
-<div id="outline-container-org4605c1b" class="outline-2">
-<h2 id="org4605c1b">Four-layer coding rubric</h2>
-<div class="outline-text-2" id="text-org4605c1b">
+<div id="outline-container-org76dd2e3" class="outline-2">
+<h2 id="org76dd2e3">Four-layer coding rubric</h2>
+<div class="outline-text-2" id="text-org76dd2e3">
 <ul class="org-ul">
 <li><b>Execution surfaces</b> — where the agent can act or be invoked: UI, CLI, API, browser, filesystem, shell, plugin, MCP.</li>
 <li><b>Safeguards</b> — mechanisms constraining, validating, or monitoring model-mediated actions: approval/authorization, sandboxing/isolation, permission/policy controls, secret management/redaction, MCP/plugin registration, browser/domain scoping.</li>
@@ -265,13 +265,13 @@ Agent QA has to ask a question conventional LLM-application QA doesn&rsquo;t: ar
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc0515cb" class="outline-2">
-<h2 id="orgc0515cb">RQ1 findings: what QA practice is visible</h2>
-<div class="outline-text-2" id="text-orgc0515cb">
+<div id="outline-container-org642ce6e" class="outline-2">
+<h2 id="org642ce6e">RQ1 findings: what QA practice is visible</h2>
+<div class="outline-text-2" id="text-org642ce6e">
 </div>
-<div id="outline-container-org5a16d5f" class="outline-3">
-<h3 id="org5a16d5f">Execution surfaces (RQ1.1)</h3>
-<div class="outline-text-3" id="text-org5a16d5f">
+<div id="outline-container-org9b1f213" class="outline-3">
+<h3 id="org9b1f213">Execution surfaces (RQ1.1)</h3>
+<div class="outline-text-3" id="text-org9b1f213">
 <p>
 Every surface family shows near-universal <b>presence</b> of some control, but coverage is inconsistent across overlapping routes: a project (e.g. <code>google-gemini/gemini-cli</code>) may expose CLI, shell, filesystem, browser, web, and MCP paths, each requiring separately-verified controls. Named recurring challenges: inconsistent control across overlapping action paths (96.8% of projects), outbound network/API effects beyond project boundary (99.4%), credential leakage through configuration (98.7%), workspace escape through file access (97.5%), host process/environment modification via commands (94.3%), extension-driven authority expansion via MCP/plugins (80.9%), unreviewed runtime code execution (78.3%), browser session/cross-domain exposure (75.8%).
 </p>
@@ -281,25 +281,25 @@ Practice families used to address these: approval/authorization controls, sandbo
 </p>
 </div>
 </div>
-<div id="outline-container-org8a5a0cb" class="outline-3">
-<h3 id="org8a5a0cb">Safeguards (RQ1.2)</h3>
-<div class="outline-text-3" id="text-org8a5a0cb">
+<div id="outline-container-org6db4601" class="outline-3">
+<h3 id="org6db4601">Safeguards (RQ1.2)</h3>
+<div class="outline-text-3" id="text-org6db4601">
 <p>
 Practices are widely present, but the real issue is <b>context-sensitive coverage</b>: the same agent capability may be treated as acceptable in one setting and risky in another, so the safeguard has to travel with the action, not the surface. Same six challenge categories recur (privileged command execution, file/workspace boundary, secrets/credentials, plugin/MCP authority, browser session/domain scoping) at 75.8-98.7% of projects each.
 </p>
 </div>
 </div>
-<div id="outline-container-org87400dc" class="outline-3">
-<h3 id="org87400dc">Testing artifacts (RQ1.3)</h3>
-<div class="outline-text-3" id="text-org87400dc">
+<div id="outline-container-org63058e0" class="outline-3">
+<h3 id="org63058e0">Testing artifacts (RQ1.3)</h3>
+<div class="outline-text-3" id="text-org63058e0">
 <p>
 Across all 157 projects: 87.3% have conventional tests/specs, 60.5% security/safety-oriented tests, 49.7% evaluation/benchmark/adversarial/red-team-like paths, but only <b>8 projects (5.1%) have prompt-injection/adversarial/jailbreak/red-team testing paths specifically</b>. Conventional tests catch ordinary regressions (parsing, session state, API wrappers); they don&rsquo;t test whether a model-mediated action <b>crosses a boundary it shouldn&rsquo;t</b>. This is the sharpest quantitative gap in the paper.
 </p>
 </div>
 </div>
-<div id="outline-container-org772244d" class="outline-3">
-<h3 id="org772244d">Risk scenarios (RQ1.4)</h3>
-<div class="outline-text-3" id="text-org772244d">
+<div id="outline-container-orgda90097" class="outline-3">
+<h3 id="orgda90097">Risk scenarios (RQ1.4)</h3>
+<div class="outline-text-3" id="text-orgda90097">
 <p>
 Eight risk-chain templates, each an end-to-end path from untrusted input/model decision to a sensitive action or asset:
 </p>
@@ -367,9 +367,9 @@ Two practice categories interrupt these chains: <b>chain-interruption</b> (appro
 </div>
 </div>
 </div>
-<div id="outline-container-org59be1de" class="outline-2">
-<h2 id="org59be1de">RQ2: undercovered QA problems</h2>
-<div class="outline-text-2" id="text-org59be1de">
+<div id="outline-container-org9f928b1" class="outline-2">
+<h2 id="org9f928b1">RQ2: undercovered QA problems</h2>
+<div class="outline-text-2" id="text-org9f928b1">
 <p>
 Table VI (source) reports the largest gaps by dimension — the % of projects exposing a challenge but lacking its matched direct practice:
 </p>
@@ -386,18 +386,18 @@ The paper&rsquo;s synthesis: undercovered QA is <b>agent-specific</b>, not class
 </p>
 </div>
 </div>
-<div id="outline-container-orgd7951c7" class="outline-2">
-<h2 id="orgd7951c7">Recommendations (source)</h2>
-<div class="outline-text-2" id="text-orgd7951c7">
+<div id="outline-container-org1613bd1" class="outline-2">
+<h2 id="org1613bd1">Recommendations (source)</h2>
+<div class="outline-text-2" id="text-org1613bd1">
 <ol class="org-ol">
 <li>Define controls by <b>protected action or asset</b> (a secret, a file, a shell boundary, a browser domain), not by interface — so the same boundary applies whether the route is CLI, API, MCP, browser, or headless/batch.</li>
 <li>Every high-authority route or risk chain should have a failure-oriented test or replay case that fails when the required approval, sandbox, policy, redaction, domain-scope, or extension check is removed.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org2d5123b" class="outline-2">
-<h2 id="org2d5123b">Relation to existing wiki content</h2>
-<div class="outline-text-2" id="text-org2d5123b">
+<div id="outline-container-org2189fa3" class="outline-2">
+<h2 id="org2189fa3">Relation to existing wiki content</h2>
+<div class="outline-text-2" id="text-org2189fa3">
 <p>
 Complements <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> (Tangent + Magalhães): those studies characterize what agent <b>tests</b> look like as written artifacts (shallow, unit-dominated, reasoning-untested); this study characterizes what agent <b>QA coverage</b> looks like at the repository-architecture level (execution surfaces × safeguards × risk chains), largely independent of test quality. The 5.1% adversarial-test figure here is a harder, corpus-wide version of Tangent&rsquo;s 7.5%-NFR-tests finding — both converge on: agent-specific, boundary-crossing failure modes are almost never tested for, regardless of framework or project category.
 </p>
@@ -407,9 +407,9 @@ Overlaps <a href="agent-safety.html">Agent Safety</a>&rsquo;s risk taxonomy (Age
 </p>
 </div>
 </div>
-<div id="outline-container-orgc119948" class="outline-2">
-<h2 id="orgc119948">Related pages</h2>
-<div class="outline-text-2" id="text-orgc119948">
+<div id="outline-container-org197685f" class="outline-2">
+<h2 id="org197685f">Related pages</h2>
+<div class="outline-text-2" id="text-org197685f">
 <ul class="org-ul">
 <li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
 <li><a href="tangent.html">Tangent (Pan et al. 2026)</a></li>
@@ -424,7 +424,7 @@ Overlaps <a href="agent-safety.html">Agent Safety</a>&rsquo;s risk taxonomy (Age
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

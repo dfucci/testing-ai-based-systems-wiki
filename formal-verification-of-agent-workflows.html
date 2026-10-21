@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Formal Verification of Agent Workflows</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbfe5bf9">Where this sits in the agent-testing lifecycle</a></li>
-<li><a href="#org8570060">The three-layer verification stack</a></li>
-<li><a href="#orgfb2aa9f">Why this needs a dependent-type language specifically</a></li>
-<li><a href="#orgc48b854">Relation to broader wiki</a></li>
-<li><a href="#orgfbded00">Related pages</a></li>
+<li><a href="#org46d81ad">Where this sits in the agent-testing lifecycle</a></li>
+<li><a href="#org44f3d96">The three-layer verification stack</a></li>
+<li><a href="#org77ac3b8">Why this needs a dependent-type language specifically</a></li>
+<li><a href="#org5ef31b7">Relation to broader wiki</a></li>
+<li><a href="#org06e2ecb">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-orgbfe5bf9" class="outline-2">
-<h2 id="orgbfe5bf9">Where this sits in the agent-testing lifecycle</h2>
-<div class="outline-text-2" id="text-orgbfe5bf9">
+<div id="outline-container-org46d81ad" class="outline-2">
+<h2 id="org46d81ad">Where this sits in the agent-testing lifecycle</h2>
+<div class="outline-text-2" id="text-org46d81ad">
 <p>
 Most of this wiki&rsquo;s agent-safety material addresses execution-time behavior: <a href="agentspec.html">AgentSpec</a>&rsquo;s <a href="runtime-enforcement.html">runtime enforcement</a> intercepts and constrains agent actions as they happen. <a href="lean4agent.html">Lean4Agent</a> addresses a different point in the lifecycle entirely — <b>before</b> execution, by formally verifying the workflow <b>specification</b> itself, and <b>after</b> execution, by localizing which step&rsquo;s behavior violated a formal assumption.
 </p>
 </div>
 </div>
-<div id="outline-container-org8570060" class="outline-2">
-<h2 id="org8570060">The three-layer verification stack</h2>
-<div class="outline-text-2" id="text-org8570060">
+<div id="outline-container-org44f3d96" class="outline-2">
+<h2 id="org44f3d96">The three-layer verification stack</h2>
+<div class="outline-text-2" id="text-org44f3d96">
 <p>
 (source for this section: Wang et al. 2026)
 </p>
@@ -254,25 +254,25 @@ The key empirical result: this verification is <b>predictive</b> of downstream t
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb2aa9f" class="outline-2">
-<h2 id="orgfb2aa9f">Why this needs a dependent-type language specifically</h2>
-<div class="outline-text-2" id="text-orgfb2aa9f">
+<div id="outline-container-org77ac3b8" class="outline-2">
+<h2 id="org77ac3b8">Why this needs a dependent-type language specifically</h2>
+<div class="outline-text-2" id="text-org77ac3b8">
 <p>
 The paper argues prior formal approaches to agent verification are each too narrow: temporal logic can&rsquo;t express data-dependent properties, SMT-backed contracts struggle with higher-order reasoning, and Hoare-style tool-call contracts only cover individual calls, not whole-workflow consistency. A dependent-type language lets a single predicate system express both per-step contracts and graph-level (whole-workflow) constraints uniformly — the ablation showing graph-level predicates catch the majority of real defects (21/40 workflows flip from failing to passing when graph-level checks are removed) is the paper&rsquo;s strongest evidence for why this expressiveness matters in practice. (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgc48b854" class="outline-2">
-<h2 id="orgc48b854">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgc48b854">
+<div id="outline-container-org5ef31b7" class="outline-2">
+<h2 id="org5ef31b7">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-org5ef31b7">
 <p>
 This is a formal-methods counterpart to <a href="llm-as-judge-evaluation.html">LLM-as-judge evaluation</a> — the paper directly compares its Layer-2 verification against an LLM-judge baseline and finds the LLM judge misses implicit information flows and graph-level constraints that the predicate system catches explicitly (source: Wang et al. 2026). It also complements <a href="agent-evaluation.html">Agent Evaluation</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a>: where those pages catalogue <b>what</b> goes wrong empirically, Lean4Agent offers a mechanism to <b>prove</b> certain classes of failure cannot occur by construction, and to <b>localize</b> the ones that still do.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfbded00" class="outline-2">
-<h2 id="orgfbded00">Related pages</h2>
-<div class="outline-text-2" id="text-orgfbded00">
+<div id="outline-container-org06e2ecb" class="outline-2">
+<h2 id="org06e2ecb">Related pages</h2>
+<div class="outline-text-2" id="text-org06e2ecb">
 <ul class="org-ul">
 <li><a href="lean4agent.html">Lean4Agent (Wang et al. 2026)</a></li>
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
@@ -287,7 +287,7 @@ This is a formal-methods counterpart to <a href="llm-as-judge-evaluation.html">L
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

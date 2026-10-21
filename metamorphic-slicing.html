@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fine-Grained Metamorphic Slicing for Fault Localization (Ren et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgef7901d">Motivation</a></li>
-<li><a href="#org34efd27">Approach</a></li>
-<li><a href="#org5fe1e1c">Findings</a></li>
-<li><a href="#org59d007c">Relation to broader wiki</a></li>
-<li><a href="#org4ea196f">Related pages</a></li>
+<li><a href="#org81f503f">Motivation</a></li>
+<li><a href="#org1072590">Approach</a></li>
+<li><a href="#orgb12603b">Findings</a></li>
+<li><a href="#orgf5c84d4">Relation to broader wiki</a></li>
+<li><a href="#orgb4377b1">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,25 +228,25 @@
 </p>
 
 <hr />
-<div id="outline-container-orgef7901d" class="outline-2">
-<h2 id="orgef7901d">Motivation</h2>
-<div class="outline-text-2" id="text-orgef7901d">
+<div id="outline-container-org81f503f" class="outline-2">
+<h2 id="org81f503f">Motivation</h2>
+<div class="outline-text-2" id="text-org81f503f">
 <p>
 Once <a href="metamorphic-testing.html">metamorphic testing</a> flags a metamorphic-relation (MR) violation, you know <b>that</b> something is wrong, but spectrum-based fault localization (SBFL) still needs to figure out <b>where</b> — and SBFL normally relies on labeled pass/fail test executions, which don&rsquo;t exist here (there&rsquo;s no oracle, only an MR violation across a group of related test cases). Metamorphic slicing addresses this by using the source and follow-up test cases within an MR-violating group as a substitute for pass/fail labels, but prior work treated all such test cases uniformly. (source: Ren et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org34efd27" class="outline-2">
-<h2 id="org34efd27">Approach</h2>
-<div class="outline-text-2" id="text-org34efd27">
+<div id="outline-container-org1072590" class="outline-2">
+<h2 id="org1072590">Approach</h2>
+<div class="outline-text-2" id="text-org1072590">
 <p>
 The paper introduces a fine-grained weighting strategy across three test-case categories within an MR-violating group (MG): statements covered only by the <b>original</b> metamorphic slice (oms), only by the <b>inverse</b> metamorphic slice (ims), or by their <b>difference</b> set (dms). Different weight combinations across 30 risk-evaluation formulas (e.g. Naish2, Wong3, GP13) are empirically compared, evaluated via TOP-N fault-localization effectiveness metrics. (source: Ren et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org5fe1e1c" class="outline-2">
-<h2 id="org5fe1e1c">Findings</h2>
-<div class="outline-text-2" id="text-org5fe1e1c">
+<div id="outline-container-orgb12603b" class="outline-2">
+<h2 id="orgb12603b">Findings</h2>
+<div class="outline-text-2" id="text-orgb12603b">
 <ul class="org-ul">
 <li><b>dms</b> is recommended as the default strategy — it consistently outperforms both <b>oms</b> and <b>ims</b> in the common real-world scenario (over 89% of MR-violating groups in the experiments) where only one test case per group is failure-revealing.</li>
 <li><b>ims</b> only outperforms when most test cases in an MR-violating group are failure-revealing, which the authors show is rare in practice (only 2 of 84 mutants exhibited this extreme case).</li>
@@ -259,17 +259,17 @@ The paper introduces a fine-grained weighting strategy across three test-case ca
 </p>
 </div>
 </div>
-<div id="outline-container-org59d007c" class="outline-2">
-<h2 id="org59d007c">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org59d007c">
+<div id="outline-container-orgf5c84d4" class="outline-2">
+<h2 id="orgf5c84d4">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgf5c84d4">
 <p>
 This is a downstream complement to <a href="metamorphic-testing.html">metamorphic testing</a>: MT tells you <b>that</b> an MR was violated (the oracle substitute), and metamorphic slicing tells you <b>where</b> in the code to look once it was. It&rsquo;s a concrete instance of the <a href="oracle-problem.html">oracle problem</a>&rsquo;s &ldquo;absence of ground truth&rdquo; constraint propagating downstream from detection into diagnosis — the same absence of labeled pass/fail data that makes MT necessary in the first place also makes standard SBFL inapplicable, requiring this bespoke slicing-based substitute.
 </p>
 </div>
 </div>
-<div id="outline-container-org4ea196f" class="outline-2">
-<h2 id="org4ea196f">Related pages</h2>
-<div class="outline-text-2" id="text-org4ea196f">
+<div id="outline-container-orgb4377b1" class="outline-2">
+<h2 id="orgb4377b1">Related pages</h2>
+<div class="outline-text-2" id="text-orgb4377b1">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
@@ -280,7 +280,7 @@ This is a downstream complement to <a href="metamorphic-testing.html">metamorphi
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

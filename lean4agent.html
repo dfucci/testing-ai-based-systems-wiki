@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lean4Agent: Formal Modeling and Verification for Agent Workflow and Trajectory (Wang et al. 2026)</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org772b6b5">Motivation</a></li>
-<li><a href="#org90bf267">Approach</a></li>
-<li><a href="#orgb8d14e7">Findings</a></li>
-<li><a href="#orgac180bb">Relation to broader wiki</a></li>
-<li><a href="#org8d349e3">Related pages</a></li>
+<li><a href="#org253ca0b">Motivation</a></li>
+<li><a href="#org4b5f0d5">Approach</a></li>
+<li><a href="#org5efd74b">Findings</a></li>
+<li><a href="#orgafd073d">Relation to broader wiki</a></li>
+<li><a href="#org78a5778">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,17 +228,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org772b6b5" class="outline-2">
-<h2 id="org772b6b5">Motivation</h2>
-<div class="outline-text-2" id="text-org772b6b5">
+<div id="outline-container-org253ca0b" class="outline-2">
+<h2 id="org253ca0b">Motivation</h2>
+<div class="outline-text-2" id="text-org253ca0b">
 <p>
 Existing agent-verification work is fragmented: LLM-as-judge evaluates outputs but is vulnerable to hallucination/overconfidence; Hoare-style contracts check tool calls; SMT-backed verification checks action-level policies; temporal-logic checkers verify artifacts. Each addresses only part of the problem and is limited by its formal language&rsquo;s expressiveness (temporal logic can&rsquo;t model data-dependent properties; SMT contracts struggle with higher-order reasoning). No prior framework formally models and verifies both agent workflow <b>specification</b> and <b>execution trajectory</b> in one unified system. (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org90bf267" class="outline-2">
-<h2 id="org90bf267">Approach</h2>
-<div class="outline-text-2" id="text-org90bf267">
+<div id="outline-container-org4b5f0d5" class="outline-2">
+<h2 id="org4b5f0d5">Approach</h2>
+<div class="outline-text-2" id="text-org4b5f0d5">
 <p>
 <b>FormalAgentLib</b> is a three-layer extensible Lean4 library:
 </p>
@@ -253,25 +253,25 @@ Existing agent-verification work is fragmented: LLM-as-judge evaluates outputs b
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8d14e7" class="outline-2">
-<h2 id="orgb8d14e7">Findings</h2>
-<div class="outline-text-2" id="text-orgb8d14e7">
+<div id="outline-container-org5efd74b" class="outline-2">
+<h2 id="org5efd74b">Findings</h2>
+<div class="outline-text-2" id="text-org5efd74b">
 <p>
 Evaluated on a hard 50-problem subset of SWE-Bench-Verified and 100 problems from ELAIP-Bench (AI paper understanding) across 5 LLMs: workflows that pass Layer-2 static verification outperform failing ones by 14.80% on SWE-Bench and 9.07% on ELAIP-Bench on average (statistically significant, 95% CI excludes zero in nearly all model/task pairs). LeanEvolve&rsquo;s formal-guided refinement further improves SWE-Bench accuracy by 7.47% on average over the already-verified baseline, and beats pure-LLM evolution by 7.00 percentage points on ELAIP-Bench — predicate-based diagnostics locate the actual defect more precisely than an LLM re-reading its own trajectory. An ablation shows graph-level predicates (not just per-node local predicates) are responsible for most of Layer-2&rsquo;s detection power: removing them flips 21/40 previously-failing workflows to passing verification, i.e. most real defects are workflow-wide consistency violations that a purely local predicate can&rsquo;t see. (source: Wang et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgac180bb" class="outline-2">
-<h2 id="orgac180bb">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgac180bb">
+<div id="outline-container-orgafd073d" class="outline-2">
+<h2 id="orgafd073d">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgafd073d">
 <p>
 Lean4Agent sits at a different point in the agent-testing lifecycle than <a href="agentspec.html">AgentSpec</a>&rsquo;s <a href="runtime-enforcement.html">runtime enforcement</a>: AgentSpec intercepts and constrains actions <b>during</b> execution, while Lean4Agent&rsquo;s Layer 1/2 verify the workflow <b>specification</b> before any execution happens (design-time, correct-by-construction), and its Layer 3 diagnoses failures <b>after</b> execution by localizing which step broke the LLMExec assumption. It is a formal-methods counterpart to <a href="llm-as-judge-evaluation.html">LLM-as-judge evaluation</a> — the paper explicitly compares its Layer-2 verification against a pure LLM-as-judge baseline and finds the LLM judge captures only explicit workflow behavior, missing implicit information flows and graph-level constraints that Lean4Agent&rsquo;s predicate system catches directly.
 </p>
 </div>
 </div>
-<div id="outline-container-org8d349e3" class="outline-2">
-<h2 id="org8d349e3">Related pages</h2>
-<div class="outline-text-2" id="text-org8d349e3">
+<div id="outline-container-org78a5778" class="outline-2">
+<h2 id="org78a5778">Related pages</h2>
+<div class="outline-text-2" id="text-org78a5778">
 <ul class="org-ul">
 <li><a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a></li>
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
@@ -287,7 +287,7 @@ Lean4Agent sits at a different point in the agent-testing lifecycle than <a href
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Safety and Refusal Testing of LLMs</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,25 +203,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4f0c6b6">Scope</a></li>
-<li><a href="#orgff9887d">Shared ingredients</a>
+<li><a href="#orgb3aeb55">Scope</a></li>
+<li><a href="#orgbf0390e">Shared ingredients</a>
 <ul>
-<li><a href="#org42836ec">Seed taxonomy — SORRY-Bench</a></li>
-<li><a href="#orgda1601a">How prompts are generated</a></li>
-<li><a href="#org0c23412">How a failure is decided</a></li>
+<li><a href="#orgc53884c">Seed taxonomy — SORRY-Bench</a></li>
+<li><a href="#org6764e27">How prompts are generated</a></li>
+<li><a href="#org29d5bdc">How a failure is decided</a></li>
 </ul>
 </li>
-<li><a href="#orga57f89f">Side by side</a></li>
-<li><a href="#org4102283">Findings that recur</a>
+<li><a href="#org109299d">Side by side</a></li>
+<li><a href="#org9563c25">Findings that recur</a>
 <ul>
-<li><a href="#orgf27e86a">Guided or varied inputs find failures that fixed benchmarks miss</a></li>
-<li><a href="#orgb954f98">Automated verdicts need validation</a></li>
-<li><a href="#org54f3a31">Counting failures and covering claims are different adequacy notions</a></li>
-<li><a href="#org32b8763">Adversarial testing is rare in practice</a></li>
+<li><a href="#orgd143815">Guided or varied inputs find failures that fixed benchmarks miss</a></li>
+<li><a href="#orge45401b">Automated verdicts need validation</a></li>
+<li><a href="#org88d2766">Counting failures and covering claims are different adequacy notions</a></li>
+<li><a href="#orgb86689b">Adversarial testing is rare in practice</a></li>
 </ul>
 </li>
-<li><a href="#org07cf6df">Gaps in this wiki</a></li>
-<li><a href="#orgdefd4af">Related pages</a></li>
+<li><a href="#org063f1a7">Gaps in this wiki</a></li>
+<li><a href="#org4853ff0">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -244,38 +244,38 @@
 </p>
 
 <hr />
-<div id="outline-container-org4f0c6b6" class="outline-2">
-<h2 id="org4f0c6b6">Scope</h2>
-<div class="outline-text-2" id="text-org4f0c6b6">
+<div id="outline-container-orgb3aeb55" class="outline-2">
+<h2 id="orgb3aeb55">Scope</h2>
+<div class="outline-text-2" id="text-orgb3aeb55">
 <p>
 This page covers <b>model-level</b> safety testing: given a model (or an application that wraps one), find prompts that elicit unsafe output or non-refusal, and judge whether the response is actually a failure. It is distinct from <a href="agent-safety.html">Agent Safety</a>, which concerns constraining the <b>actions</b> of an agent (AgentSpec-style runtime enforcement) rather than the text a model returns. Only two sources here test refusal behavior directly; a third (Dai et al.) shows how rarely comparable tests exist in agent repositories.
 </p>
 </div>
 </div>
-<div id="outline-container-orgff9887d" class="outline-2">
-<h2 id="orgff9887d">Shared ingredients</h2>
-<div class="outline-text-2" id="text-orgff9887d">
+<div id="outline-container-orgbf0390e" class="outline-2">
+<h2 id="orgbf0390e">Shared ingredients</h2>
+<div class="outline-text-2" id="text-orgbf0390e">
 </div>
-<div id="outline-container-org42836ec" class="outline-3">
-<h3 id="org42836ec">Seed taxonomy — SORRY-Bench</h3>
-<div class="outline-text-3" id="text-org42836ec">
+<div id="outline-container-orgc53884c" class="outline-3">
+<h3 id="orgc53884c">Seed taxonomy — SORRY-Bench</h3>
+<div class="outline-text-3" id="text-orgc53884c">
 <p>
 Both direct tests start from the same safety taxonomy. STELLAR-D&rsquo;s SafeQA case study follows ASTRAL&rsquo;s discretization: 13 SORRY-Bench categories as content features, plus style features (persuasion, expression, politeness, slang, anthropomorphism) and perturbation features (word deletions, filler words, homophonic substitutions, character-level noise and typos). (source: Sorokin et al. 2026) LEST selects 15 of SORRY-Bench&rsquo;s 44 categories across three domains (Mental Health and Self-Harm, Harmful and Violent Content, Fairness and Bias) and keeps 97 seed prompts for which refusal is the expected behavior. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgda1601a" class="outline-3">
-<h3 id="orgda1601a">How prompts are generated</h3>
-<div class="outline-text-3" id="text-orgda1601a">
+<div id="outline-container-org6764e27" class="outline-3">
+<h3 id="org6764e27">How prompts are generated</h3>
+<div class="outline-text-3" id="text-org6764e27">
 <ul class="org-ul">
 <li><b>Feedback-driven (STELLAR-D)</b>: a genetic algorithm over discretized feature vectors; an LLM instantiates each vector into a prompt (with five malicious examples retrieved from BeaverTails by RAG), and a continuous 0-1 safety score from an LLM judge is the fitness to minimize. See <a href="search-based-testing.html">Search-Based Testing</a>. (source: Sorokin et al. 2026)</li>
 <li><b>Response-independent mutation (LEST)</b>: seven operators (lexical substitution, modifier insertion/deletion, person conversion, paraphrase, identity swap) fuzz fixed seeds; no loop optimizes toward compliance. (source: Moshood et al. 2026)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0c23412" class="outline-3">
-<h3 id="org0c23412">How a failure is decided</h3>
-<div class="outline-text-3" id="text-org0c23412">
+<div id="outline-container-org29d5bdc" class="outline-3">
+<h3 id="org29d5bdc">How a failure is decided</h3>
+<div class="outline-text-3" id="text-org29d5bdc">
 <ul class="org-ul">
 <li>STELLAR-D uses an LLM judge — continuous during search, a binary GPT-4o-mini oracle (ASTRAL&rsquo;s prompt template) afterward to count failures. The judge was benchmarked across eight LLMs on 1,000 BeaverTails question-answer pairs; see <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>. (source: Sorokin et al. 2026)</li>
 <li>LEST labels each response Refuse/Comply by majority of three guard models, then has three humans check every flagged Refuse→Comply flip for preserved harmful intent and genuine compliance. (source: Moshood et al. 2026)</li>
@@ -283,9 +283,9 @@ Both direct tests start from the same safety taxonomy. STELLAR-D&rsquo;s SafeQA 
 </div>
 </div>
 </div>
-<div id="outline-container-orga57f89f" class="outline-2">
-<h2 id="orga57f89f">Side by side</h2>
-<div class="outline-text-2" id="text-orga57f89f">
+<div id="outline-container-org109299d" class="outline-2">
+<h2 id="org109299d">Side by side</h2>
+<div class="outline-text-2" id="text-org109299d">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -347,46 +347,46 @@ Both direct tests start from the same safety taxonomy. STELLAR-D&rsquo;s SafeQA 
 </p>
 </div>
 </div>
-<div id="outline-container-org4102283" class="outline-2">
-<h2 id="org4102283">Findings that recur</h2>
-<div class="outline-text-2" id="text-org4102283">
+<div id="outline-container-org9563c25" class="outline-2">
+<h2 id="org9563c25">Findings that recur</h2>
+<div class="outline-text-2" id="text-org9563c25">
 </div>
-<div id="outline-container-orgf27e86a" class="outline-3">
-<h3 id="orgf27e86a">Guided or varied inputs find failures that fixed benchmarks miss</h3>
-<div class="outline-text-3" id="text-orgf27e86a">
+<div id="outline-container-orgd143815" class="outline-3">
+<h3 id="orgd143815">Guided or varied inputs find failures that fixed benchmarks miss</h3>
+<div class="outline-text-3" id="text-orgd143815">
 <p>
 On SafeQA, STELLAR variants detect more failures than random, T-wise and ASTRAL baselines (Table 5): e.g. for GPT-4o, 216.17 failures for STELLAR vs. 77.00 for random and 73.00 for ASTRAL; for DeepSeek-V2-16B, 412.33 vs. 198.00 and 198.67. (source: Sorokin et al. 2026; see the inconsistency note on <a href="stellar-d.html">STELLAR-D</a> about which models SafeQA covered.) In LEST, both models refuse over 95% of the unmodified seeds, yet validated mutations contradict 6 of the 9 covered refusal-testable claims. Different mechanisms, same conclusion: a high pass rate on a fixed prompt set says little about robustness. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgb954f98" class="outline-3">
-<h3 id="orgb954f98">Automated verdicts need validation</h3>
-<div class="outline-text-3" id="text-orgb954f98">
+<div id="outline-container-orge45401b" class="outline-3">
+<h3 id="orge45401b">Automated verdicts need validation</h3>
+<div class="outline-text-3" id="text-orge45401b">
 <p>
 LEST&rsquo;s judge-only count of 312 failures falls to 19 after human review, mainly because most flips came from mutations that no longer asked for the same harmful thing (28.2% preserved intent) or from responses the guards called compliant but humans did not. STELLAR-D&rsquo;s SafeQA failure counts rest on an LLM judge whose binary F1 was 0.79 in the paper&rsquo;s judge benchmark. Whether SafeQA&rsquo;s counts would shrink similarly under human review is not tested in either source (cross-reference, not stated in either paper). (source: Moshood et al. 2026; Sorokin et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org54f3a31" class="outline-3">
-<h3 id="org54f3a31">Counting failures and covering claims are different adequacy notions</h3>
-<div class="outline-text-3" id="text-org54f3a31">
+<div id="outline-container-org88d2766" class="outline-3">
+<h3 id="org88d2766">Counting failures and covering claims are different adequacy notions</h3>
+<div class="outline-text-3" id="text-org88d2766">
 <p>
 STELLAR-D measures how varied the failures it found are; LEST measures how much of a model&rsquo;s <b>documented</b> behavior any test touches. They answer complementary questions, and neither alone says whether the model is safe. See <a href="specification-based-testing.html">Specification-Based Testing</a> and <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org32b8763" class="outline-3">
-<h3 id="org32b8763">Adversarial testing is rare in practice</h3>
-<div class="outline-text-3" id="text-org32b8763">
+<div id="outline-container-orgb86689b" class="outline-3">
+<h3 id="orgb86689b">Adversarial testing is rare in practice</h3>
+<div class="outline-text-3" id="text-orgb86689b">
 <p>
 At the repository level, only 8 of 157 popular open-source agent projects (5.1%) contain prompt-injection, adversarial or red-team test paths, and 97.8% of projects lacking that practice lack it entirely. This concerns agent projects rather than model testing, but it shows how little of the testing described above is routine. (source: Dai et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org07cf6df" class="outline-2">
-<h2 id="org07cf6df">Gaps in this wiki</h2>
-<div class="outline-text-2" id="text-org07cf6df">
+<div id="outline-container-org063f1a7" class="outline-2">
+<h2 id="org063f1a7">Gaps in this wiki</h2>
+<div class="outline-text-2" id="text-org063f1a7">
 <ul class="org-ul">
 <li>No source here tests refusal in multi-turn dialogue (the closest, <a href="mortar.html">MORTAR</a>, tests multi-turn dialogue systems generally, not safety refusals specifically) or in agentic tool-use settings.</li>
 <li>Jailbreak optimizers (PAIR, TAP, AutoDAN, FuzzLLM and others) appear only as work cited in LEST; none has a raw source here, so their reported effectiveness is not covered.</li>
@@ -394,9 +394,9 @@ At the repository level, only 8 of 157 popular open-source agent projects (5.1%)
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdefd4af" class="outline-2">
-<h2 id="orgdefd4af">Related pages</h2>
-<div class="outline-text-2" id="text-orgdefd4af">
+<div id="outline-container-org4853ff0" class="outline-2">
+<h2 id="org4853ff0">Related pages</h2>
+<div class="outline-text-2" id="text-org4853ff0">
 <ul class="org-ul">
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="stellar-d.html">STELLAR-D (Sorokin et al. 2026)</a></li>
@@ -413,7 +413,7 @@ At the repository level, only 8 of 157 popular open-source agent projects (5.1%)
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

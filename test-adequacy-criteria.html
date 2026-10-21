@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Test Adequacy Criteria for ML Systems</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,14 +203,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org16f89b2">Why code coverage fails for ML</a></li>
-<li><a href="#orgfaa5b73">Neuron-activation-based criteria (deep learning)</a></li>
-<li><a href="#orga1ba4b5">Property-oriented adequacy: metamorphic relation compliance</a></li>
-<li><a href="#orgf459b12">Mutation score in the LLM era</a></li>
-<li><a href="#orgd662836">Potential vs. effective kill: decomposing mutation-style scores</a></li>
-<li><a href="#orgacede6b">Adequacy of what? Suites, rubrics, and documented claims</a></li>
-<li><a href="#org214b4f2">Gap partially filled: agent skill coverage</a></li>
-<li><a href="#org5845070">Related pages</a></li>
+<li><a href="#org763d9be">Why code coverage fails for ML</a></li>
+<li><a href="#org3d7048a">Neuron-activation-based criteria (deep learning)</a></li>
+<li><a href="#org22799a4">Property-oriented adequacy: metamorphic relation compliance</a></li>
+<li><a href="#orgdce0b37">Mutation score in the LLM era</a></li>
+<li><a href="#org6312223">Potential vs. effective kill: decomposing mutation-style scores</a></li>
+<li><a href="#orgabcdd95">Adequacy of what? Suites, rubrics, and documented claims</a></li>
+<li><a href="#org4deb66a">Gap partially filled: agent skill coverage</a></li>
+<li><a href="#orgcf7a537">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -239,17 +239,17 @@
 </p>
 
 <hr />
-<div id="outline-container-org16f89b2" class="outline-2">
-<h2 id="org16f89b2">Why code coverage fails for ML</h2>
-<div class="outline-text-2" id="text-org16f89b2">
+<div id="outline-container-org763d9be" class="outline-2">
+<h2 id="org763d9be">Why code coverage fails for ML</h2>
+<div class="outline-text-2" id="text-org763d9be">
 <p>
 ML code is mostly library calls into a training loop; the actual decision logic lives in learned weights, not source lines. Code coverage of the training script says almost nothing about whether the model&rsquo;s decision space has been exercised. Riccio et al. 2020 found adequacy criteria the <b>second</b>-most-studied open problem in their mapping (12/70 papers, 17%), just behind the oracle problem (13/70, 19%). Separately, a broader count of papers that use or propose <b>any</b> adequacy criterion (not just papers where it&rsquo;s the focal open problem) is 24/70. (source: Riccio et al. 2020)
 </p>
 </div>
 </div>
-<div id="outline-container-orgfaa5b73" class="outline-2">
-<h2 id="orgfaa5b73">Neuron-activation-based criteria (deep learning)</h2>
-<div class="outline-text-2" id="text-orgfaa5b73">
+<div id="outline-container-org3d7048a" class="outline-2">
+<h2 id="org3d7048a">Neuron-activation-based criteria (deep learning)</h2>
+<div class="outline-text-2" id="text-org3d7048a">
 <ul class="org-ul">
 <li><b>Neuron coverage</b> (Pei et al. 2017, DeepXplore) — fraction of neurons activated above a threshold across the test suite.</li>
 <li><b>k-multisection neuron coverage (KMNC)</b> and <b>neuron boundary coverage</b> (DeepGauge) — refine neuron coverage into activation-range bins.</li>
@@ -261,33 +261,33 @@ ML code is mostly library calls into a training loop; the actual decision logic 
 </p>
 </div>
 </div>
-<div id="outline-container-orga1ba4b5" class="outline-2">
-<h2 id="orga1ba4b5">Property-oriented adequacy: metamorphic relation compliance</h2>
-<div class="outline-text-2" id="text-orga1ba4b5">
+<div id="outline-container-org22799a4" class="outline-2">
+<h2 id="org22799a4">Property-oriented adequacy: metamorphic relation compliance</h2>
+<div class="outline-text-2" id="text-org22799a4">
 <p>
 METTLE proposes an alternative adequacy criterion that isn&rsquo;t about <b>coverage</b> of internal structure at all: adequacy is compliance with a weighted set of user-defined <a href="metamorphic-testing.html">metamorphic relations</a> (MRs), summarized via violation rate (VR) and reclustering percentage (RP). This reframes &ldquo;sufficient testing&rdquo; as &ldquo;sufficient behavioral-property satisfaction,&rdquo; and doubles as a criterion for <b>choosing between</b> candidate clustering systems, not just testing one. (source: METTLE)
 </p>
 </div>
 </div>
-<div id="outline-container-orgf459b12" class="outline-2">
-<h2 id="orgf459b12">Mutation score in the LLM era</h2>
-<div class="outline-text-2" id="text-orgf459b12">
+<div id="outline-container-orgdce0b37" class="outline-2">
+<h2 id="orgdce0b37">Mutation score in the LLM era</h2>
+<div class="outline-text-2" id="text-orgdce0b37">
 <p>
 Mutation score (fraction of injected mutants killed) remains a live adequacy criterion, but two 2025-2026 papers extend it beyond classic syntax-based mutation: LLMs can generate semantically novel mutants from a program&rsquo;s natural-language <b>intent</b> rather than its syntax, and LLM agents can consume mutation-analysis feedback directly to strengthen the assertions they generate. Two later 2026 papers extend it further — to mutants conditioned on the existing tests, and to rubrics for LLM-judged evaluation (see &ldquo;Adequacy of what?&rdquo; below). See <a href="mutation-testing-for-llm-systems.html">Mutation Testing for LLM Systems</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd662836" class="outline-2">
-<h2 id="orgd662836">Potential vs. effective kill: decomposing mutation-style scores</h2>
-<div class="outline-text-2" id="text-orgd662836">
+<div id="outline-container-org6312223" class="outline-2">
+<h2 id="org6312223">Potential vs. effective kill: decomposing mutation-style scores</h2>
+<div class="outline-text-2" id="text-org6312223">
 <p>
 A single &ldquo;kill rate&rdquo; conflates two different things: whether a suite&rsquo;s <b>inputs</b> could distinguish a faulty implementation, and whether the suite&rsquo;s <b>expected outputs</b> are also correct enough to actually flag the fault. <a href="oracle-conversion.html">Liang et al. 2026 (oracle conversion)</a> formalize this split as potential kill (O, input-side) vs. effective kill (K, output-side), with the gap O−K quantifying &ldquo;conversion loss.&rdquo; In their specification-based test-generation setting, correctness-only reward training raised effective kill while <b>shrinking</b> potential kill below baseline — a joint reward is needed to avoid this trade. Any adequacy metric built on mutant-killing (not just this paper&rsquo;s setting) is vulnerable to the same conflation if it doesn&rsquo;t separately track whether reported kills reflect correct oracle judgments.
 </p>
 </div>
 </div>
-<div id="outline-container-orgacede6b" class="outline-2">
-<h2 id="orgacede6b">Adequacy of what? Suites, rubrics, and documented claims</h2>
-<div class="outline-text-2" id="text-orgacede6b">
+<div id="outline-container-orgabcdd95" class="outline-2">
+<h2 id="orgabcdd95">Adequacy of what? Suites, rubrics, and documented claims</h2>
+<div class="outline-text-2" id="text-orgabcdd95">
 <p>
 Three 2026 papers apply the same &ldquo;what did the tests miss?&rdquo; question to different artifacts:
 </p>
@@ -303,17 +303,17 @@ LEST&rsquo;s claim coverage and <a href="skill-coverage.html">Skill Coverage</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org214b4f2" class="outline-2">
-<h2 id="org214b4f2">Gap partially filled: agent skill coverage</h2>
-<div class="outline-text-2" id="text-org214b4f2">
+<div id="outline-container-org4deb66a" class="outline-2">
+<h2 id="org4deb66a">Gap partially filled: agent skill coverage</h2>
+<div class="outline-text-2" id="text-org4deb66a">
 <p>
 This wiki previously noted no agreed adequacy standard existed for LLM-based agent systems — Tangent (Pan et al. 2026) reports practitioners have no accepted adequacy standard for agents and lean on post-deployment observability instead (see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>). <a href="skill-coverage.html">Skill Coverage (Tan et al. 2026)</a> is a first concrete step: a binary cover/not-cover adequacy criterion for agent <b>skill documents</b> specifically (not the agent&rsquo;s code or weights), showing existing benchmark executions cover only 39.90-43.98% of documented skill behavior. This doesn&rsquo;t close the broader gap — adequacy for the agent&rsquo;s <b>decision-making</b> itself, as opposed to its skill specifications, remains open — but it establishes that agent-adequacy criteria are tractable to define. See <a href="agent-skill-coverage.html">Agent Skill Coverage</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org5845070" class="outline-2">
-<h2 id="org5845070">Related pages</h2>
-<div class="outline-text-2" id="text-org5845070">
+<div id="outline-container-orgcf7a537" class="outline-2">
+<h2 id="orgcf7a537">Related pages</h2>
+<div class="outline-text-2" id="text-orgcf7a537">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="mettle.html">METTLE</a></li>
@@ -333,7 +333,7 @@ This wiki previously noted no agreed adequacy standard existed for LLM-based age
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>

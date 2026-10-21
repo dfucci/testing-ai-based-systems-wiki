@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-19 Mon 09:39 -->
+<!-- 2026-10-21 Wed 11:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Agent Failure Modes</title>
@@ -194,7 +194,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" href="../other/mystyle.css" type="text/css"/>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -203,17 +203,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga4da782">Taxonomy (from TRAJEVAL)</a>
+<li><a href="#orgf5ef123">Taxonomy (from TRAJEVAL)</a>
 <ul>
-<li><a href="#orgc185428">Search failure (search recall &lt; 0.5)</a></li>
-<li><a href="#org4257da2">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</a></li>
-<li><a href="#org20a30fc">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</a></li>
+<li><a href="#org17d9215">Search failure (search recall &lt; 0.5)</a></li>
+<li><a href="#orgaff5aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</a></li>
+<li><a href="#orgcb29a4b">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</a></li>
 </ul>
 </li>
-<li><a href="#org4acfd5d">Model-Specific Patterns</a></li>
-<li><a href="#org8cdb888">Illustrative Case Study</a></li>
-<li><a href="#orge91e68f">Robustness of Reference Solutions</a></li>
-<li><a href="#org9ef7e21">Related pages</a></li>
+<li><a href="#org93c5e0f">Model-Specific Patterns</a></li>
+<li><a href="#orgcc8664b">Illustrative Case Study</a></li>
+<li><a href="#orgb80a101">Robustness of Reference Solutions</a></li>
+<li><a href="#orgc73de7a">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -234,16 +234,16 @@
 </p>
 
 <hr />
-<div id="outline-container-orga4da782" class="outline-2">
-<h2 id="orga4da782">Taxonomy (from TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-orga4da782">
+<div id="outline-container-orgf5ef123" class="outline-2">
+<h2 id="orgf5ef123">Taxonomy (from TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-orgf5ef123">
 <p>
 <a href="trajeval.html">TRAJEVAL</a> identifies three fundamental failure modes based on which stage&rsquo;s recall is low (source: Kim et al. 2026):
 </p>
 </div>
-<div id="outline-container-orgc185428" class="outline-3">
-<h3 id="orgc185428">Search failure (search recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-orgc185428">
+<div id="outline-container-org17d9215" class="outline-3">
+<h3 id="org17d9215">Search failure (search recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-org17d9215">
 <p>
 Agent fails to locate relevant files within the repository. The correct files are never opened.
 </p>
@@ -255,9 +255,9 @@ Agent fails to locate relevant files within the repository. The correct files ar
 </ul>
 </div>
 </div>
-<div id="outline-container-org4257da2" class="outline-3">
-<h3 id="org4257da2">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-org4257da2">
+<div id="outline-container-orgaff5aa8" class="outline-3">
+<h3 id="orgaff5aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-orgaff5aa8">
 <p>
 Agent finds the correct files but examines the wrong functions within them.
 </p>
@@ -269,9 +269,9 @@ Agent finds the correct files but examines the wrong functions within them.
 </ul>
 </div>
 </div>
-<div id="outline-container-org20a30fc" class="outline-3">
-<h3 id="org20a30fc">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-org20a30fc">
+<div id="outline-container-orgcb29a4b" class="outline-3">
+<h3 id="orgcb29a4b">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-orgcb29a4b">
 <p>
 Agent comprehends the relevant context but targets incorrect locations for modification.
 </p>
@@ -284,9 +284,9 @@ Agent comprehends the relevant context but targets incorrect locations for modif
 </div>
 </div>
 </div>
-<div id="outline-container-org4acfd5d" class="outline-2">
-<h2 id="org4acfd5d">Model-Specific Patterns</h2>
-<div class="outline-text-2" id="text-org4acfd5d">
+<div id="outline-container-org93c5e0f" class="outline-2">
+<h2 id="org93c5e0f">Model-Specific Patterns</h2>
+<div class="outline-text-2" id="text-org93c5e0f">
 <p>
 From TRAJEVAL analysis on SWE-bench Verified (SWE-Agent architecture) (source: Kim et al. 2026):
 </p>
@@ -334,9 +334,9 @@ These patterns enable <b>targeted</b> interventions: the same intervention that 
 </p>
 </div>
 </div>
-<div id="outline-container-org8cdb888" class="outline-2">
-<h2 id="org8cdb888">Illustrative Case Study</h2>
-<div class="outline-text-2" id="text-org8cdb888">
+<div id="outline-container-orgcc8664b" class="outline-2">
+<h2 id="orgcc8664b">Illustrative Case Study</h2>
+<div class="outline-text-2" id="text-orgcc8664b">
 <p>
 GPT-5 on <code>django/django-11400</code> (requires modifying 4 functions) (source: Kim et al. 2026):
 </p>
@@ -364,9 +364,9 @@ Both show as &ldquo;failed&rdquo; in Pass@1. TRAJEVAL distinguishes them.
 </p>
 </div>
 </div>
-<div id="outline-container-orge91e68f" class="outline-2">
-<h2 id="orge91e68f">Robustness of Reference Solutions</h2>
-<div class="outline-text-2" id="text-orge91e68f">
+<div id="outline-container-orgb80a101" class="outline-2">
+<h2 id="orgb80a101">Robustness of Reference Solutions</h2>
+<div class="outline-text-2" id="text-orgb80a101">
 <p>
 A concern: if multiple valid solutions exist, reference-patch comparison may misclassify. TRAJEVAL checked 334 instances resolved by 2+ models (source: Kim et al. 2026):
 </p>
@@ -381,9 +381,9 @@ SWE-bench issues have well-defined canonical fix locations, validating the refer
 </p>
 </div>
 </div>
-<div id="outline-container-org9ef7e21" class="outline-2">
-<h2 id="org9ef7e21">Related pages</h2>
-<div class="outline-text-2" id="text-org9ef7e21">
+<div id="outline-container-orgc73de7a" class="outline-2">
+<h2 id="orgc73de7a">Related pages</h2>
+<div class="outline-text-2" id="text-orgc73de7a">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
@@ -396,7 +396,7 @@ SWE-bench issues have well-defined canonical fix locations, validating the refer
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-19 Mon 09:39</p>
+<p class="date">Created: 2026-10-21 Wed 11:29</p>
 </div>
 </body>
 </html>
