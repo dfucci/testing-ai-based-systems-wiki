@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Specification-Based Testing of AI Systems</title>
@@ -203,22 +203,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org06380a7">Core pattern</a></li>
-<li><a href="#org24c820e">Instances in this wiki</a></li>
-<li><a href="#org7fa8b99">What the comparison shows</a>
+<li><a href="#org00fa481">Core pattern</a></li>
+<li><a href="#orgdc6e933">Instances in this wiki</a></li>
+<li><a href="#org297b25c">What the comparison shows</a>
 <ul>
-<li><a href="#orgda20cd8">Coverage of documented behavior is lower than task success suggests</a></li>
-<li><a href="#orge08d3d2">The oracle depends on the specification element</a></li>
-<li><a href="#org9ac6c3d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</a></li>
-<li><a href="#org2d4e7c2">Translation from specification to test is still manual</a></li>
+<li><a href="#orgc452c83">Coverage of documented behavior is lower than task success suggests</a></li>
+<li><a href="#orgccc7c3b">The oracle depends on the specification element</a></li>
+<li><a href="#org232237d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</a></li>
+<li><a href="#orgbd201e2">Translation from specification to test: manual in LEST, automated in AgenTest</a></li>
+<li><a href="#orgc7938fd">The specification may have to be mined, and mined rules are the least reliable</a></li>
 </ul>
 </li>
-<li><a href="#org8e25d23">Related pages</a></li>
+<li><a href="#orge259f0b">Related pages</a></li>
 </ul>
 </div>
 </div>
 <p>
-<b>Summary</b>: A family of approaches that take a written specification — safety claims, requirements, a skill document, a task description, a formal workflow — as the source of the tests, the oracle, or the adequacy measure, rather than starting from an arbitrary benchmark.
+<b>Summary</b>: A family of approaches that take a written specification — safety claims, requirements, a skill document, a task description, a formal workflow, an agent&rsquo;s system prompt and tool definitions — as the source of the tests, the oracle, or the adequacy measure, rather than starting from an arbitrary benchmark.
 </p>
 
 <p>
@@ -231,16 +232,17 @@
 <li><a href="../raw/Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf">Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf</a></li>
 <li><a href="../raw/Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf">Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf</a></li>
 <li><a href="../raw/Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf">Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf</a></li>
+<li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-org06380a7" class="outline-2">
-<h2 id="org06380a7">Core pattern</h2>
-<div class="outline-text-2" id="text-org06380a7">
+<div id="outline-container-org00fa481" class="outline-2">
+<h2 id="org00fa481">Core pattern</h2>
+<div class="outline-text-2" id="text-org00fa481">
 <p>
 Four questions recur whenever a specification drives testing:
 </p>
@@ -257,9 +259,9 @@ The approaches below answer these differently.
 </p>
 </div>
 </div>
-<div id="outline-container-org24c820e" class="outline-2">
-<h2 id="org24c820e">Instances in this wiki</h2>
-<div class="outline-text-2" id="text-org24c820e">
+<div id="outline-container-orgdc6e933" class="outline-2">
+<h2 id="orgdc6e933">Instances in this wiki</h2>
+<div class="outline-text-2" id="text-orgdc6e933">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -323,6 +325,14 @@ The approaches below answer these differently.
 <td class="org-left">Structural and semantic predicates</td>
 <td class="org-left">Lean-checkable predicates, external validators, LLM judge for natural-language predicates</td>
 </tr>
+
+<tr>
+<td class="org-left"><a href="agentest.html">AgenTest (Quan 2026)</a></td>
+<td class="org-left">A tool-using agent&rsquo;s system prompt, tool definitions and LLM domain knowledge, mined and refined into Given–When–Then scenarios</td>
+<td class="org-left">Generated automatically: a driver builds the database state each Given needs, a simulated user, and a domain-independent interaction strategy</td>
+<td class="org-left">None beyond running each refined specification (504 of 551 became test cases)</td>
+<td class="org-left">Assertions fixed before execution: deterministic predicates over tool calls and state, plus LLM judgments that must quote the trace</td>
+</tr>
 </tbody>
 </table>
 
@@ -331,52 +341,69 @@ The approaches below answer these differently.
 </p>
 </div>
 </div>
-<div id="outline-container-org7fa8b99" class="outline-2">
-<h2 id="org7fa8b99">What the comparison shows</h2>
-<div class="outline-text-2" id="text-org7fa8b99">
+<div id="outline-container-org297b25c" class="outline-2">
+<h2 id="org297b25c">What the comparison shows</h2>
+<div class="outline-text-2" id="text-org297b25c">
 </div>
-<div id="outline-container-orgda20cd8" class="outline-3">
-<h3 id="orgda20cd8">Coverage of documented behavior is lower than task success suggests</h3>
-<div class="outline-text-3" id="text-orgda20cd8">
+<div id="outline-container-orgc452c83" class="outline-3">
+<h3 id="orgc452c83">Coverage of documented behavior is lower than task success suggests</h3>
+<div class="outline-text-3" id="text-orgc452c83">
 <p>
 Skill Coverage finds that benchmark runs exercise only about 40-44% of a skill&rsquo;s documented constraints; LEST finds that 58.6% of prompt-testable safety claims have any applicable benchmark prompt, even though both models pass over 95% of the unmodified prompts. The units differ (constraints in a skill document vs. claims in a system card), so the figures are not comparable as numbers. The shared lesson is that pass rate on a benchmark and coverage of the specification are separate quantities. (source: Tan et al. 2026; Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orge08d3d2" class="outline-3">
-<h3 id="orge08d3d2">The oracle depends on the specification element</h3>
-<div class="outline-text-3" id="text-orge08d3d2">
+<div id="outline-container-orgccc7c3b" class="outline-3">
+<h3 id="orgccc7c3b">The oracle depends on the specification element</h3>
+<div class="outline-text-3" id="text-orgccc7c3b">
 <p>
 LEST shows that a prompt-testable claim does not automatically have a refusal oracle: a claim saying the model occasionally complies with misuse makes a Refuse→Comply flip consistent with the claim. Oracle applicability had the lowest annotator agreement of any LEST step (κ = 0.457). REAG makes a related point from the other side: a generated oracle can itself be wrong, so its judge needs calibration (see <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>). (source: Moshood et al. 2026; Wang et al. 2026)
 </p>
+
+<p>
+AgenTest splits the oracle by the kind of evidence a specification element has: ownership, argument values and call order become deterministic predicates (492 of 579 default-strategy checks, 85%), while confirmation and disclosure rules get an LLM judgment that must quote the trace. (source: Quan et al. 2026)
+</p>
 </div>
 </div>
-<div id="outline-container-org9ac6c3d" class="outline-3">
-<h3 id="org9ac6c3d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</h3>
-<div class="outline-text-3" id="text-org9ac6c3d">
+<div id="outline-container-org232237d" class="outline-3">
+<h3 id="org232237d">Reporting &ldquo;not covered&rdquo; apart from &ldquo;no counterexample&rdquo;</h3>
+<div class="outline-text-3" id="text-org232237d">
 <p>
 LEST reports three claim states — not covered, covered with no counterexample observed, counterexample found — and says the middle state is not verification. This keeps absence of failure from being read as presence of coverage, which is the same distinction <a href="test-adequacy-criteria.html">test adequacy</a> draws between &ldquo;tests passed&rdquo; and &ldquo;tests were sufficient&rdquo;.
 </p>
 </div>
 </div>
-<div id="outline-container-org2d4e7c2" class="outline-3">
-<h3 id="org2d4e7c2">Translation from specification to test is still manual</h3>
-<div class="outline-text-3" id="text-org2d4e7c2">
+<div id="outline-container-orgbd201e2" class="outline-3">
+<h3 id="orgbd201e2">Translation from specification to test: manual in LEST, automated in AgenTest</h3>
+<div class="outline-text-3" id="text-orgbd201e2">
 <p>
-All of LEST&rsquo;s claim identification, testability, claim-to-prompt mapping and oracle-applicability judgments were manual (three annotators, κ 0.457-0.912). In REAG, retrieval precision rather than oracle generation quality is the dominant bottleneck for oracle correctness. Automating the specification-to-test step is the open problem both identify. (source: Moshood et al. 2026; Wang et al. 2026)
+All of LEST&rsquo;s claim identification, testability, claim-to-prompt mapping and oracle-applicability judgments were manual (three annotators, κ 0.457-0.912). In REAG, retrieval precision rather than oracle generation quality is the dominant bottleneck for oracle correctness. Both identify automating the specification-to-test step as the open problem. (source: Moshood et al. 2026; Wang et al. 2026)
+</p>
+
+<p>
+<a href="agentest.html">AgenTest</a> automates the step end to end for tool-using agents: LLM-mined specifications, a driver that builds the database state and simulated user each Given needs, and oracle assertions fixed before execution. The cost moves to specification correctness: 88.0% of its 551 refined specifications were correct (80.6% of those inferred from domain knowledge), and the 66 wrong ones (30 unsupported by the source, 19 contradicting it, 17 missing a condition of the rule) include 26 of the 47 specifications for which no test driver could be built. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgc7938fd" class="outline-3">
+<h3 id="orgc7938fd">The specification may have to be mined, and mined rules are the least reliable</h3>
+<div class="outline-text-3" id="text-orgc7938fd">
+<p>
+AgenTest&rsquo;s agents come without a requirements document. Tool definitions and domain knowledge supply 56% of the retained specifications, and rules stated in no artifact account for 50.6% (DeepSeek-V4-Flash) and 36.4% (Qwen-3.8-Flash) of the bugs found, including almost all unauthorized-action bugs (8 of 9 and 9 of 10). The first question above (&ldquo;which parts are testable at all?&rdquo;) also shows up here: 21 specifications could not be tested because the environment cannot hold the state they assume. (source: Quan et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8e25d23" class="outline-2">
-<h2 id="org8e25d23">Related pages</h2>
-<div class="outline-text-2" id="text-org8e25d23">
+<div id="outline-container-orge259f0b" class="outline-2">
+<h2 id="orge259f0b">Related pages</h2>
+<div class="outline-text-2" id="text-orge259f0b">
 <ul class="org-ul">
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="reag.html">REAG (Wang et al. 2026)</a></li>
 <li><a href="skill-coverage.html">Skill Coverage (Tan et al. 2026)</a></li>
 <li><a href="oracle-conversion.html">Oracle Conversion (Liang et al. 2026)</a></li>
 <li><a href="lean4agent.html">Lean4Agent (Wang et al. 2026)</a></li>
+<li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
 <li><a href="agentspec.html">AgentSpec</a></li>
 <li><a href="test-adequacy-criteria.html">Test Adequacy Criteria for ML Systems</a></li>
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
@@ -389,7 +416,7 @@ All of LEST&rsquo;s claim identification, testability, claim-to-prompt mapping a
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

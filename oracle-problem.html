@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Oracle Problem in ML/AI Testing</title>
@@ -203,13 +203,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcce8bf3">Definition</a></li>
-<li><a href="#orga442c13">Why it gets worse for LLMs</a></li>
-<li><a href="#orge841410">Solution strategies documented in this wiki</a></li>
-<li><a href="#orgabab8e6">Known pitfall: naive single-reference pseudo-oracles</a></li>
-<li><a href="#org2e0630c">Known pitfall: correct oracles can still fail to convert opportunity into detection</a></li>
-<li><a href="#orgb6b1102">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</a></li>
-<li><a href="#org150f2ff">Related pages</a></li>
+<li><a href="#org5f5728f">Definition</a></li>
+<li><a href="#orgb67b3db">Why it gets worse for LLMs</a></li>
+<li><a href="#org011cc2c">Solution strategies documented in this wiki</a></li>
+<li><a href="#org9ce469f">Known pitfall: naive single-reference pseudo-oracles</a></li>
+<li><a href="#orgb6c015f">Known pitfall: correct oracles can still fail to convert opportunity into detection</a></li>
+<li><a href="#org7ce675f">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</a></li>
+<li><a href="#org548bce5">Known pitfall: final-state oracles miss process violations</a></li>
+<li><a href="#org0e42a66">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -234,16 +235,18 @@
 <li><a href="../raw/Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf">Liang et al. - 2026 - Correct Tests Are Not Enough Measuring and Training Oracle Conversion in Specification-Based Test G.pdf</a></li>
 <li><a href="../raw/Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf">Kiele et al. - 2026 - Beyond Rule-Based Mutation Testing Test-Aware Mutant Generation Using Large Language Models.pdf</a></li>
 <li><a href="../raw/Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf">Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf</a></li>
+<li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
+<li><a href="../raw/Ludwick and Hsiao - 2026 - SANE Automated Scorer-Specific Metamorphic Testin.pdf">Ludwick and Hsiao - 2026 - SANE Automated Scorer-Specific Metamorphic Testin.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-orgcce8bf3" class="outline-2">
-<h2 id="orgcce8bf3">Definition</h2>
-<div class="outline-text-2" id="text-orgcce8bf3">
+<div id="outline-container-org5f5728f" class="outline-2">
+<h2 id="org5f5728f">Definition</h2>
+<div class="outline-text-2" id="text-org5f5728f">
 <p>
 Traditional testing (Weyuker&rsquo;s oracle problem, cited in Zhang 2022) checks actual output against an expected output computed independently of the system under test. For ML systems this independent computation usually does not exist — the model <b>is</b> the specification. (source: Zhang et al. 2022)
 </p>
@@ -253,9 +256,9 @@ Riccio et al. 2020 found the oracle problem the <b>most</b>-studied open problem
 </p>
 </div>
 </div>
-<div id="outline-container-orga442c13" class="outline-2">
-<h2 id="orga442c13">Why it gets worse for LLMs</h2>
-<div class="outline-text-2" id="text-orga442c13">
+<div id="outline-container-orgb67b3db" class="outline-2">
+<h2 id="orgb67b3db">Why it gets worse for LLMs</h2>
+<div class="outline-text-2" id="text-orgb67b3db">
 <p>
 Three compounding factors, per Terragni 2026 and Magalhães et al. 2025:
 </p>
@@ -270,9 +273,9 @@ Magalhães et al. 2025 found student developers responding to this by falling ba
 </p>
 </div>
 </div>
-<div id="outline-container-orge841410" class="outline-2">
-<h2 id="orge841410">Solution strategies documented in this wiki</h2>
-<div class="outline-text-2" id="text-orge841410">
+<div id="outline-container-org011cc2c" class="outline-2">
+<h2 id="org011cc2c">Solution strategies documented in this wiki</h2>
+<div class="outline-text-2" id="text-org011cc2c">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -312,7 +315,7 @@ Magalhães et al. 2025 found student developers responding to this by falling ba
 <tr>
 <td class="org-left">Differential/cross-referencing</td>
 <td class="org-left">Compare independent implementations or models</td>
-<td class="org-left">noted in Zhang 2022, Riccio 2020 — no dedicated instance page yet; distinct from <a href="delta-drl-differential-testing.html">Delta</a>&rsquo;s self-referential variant below, which compares the system against a comparator trained on its <b>own</b> data rather than an independent implementation</td>
+<td class="org-left">noted in Zhang 2022, Riccio 2020; distinct from <a href="delta-drl-differential-testing.html">Delta</a>&rsquo;s self-referential variant below, which compares the system against a comparator trained on its <b>own</b> data rather than an independent implementation</td>
 </tr>
 
 <tr>
@@ -344,6 +347,18 @@ Magalhães et al. 2025 found student developers responding to this by falling ba
 <td class="org-left">Each documented claim decides whether refusal (or another behavior) is valid evidence against it; automated labels are candidates until human-validated</td>
 <td class="org-left"><a href="lest.html">LEST</a></td>
 </tr>
+
+<tr>
+<td class="org-left">Specification-derived hybrid oracle</td>
+<td class="org-left">Assertions extracted from a mined business rule <b>before</b> execution; deterministic predicates over tool calls, state and event order, plus LLM judgments that must quote the trace</td>
+<td class="org-left"><a href="agentest.html">AgenTest</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Scorer-specific metamorphic relations</td>
+<td class="org-left">An agent derives, per judge, perturbations and expected score relations, filtered by a recipe / case / relation validity chain</td>
+<td class="org-left"><a href="sane.html">SANE</a></td>
+</tr>
 </tbody>
 </table>
 
@@ -352,25 +367,25 @@ REAG (Wang et al. 2026) is notable for explicitly treating oracle <b>correctness
 </p>
 </div>
 </div>
-<div id="outline-container-orgabab8e6" class="outline-2">
-<h2 id="orgabab8e6">Known pitfall: naive single-reference pseudo-oracles</h2>
-<div class="outline-text-2" id="text-orgabab8e6">
+<div id="outline-container-org9ce469f" class="outline-2">
+<h2 id="org9ce469f">Known pitfall: naive single-reference pseudo-oracles</h2>
+<div class="outline-text-2" id="text-org9ce469f">
 <p>
 A recurring shortcut in LLM test-generation pipelines is executing a generated input on <b>one</b> accepted/reference program and treating its output as ground truth. <a href="audit-feedback-driven-evolution.html">Liang et al. 2026</a> show this can badly mislead evaluation, not just individual test cases: on their benchmarks, a model&rsquo;s own generated expected output agreed with a multi-program consensus panel only 27.79-58.90% of the time, and using a single reference inflated the apparent gain of an iterative &ldquo;self-evolving&rdquo; test generator by 9.46-14.85 percentage points versus panel-audited ground truth — after auditing, an equal-budget independent-resampling baseline often beat the &ldquo;evolving&rdquo; method outright. The lesson generalizes: a single unverified stand-in oracle doesn&rsquo;t just produce isolated false positives, it can systematically bias <b>comparisons between testing methods</b>. <a href="focal-oracle-prediction.html">FOCAL</a>&rsquo;s companion finding — that high aggregate accuracy can coexist with near-zero FAIL-class recall — is the same warning from the metric side rather than the oracle-construction side.
 </p>
 </div>
 </div>
-<div id="outline-container-org2e0630c" class="outline-2">
-<h2 id="org2e0630c">Known pitfall: correct oracles can still fail to convert opportunity into detection</h2>
-<div class="outline-text-2" id="text-org2e0630c">
+<div id="outline-container-orgb6c015f" class="outline-2">
+<h2 id="orgb6c015f">Known pitfall: correct oracles can still fail to convert opportunity into detection</h2>
+<div class="outline-text-2" id="text-orgb6c015f">
 <p>
 Even once the naive single-reference pitfall above is fixed by auditing against a multi-program consensus, a second and distinct gap remains: <a href="oracle-conversion.html">Liang et al. 2026 (oracle conversion)</a> show a specification-based test generator can find a genuinely fault-revealing input (&ldquo;potential kill&rdquo;) yet still predict the wrong expected output for it, so the fault goes undetected (&ldquo;effective kill&rdquo; &lt; &ldquo;potential kill&rdquo;). Training the model to be more <b>correct</b> (reward correctness only) actually shrinks the pool of discriminative inputs it chooses in the first place — a joint reward that credits both correctness and potential kill is needed to avoid trading one for the other. This is a training-time/measurement-time instance of the oracle problem: the oracle here is trustworthy, but converting a good test input into a correct expected output is itself a nontrivial reasoning task that can silently fail.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb6b1102" class="outline-2">
-<h2 id="orgb6b1102">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</h2>
-<div class="outline-text-2" id="text-orgb6b1102">
+<div id="outline-container-org7ce675f" class="outline-2">
+<h2 id="org7ce675f">Known pitfall: the &ldquo;stronger&rdquo; oracle is still incomplete</h2>
+<div class="outline-text-2" id="text-org7ce675f">
 <p>
 Using a larger held-out test suite as ground truth avoids the single-reference problem above, but it is still a proxy. <a href="test-aware-mutants.html">Kiele et al. 2026</a> score LLM-generated mutants against EvalPlus&rsquo;s extended HumanEval/MBPP tests and then hand-classified the 65 mutants that survived even those: 49 (75.4%) were real edge-case bugs the oracle never tests (e.g. an empty-substring input), 9 (13.8%) equivalent, 7 (10.8%) bugs only under under-specified task descriptions. The effect on that paper&rsquo;s numbers is the opposite of the single-reference case: the oracle&rsquo;s gaps <b>understate</b> the method&rsquo;s success rate rather than inflating it. (source: Kiele et al. 2026)
 </p>
@@ -380,10 +395,20 @@ A different failure of automated verdicts appears in <a href="lest.html">LEST</a
 </p>
 </div>
 </div>
-<div id="outline-container-org150f2ff" class="outline-2">
-<h2 id="org150f2ff">Related pages</h2>
-<div class="outline-text-2" id="text-org150f2ff">
+<div id="outline-container-org548bce5" class="outline-2">
+<h2 id="org548bce5">Known pitfall: final-state oracles miss process violations</h2>
+<div class="outline-text-2" id="text-org548bce5">
+<p>
+Agent benchmarks often judge a run by its end state. <a href="agentest.html">AgenTest</a> (Quan et al. 2026) reports that τ²-bench judges mainly by the final database state plus a few required actions, and that about 60% of the bug-triggering runs it found (60% on one model, 59% on the other) cannot be detected from the final state: 42% and 37% leave the database unchanged (for example, acting before the user confirms), and the rest write a state a compliant run could also produce (for example, modifying another user&rsquo;s reservation). The judges of the three baselines it compared reached 25.0%, 46.5% and 5.7% precision against manual review, versus 82.6% for a hybrid oracle whose assertions were fixed before execution. This is the process-level analogue of the single-reference pitfall above: the oracle has to observe the interaction (messages, tool calls, state transitions), not only where it ended. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org0e42a66" class="outline-2">
+<h2 id="org0e42a66">Related pages</h2>
+<div class="outline-text-2" id="text-org0e42a66">
 <ul class="org-ul">
+<li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
+<li><a href="sane.html">SANE (Ludwick &amp; Hsiao 2026)</a></li>
 <li><a href="test-aware-mutants.html">Test-Aware Mutant Generation (Kiele et al. 2026)</a></li>
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
@@ -403,7 +428,7 @@ A different failure of automated verdicts appears in <a href="lest.html">LEST</a
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

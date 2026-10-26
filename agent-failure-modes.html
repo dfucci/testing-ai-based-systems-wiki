@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Agent Failure Modes</title>
@@ -203,22 +203,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf5ef123">Taxonomy (from TRAJEVAL)</a>
+<li><a href="#org574c266">Taxonomy (from TRAJEVAL)</a>
 <ul>
-<li><a href="#org17d9215">Search failure (search recall &lt; 0.5)</a></li>
-<li><a href="#orgaff5aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</a></li>
-<li><a href="#orgcb29a4b">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</a></li>
+<li><a href="#org34580b4">Search failure (search recall &lt; 0.5)</a></li>
+<li><a href="#orge852aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</a></li>
+<li><a href="#org6808caf">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</a></li>
 </ul>
 </li>
-<li><a href="#org93c5e0f">Model-Specific Patterns</a></li>
-<li><a href="#orgcc8664b">Illustrative Case Study</a></li>
-<li><a href="#orgb80a101">Robustness of Reference Solutions</a></li>
-<li><a href="#orgc73de7a">Related pages</a></li>
+<li><a href="#orgad11ee3">Model-Specific Patterns</a></li>
+<li><a href="#org71e69c8">Illustrative Case Study</a></li>
+<li><a href="#orgdfa5094">Robustness of Reference Solutions</a></li>
+<li><a href="#org3278bfa">Business-logic violations in tool-using agents (AgenTest)</a></li>
+<li><a href="#org4eb2b8e">Regressions and waste under different user behaviors (SWE-DIVE)</a></li>
+<li><a href="#orge9416df">Related pages</a></li>
 </ul>
 </div>
 </div>
 <p>
-<b>Summary</b>: Code agents exhibit distinct, diagnosable failure patterns that differ across model families — a distinction invisible to Pass@1 but revealed by stage-wise trajectory analysis.
+<b>Summary</b>: Code agents exhibit distinct, diagnosable failure patterns that differ across model families — a distinction invisible to Pass@1 but revealed by stage-wise trajectory analysis. Interaction-level studies add two more families: business-rule violations by tool-using agents and regressions under different simulated-user behaviors.
 </p>
 
 <p>
@@ -227,23 +229,25 @@
 
 <ul class="org-ul">
 <li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
+<li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
+<li><a href="../raw/Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf">Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-orgf5ef123" class="outline-2">
-<h2 id="orgf5ef123">Taxonomy (from TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-orgf5ef123">
+<div id="outline-container-org574c266" class="outline-2">
+<h2 id="org574c266">Taxonomy (from TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-org574c266">
 <p>
 <a href="trajeval.html">TRAJEVAL</a> identifies three fundamental failure modes based on which stage&rsquo;s recall is low (source: Kim et al. 2026):
 </p>
 </div>
-<div id="outline-container-org17d9215" class="outline-3">
-<h3 id="org17d9215">Search failure (search recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-org17d9215">
+<div id="outline-container-org34580b4" class="outline-3">
+<h3 id="org34580b4">Search failure (search recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-org34580b4">
 <p>
 Agent fails to locate relevant files within the repository. The correct files are never opened.
 </p>
@@ -255,9 +259,9 @@ Agent fails to locate relevant files within the repository. The correct files ar
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaff5aa8" class="outline-3">
-<h3 id="orgaff5aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-orgaff5aa8">
+<div id="outline-container-orge852aa8" class="outline-3">
+<h3 id="orge852aa8">Read failure (search recall &gt; 0.8, read recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-orge852aa8">
 <p>
 Agent finds the correct files but examines the wrong functions within them.
 </p>
@@ -269,9 +273,9 @@ Agent finds the correct files but examines the wrong functions within them.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcb29a4b" class="outline-3">
-<h3 id="orgcb29a4b">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</h3>
-<div class="outline-text-3" id="text-orgcb29a4b">
+<div id="outline-container-org6808caf" class="outline-3">
+<h3 id="org6808caf">Edit failure (read recall &gt; 0.8, edit recall &lt; 0.5)</h3>
+<div class="outline-text-3" id="text-org6808caf">
 <p>
 Agent comprehends the relevant context but targets incorrect locations for modification.
 </p>
@@ -284,9 +288,9 @@ Agent comprehends the relevant context but targets incorrect locations for modif
 </div>
 </div>
 </div>
-<div id="outline-container-org93c5e0f" class="outline-2">
-<h2 id="org93c5e0f">Model-Specific Patterns</h2>
-<div class="outline-text-2" id="text-org93c5e0f">
+<div id="outline-container-orgad11ee3" class="outline-2">
+<h2 id="orgad11ee3">Model-Specific Patterns</h2>
+<div class="outline-text-2" id="text-orgad11ee3">
 <p>
 From TRAJEVAL analysis on SWE-bench Verified (SWE-Agent architecture) (source: Kim et al. 2026):
 </p>
@@ -334,9 +338,9 @@ These patterns enable <b>targeted</b> interventions: the same intervention that 
 </p>
 </div>
 </div>
-<div id="outline-container-orgcc8664b" class="outline-2">
-<h2 id="orgcc8664b">Illustrative Case Study</h2>
-<div class="outline-text-2" id="text-orgcc8664b">
+<div id="outline-container-org71e69c8" class="outline-2">
+<h2 id="org71e69c8">Illustrative Case Study</h2>
+<div class="outline-text-2" id="text-org71e69c8">
 <p>
 GPT-5 on <code>django/django-11400</code> (requires modifying 4 functions) (source: Kim et al. 2026):
 </p>
@@ -364,9 +368,9 @@ Both show as &ldquo;failed&rdquo; in Pass@1. TRAJEVAL distinguishes them.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb80a101" class="outline-2">
-<h2 id="orgb80a101">Robustness of Reference Solutions</h2>
-<div class="outline-text-2" id="text-orgb80a101">
+<div id="outline-container-orgdfa5094" class="outline-2">
+<h2 id="orgdfa5094">Robustness of Reference Solutions</h2>
+<div class="outline-text-2" id="text-orgdfa5094">
 <p>
 A concern: if multiple valid solutions exist, reference-patch comparison may misclassify. TRAJEVAL checked 334 instances resolved by 2+ models (source: Kim et al. 2026):
 </p>
@@ -381,10 +385,94 @@ SWE-bench issues have well-defined canonical fix locations, validating the refer
 </p>
 </div>
 </div>
-<div id="outline-container-orgc73de7a" class="outline-2">
-<h2 id="orgc73de7a">Related pages</h2>
-<div class="outline-text-2" id="text-orgc73de7a">
+<div id="outline-container-org3278bfa" class="outline-2">
+<h2 id="org3278bfa">Business-logic violations in tool-using agents (AgenTest)</h2>
+<div class="outline-text-2" id="text-org3278bfa">
+<p>
+The taxonomy above localizes a code agent&rsquo;s mistake. <a href="agentest.html">AgenTest</a> instead classifies what customer-service agents (τ²-bench airline, retail, telecom) do wrong against mined business rules, by symptom and root cause. Counts are unique violated refined specifications (source: Quan et al. 2026):
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Symptom</th>
+<th scope="col" class="org-right">DeepSeek-V4-Flash</th>
+<th scope="col" class="org-right">Qwen-3.8-Flash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Invalid or unsourced argument value</td>
+<td class="org-right">43</td>
+<td class="org-right">46</td>
+</tr>
+
+<tr>
+<td class="org-left">Disallowed operation (forbidding state, condition or limit)</td>
+<td class="org-right">13</td>
+<td class="org-right">22</td>
+</tr>
+
+<tr>
+<td class="org-left">Missing prerequisite (acts before a required confirmation or check)</td>
+<td class="org-right">12</td>
+<td class="org-right">25</td>
+</tr>
+
+<tr>
+<td class="org-left">Unauthorized action (acts on another user&rsquo;s object)</td>
+<td class="org-right">9</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-left">Improper escalation (transfers at the wrong time, or acts after it)</td>
+<td class="org-right">6</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-left">Incorrect communication (unsupported facts, omitted disclosures)</td>
+<td class="org-right">6</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>Total</b></td>
+<td class="org-right">89</td>
+<td class="org-right">121</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+By root cause: the rule is implicit (stated in no artifact) for 45 and 44 of these; stated but ignored for 27 and 32; stated but misapplied for 17 and 45. Misapplication differs most between the two models. The authors tie each cause to a different repair: state implicit rules in the prompt or enforce them in the tools, enforce ignored rules in the tools, clarify misapplied ones. About 60% of bug-triggering runs are invisible in the final database state. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org4eb2b8e" class="outline-2">
+<h2 id="org4eb2b8e">Regressions and waste under different user behaviors (SWE-DIVE)</h2>
+<div class="outline-text-2" id="text-org4eb2b8e">
+<p>
+<a href="swe-dive.html">SWE-DIVE</a> adds an interaction-level family. In a pilot of 11 SWE-bench Verified tasks run with a simulated user, 4 or 5 of 11 runs per persona broke previously passing tests, against 2 of 11 for the single-prompt baseline. On astropy-12907 the Vague Requester persona led the agent to rewrite more than needed and fail 10 of 13 previously passing tests while still fixing the target bug. These are regression and waste measures rather than search/read/edit recall, from a small workshop pilot (one run per cell); see the SWE-DIVE page for limits. (source: Brehme et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orge9416df" class="outline-2">
+<h2 id="orge9416df">Related pages</h2>
+<div class="outline-text-2" id="text-orge9416df">
 <ul class="org-ul">
+<li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
+<li><a href="swe-dive.html">SWE-DIVE (Brehme et al. 2026)</a></li>
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
 <li><a href="golden-context.html">Golden Context</a></li>
@@ -396,7 +484,7 @@ SWE-bench issues have well-defined canonical fix locations, validating the refer
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

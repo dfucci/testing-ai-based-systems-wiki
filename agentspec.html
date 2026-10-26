@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents</title>
@@ -203,26 +203,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org680347d">Overview</a></li>
-<li><a href="#orgaedd89b">The AgentSpec Language</a>
+<li><a href="#orgff2016d">Overview</a></li>
+<li><a href="#org59bf4ff">The AgentSpec Language</a>
 <ul>
-<li><a href="#orgfc1062b">Triggers</a></li>
-<li><a href="#org4c4170f">Checks (Predicates)</a></li>
-<li><a href="#orge3ee254">Enforcement Actions</a></li>
+<li><a href="#org8761b9d">Triggers</a></li>
+<li><a href="#org5c84965">Checks (Predicates)</a></li>
+<li><a href="#org7cdaccc">Enforcement Actions</a></li>
 </ul>
 </li>
-<li><a href="#orgc147768">Implementation</a></li>
-<li><a href="#org69788ba">Evaluation Results</a>
+<li><a href="#org4da31c0">Implementation</a></li>
+<li><a href="#org8eec4e9">Evaluation Results</a>
 <ul>
-<li><a href="#orgcd43a47">RQ1: Expressiveness and Effectiveness</a></li>
-<li><a href="#org1cb8518">RQ2: LLM-Generated Rules</a></li>
-<li><a href="#org1a847e2">RQ3: Rule Generalizability</a></li>
-<li><a href="#org021abd1">RQ4: Runtime Overhead</a></li>
+<li><a href="#orgabfe8fe">RQ1: Expressiveness and Effectiveness</a></li>
+<li><a href="#org9b2b851">RQ2: LLM-Generated Rules</a></li>
+<li><a href="#org85f37c3">RQ3: Rule Generalizability</a></li>
+<li><a href="#org2d11742">RQ4: Runtime Overhead</a></li>
 </ul>
 </li>
-<li><a href="#org8c1982d">Limitations</a></li>
-<li><a href="#org73c2996">Relation to Other Approaches</a></li>
-<li><a href="#orgee2fb5e">Related pages</a></li>
+<li><a href="#org5637846">Limitations</a></li>
+<li><a href="#org0f06e56">Relation to Other Approaches</a></li>
+<li><a href="#orgac84837">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -236,16 +236,17 @@
 
 <ul class="org-ul">
 <li><a href="../raw/Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf">Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf</a></li>
+<li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-org680347d" class="outline-2">
-<h2 id="org680347d">Overview</h2>
-<div class="outline-text-2" id="text-org680347d">
+<div id="outline-container-orgff2016d" class="outline-2">
+<h2 id="orgff2016d">Overview</h2>
+<div class="outline-text-2" id="text-orgff2016d">
 <p>
 LLM agents operating autonomously can take harmful, unintended actions — financial transactions, destructive file operations, traffic law violations. AgentSpec provides a declarative mechanism for constraining agent behavior at runtime without modifying the agent&rsquo;s internals. (source: Wang et al. 2025)
 </p>
@@ -255,9 +256,9 @@ Unlike post-hoc evaluation (e.g., <a href="trajeval.html">TRAJEVAL</a>) or pre-e
 </p>
 </div>
 </div>
-<div id="outline-container-orgaedd89b" class="outline-2">
-<h2 id="orgaedd89b">The AgentSpec Language</h2>
-<div class="outline-text-2" id="text-orgaedd89b">
+<div id="outline-container-org59bf4ff" class="outline-2">
+<h2 id="org59bf4ff">The AgentSpec Language</h2>
+<div class="outline-text-2" id="text-org59bf4ff">
 <p>
 Each rule has five parts (source: Wang et al. 2025):
 </p>
@@ -271,9 +272,9 @@ end
 </code></pre>
 </div>
 </div>
-<div id="outline-container-orgfc1062b" class="outline-3">
-<h3 id="orgfc1062b">Triggers</h3>
-<div class="outline-text-3" id="text-orgfc1062b">
+<div id="outline-container-org8761b9d" class="outline-3">
+<h3 id="org8761b9d">Triggers</h3>
+<div class="outline-text-3" id="text-org8761b9d">
 <p>
 Events that activate a rule:
 </p>
@@ -285,9 +286,9 @@ Events that activate a rule:
 </ul>
 </div>
 </div>
-<div id="outline-container-org4c4170f" class="outline-3">
-<h3 id="org4c4170f">Checks (Predicates)</h3>
-<div class="outline-text-3" id="text-org4c4170f">
+<div id="outline-container-org5c84965" class="outline-3">
+<h3 id="org5c84965">Checks (Predicates)</h3>
+<div class="outline-text-3" id="text-org5c84965">
 <p>
 Boolean conditions evaluated when trigger fires. Can be:
 </p>
@@ -297,9 +298,9 @@ Boolean conditions evaluated when trigger fires. Can be:
 </ul>
 </div>
 </div>
-<div id="outline-container-orge3ee254" class="outline-3">
-<h3 id="orge3ee254">Enforcement Actions</h3>
-<div class="outline-text-3" id="text-orge3ee254">
+<div id="outline-container-org7cdaccc" class="outline-3">
+<h3 id="org7cdaccc">Enforcement Actions</h3>
+<div class="outline-text-3" id="text-org7cdaccc">
 <p>
 Actions taken when trigger fires and all predicates hold:
 </p>
@@ -312,9 +313,9 @@ Actions taken when trigger fires and all predicates hold:
 </div>
 </div>
 </div>
-<div id="outline-container-orgc147768" class="outline-2">
-<h2 id="orgc147768">Implementation</h2>
-<div class="outline-text-2" id="text-orgc147768">
+<div id="outline-container-org4da31c0" class="outline-2">
+<h2 id="org4da31c0">Implementation</h2>
+<div class="outline-text-2" id="text-org4da31c0">
 <p>
 AgentSpec is implemented for LangChain by intercepting <code>iter_next_step</code> (source: Wang et al. 2025). Three hook points:
 </p>
@@ -329,13 +330,13 @@ The framework is architecture-agnostic: the same principles apply to AutoGen and
 </p>
 </div>
 </div>
-<div id="outline-container-org69788ba" class="outline-2">
-<h2 id="org69788ba">Evaluation Results</h2>
-<div class="outline-text-2" id="text-org69788ba">
+<div id="outline-container-org8eec4e9" class="outline-2">
+<h2 id="org8eec4e9">Evaluation Results</h2>
+<div class="outline-text-2" id="text-org8eec4e9">
 </div>
-<div id="outline-container-orgcd43a47" class="outline-3">
-<h3 id="orgcd43a47">RQ1: Expressiveness and Effectiveness</h3>
-<div class="outline-text-3" id="text-orgcd43a47">
+<div id="outline-container-orgabfe8fe" class="outline-3">
+<h3 id="orgabfe8fe">RQ1: Expressiveness and Effectiveness</h3>
+<div class="outline-text-3" id="text-orgabfe8fe">
 <p>
 Evaluated on three agent types (source: Wang et al. 2025):
 </p>
@@ -383,9 +384,9 @@ Safe task success drops only slightly for embodied agents (58.62% → 54.26%).
 </p>
 </div>
 </div>
-<div id="outline-container-org1cb8518" class="outline-3">
-<h3 id="org1cb8518">RQ2: LLM-Generated Rules</h3>
-<div class="outline-text-3" id="text-org1cb8518">
+<div id="outline-container-org9b2b851" class="outline-3">
+<h3 id="org9b2b851">RQ2: LLM-Generated Rules</h3>
+<div class="outline-text-3" id="text-org9b2b851">
 <p>
 Using OpenAI o1 to auto-generate AgentSpec rules (source: Wang et al. 2025):
 </p>
@@ -400,17 +401,17 @@ LLM-generated rules tend to over-fit to provided examples and may miss broadly-s
 </p>
 </div>
 </div>
-<div id="outline-container-org1a847e2" class="outline-3">
-<h3 id="org1a847e2">RQ3: Rule Generalizability</h3>
-<div class="outline-text-3" id="text-org1a847e2">
+<div id="outline-container-org85f37c3" class="outline-3">
+<h3 id="org85f37c3">RQ3: Rule Generalizability</h3>
+<div class="outline-text-3" id="text-org85f37c3">
 <p>
 Single rules cover many instances: one embodied-agent rule (Figure 7 in paper) prevents 96 risky scenarios. Rules share predicates across risk categories. (source: Wang et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org021abd1" class="outline-3">
-<h3 id="org021abd1">RQ4: Runtime Overhead</h3>
-<div class="outline-text-3" id="text-org021abd1">
+<div id="outline-container-org2d11742" class="outline-3">
+<h3 id="org2d11742">RQ4: Runtime Overhead</h3>
+<div class="outline-text-3" id="text-org2d11742">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -449,9 +450,9 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </div>
 </div>
 </div>
-<div id="outline-container-org8c1982d" class="outline-2">
-<h2 id="org8c1982d">Limitations</h2>
-<div class="outline-text-2" id="text-org8c1982d">
+<div id="outline-container-org5637846" class="outline-2">
+<h2 id="org5637846">Limitations</h2>
+<div class="outline-text-2" id="text-org5637846">
 <ul class="org-ul">
 <li><b>Deterministic enforcement only</b>: no probabilistic or trajectory-based safety analysis; cannot reason about long-term consequences of current actions</li>
 <li><b>No future-state estimation</b>: cannot detect when immediate preconditions are safe but risky states are likely later</li>
@@ -463,9 +464,9 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </p>
 </div>
 </div>
-<div id="outline-container-org73c2996" class="outline-2">
-<h2 id="org73c2996">Relation to Other Approaches</h2>
-<div class="outline-text-2" id="text-org73c2996">
+<div id="outline-container-org0f06e56" class="outline-2">
+<h2 id="org0f06e56">Relation to Other Approaches</h2>
+<div class="outline-text-2" id="text-org0f06e56">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -511,17 +512,18 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </table>
 
 <p>
-(source: Wang et al. 2025 for the AgentSpec, GuardAgent and NEMO rows; the TRAJEVAL row is a cross-reference added by this wiki, since that paper postdates AgentSpec)
+(source: Wang et al. 2025 for the AgentSpec, GuardAgent and NEMO rows; Kim et al. 2026 for the TRAJEVAL row)
 </p>
 </div>
 </div>
-<div id="outline-container-orgee2fb5e" class="outline-2">
-<h2 id="orgee2fb5e">Related pages</h2>
-<div class="outline-text-2" id="text-orgee2fb5e">
+<div id="outline-container-orgac84837" class="outline-2">
+<h2 id="orgac84837">Related pages</h2>
+<div class="outline-text-2" id="text-orgac84837">
 <ul class="org-ul">
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
 <li><a href="agent-safety.html">Agent Safety</a></li>
 <li><a href="trajeval.html">TRAJEVAL</a></li>
+<li><a href="agentsight.html">AgentSight (Zheng et al. 2025)</a></li>
 <li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
 <li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
 </ul>
@@ -530,7 +532,7 @@ Negligible relative to agent execution times (~25.4s for code agents, ~9.82s for
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Metamorphic Testing</title>
@@ -203,12 +203,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge10a06d">Core idea</a></li>
-<li><a href="#org06b4d25">Instances in this wiki</a></li>
-<li><a href="#org7622b17">Downstream: fault localization after a violation</a></li>
-<li><a href="#org9510139">Common failure pattern across instances</a></li>
-<li><a href="#org558b731">Known limitation: false positives</a></li>
-<li><a href="#orgb315283">Related pages</a></li>
+<li><a href="#org35cd2d7">Core idea</a></li>
+<li><a href="#org9e497f8">Instances in this wiki</a></li>
+<li><a href="#org0ce4e72">Downstream: fault localization after a violation</a></li>
+<li><a href="#org432f31e">Common failure pattern across instances</a></li>
+<li><a href="#orgfee1016">Known limitation: false positives</a></li>
+<li><a href="#org8ac8119">Where relations come from: fixed lists or derived per system</a></li>
+<li><a href="#org028a206">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -230,16 +231,17 @@
 <li><a href="../raw/Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf">Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf</a></li>
 <li><a href="../raw/Ren et al. - 2026 - Fine-grained approach to metamorphic slicing Enhancing fault localization in the absence of oracle.pdf">Ren et al. - 2026 - Fine-grained approach to metamorphic slicing Enhancing fault localization in the absence of oracle.pdf</a></li>
 <li><a href="../raw/Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf">Moshood et al. - 2026 - Specification-Based Testing of Large Language Models.pdf</a></li>
+<li><a href="../raw/Ludwick and Hsiao - 2026 - SANE Automated Scorer-Specific Metamorphic Testin.pdf">Ludwick and Hsiao - 2026 - SANE Automated Scorer-Specific Metamorphic Testin.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-orge10a06d" class="outline-2">
-<h2 id="orge10a06d">Core idea</h2>
-<div class="outline-text-2" id="text-orge10a06d">
+<div id="outline-container-org35cd2d7" class="outline-2">
+<h2 id="org35cd2d7">Core idea</h2>
+<div class="outline-text-2" id="text-org35cd2d7">
 <p>
 Originally proposed by Chen, Cheung &amp; Yiu (1998). Instead of asking &ldquo;is this output correct?&rdquo;, MT asks &ldquo;given this systematic change to the input, how must the output change (or stay the same)?&rdquo; (source: Terragni 2026)
 </p>
@@ -256,9 +258,9 @@ Riccio et al. 2020 found the metamorphic oracle the most common oracle type acro
 </p>
 </div>
 </div>
-<div id="outline-container-org06b4d25" class="outline-2">
-<h2 id="org06b4d25">Instances in this wiki</h2>
-<div class="outline-text-2" id="text-org06b4d25">
+<div id="outline-container-org9e497f8" class="outline-2">
+<h2 id="org9e497f8">Instances in this wiki</h2>
+<div class="outline-text-2" id="text-org9e497f8">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -318,29 +320,35 @@ Riccio et al. 2020 found the metamorphic oracle the most common oracle type acro
 <td class="org-left">LLM safety refusal behavior</td>
 <td class="org-left">refusal on a harmful seed prompt should persist under lexical substitution, modifier insertion/deletion, person conversion, paraphrase, or identity swap; relation applied only to claims for which refusal is a valid oracle</td>
 </tr>
+
+<tr>
+<td class="org-left"><a href="sane.html">SANE / Ludwick &amp; Hsiao 2026</a></td>
+<td class="org-left">LLM judges and scorers (faithfulness, fluency, coherence, professionalism, toxicity)</td>
+<td class="org-left">derived per scorer by an agent from six behavioral requirements (monotonicity, subadditivity, repeatability, robustness, dynamic range, calibration); e.g. appending profanity-free belittling language must not lower a toxicity score by more than a noise tolerance ε</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-org7622b17" class="outline-2">
-<h2 id="org7622b17">Downstream: fault localization after a violation</h2>
-<div class="outline-text-2" id="text-org7622b17">
+<div id="outline-container-org0ce4e72" class="outline-2">
+<h2 id="org0ce4e72">Downstream: fault localization after a violation</h2>
+<div class="outline-text-2" id="text-org0ce4e72">
 <p>
 Detecting an MR violation only tells you <b>that</b> something is wrong. <a href="metamorphic-slicing.html">Metamorphic slicing (Ren et al. 2026)</a> addresses <b>where</b>: a fine-grained weighting scheme over statements covered by source-only, follow-up-only, or shared test cases within a violating group substitutes for the pass/fail labels that spectrum-based fault localization normally needs but which don&rsquo;t exist here.
 </p>
 </div>
 </div>
-<div id="outline-container-org9510139" class="outline-2">
-<h2 id="org9510139">Common failure pattern across instances</h2>
-<div class="outline-text-2" id="text-org9510139">
+<div id="outline-container-org432f31e" class="outline-2">
+<h2 id="org432f31e">Common failure pattern across instances</h2>
+<div class="outline-text-2" id="text-org432f31e">
 <p>
 The original three instances (METTLE, LLMorph, MMT4NL) all report that MT catches faults invisible to accuracy-style metrics: models score highly on unperturbed benchmarks yet violate MRs at meaningful rates (18% average / up to 80% for LLMorph; pass rates dropping to 60% under negation for MMT4NL; 9/11 MRs violated by k-means for METTLE). LGMT reproduces the same pattern for logical reasoning specifically: static accuracy of 65-74% drops to 52-61% once consistency under logic-preserving transformation is required. The common lesson: static accuracy hides behavioral fragility that only shows up under systematic input transformation.
 </p>
 </div>
 </div>
-<div id="outline-container-org558b731" class="outline-2">
-<h2 id="org558b731">Known limitation: false positives</h2>
-<div class="outline-text-2" id="text-org558b731">
+<div id="outline-container-orgfee1016" class="outline-2">
+<h2 id="orgfee1016">Known limitation: false positives</h2>
+<div class="outline-text-2" id="text-orgfee1016">
 <p>
 MT for NLP/LLMs suffers semantic ambiguity — a &ldquo;violation&rdquo; may reflect legitimate linguistic variation rather than a bug. Terragni 2026 reports a true-positive rate of ~62% on manually reviewed violations, comparable to prior traditional NLP MT work, not worse. (source: Terragni 2026)
 </p>
@@ -354,11 +362,20 @@ Two 2026 approaches attack this limitation directly, from opposite ends: Explana
 </p>
 </div>
 </div>
-<div id="outline-container-orgb315283" class="outline-2">
-<h2 id="orgb315283">Related pages</h2>
-<div class="outline-text-2" id="text-orgb315283">
+<div id="outline-container-org8ac8119" class="outline-2">
+<h2 id="org8ac8119">Where relations come from: fixed lists or derived per system</h2>
+<div class="outline-text-2" id="text-org8ac8119">
+<p>
+Most instances above draw relations from a fixed list: LLMorph&rsquo;s 191 collected NLP relations, MMT4NL&rsquo;s nine types, LEST&rsquo;s seven operators. <a href="sane.html">SANE</a> (Ludwick &amp; Hsiao 2026) argues that for LLM judges the same transformation can need a different expected relation depending on the scorer (adding relevant detail lowers a concision score but can raise a coverage score), so it derives perturbations and expected relations per scorer, then audits every recipe and case with three validity questions: does the recipe agree with scorer intent (probability 0.812), does the case realize it (0.708 given alignment), does the relation apply to the realized case (0.987 given both). The overall candidate-to-joint-valid yield was 0.568, so without that filter roughly 43% of automatically derived cases would be invalid tests. This is the same concern LEST raises about failure-flagged mutants, measured here on the whole candidate population rather than only on the flagged subset. See <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a> for the judge-testing context. (source: Ludwick &amp; Hsiao 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org028a206" class="outline-2">
+<h2 id="org028a206">Related pages</h2>
+<div class="outline-text-2" id="text-org028a206">
 <ul class="org-ul">
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
+<li><a href="sane.html">SANE (Ludwick &amp; Hsiao 2026)</a></li>
 <li><a href="mettle.html">METTLE</a></li>
 <li><a href="metamorphic-testing-llms.html">Metamorphic Testing for LLMs (Terragni 2026 / LLMorph)</a></li>
 <li><a href="mmt4nl.html">MMT4NL (Racharak 2026)</a></li>
@@ -376,7 +393,7 @@ Two 2026 approaches attack this limitation directly, from opposite ends: Explana
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

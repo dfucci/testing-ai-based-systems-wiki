@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>From Untestable to Testable: Metamorphic Testing in the Age of LLMs (Terragni 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbcb0e28">Argument</a></li>
-<li><a href="#org8b37855">LLMorph and the underlying survey</a></li>
-<li><a href="#org330e1f6">False positives and diagnosis difficulty</a></li>
-<li><a href="#orgcef0f2d">Forward-looking scope</a></li>
-<li><a href="#org711dc6d">Related pages</a></li>
+<li><a href="#org2a55d69">Argument</a></li>
+<li><a href="#org2237de7">LLMorph and the underlying survey</a></li>
+<li><a href="#org2fbd5e7">False positives and diagnosis difficulty</a></li>
+<li><a href="#org9b28a6a">Forward-looking scope</a></li>
+<li><a href="#org58253db">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,41 +228,41 @@
 </p>
 
 <hr />
-<div id="outline-container-orgbcb0e28" class="outline-2">
-<h2 id="orgbcb0e28">Argument</h2>
-<div class="outline-text-2" id="text-orgbcb0e28">
+<div id="outline-container-org2a55d69" class="outline-2">
+<h2 id="org2a55d69">Argument</h2>
+<div class="outline-text-2" id="text-org2a55d69">
 <p>
 Classic testing needs ground-truth oracles; LLM outputs are open-ended, phrasing-sensitive, and deployed in constantly shifting contexts, so labeled test data can&rsquo;t scale or stay current — the <a href="oracle-problem.html">oracle problem</a> in its sharpest form. <a href="metamorphic-testing.html">Metamorphic testing</a> replaces &ldquo;what&rsquo;s the correct output?&rdquo; with &ldquo;how should the output change given a systematic change to the input?&rdquo; — a relation oracle that needs no per-test label. (source: Terragni 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org8b37855" class="outline-2">
-<h2 id="org8b37855">LLMorph and the underlying survey</h2>
-<div class="outline-text-2" id="text-org8b37855">
+<div id="outline-container-org2237de7" class="outline-2">
+<h2 id="org2237de7">LLMorph and the underlying survey</h2>
+<div class="outline-text-2" id="text-org2237de7">
 <p>
 Terragni&rsquo;s group ran a systematic literature review of 1,024 papers, extracting 191 metamorphic relations for NLP across 24 tasks, and implemented 36 of them in LLMorph. Applied to GPT-4, LLaMA 3, and Hermes-2 across ~560,000 tests: average 18% MR violation rate, up to 80% for individual relations. Several task-independent MRs generalized well across tasks.
 </p>
 </div>
 </div>
-<div id="outline-container-org330e1f6" class="outline-2">
-<h2 id="org330e1f6">False positives and diagnosis difficulty</h2>
-<div class="outline-text-2" id="text-org330e1f6">
+<div id="outline-container-org2fbd5e7" class="outline-2">
+<h2 id="org2fbd5e7">False positives and diagnosis difficulty</h2>
+<div class="outline-text-2" id="text-org2fbd5e7">
 <p>
 Manual review of 937 violations found ~62% true-positive rate — comparable to (not worse than) traditional NLP MT, but non-trivial noise remains. Diagnosing <b>why</b> a violation occurred is harder than in classical software testing: the fault may trace to model weights or training data rather than a fixable code location, so remediation may mean prompt/guardrail changes or fine-tuning, not a patch.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcef0f2d" class="outline-2">
-<h2 id="orgcef0f2d">Forward-looking scope</h2>
-<div class="outline-text-2" id="text-orgcef0f2d">
+<div id="outline-container-org9b28a6a" class="outline-2">
+<h2 id="org9b28a6a">Forward-looking scope</h2>
+<div class="outline-text-2" id="text-org9b28a6a">
 <p>
 The article gestures toward MT for code-generating LLMs (oracle = compiles/passes tests/static analysis) and for agentic systems (e.g., invariance under reordering of agent tool invocations) as future application areas — directly relevant to <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a> and <a href="trajectory-analysis.html">Trajectory Analysis</a> on this wiki. <a href="mortar.html">MORTAR</a> is a concrete instance of MT extended past this article&rsquo;s single-turn scope, into multi-turn dialogue.
 </p>
 </div>
 </div>
-<div id="outline-container-org711dc6d" class="outline-2">
-<h2 id="org711dc6d">Related pages</h2>
-<div class="outline-text-2" id="text-org711dc6d">
+<div id="outline-container-org58253db" class="outline-2">
+<h2 id="org58253db">Related pages</h2>
+<div class="outline-text-2" id="text-org58253db">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="oracle-problem.html">The Oracle Problem</a></li>
@@ -276,7 +276,7 @@ The article gestures toward MT for code-generating LLMs (oracle = compiles/passe
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing AI-enabled software systems Wiki Index</title>
@@ -203,20 +203,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5aaa6e8">Paper Summaries</a>
+<li><a href="#org3e30031">Paper Summaries</a>
 <ul>
-<li><a href="#org8d65898">Code agents</a></li>
-<li><a href="#orgc3015d3">Metamorphic testing</a></li>
-<li><a href="#orgf0a0c81">Robustness and test generation</a></li>
-<li><a href="#org741d42b">Safety and specification testing</a></li>
-<li><a href="#org627b517">Oracle construction and auditing</a></li>
-<li><a href="#org556f836">Foundational surveys</a></li>
+<li><a href="#org8ae02b4">Agents and agent testing</a></li>
+<li><a href="#org1a624d0">Metamorphic testing</a></li>
+<li><a href="#orgc1f50dd">Robustness and test generation</a></li>
+<li><a href="#org628faaf">Safety and specification testing</a></li>
+<li><a href="#org842f183">Oracle construction and auditing</a></li>
+<li><a href="#org65fc1ba">Foundational surveys</a></li>
 </ul>
 </li>
-<li><a href="#org3808da8">Core Concepts</a>
+<li><a href="#org58cba4b">Core Concepts</a>
 <ul>
-<li><a href="#org3eb6227">Agents</a></li>
-<li><a href="#orgf7ea151">Testing theory and oracles</a></li>
+<li><a href="#org747f239">Agents</a></li>
+<li><a href="#org5b99810">Testing theory and oracles</a></li>
 </ul>
 </li>
 </ul>
@@ -227,13 +227,13 @@ Research knowledge base on verification, validation, and testing of software sys
 </p>
 
 <hr />
-<div id="outline-container-org5aaa6e8" class="outline-2">
-<h2 id="org5aaa6e8">Paper Summaries</h2>
-<div class="outline-text-2" id="text-org5aaa6e8">
+<div id="outline-container-org3e30031" class="outline-2">
+<h2 id="org3e30031">Paper Summaries</h2>
+<div class="outline-text-2" id="text-org3e30031">
 </div>
-<div id="outline-container-org8d65898" class="outline-3">
-<h3 id="org8d65898">Code agents</h3>
-<div class="outline-text-3" id="text-org8d65898">
+<div id="outline-container-org8ae02b4" class="outline-3">
+<h3 id="org8ae02b4">Agents and agent testing</h3>
+<div class="outline-text-3" id="text-org8ae02b4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -278,13 +278,28 @@ Research knowledge base on verification, validation, and testing of software sys
 <td class="org-left"><a href="qa-practices-gaps-agents.html">QA Practices and Gaps in AI Agents (Dai 2026)</a></td>
 <td class="org-left">157-repo study of execution surfaces/safeguards/testing/risk chains; only 5.1% of projects have adversarial tests</td>
 </tr>
+
+<tr>
+<td class="org-left"><a href="agentest.html">AgenTest (Quan 2026)</a></td>
+<td class="org-left">Mines business rules from prompts/tool schemas/domain knowledge into Given–When–Then specs and tests each with a simulated user; 89 and 121 violated specs vs. 26 and 49 for all baselines combined; ~60% of bug runs invisible in the final state</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="swe-dive.html">SWE-DIVE (Brehme 2026)</a></td>
+<td class="org-left">Turns SWE-bench tasks into multi-turn chats with persona-based simulated users; 11-task pilot shows more regressions than single-turn (workshop paper)</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="agentsight.html">AgentSight (Zheng 2025)</a></td>
+<td class="org-left">eBPF boundary tracing correlating decrypted LLM traffic with kernel events plus an observer LLM; 2.9% overhead, three case studies</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-orgc3015d3" class="outline-3">
-<h3 id="orgc3015d3">Metamorphic testing</h3>
-<div class="outline-text-3" id="text-orgc3015d3">
+<div id="outline-container-org1a624d0" class="outline-3">
+<h3 id="org1a624d0">Metamorphic testing</h3>
+<div class="outline-text-3" id="text-org1a624d0">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -334,13 +349,18 @@ Research knowledge base on verification, validation, and testing of software sys
 <td class="org-left"><a href="metamorphic-slicing.html">Metamorphic Slicing (Ren 2026)</a></td>
 <td class="org-left">Fine-grained fault localization within MR-violating groups when no oracle exists</td>
 </tr>
+
+<tr>
+<td class="org-left"><a href="sane.html">SANE (Ludwick &amp; Hsiao 2026)</a></td>
+<td class="org-left">Agent derives scorer-specific metamorphic recipes for LLM judges with a recipe/case/relation validity chain; 3.7x the validated families of JRH, judge ranking ρ=0.852 vs. FaithBench</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-orgf0a0c81" class="outline-3">
-<h3 id="orgf0a0c81">Robustness and test generation</h3>
-<div class="outline-text-3" id="text-orgf0a0c81">
+<div id="outline-container-orgc1f50dd" class="outline-3">
+<h3 id="orgc1f50dd">Robustness and test generation</h3>
+<div class="outline-text-3" id="text-orgc1f50dd">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -404,9 +424,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org741d42b" class="outline-3">
-<h3 id="org741d42b">Safety and specification testing</h3>
-<div class="outline-text-3" id="text-org741d42b">
+<div id="outline-container-org628faaf" class="outline-3">
+<h3 id="org628faaf">Safety and specification testing</h3>
+<div class="outline-text-3" id="text-org628faaf">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -435,9 +455,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org627b517" class="outline-3">
-<h3 id="org627b517">Oracle construction and auditing</h3>
-<div class="outline-text-3" id="text-org627b517">
+<div id="outline-container-org842f183" class="outline-3">
+<h3 id="org842f183">Oracle construction and auditing</h3>
+<div class="outline-text-3" id="text-org842f183">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -481,9 +501,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org556f836" class="outline-3">
-<h3 id="org556f836">Foundational surveys</h3>
-<div class="outline-text-3" id="text-org556f836">
+<div id="outline-container-org65fc1ba" class="outline-3">
+<h3 id="org65fc1ba">Foundational surveys</h3>
+<div class="outline-text-3" id="text-org65fc1ba">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -518,13 +538,13 @@ Research knowledge base on verification, validation, and testing of software sys
 </div>
 </div>
 </div>
-<div id="outline-container-org3808da8" class="outline-2">
-<h2 id="org3808da8">Core Concepts</h2>
-<div class="outline-text-2" id="text-org3808da8">
+<div id="outline-container-org58cba4b" class="outline-2">
+<h2 id="org58cba4b">Core Concepts</h2>
+<div class="outline-text-2" id="text-org58cba4b">
 </div>
-<div id="outline-container-org3eb6227" class="outline-3">
-<h3 id="org3eb6227">Agents</h3>
-<div class="outline-text-3" id="text-org3eb6227">
+<div id="outline-container-org747f239" class="outline-3">
+<h3 id="org747f239">Agents</h3>
+<div class="outline-text-3" id="text-org747f239">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -583,9 +603,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-orgf7ea151" class="outline-3">
-<h3 id="orgf7ea151">Testing theory and oracles</h3>
-<div class="outline-text-3" id="text-orgf7ea151">
+<div id="outline-container-org5b99810" class="outline-3">
+<h3 id="org5b99810">Testing theory and oracles</h3>
+<div class="outline-text-3" id="text-org5b99810">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -628,7 +648,7 @@ Research knowledge base on verification, validation, and testing of software sys
 
 <tr>
 <td class="org-left"><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></td>
-<td class="org-left">Using calibrated LLM judges as oracles when no ground truth exists; rubric adequacy via mutation, and why judge-only verdicts overstate failures</td>
+<td class="org-left">Using calibrated LLM judges as oracles when no ground truth exists; rubric adequacy via mutation, metamorphic testing of the judge itself, and why judge-only verdicts overstate failures</td>
 </tr>
 
 <tr>
@@ -648,7 +668,7 @@ Research knowledge base on verification, validation, and testing of software sys
 
 <tr>
 <td class="org-left"><a href="specification-based-testing.html">Specification-Based Testing</a></td>
-<td class="org-left">Documents (safety claims, requirements, skill docs, task descriptions) as the source of tests, oracles and coverage; compares LEST, REAG, Skill Coverage, Oracle Conversion, Lean4Agent</td>
+<td class="org-left">Documents (safety claims, requirements, skill docs, task descriptions) as the source of tests, oracles and coverage; compares LEST, REAG, Skill Coverage, Oracle Conversion, Lean4Agent, AgenTest</td>
 </tr>
 
 <tr>
@@ -668,7 +688,7 @@ Research knowledge base on verification, validation, and testing of software sys
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

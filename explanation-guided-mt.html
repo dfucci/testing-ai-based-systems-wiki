@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Explanation-Guided Metamorphic Testing of Specialized Language Models (Chen et al. 2026)</title>
@@ -203,11 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcec3c0b">Motivation</a></li>
-<li><a href="#orgf702e6f">Method</a></li>
-<li><a href="#orgbac21a3">Findings</a></li>
-<li><a href="#orgdc4e870">Relation to broader wiki</a></li>
-<li><a href="#org27a92b7">Related pages</a></li>
+<li><a href="#org5d57283">Motivation</a></li>
+<li><a href="#org9560d17">Method</a></li>
+<li><a href="#org501d728">Findings</a></li>
+<li><a href="#orge03ee57">Relation to broader wiki</a></li>
+<li><a href="#org0838fe1">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -221,32 +221,34 @@
 
 <ul class="org-ul">
 <li><a href="../raw/Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf">Chen et al. - 2026 - Explanation-Guided Metamorphic Testing of Specialized Language Models An Empirical Study.pdf</a></li>
+<li><a href="../raw/Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf">Terragni - 2026 - From Untestable to Testable Metamorphic Testing in the Age of LLMs.pdf</a></li>
+<li><a href="../raw/Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf">Zhou et al. - 2026 - LGMT Logic-Grounded Metamorphic Testing for Evaluating the Reasoning Reliability of LLMs.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-orgcec3c0b" class="outline-2">
-<h2 id="orgcec3c0b">Motivation</h2>
-<div class="outline-text-2" id="text-orgcec3c0b">
+<div id="outline-container-org5d57283" class="outline-2">
+<h2 id="org5d57283">Motivation</h2>
+<div class="outline-text-2" id="text-org5d57283">
 <p>
 Task-specialized language models (issue triaging, document classification) are increasingly embedded in software engineering workflows, but there is little empirical evidence on how to test their robustness under semantics-preserving perturbations. Heuristic mutation (random synonym swap, random token deletion) wastes effort mutating tokens the model doesn&rsquo;t actually attend to, and risks generating semantically invalid variants that look like bugs but are actually broken test cases. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgf702e6f" class="outline-2">
-<h2 id="orgf702e6f">Method</h2>
-<div class="outline-text-2" id="text-orgf702e6f">
+<div id="outline-container-org9560d17" class="outline-2">
+<h2 id="org9560d17">Method</h2>
+<div class="outline-text-2" id="text-org9560d17">
 <p>
 A large-scale empirical study across three datasets, four model architectures, and 20 testing configurations combining: attribution-based token prioritization (use explainability methods to find which tokens the model&rsquo;s prediction depends on), LLM-driven mutation (perturb exactly those tokens), and automated semantic verification (a gate that rejects mutations which no longer preserve the original label/meaning) — compared against heuristic mutation baselines. (source: Chen et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-orgbac21a3" class="outline-2">
-<h2 id="orgbac21a3">Findings</h2>
-<div class="outline-text-2" id="text-orgbac21a3">
+<div id="outline-container-org501d728" class="outline-2">
+<h2 id="org501d728">Findings</h2>
+<div class="outline-text-2" id="text-org501d728">
 <ul class="org-ul">
 <li>Explanation-guided mutation generates 2.30x more <b>verified</b> failure-inducing test cases than heuristic mutation.</li>
 <li>The semantic-verification gate substantially improves mutation validity — among gate-accepted variants, human annotation confirms high label-preservation precision, addressing metamorphic testing&rsquo;s classic false-positive problem (see <a href="metamorphic-testing.html">Metamorphic Testing</a>&rsquo;s &ldquo;known limitation&rdquo; section).</li>
@@ -258,26 +260,23 @@ A large-scale empirical study across three datasets, four model architectures, a
 </p>
 </div>
 </div>
-<div id="outline-container-orgdc4e870" class="outline-2">
-<h2 id="orgdc4e870">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-orgdc4e870">
+<div id="outline-container-orge03ee57" class="outline-2">
+<h2 id="orge03ee57">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orge03ee57">
 <p>
-This paper directly answers a gap left open by prior <a href="metamorphic-testing.html">metamorphic testing</a> work in this wiki (e.g. <a href="mmt4nl.html">MMT4NL</a>, <a href="metamorphic-testing-llms.html">LLMorph</a>): those apply MRs uniformly across all tokens/inputs, whereas explanation-guided MT targets the <b>specific</b> tokens a model is known to be sensitive to, making mutation both more efficient and more likely to expose genuine (not accidental) failures. It also addresses the false-positive/semantic-drift problem that <a href="metamorphic-testing-llms.html">Terragni 2026</a> and <a href="lgmt.html">LGMT</a> both flag as MT&rsquo;s chief weakness for NLP, via its automated semantic-verification gate.
-</p>
-
-<p>
-<a href="lest.html">LEST (Moshood et al. 2026)</a> offers a caution relevant to such gates: after similar automated validity checks, 89.3% of a sampled mutant set preserved intent, yet among the mutants flagged as failures only 28.2% did (cross-reference, not stated in this paper). Whether Explanation-Guided MT&rsquo;s 2.30x yield of &ldquo;verified&rdquo; failures holds up at the failure subset specifically is not something its own semantic gate alone can show (the author&rsquo;s inference, not a finding of either paper).
+The paper compares attribution-guided token selection against a random-selection baseline, and notes that the unguided setup resembles CheckList-style invariance testing, with a tendency to introduce grammatical artifacts instead of semantically meaningful perturbations. Its semantic-verification gate (bidirectional NLI entailment plus a linguistic-naturalness check) targets invalid mutations that alter the task label and produce false positives. <a href="metamorphic-testing-llms.html">Terragni 2026</a> reports a true-positive rate of about 62% on manually reviewed violations, and <a href="lgmt.html">LGMT</a> derives relations from proven equivalence laws at generation time. (source: Chen et al. 2026; Terragni 2026; Zhou et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org27a92b7" class="outline-2">
-<h2 id="org27a92b7">Related pages</h2>
-<div class="outline-text-2" id="text-org27a92b7">
+<div id="outline-container-org0838fe1" class="outline-2">
+<h2 id="org0838fe1">Related pages</h2>
+<div class="outline-text-2" id="text-org0838fe1">
 <ul class="org-ul">
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
 <li><a href="mmt4nl.html">MMT4NL (Racharak 2026)</a></li>
 <li><a href="metamorphic-testing-llms.html">Metamorphic Testing for LLMs (Terragni 2026)</a></li>
 <li><a href="lgmt.html">LGMT (Zhou et al. 2026)</a></li>
+<li><a href="sane.html">SANE (Ludwick &amp; Hsiao 2026)</a></li>
 <li><a href="lest.html">LEST (Moshood et al. 2026)</a></li>
 <li><a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a></li>
 </ul>
@@ -286,7 +285,7 @@ This paper directly answers a gap left open by prior <a href="metamorphic-testin
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

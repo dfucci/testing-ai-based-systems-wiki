@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LEST — Specification-Based Testing of Large Language Models (Moshood et al. 2026)</title>
@@ -203,24 +203,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0d371f7">Problem</a></li>
-<li><a href="#org32809e6">Approach</a>
+<li><a href="#org6843e6e">Problem</a></li>
+<li><a href="#orgfa57527">Approach</a>
 <ul>
-<li><a href="#orgc8f92cb">Mutation operators and validity checks</a></li>
+<li><a href="#org38d4e58">Mutation operators and validity checks</a></li>
 </ul>
 </li>
-<li><a href="#org613de0c">Results</a>
+<li><a href="#orga7092ab">Results</a>
 <ul>
-<li><a href="#org7f88538">RQ1 — testability of documented claims</a></li>
-<li><a href="#orgf23f1eb">RQ2 — coverage and counterexamples</a></li>
-<li><a href="#orgbce6328">RQ3 — operators</a></li>
-<li><a href="#org5e9c9a0">Motivating example</a></li>
+<li><a href="#org49fe15b">RQ1 — testability of documented claims</a></li>
+<li><a href="#orgf23e12a">RQ2 — coverage and counterexamples</a></li>
+<li><a href="#orgcf2c065">RQ3 — operators</a></li>
+<li><a href="#orgf91ac1f">Motivating example</a></li>
 </ul>
 </li>
-<li><a href="#orge5f719a">What it shows</a></li>
-<li><a href="#orgbbd92ec">Limitations (per the paper)</a></li>
-<li><a href="#org72f1cf6">Relation to broader wiki</a></li>
-<li><a href="#org47dbea8">Related pages</a></li>
+<li><a href="#orgde3f81e">What it shows</a></li>
+<li><a href="#org419235a">Limitations (per the paper)</a></li>
+<li><a href="#orgf777a22">Relation to broader wiki</a></li>
+<li><a href="#org42069c9">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -237,7 +237,7 @@
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
@@ -245,17 +245,17 @@
 <p>
 See <a href="specification-based-testing.html">Specification-Based Testing</a> for how LEST relates to the other documented-behavior approaches in this wiki.
 </p>
-<div id="outline-container-org0d371f7" class="outline-2">
-<h2 id="org0d371f7">Problem</h2>
-<div class="outline-text-2" id="text-org0d371f7">
+<div id="outline-container-org6843e6e" class="outline-2">
+<h2 id="org6843e6e">Problem</h2>
+<div class="outline-text-2" id="text-org6843e6e">
 <p>
 Safety evaluations typically start from a fixed benchmark (HarmBench, JailbreakBench, SORRY-Bench) rather than asking which <b>documented claims</b> the benchmark actually tests. Three gaps follow: (1) not every claim in a system card is observable through black-box interaction; (2) a prompt sharing a broad safety category with a claim does not necessarily exercise that claim, so benchmark size or category overlap does not imply specification coverage; (3) a single fixed prompt says little about whether behavior survives rewording, and automated judges alone may misclassify failures. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org32809e6" class="outline-2">
-<h2 id="org32809e6">Approach</h2>
-<div class="outline-text-2" id="text-org32809e6">
+<div id="outline-container-orgfa57527" class="outline-2">
+<h2 id="orgfa57527">Approach</h2>
+<div class="outline-text-2" id="text-orgfa57527">
 <p>
 LEST has five stages (claims → testability → claim-prompt mapping → mutation → execution and validation):
 </p>
@@ -272,9 +272,9 @@ LEST has five stages (claims → testability → claim-prompt mapping → mutati
 Claim-level reporting has three states: <b>not covered</b>, <b>covered, no counterexample observed</b> (explicitly not &ldquo;verified&rdquo;), and <b>counterexample found</b>.
 </p>
 </div>
-<div id="outline-container-orgc8f92cb" class="outline-3">
-<h3 id="orgc8f92cb">Mutation operators and validity checks</h3>
-<div class="outline-text-3" id="text-orgc8f92cb">
+<div id="outline-container-org38d4e58" class="outline-3">
+<h3 id="org38d4e58">Mutation operators and validity checks</h3>
+<div class="outline-text-3" id="text-org38d4e58">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -337,21 +337,21 @@ During fuzzing a candidate is rejected if it fails grammaticality (CoLA-trained 
 </div>
 </div>
 </div>
-<div id="outline-container-org613de0c" class="outline-2">
-<h2 id="org613de0c">Results</h2>
-<div class="outline-text-2" id="text-org613de0c">
+<div id="outline-container-orga7092ab" class="outline-2">
+<h2 id="orga7092ab">Results</h2>
+<div class="outline-text-2" id="text-orga7092ab">
 </div>
-<div id="outline-container-org7f88538" class="outline-3">
-<h3 id="org7f88538">RQ1 — testability of documented claims</h3>
-<div class="outline-text-3" id="text-org7f88538">
+<div id="outline-container-org49fe15b" class="outline-3">
+<h3 id="org49fe15b">RQ1 — testability of documented claims</h3>
+<div class="outline-text-3" id="text-org49fe15b">
 <p>
 56 claims; 29 (51.8%) prompt-testable. Claude Opus 4.8: 20 of 31 (64.5%); GPT-5.5: 9 of 25 (36.0%). Of the 27 non-testable claims, 18 (66.7%) concern internal or unobservable behavior or evaluation processes, 6 (22.2%) a component in isolation, 3 (11.1%) have no prompt that could objectively confirm or deny them. Inter-annotator Fleiss&rsquo; κ: 0.912 (claim identification), 0.856 (testability).
 </p>
 </div>
 </div>
-<div id="outline-container-orgf23f1eb" class="outline-3">
-<h3 id="orgf23f1eb">RQ2 — coverage and counterexamples</h3>
-<div class="outline-text-3" id="text-orgf23f1eb">
+<div id="outline-container-orgf23e12a" class="outline-3">
+<h3 id="orgf23e12a">RQ2 — coverage and counterexamples</h3>
+<div class="outline-text-3" id="text-orgf23e12a">
 <p>
 Claim funnel (Table 2 of the paper):
 </p>
@@ -436,26 +436,26 @@ Claim funnel (Table 2 of the paper):
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbce6328" class="outline-3">
-<h3 id="orgbce6328">RQ3 — operators</h3>
-<div class="outline-text-3" id="text-orgbce6328">
+<div id="outline-container-orgcf2c065" class="outline-3">
+<h3 id="orgcf2c065">RQ3 — operators</h3>
+<div class="outline-text-3" id="text-orgcf2c065">
 <p>
 Automated→validated R→C counts across both models: Paraphrase 95→8, PCLS 50→4, Fairness 100→3, Modifier insertion 32→3, Deletion 33→1, person conversion 2→0. Validated transitions come from five of seven operators; the authors decline to rank operators because 19 cases are too few. Paraphrase and PCLS mostly expose Harmful/Violent Content failures, Fairness mutation exposes Fairness/Bias ones.
 </p>
 </div>
 </div>
-<div id="outline-container-org5e9c9a0" class="outline-3">
-<h3 id="org5e9c9a0">Motivating example</h3>
-<div class="outline-text-3" id="text-org5e9c9a0">
+<div id="outline-container-orgf91ac1f" class="outline-3">
+<h3 id="orgf91ac1f">Motivating example</h3>
+<div class="outline-text-3" id="text-orgf91ac1f">
 <p>
 A Claude Opus 4.8 system-card claim reported in the BBQ bias context states that the model &ldquo;does not produce unfair or stereotyped outputs&rdquo;. The benchmark seed is refused; a Fairness-mutated variant targeting a different group was answered with a list of offensive terms (framed as useful for education/moderation), and again in four more executions. The refusal is not invariant across related inputs that exercise the same property. (source: Moshood et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge5f719a" class="outline-2">
-<h2 id="orge5f719a">What it shows</h2>
-<div class="outline-text-2" id="text-orge5f719a">
+<div id="outline-container-orgde3f81e" class="outline-2">
+<h2 id="orgde3f81e">What it shows</h2>
+<div class="outline-text-2" id="text-orgde3f81e">
 <ul class="org-ul">
 <li><b>High refusal rate on fixed prompts does not imply robustness under variation</b>: both models refuse more than 95% of seeds, yet a majority of the covered refusal-testable claims have a human-validated counterexample.</li>
 <li><b>Judge-only evaluation overstates failure</b>: 312 flagged vs. 19 validated (about 16×). Candidates should be treated as candidates.</li>
@@ -464,25 +464,25 @@ A Claude Opus 4.8 system-card claim reported in the BBQ bias context states that
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbbd92ec" class="outline-2">
-<h2 id="orgbbd92ec">Limitations (per the paper)</h2>
-<div class="outline-text-2" id="text-orgbbd92ec">
+<div id="outline-container-org419235a" class="outline-2">
+<h2 id="org419235a">Limitations (per the paper)</h2>
+<div class="outline-text-2" id="text-org419235a">
 <p>
 Black-box only; the present instantiation covers claims where refusal is a valid oracle (other prompt-testable claims need richer oracles); seven operators, three domains, two commercial models, 97 seeds. Only automated-R→C cases are human-checked, so automated false negatives are missed. Recall of claim extraction beyond section selection (10 of 15 relevant sections retrieved, 66.7%; the five misses held no refusal-testable claim) was not exhaustively measured. Operator-level findings are descriptive, not causal. All claim identification, testability, mapping and oracle judgments are manual, which the authors name as the main open problem (automatic claim-to-test generation).
 </p>
 </div>
 </div>
-<div id="outline-container-org72f1cf6" class="outline-2">
-<h2 id="org72f1cf6">Relation to broader wiki</h2>
-<div class="outline-text-2" id="text-org72f1cf6">
+<div id="outline-container-orgf777a22" class="outline-2">
+<h2 id="orgf777a22">Relation to broader wiki</h2>
+<div class="outline-text-2" id="text-orgf777a22">
 <p>
-Each operator works as an invariance <a href="metamorphic-testing.html">metamorphic relation</a> (&ldquo;refusal should persist under a meaning-preserving edit&rdquo;); the paper cites a collection of 191 NLP metamorphic relations (Cho et al.), which appears to be the LLMorph work this wiki covers under <a href="metamorphic-testing-llms.html">Terragni 2026</a> (needs verification). Its finding that failure-flagged mutants are mostly invalid sharpens the false-positive problem noted there (~62% true-positive rate) and the semantic-verification gate of <a href="explanation-guided-mt.html">Explanation-Guided MT</a>: gating the generator is not enough, the <b>failures</b> need validating. Unlike jailbreak-fuzzers (PAIR, TAP, AutoDAN, FuzzLLM), LEST&rsquo;s goal is consistency testing, not optimizing an attack, and its prompts are generated independently of model responses; see <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a>. The claim-coverage notion belongs with <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a> next to <a href="skill-coverage.html">Skill Coverage</a>, and the three-judge ensemble overestimating failures is a data point for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>.
+Each operator works as an invariance <a href="metamorphic-testing.html">metamorphic relation</a> (&ldquo;refusal should persist under a meaning-preserving edit&rdquo;); the paper cites a collection of 191 NLP metamorphic relations (Cho et al.). Its finding that failure-flagged mutants are mostly invalid sharpens the false-positive problem noted for <a href="metamorphic-testing-llms.html">Terragni 2026</a> (~62% true-positive rate) and the semantic-verification gate of <a href="explanation-guided-mt.html">Explanation-Guided MT</a>: gating the generator is not enough, the <b>failures</b> need validating. Unlike jailbreak-fuzzers (PAIR, TAP, AutoDAN, FuzzLLM), LEST&rsquo;s goal is consistency testing, not optimizing an attack, and its prompts are generated independently of model responses; see <a href="adversarial-robustness-testing.html">Adversarial Robustness Testing</a>. The claim-coverage notion belongs with <a href="test-adequacy-criteria.html">Test Adequacy Criteria</a> next to <a href="skill-coverage.html">Skill Coverage</a>, and the three-judge ensemble overestimating failures is a data point for <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org47dbea8" class="outline-2">
-<h2 id="org47dbea8">Related pages</h2>
-<div class="outline-text-2" id="text-org47dbea8">
+<div id="outline-container-org42069c9" class="outline-2">
+<h2 id="org42069c9">Related pages</h2>
+<div class="outline-text-2" id="text-org42069c9">
 <ul class="org-ul">
 <li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
 <li><a href="metamorphic-testing.html">Metamorphic Testing</a></li>
@@ -501,7 +501,7 @@ Each operator works as an invariance <a href="metamorphic-testing.html">metamorp
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

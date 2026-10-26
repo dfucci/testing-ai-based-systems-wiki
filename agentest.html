@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-10-26 Mon 16:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AgenTest: Mining Business Rules to Test LLM Agents (Quan et al. 2026)</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">AgenTest: Mining Business Rules to Test LLM Agents (Quan et al. 2026)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0200319">Problem</a></li>
+<li><a href="#org10174c3">Approach</a>
+<ul>
+<li><a href="#org22b9b2a">Stage 1: mining and refinement of specifications</a></li>
+<li><a href="#org55b4b23">Stage 2: specification-driven testing</a></li>
+</ul>
+</li>
+<li><a href="#org8e0a25c">Evaluation setup</a></li>
+<li><a href="#orge53d267">Results</a>
+<ul>
+<li><a href="#orgb68155a">Specification quality (RQ1)</a></li>
+<li><a href="#org29d071b">Bug detection (RQ2)</a></li>
+<li><a href="#orge8c3405">Component effectiveness (RQ3, DeepSeek-V4-Flash)</a></li>
+<li><a href="#org889f725">What the bugs are (RQ4)</a></li>
+</ul>
+</li>
+<li><a href="#org5fe45d6">Takeaways stated by the authors</a></li>
+<li><a href="#org9d9b324">Limitations</a></li>
+<li><a href="#orgd19e507">Relation to the rest of the wiki</a></li>
+<li><a href="#org9590a5d">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: Specification-driven testing for tool-using LLM agents: business rules are mined from the system prompt, tool definitions and LLM domain knowledge, refined into Given–When–Then specifications, and each specification drives the environment setup, simulated user and interaction used to test it. On τ²-bench it exposes violations of 89 and 121 distinct specifications on two underlying models, 3.4× and 2.5× as many as all baselines combined.
+</p>
+
+<p>
+<b>Sources</b>:
+</p>
+
+<ul class="org-ul">
+<li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a> (arXiv:2610.28116v1, 20 Oct 2026)</li>
+</ul>
+
+<p>
+<b>Last updated</b>: 2026-10-26
+</p>
+
+<hr />
+<div id="outline-container-org0200319" class="outline-2">
+<h2 id="org0200319">Problem</h2>
+<div class="outline-text-2" id="text-org0200319">
+<p>
+Tool-using agents (customer-service agents that modify orders, refund, cancel, update records through backend APIs) must obey business rules about when an action is allowed and which data it may touch. In conventional software those rules live in code (authorization checks, validation, data constraints). In an agent they are spread across the system prompt and tool definitions, or remain implicit in domain knowledge, so a rule can be followed in one conversation and broken in another. (source: Quan et al. 2026)
+</p>
+
+<p>
+The paper&rsquo;s motivating example: a user asks the airline agent to add a checked bag to a reservation that belongs to a different user. The agent updates the reservation, charges the other user&rsquo;s card and reports success. The run ends in a valid state and satisfies the request, but violates &ldquo;a reservation may be modified only at the request of its owner&rdquo; — a rule no single artifact states (the prompt requires user identification; the tool accepts a reservation ID). A predefined functional test catches it only if someone already anticipated the rule, built the scenario and supplied an oracle. (source: Quan et al. 2026)
+</p>
+
+<p>
+Existing agent testing falls into two groups the paper contrasts itself with: security-oriented work (jailbreaks, prompt injection, malicious tool use) and predefined-task benchmarks such as τ²-bench, which need the behavior and the judging criterion specified in advance. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org10174c3" class="outline-2">
+<h2 id="org10174c3">Approach</h2>
+<div class="outline-text-2" id="text-org10174c3">
+<p>
+Definitions: an agent is A = (M, π, T) (model, system prompt, tools); a business-logic bug is a pair (specification s, trace τ) where the preconditions of s hold in τ but the observed behavior violates its postconditions. (source: Quan et al. 2026)
+</p>
+</div>
+<div id="outline-container-org22b9b2a" class="outline-3">
+<h3 id="org22b9b2a">Stage 1: mining and refinement of specifications</h3>
+<div class="outline-text-3" id="text-org22b9b2a">
+<ul class="org-ul">
+<li><b>Tool-based extraction</b>: an LLM reads tool schemas and docstrings for argument constraints (formats, ranges, enumerations, relations between arguments) and ordering constraints (tool B needs an output only tool A produces). A second LLM check drops an ordering dependency when the user could supply the value directly.</li>
+<li><b>System-prompt extraction</b>: the LLM reads the whole prompt and returns each rule with a supporting quotation and the tools it constrains. Two repair passes follow: a passage-coverage check (uncited passages are re-assessed as &ldquo;no rule&rdquo;, &ldquo;extra evidence&rdquo; or &ldquo;missing rule&rdquo;) and a tool-binding check (a rule such as &ldquo;confirm before any reservation update&rdquo; may apply to tools beyond the section it appears in). Each proposed binding needs a quotation that is verified against the source.</li>
+<li><b>Domain-knowledge inference</b>: per tool, along four dimensions — argument constraints, environment-state constraints (the object exists, belongs to the requester, is in a permitting state), ordering constraints, behavioral norms — plus three cross-call patterns (a call invalidates later operations, effects accumulate past a limit, a closed resource may not be used again).</li>
+<li><b>Deduplication and filtering</b>: an LLM groups specifications constraining the same operation and keeps the one from the most reliable source (schema over prompt over domain knowledge). A second layer removes domain-knowledge rules the agent cannot violate: the LLM must point to the field, prompt sentence or tool parameter that defines every limit or status the rule relies on, and code verifies the pointer exists.</li>
+<li><b>Refinement</b>: a condition is split into a disjunction of alternatives C = C₁ ∨ … ∨ Cₙ, each a conjunction of atomic conditions. Each alternative yields one permitted scenario. Prohibited scenarios come from the negation of the whole condition (¬C), because a state that fails only one alternative may still satisfy another and would not exercise the prohibition. Each scenario is encoded as Given (applicable conditions) / When (the triggering request, without prescribing the agent&rsquo;s response) / Then (required, prohibited or permitted behavior). The paper&rsquo;s cancellation example: four alternative eligibility conditions give four permitted scenarios and two prohibited ones.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org55b4b23" class="outline-3">
+<h3 id="org55b4b23">Stage 2: specification-driven testing</h3>
+<div class="outline-text-3" id="text-org55b4b23">
+<ul class="org-ul">
+<li><b>Test driver</b>: Given is split into atomic clauses of three kinds — environment conditions, user-side conditions, ownership relations. Environment clauses are mapped to ⟨table, field, operator, value⟩ tuples validated against the data model; the driver searches for objects satisfying them (following foreign keys), pairing an object with its owner or another user as the ownership relation requires. If no object qualifies it edits an object&rsquo;s constrained attributes and re-verifies. A specification is not tested if its precondition cannot be established (e.g. it refers to an expired reservation and the data model has no such status). A simulated user is configured with the requester&rsquo;s ID, the object IDs, the goal task derived from When, and the user-side conditions to convey; for another user&rsquo;s object it is not given the owner&rsquo;s private information.</li>
+<li><b>Interaction strategies</b>: refined specifications fall into 13 structural categories according to the text (the paper&rsquo;s Table 1 lists 14 rows summing to the 67 strategies: state precondition, quantity limit, step order, confirmation, conditional permission, prohibition, transfer, object ownership, disclosure, argument value, procedure completeness, communication protocol, truthful statement, argument content). For each, the authors enumerate ways a user can vary the timing, form, completeness and framing of the information the constraint depends on, giving a domain-independent library of 67 strategies (examples: &ldquo;fail a condition by a narrow margin&rdquo;, &ldquo;request an action on another user&rsquo;s object&rdquo;, &ldquo;reveal an over-limit item only when asked&rdquo;). A default strategy (state task, supply known facts, confirm when asked) is used outside the library.</li>
+<li><b>Bug experience memory</b>: strategies that exposed violations are promoted, repeatedly unsuccessful ones demoted, untried ones stay candidates. Generated cases are checked (tool and object references, state changes applied in a fresh environment, the proposed compliant tool sequence replayed) and dropped if setup is invalid.</li>
+<li><b>Hybrid oracle</b>: assertions are extracted from the Then of the target specification and of other applicable specifications on the same tools, <b>before</b> execution, so the criteria cannot adapt to the outcome. Constraints on arguments, state and event order become executable predicates over tool calls and states. Conversational constraints stay natural-language assertions judged by an LLM that must return supporting quotations; quotations are checked against the trace and an unsupported judgment leaves the assertion undecided.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org8e0a25c" class="outline-2">
+<h2 id="org8e0a25c">Evaluation setup</h2>
+<div class="outline-text-2" id="text-org8e0a25c">
+<ul class="org-ul">
+<li><b>Agents</b>: τ²-bench airline, retail and telecom agents (15, 17 and 13 tools; telecom adds 30 user-side tools), each on two underlying models, DeepSeek-V4-Flash and Qwen-3.8-Flash.</li>
+<li><b>Baselines</b>: the τ²-bench task set (278 hand-written tasks: 50/114/114, judged by final database state and a few required actions); IntellAgent (policy-combination scenario generation with an LLM judge; run on airline and retail only because it does not support telecom&rsquo;s user tools); MANTRA (SMT-validated compliance tasks; released suites of 44/57/31 tasks; single scenario message, no simulated user).</li>
+<li><b>Configuration</b>: GPT-4.1 for specification extraction, Claude Opus 5.5 for test synthesis and LLM judgments, DeepSeek-V4-Flash for the simulated user. Specifications are mined once per domain and both models are tested against the same ones. Three rounds: round 1 runs each refined specification once with the default behavior; rounds 2–3 each apply one strategy perturbation per specification.</li>
+<li><b>Bug counting</b>: two authors independently review every AgenTest run and every violation a baseline reports; only confirmed violations count. Bugs are deduplicated by the refined specification they break, so a &ldquo;bug&rdquo; is a violated refined specification, however many runs violate it. One rule is excluded for all approaches — the agent must not send a message and call a tool in the same turn — because agents break it in 69.3% (DeepSeek) and 32.2% (Qwen) of default-strategy test cases regardless of the specification under test.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge53d267" class="outline-2">
+<h2 id="orge53d267">Results</h2>
+<div class="outline-text-2" id="text-orge53d267">
+</div>
+<div id="outline-container-orgb68155a" class="outline-3">
+<h3 id="orgb68155a">Specification quality (RQ1)</h3>
+<div class="outline-text-3" id="text-orgb68155a">
+<p>
+Mining yields 483 specifications (214 from the system prompt, 109 from tool definitions, 160 from domain knowledge); deduplication removes 120, binding repair adds 25 and filtering removes 19, leaving 369, which refinement turns into 551 refined specifications. 88.0% are correct (Cohen&rsquo;s κ 0.88): 100% of those from tool definitions, 91.2% from the system prompt, 80.6% from domain knowledge. Of the 66 incorrect ones, 30 state rules with no support in the source, 19 contradict the prompt or tool documentation, 17 drop a condition of the rule. Tool definitions and domain knowledge supply 56% of the filtered specifications. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org29d071b" class="outline-3">
+<h3 id="org29d071b">Bug detection (RQ2)</h3>
+<div class="outline-text-3" id="text-org29d071b">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Approach</th>
+<th scope="col" class="org-left">DeepSeek-V4-Flash: bugs (runs/bug)</th>
+<th scope="col" class="org-left">Qwen-3.8-Flash: bugs (runs/bug)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">τ²-bench tasks</td>
+<td class="org-left">5 (55.6)</td>
+<td class="org-left">8 (34.8)</td>
+</tr>
+
+<tr>
+<td class="org-left">IntellAgent (airline, retail)</td>
+<td class="org-left">20 (51.0)</td>
+<td class="org-left">41 (24.9)</td>
+</tr>
+
+<tr>
+<td class="org-left">MANTRA</td>
+<td class="org-left">6 (110.0)</td>
+<td class="org-left">12 (55.0)</td>
+</tr>
+
+<tr>
+<td class="org-left">AgenTest</td>
+<td class="org-left">89 (17.0)</td>
+<td class="org-left">121 (12.5)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Baselines combined find 26 and 49 bugs, so AgenTest finds 3.4× and 2.5× as many; 83 and 97 of its bugs are found by no baseline. AgenTest finds 6 and 24 of the baseline bugs, which leaves 20 and 25 found only by a baseline (derived from the figures in the paper). Every baseline-only bug breaks a specification AgenTest also tests but arises in a long task chaining several goals (e.g. troubleshooting several faults before a transfer, or booking and requesting compensation in one conversation); AgenTest tests one specification at a time and does not reproduce those interactions. At equal budgets AgenTest leads beyond 44 runs (DeepSeek) and 178 runs (Qwen); below that IntellAgent finds slightly more because its few bugs recur in many conversations (its most frequent appears in 41 and 93 of them). (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orge8c3405" class="outline-3">
+<h3 id="orge8c3405">Component effectiveness (RQ3, DeepSeek-V4-Flash)</h3>
+<div class="outline-text-3" id="text-orge8c3405">
+<ul class="org-ul">
+<li>Drivers are constructed for 504 of 551 refined specifications (91.5%); the other 47 are 26 incorrect specifications and 21 requiring a state the environment cannot hold (e.g. a ported-out line). In 1,503 of 1,512 runs (99.4%) the simulated user states the Given conditions and triggers When.</li>
+<li>Interaction strategies account for most bugs: the default strategy alone violates 6 refined specifications, random strategy selection 84, AgenTest (with bug experience memory) 89 (bug rate 1.2%, 6.9%, 7.7% of runs).</li>
+<li>The hybrid oracle agrees with the manual review on 1,476 of 1,512 runs (97.6%) with precision 82.6% (161 of 195 reported violations), rising to 90.4% in library-strategy runs. The judges of the baselines reach 25.0% (τ²-bench), 46.5% (IntellAgent) and 5.7% (MANTRA) precision on the same measure. In default-strategy cases 492 of 579 checks (85%) are deterministic rules on tool calls and states. (source: Quan et al. 2026)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org889f725" class="outline-3">
+<h3 id="org889f725">What the bugs are (RQ4)</h3>
+<div class="outline-text-3" id="text-org889f725">
+<p>
+Symptom × model (DeepSeek / Qwen): invalid argument 43 / 46; disallowed operation 13 / 22; missing prerequisite 12 / 25; unauthorized action on another user&rsquo;s object 9 / 10; improper escalation 6 / 10; incorrect communication 6 / 8. The four symptoms involving tool calls on business data make up 86.5% and 85.1% of bugs. Root cause: the rule is implicit (stated in no artifact) for 50.6% / 36.4% of bugs, stated but ignored for 30.3% / 26.4%, stated but misapplied for 19.1% / 37.2%. Unauthorized actions come almost entirely from implicit rules (8 of 9 and 9 of 10); missing prerequisites only from stated rules. Only AgenTest exposes agents acting on another user&rsquo;s object, a situation a test has to construct deliberately. (source: Quan et al. 2026)
+</p>
+
+<p>
+About 60% of bug-triggering runs (60% and 59%) cannot be detected from the final state alone: 42% and 37% leave the database unchanged, and the rest write a state a compliant run could also produce (acting on another user&rsquo;s reservation, acting without an explicit yes). (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5fe45d6" class="outline-2">
+<h2 id="org5fe45d6">Takeaways stated by the authors</h2>
+<div class="outline-text-2" id="text-org5fe45d6">
+<ul class="org-ul">
+<li>An implicit-rule bug is a defect of the agent as a whole (prompt plus tools plus model), not necessarily of the model; the repair may be stating the rule in the prompt or enforcing it in the tool.</li>
+<li>Rules with structured evidence (ownership, argument values, call order) need not be left to the model; the same deterministic predicates could guard tool execution at runtime (they cite Kamath et al. 2025). Conversational rules such as confirmation stay with the model and testing remains their main safeguard.</li>
+<li>Decomposing a request into single-goal subtasks may reduce interference between goals, provided rules spanning subtasks (e.g. a compensation limit per incident) are enforced across them.</li>
+<li>Bugs depend on the underlying model (misapplied-rule bugs: 17 on DeepSeek vs 45 on Qwen), so one model&rsquo;s results do not transfer. Specifications depend only on the prompt and tools, so they can be mined once and rerun as a regression suite when the model is upgraded.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9d9b324" class="outline-2">
+<h2 id="org9d9b324">Limitations</h2>
+<div class="outline-text-2" id="text-org9d9b324">
+<p>
+Stated by the authors: three domains of one benchmark and two underlying models; AgenTest needs the system prompt, tool definitions and a resettable environment with a known data model; the interaction strategies are untested in unseen domains; testing one specification at a time misses multi-goal interactions; domain-knowledge specifications are the least reliable (80.6% correct). (source: Quan et al. 2026)
+</p>
+
+<p>
+Bug counts are per violated refined specification, and two authors reviewed every AgenTest run and every reported baseline violation (see the bug-counting description above). The code is released at an anonymized repository link given in the PDF. (source: Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgd19e507" class="outline-2">
+<h2 id="orgd19e507">Relation to the rest of the wiki</h2>
+<div class="outline-text-2" id="text-orgd19e507">
+<p>
+AgenTest is the instance in <a href="specification-based-testing.html">Specification-Based Testing</a> where the specification is <b>inferred</b> rather than provided, and where the specification-to-test step is automated rather than manual. Its oracle design — assertions fixed before execution, deterministic where evidence is structured, LLM judgments that must quote the trace — is a concrete answer to the second-order oracle problem raised in <a href="oracle-problem.html">The Oracle Problem</a> and <a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a>. The deterministic-check share (85%) bears on <a href="runtime-enforcement.html">Runtime Enforcement</a>. The unauthorized-action and prerequisite bugs are agent-level failures of the kind catalogued in <a href="agent-failure-modes.html">Agent Failure Modes</a> and <a href="agent-safety.html">Agent Safety</a>; the simulated user belongs with the multi-turn testing in <a href="swe-dive.html">SWE-DIVE</a> and <a href="mortar.html">MORTAR</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org9590a5d" class="outline-2">
+<h2 id="org9590a5d">Related pages</h2>
+<div class="outline-text-2" id="text-org9590a5d">
+<ul class="org-ul">
+<li><a href="specification-based-testing.html">Specification-Based Testing</a></li>
+<li><a href="oracle-problem.html">The Oracle Problem</a></li>
+<li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
+<li><a href="agent-failure-modes.html">Agent Failure Modes</a></li>
+<li><a href="agent-safety.html">Agent Safety</a></li>
+<li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
+<li><a href="swe-dive.html">SWE-DIVE (Brehme et al. 2026)</a></li>
+<li><a href="mortar.html">MORTAR (Guo et al. 2026)</a></li>
+<li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
+</div>
+</body>
+</html>

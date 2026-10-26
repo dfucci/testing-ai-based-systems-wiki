@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Agent Evaluation</title>
@@ -203,21 +203,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb948d31">Outcome-Based Metrics</a>
+<li><a href="#orgb02cf0b">Outcome-Based Metrics</a>
 <ul>
-<li><a href="#orgc347251">Pass@k</a></li>
-<li><a href="#org3cd9cd5">CodeBLEU</a></li>
-<li><a href="#org88d395b">Efficiency metrics</a></li>
+<li><a href="#orgc619f0c">Pass@k</a></li>
+<li><a href="#orgabb33ab">CodeBLEU</a></li>
+<li><a href="#org5208944">Efficiency metrics</a></li>
 </ul>
 </li>
-<li><a href="#org0875a0c">Process-Based Metrics (TRAJEVAL)</a></li>
-<li><a href="#org9c3d97b">Safety-Oriented Evaluation</a></li>
-<li><a href="#orgdc61852">Generalization Evaluation</a></li>
-<li><a href="#orgb3c2a0d">Benchmarks</a></li>
-<li><a href="#org6d6b559">Limitations of Current Evaluation</a></li>
-<li><a href="#org2d903ac">Evaluation Without Ground Truth</a></li>
-<li><a href="#orge7f1f81">Formal and Adequacy-Based Alternatives to Benchmark Scores</a></li>
-<li><a href="#org1aa3422">Related pages</a></li>
+<li><a href="#orga21ad4d">Process-Based Metrics (TRAJEVAL)</a></li>
+<li><a href="#orgf38eeb0">Safety-Oriented Evaluation</a></li>
+<li><a href="#orgddfbee5">Generalization Evaluation</a></li>
+<li><a href="#org319d08a">Benchmarks</a></li>
+<li><a href="#org73a73fc">Limitations of Current Evaluation</a></li>
+<li><a href="#orgaf908f2">Evaluation Without Ground Truth</a></li>
+<li><a href="#org65dbb45">Formal and Adequacy-Based Alternatives to Benchmark Scores</a></li>
+<li><a href="#org24df817">Interaction-Aware Evaluation</a></li>
+<li><a href="#org50da6ce">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -233,20 +234,22 @@
 <li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
 <li><a href="../raw/Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf">Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf</a></li>
 <li><a href="../raw/Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf">Tan et al. - 2026 - Skill Coverage A Test Adequacy Metric for Agent Skills.pdf</a></li>
+<li><a href="../raw/Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf">Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf</a></li>
+<li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-08-30
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-orgb948d31" class="outline-2">
-<h2 id="orgb948d31">Outcome-Based Metrics</h2>
-<div class="outline-text-2" id="text-orgb948d31">
+<div id="outline-container-orgb02cf0b" class="outline-2">
+<h2 id="orgb02cf0b">Outcome-Based Metrics</h2>
+<div class="outline-text-2" id="text-orgb02cf0b">
 </div>
-<div id="outline-container-orgc347251" class="outline-3">
-<h3 id="orgc347251">Pass@k</h3>
-<div class="outline-text-3" id="text-orgc347251">
+<div id="outline-container-orgc619f0c" class="outline-3">
+<h3 id="orgc619f0c">Pass@k</h3>
+<div class="outline-text-3" id="text-orgc619f0c">
 <p>
 Probability of generating a correct solution within k attempts. Standard metric for code agents on SWE-bench. Collapses entire execution into a binary signal — passes or fails. Cannot reveal where or why an agent failed.
 </p>
@@ -256,26 +259,26 @@ Probability of generating a correct solution within k attempts. Standard metric 
 </p>
 </div>
 </div>
-<div id="outline-container-org3cd9cd5" class="outline-3">
-<h3 id="org3cd9cd5">CodeBLEU</h3>
-<div class="outline-text-3" id="text-org3cd9cd5">
+<div id="outline-container-orgabb33ab" class="outline-3">
+<h3 id="orgabb33ab">CodeBLEU</h3>
+<div class="outline-text-3" id="text-orgabb33ab">
 <p>
 Measures syntactic and semantic similarity of generated code to reference. Operates on outputs, not process. Does not capture whether agent explored the right code regions.
 </p>
 </div>
 </div>
-<div id="outline-container-org88d395b" class="outline-3">
-<h3 id="org88d395b">Efficiency metrics</h3>
-<div class="outline-text-3" id="text-org88d395b">
+<div id="outline-container-org5208944" class="outline-3">
+<h3 id="org5208944">Efficiency metrics</h3>
+<div class="outline-text-3" id="text-org5208944">
 <p>
 Token consumption, latency, cost per solution. Measure operational costs but not behavioral quality.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0875a0c" class="outline-2">
-<h2 id="org0875a0c">Process-Based Metrics (TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-org0875a0c">
+<div id="outline-container-orga21ad4d" class="outline-2">
+<h2 id="orga21ad4d">Process-Based Metrics (TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-orga21ad4d">
 <p>
 <a href="trajeval.html">TRAJEVAL</a> introduces stage-wise precision and recall metrics that measure <b>how</b> agents arrive at solutions:
 </p>
@@ -317,9 +320,9 @@ Key finding: these 6 features predict model-level Pass@1 within 0.87–2.1% MAE,
 </p>
 </div>
 </div>
-<div id="outline-container-org9c3d97b" class="outline-2">
-<h2 id="org9c3d97b">Safety-Oriented Evaluation</h2>
-<div class="outline-text-2" id="text-org9c3d97b">
+<div id="outline-container-orgf38eeb0" class="outline-2">
+<h2 id="orgf38eeb0">Safety-Oriented Evaluation</h2>
+<div class="outline-text-2" id="text-orgf38eeb0">
 <p>
 For <a href="agent-safety.html">agent safety</a>, evaluation focuses on whether agents execute harmful actions. Key benchmarks:
 </p>
@@ -335,9 +338,9 @@ Safety evaluation uses enforcement rate (fraction of risky actions successfully 
 </p>
 </div>
 </div>
-<div id="outline-container-orgdc61852" class="outline-2">
-<h2 id="orgdc61852">Generalization Evaluation</h2>
-<div class="outline-text-2" id="text-orgdc61852">
+<div id="outline-container-orgddfbee5" class="outline-2">
+<h2 id="orgddfbee5">Generalization Evaluation</h2>
+<div class="outline-text-2" id="text-orgddfbee5">
 <p>
 TRAJEVAL identifies three increasingly challenging distribution shifts:
 </p>
@@ -353,17 +356,17 @@ Results: for the SWE-Agent/SWE-bench configuration specifically, trajectory feat
 </p>
 </div>
 </div>
-<div id="outline-container-orgb3c2a0d" class="outline-2">
-<h2 id="orgb3c2a0d">Benchmarks</h2>
-<div class="outline-text-2" id="text-orgb3c2a0d">
+<div id="outline-container-org319d08a" class="outline-2">
+<h2 id="org319d08a">Benchmarks</h2>
+<div class="outline-text-2" id="text-org319d08a">
 <p>
 See <a href="code-agent-benchmarks.html">Code Agent Benchmarks</a> for details on SWE-bench, PolyBench, RedCode-Exec, SafeAgentBench, and FixDrive.
 </p>
 </div>
 </div>
-<div id="outline-container-org6d6b559" class="outline-2">
-<h2 id="org6d6b559">Limitations of Current Evaluation</h2>
-<div class="outline-text-2" id="text-org6d6b559">
+<div id="outline-container-org73a73fc" class="outline-2">
+<h2 id="org73a73fc">Limitations of Current Evaluation</h2>
+<div class="outline-text-2" id="text-org73a73fc">
 <ul class="org-ul">
 <li><b>Binary outcomes hide failure structure</b>: models with same Pass@1 may fail in completely different ways</li>
 <li><b>Reference-patch assumption</b>: trajectory metrics assume reference patches represent canonical solutions (TRAJEVAL validates this: 93.3% of multi-solved instances show exact function-level convergence)</li>
@@ -372,17 +375,17 @@ See <a href="code-agent-benchmarks.html">Code Agent Benchmarks</a> for details o
 </ul>
 </div>
 </div>
-<div id="outline-container-org2d903ac" class="outline-2">
-<h2 id="org2d903ac">Evaluation Without Ground Truth</h2>
-<div class="outline-text-2" id="text-org2d903ac">
+<div id="outline-container-orgaf908f2" class="outline-2">
+<h2 id="orgaf908f2">Evaluation Without Ground Truth</h2>
+<div class="outline-text-2" id="text-orgaf908f2">
 <p>
 For agent outputs with no fixed correct answer, <a href="reag.html">REAG</a> proposes requirements-grounded oracle generation plus a confidence-calibrated <a href="llm-as-judge-evaluation.html">LLM-as-judge cascade</a> (conformal risk control, abstention on low confidence) as an alternative to fixed benchmarks. Empirically, <a href="tangent.html">Tangent</a> finds most real-world agent test suites still rely on shallow unit assertions rather than this kind of behavior-level evaluation — see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orge7f1f81" class="outline-2">
-<h2 id="orge7f1f81">Formal and Adequacy-Based Alternatives to Benchmark Scores</h2>
-<div class="outline-text-2" id="text-orge7f1f81">
+<div id="outline-container-org65dbb45" class="outline-2">
+<h2 id="org65dbb45">Formal and Adequacy-Based Alternatives to Benchmark Scores</h2>
+<div class="outline-text-2" id="text-org65dbb45">
 <p>
 <a href="lean4agent.html">Lean4Agent</a> shows that a design-time formal-verification pass on the workflow specification itself is predictive of downstream benchmark performance (11.94% average gain for verification-passing workflows) — an evaluation signal available <b>before</b> running any benchmark task. See <a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a>.
 </p>
@@ -392,10 +395,20 @@ Separately, <a href="skill-coverage.html">Skill Coverage</a> evaluates agent <b>
 </p>
 </div>
 </div>
-<div id="outline-container-org1aa3422" class="outline-2">
-<h2 id="org1aa3422">Related pages</h2>
-<div class="outline-text-2" id="text-org1aa3422">
+<div id="outline-container-org24df817" class="outline-2">
+<h2 id="org24df817">Interaction-Aware Evaluation</h2>
+<div class="outline-text-2" id="text-org24df817">
+<p>
+Two 2026 papers question evaluation that scores a single prompt and the final state. <a href="swe-dive.html">SWE-DIVE</a> re-runs SWE-bench tasks as multi-turn conversations with simulated users in three personas. In an 11-task pilot, 4 or 5 of 11 runs per persona broke previously passing tests against 2 of 11 for the single-prompt baseline, and the personas induced different amounts of rewriting and token use, so the measured result depends on the simulated user as well as on the agent. <a href="agentest.html">AgenTest</a> finds that about 60% of bug-triggering runs on τ²-bench agents are invisible in the final database state, and its rule-driven tests expose 89 and 121 violated specifications against 5 and 8 for the benchmark&rsquo;s own task suite. Both argue for observing the whole interaction; system-level capture of it is the subject of <a href="agentsight.html">AgentSight</a> (see <a href="trajectory-analysis.html">Trajectory Analysis</a>). (source: Brehme et al. 2026; Quan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org50da6ce" class="outline-2">
+<h2 id="org50da6ce">Related pages</h2>
+<div class="outline-text-2" id="text-org50da6ce">
 <ul class="org-ul">
+<li><a href="swe-dive.html">SWE-DIVE (Brehme et al. 2026)</a></li>
+<li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
 <li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
@@ -415,7 +428,7 @@ Separately, <a href="skill-coverage.html">Skill Coverage</a> evaluates agent <b>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>

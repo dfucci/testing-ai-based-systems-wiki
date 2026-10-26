@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 11:29 -->
+<!-- 2026-10-26 Mon 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LLM Agent Testing Practice (Empirical Findings)</title>
@@ -203,10 +203,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org953998f">Three studies, converging findings</a></li>
-<li><a href="#org7c4addd">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
-<li><a href="#orgcb5540a">Relation to existing wiki content</a></li>
-<li><a href="#org4c2f54c">Related pages</a></li>
+<li><a href="#org7305ffa">Three studies, converging findings</a></li>
+<li><a href="#orga0bc72d">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</a></li>
+<li><a href="#org6ba65c8">Relation to existing wiki content</a></li>
+<li><a href="#org3fad8e4">Observability as the substitute for adequacy (AgentSight)</a></li>
+<li><a href="#org339ba79">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -223,16 +224,17 @@
 <li><a href="../raw/Magalhaes_et_al_2025.pdf">Magalhaes<sub>et</sub><sub>al</sub><sub>2025.pdf</sub></a></li>
 <li><a href="../raw/Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf">Dai et al. - 2026 - A Large-Scale Empirical Study of Quality Assurance Practices and Gaps in AI Agents.pdf</a></li>
 <li><a href="../raw/Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf">Riccio et al. - 2020 - Testing machine learning based systems a systematic mapping.pdf</a></li>
+<li><a href="../raw/Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf">Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-18
+<b>Last updated</b>: 2026-10-26
 </p>
 
 <hr />
-<div id="outline-container-org953998f" class="outline-2">
-<h2 id="org953998f">Three studies, converging findings</h2>
-<div class="outline-text-2" id="text-org953998f">
+<div id="outline-container-org7305ffa" class="outline-2">
+<h2 id="org7305ffa">Three studies, converging findings</h2>
+<div class="outline-text-2" id="text-org7305ffa">
 <p>
 <a href="tangent.html">Tangent</a> (Pan et al. 2026) mined 1,190 GitHub repos using LangChain/LangGraph/MCP down to 2,572 manually labeled tests across 240 modules, plus structured interviews with 10 senior industry practitioners. <a href="testing-untestable-llm-software.html">Magalhães et al. 2025</a> ran a qualitative case study on 99 student reflection reports from 21 team projects building real LLM-integrated apps. <a href="qa-practices-gaps-agents.html">Dai et al. 2026</a> coded repository-visible QA artifacts (not just tests) across 157 popular open-source agent projects against a four-layer execution-surface/safeguard/testing/risk-scenario rubric. Different methods, same conclusions (source: Pan et al. 2026; Magalhães et al. 2025; Dai et al. 2026):
 </p>
@@ -249,26 +251,35 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org7c4addd" class="outline-2">
-<h2 id="org7c4addd">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
-<div class="outline-text-2" id="text-org7c4addd">
+<div id="outline-container-orga0bc72d" class="outline-2">
+<h2 id="orga0bc72d">Tangent&rsquo;s 23-pattern taxonomy (structure for future pages)</h2>
+<div class="outline-text-2" id="text-orga0bc72d">
 <p>
 Four categories: test fixtures (mock agent/tool/environment), test data (mocked/real/synthetic/dummy), test objectives (agent/tool, interaction, scenario, e2e), assertions (state/output/memory/reasoning/environment) (source: Pan et al. 2026). A useful checklist against which any new agent-testing technique in this wiki can be positioned.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcb5540a" class="outline-2">
-<h2 id="orgcb5540a">Relation to existing wiki content</h2>
-<div class="outline-text-2" id="text-orgcb5540a">
+<div id="outline-container-org6ba65c8" class="outline-2">
+<h2 id="org6ba65c8">Relation to existing wiki content</h2>
+<div class="outline-text-2" id="text-org6ba65c8">
 <p>
-This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a> (from TRAJEVAL): those pages describe <b>diagnosing</b> agent failures after the fact via trajectory decomposition; this page describes what developers actually <b>write as tests</b> beforehand. TRAJEVAL&rsquo;s finding that agents over-explore (4-8% precision) is a failure mode invisible to the shallow unit tests Tangent documents — neither source tests for it directly today. (cross-reference, not directly stated in either source)
+This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and <a href="agent-failure-modes.html">Agent Failure Modes</a> (from TRAJEVAL): those pages describe <b>diagnosing</b> agent failures after the fact via trajectory decomposition; this page describes what developers actually <b>write as tests</b> beforehand.
 </p>
 </div>
 </div>
-<div id="outline-container-org4c2f54c" class="outline-2">
-<h2 id="org4c2f54c">Related pages</h2>
-<div class="outline-text-2" id="text-org4c2f54c">
+<div id="outline-container-org3fad8e4" class="outline-2">
+<h2 id="org3fad8e4">Observability as the substitute for adequacy (AgentSight)</h2>
+<div class="outline-text-2" id="text-org3fad8e4">
+<p>
+Tangent&rsquo;s interviewees substitute post-deployment observability for formal test suites. <a href="agentsight.html">AgentSight</a> (Zheng et al. 2025) classifies the named tool family (Langfuse, LangSmith, Datadog; OpenTelemetry GenAI conventions) as <b>intent-side</b> observability that traces prompts and tool selection but cannot see actions outside the agent process, and proposes boundary tracing at the kernel and TLS layer with an observer LLM instead. Whether that closes the adequacy gap is not shown: the paper reports overhead (2.9% average) and three single-instance case studies, not detection rates. (source: Zheng et al. 2025; Pan et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org339ba79" class="outline-2">
+<h2 id="org339ba79">Related pages</h2>
+<div class="outline-text-2" id="text-org339ba79">
 <ul class="org-ul">
+<li><a href="agentsight.html">AgentSight (Zheng et al. 2025)</a></li>
 <li><a href="tangent.html">Tangent (Pan et al. 2026)</a></li>
 <li><a href="testing-untestable-llm-software.html">Testing Untestable LLM Software (Magalhães et al. 2025)</a></li>
 <li><a href="qa-practices-gaps-agents.html">QA Practices and Gaps in AI Agents (Dai et al. 2026)</a></li>
@@ -284,7 +295,7 @@ This complements <a href="trajectory-analysis.html">Trajectory Analysis</a> and 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-21 Wed 11:29</p>
+<p class="date">Created: 2026-10-26 Mon 16:53</p>
 </div>
 </body>
 </html>
