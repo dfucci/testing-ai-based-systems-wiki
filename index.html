@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-26 Mon 16:53 -->
+<!-- 2026-11-09 Mon 12:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing AI-enabled software systems Wiki Index</title>
@@ -203,20 +203,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3e30031">Paper Summaries</a>
+<li><a href="#orgf02f0f6">Paper Summaries</a>
 <ul>
-<li><a href="#org8ae02b4">Agents and agent testing</a></li>
-<li><a href="#org1a624d0">Metamorphic testing</a></li>
-<li><a href="#orgc1f50dd">Robustness and test generation</a></li>
-<li><a href="#org628faaf">Safety and specification testing</a></li>
-<li><a href="#org842f183">Oracle construction and auditing</a></li>
-<li><a href="#org65fc1ba">Foundational surveys</a></li>
+<li><a href="#org1afbd2c">Agents and agent testing</a></li>
+<li><a href="#org275cec7">Metamorphic testing</a></li>
+<li><a href="#org4fec86f">Robustness and test generation</a></li>
+<li><a href="#org8dfbb0f">Safety and specification testing</a></li>
+<li><a href="#orgb91e47b">Oracle construction and auditing</a></li>
+<li><a href="#orgfcbb568">Foundational surveys</a></li>
 </ul>
 </li>
-<li><a href="#org58cba4b">Core Concepts</a>
+<li><a href="#org6dc097b">Core Concepts</a>
 <ul>
-<li><a href="#org747f239">Agents</a></li>
-<li><a href="#org5b99810">Testing theory and oracles</a></li>
+<li><a href="#org6f44bea">Agents</a></li>
+<li><a href="#org7f6f623">Testing theory and oracles</a></li>
 </ul>
 </li>
 </ul>
@@ -227,13 +227,13 @@ Research knowledge base on verification, validation, and testing of software sys
 </p>
 
 <hr />
-<div id="outline-container-org3e30031" class="outline-2">
-<h2 id="org3e30031">Paper Summaries</h2>
-<div class="outline-text-2" id="text-org3e30031">
+<div id="outline-container-orgf02f0f6" class="outline-2">
+<h2 id="orgf02f0f6">Paper Summaries</h2>
+<div class="outline-text-2" id="text-orgf02f0f6">
 </div>
-<div id="outline-container-org8ae02b4" class="outline-3">
-<h3 id="org8ae02b4">Agents and agent testing</h3>
-<div class="outline-text-3" id="text-org8ae02b4">
+<div id="outline-container-org1afbd2c" class="outline-3">
+<h3 id="org1afbd2c">Agents and agent testing</h3>
+<div class="outline-text-3" id="text-org1afbd2c">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -293,13 +293,23 @@ Research knowledge base on verification, validation, and testing of software sys
 <td class="org-left"><a href="agentsight.html">AgentSight (Zheng 2025)</a></td>
 <td class="org-left">eBPF boundary tracing correlating decrypted LLM traffic with kernel events plus an observer LLM; 2.9% overhead, three case studies</td>
 </tr>
+
+<tr>
+<td class="org-left"><a href="episteme.html">EPISTEME (Bobadilla 2026)</a></td>
+<td class="org-left">Harness makes the model declare a type and reason for every shell call and checks it against workspace effects; journal exposed 44 of 49 test-cheating runs on ImpossibleBench, all via the agent&rsquo;s own stated reason (checker alone: 3)</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="case.html">CASE (Assunção &amp; Periyathambi 2026)</a></td>
+<td class="org-left">Labels retrieved artifacts valid/invalid/unknown per deployment and time from flag and config evidence; synthetic six-task pilot, perfect P/R on self-defined labels, no agent run</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-org1a624d0" class="outline-3">
-<h3 id="org1a624d0">Metamorphic testing</h3>
-<div class="outline-text-3" id="text-org1a624d0">
+<div id="outline-container-org275cec7" class="outline-3">
+<h3 id="org275cec7">Metamorphic testing</h3>
+<div class="outline-text-3" id="text-org275cec7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -358,9 +368,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-orgc1f50dd" class="outline-3">
-<h3 id="orgc1f50dd">Robustness and test generation</h3>
-<div class="outline-text-3" id="text-orgc1f50dd">
+<div id="outline-container-org4fec86f" class="outline-3">
+<h3 id="org4fec86f">Robustness and test generation</h3>
+<div class="outline-text-3" id="text-org4fec86f">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -424,9 +434,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org628faaf" class="outline-3">
-<h3 id="org628faaf">Safety and specification testing</h3>
-<div class="outline-text-3" id="text-org628faaf">
+<div id="outline-container-org8dfbb0f" class="outline-3">
+<h3 id="org8dfbb0f">Safety and specification testing</h3>
+<div class="outline-text-3" id="text-org8dfbb0f">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -455,9 +465,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org842f183" class="outline-3">
-<h3 id="org842f183">Oracle construction and auditing</h3>
-<div class="outline-text-3" id="text-org842f183">
+<div id="outline-container-orgb91e47b" class="outline-3">
+<h3 id="orgb91e47b">Oracle construction and auditing</h3>
+<div class="outline-text-3" id="text-orgb91e47b">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -501,9 +511,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org65fc1ba" class="outline-3">
-<h3 id="org65fc1ba">Foundational surveys</h3>
-<div class="outline-text-3" id="text-org65fc1ba">
+<div id="outline-container-orgfcbb568" class="outline-3">
+<h3 id="orgfcbb568">Foundational surveys</h3>
+<div class="outline-text-3" id="text-orgfcbb568">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -538,13 +548,13 @@ Research knowledge base on verification, validation, and testing of software sys
 </div>
 </div>
 </div>
-<div id="outline-container-org58cba4b" class="outline-2">
-<h2 id="org58cba4b">Core Concepts</h2>
-<div class="outline-text-2" id="text-org58cba4b">
+<div id="outline-container-org6dc097b" class="outline-2">
+<h2 id="org6dc097b">Core Concepts</h2>
+<div class="outline-text-2" id="text-org6dc097b">
 </div>
-<div id="outline-container-org747f239" class="outline-3">
-<h3 id="org747f239">Agents</h3>
-<div class="outline-text-3" id="text-org747f239">
+<div id="outline-container-org6f44bea" class="outline-3">
+<h3 id="org6f44bea">Agents</h3>
+<div class="outline-text-3" id="text-org6f44bea">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -567,22 +577,22 @@ Research knowledge base on verification, validation, and testing of software sys
 
 <tr>
 <td class="org-left"><a href="golden-context.html">Golden Context</a></td>
-<td class="org-left">Minimal code elements an agent must find/modify to solve a task, derived from reference patches</td>
+<td class="org-left">Minimal code elements an agent must find/modify to solve a task, derived from reference patches; CASE&rsquo;s relevant-but-not-applicable context</td>
 </tr>
 
 <tr>
 <td class="org-left"><a href="agent-failure-modes.html">Agent Failure Modes</a></td>
-<td class="org-left">Taxonomy of search/read/edit failures in code agents with model-specific patterns</td>
+<td class="org-left">Taxonomy of search/read/edit failures in code agents with model-specific patterns; test tampering and exploitation on impossible tasks</td>
 </tr>
 
 <tr>
 <td class="org-left"><a href="runtime-enforcement.html">Runtime Enforcement</a></td>
-<td class="org-left">Intercepting and constraining LLM agent actions during execution</td>
+<td class="org-left">Intercepting and constraining LLM agent actions during execution, including declared-intent checks (EPISTEME)</td>
 </tr>
 
 <tr>
 <td class="org-left"><a href="agent-safety.html">Agent Safety</a></td>
-<td class="org-left">Mechanisms for preventing harmful or policy-violating agent actions</td>
+<td class="org-left">Mechanisms for preventing harmful or policy-violating agent actions; test-tampering evidence from EPISTEME</td>
 </tr>
 
 <tr>
@@ -592,7 +602,7 @@ Research knowledge base on verification, validation, and testing of software sys
 
 <tr>
 <td class="org-left"><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></td>
-<td class="org-left">SWE-bench, PolyBench, RedCode-Exec, SafeAgentBench, FixDrive benchmark descriptions</td>
+<td class="org-left">SWE-bench, PolyBench, RedCode-Exec, SafeAgentBench, FixDrive, ImpossibleBench benchmark descriptions</td>
 </tr>
 
 <tr>
@@ -603,9 +613,9 @@ Research knowledge base on verification, validation, and testing of software sys
 </table>
 </div>
 </div>
-<div id="outline-container-org5b99810" class="outline-3">
-<h3 id="org5b99810">Testing theory and oracles</h3>
-<div class="outline-text-3" id="text-org5b99810">
+<div id="outline-container-org7f6f623" class="outline-3">
+<h3 id="org7f6f623">Testing theory and oracles</h3>
+<div class="outline-text-3" id="text-org7f6f623">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -688,7 +698,7 @@ Research knowledge base on verification, validation, and testing of software sys
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-26 Mon 16:53</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
 </div>
 </body>
 </html>

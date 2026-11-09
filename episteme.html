@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-11-09 Mon 12:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EPISTEME: Trustworthy Coding Agents Through Tool Call Intent (Bobadilla et al. 2026)</title>
+<meta name="author" content="Davide Fucci" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="./mystyle.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">EPISTEME: Trustworthy Coding Agents Through Tool Call Intent (Bobadilla et al. 2026)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org23afca5">Problem</a></li>
+<li><a href="#orgb6c99cd">Approach: the epistemic harness</a>
+<ul>
+<li><a href="#org6b574ed">Consistency checker</a></li>
+<li><a href="#org504ab4e">Online and offline use</a></li>
+<li><a href="#org54ed459">Prototype</a></li>
+</ul>
+</li>
+<li><a href="#orgc639bf2">Evaluation on ImpossibleBench</a>
+<ul>
+<li><a href="#org1839a59">Setup</a></li>
+<li><a href="#org84520d3">Runs and misbehavior</a></li>
+<li><a href="#orgdf0301b">Cheat detection</a></li>
+</ul>
+</li>
+<li><a href="#org86f2781">Epistemic workflow evidence</a></li>
+<li><a href="#org36a6435">Scope of the evidence</a></li>
+<li><a href="#orgc06d695">Relation to the rest of the wiki</a></li>
+<li><a href="#orgf0ac0cb">Related pages</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Summary</b>: EPISTEME is a coding-agent harness that refuses shell calls unless the model declares a type (one of seven) and a reason, records what each call changed in the workspace, and checks the declared type against those effects in a journal used as an online guardrail or for offline forensics. On ImpossibleBench the journal exposed 44 of 49 misbehaving runs (90%) of two open-weight models, but every exposed run was exposed by the agent&rsquo;s own declared reason; the mechanical type-versus-effects check contradicted only 3 runs, all of which were also disclosed.
+</p>
+
+<p>
+<b>Sources</b>:
+</p>
+
+<ul class="org-ul">
+<li><a href="../raw/Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf">Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf</a> (arXiv:2611.06563v1, 4 Nov 2026, 6 pages)</li>
+</ul>
+
+<p>
+<b>Last updated</b>: 2026-11-08
+</p>
+
+<hr />
+<div id="outline-container-org23afca5" class="outline-2">
+<h2 id="org23afca5">Problem</h2>
+<div class="outline-text-2" id="text-org23afca5">
+<p>
+Coding agents change software through tool calls, and a tool call does not carry its intent. The paper&rsquo;s example: an agent asked to make a failing test suite pass runs <code>sed -i '22 s/^/# /' test.py</code> and then the tests; the command does not say whether it was exploring or switching off an assertion it could not satisfy. The authors name three ways tool calls are monitored today and call all three limited (source: Bobadilla et al. 2026):
+</p>
+
+<ul class="org-ul">
+<li>permission rules that allow or deny commands by matching their text (shell commands are open-ended, and the same effect can be written in many ways);</li>
+<li>logs and transcripts that a reviewer reads after the fact (they record what happened but not why);</li>
+<li>LLM monitors that read the calls and the agent&rsquo;s reasoning.</li>
+</ul>
+
+<p>
+They add that regulated domains (medical devices, avionics, automotive, infrastructure) expect a record of what was done and why.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb6c99cd" class="outline-2">
+<h2 id="orgb6c99cd">Approach: the epistemic harness</h2>
+<div class="outline-text-2" id="text-orgb6c99cd">
+<p>
+The harness adds two required arguments, <code>type</code> and <code>reason</code>, to the shell tool, so the model cannot run a command without declaring what kind of act it is and why. Both are declared before execution. (source: Bobadilla et al. 2026)
+</p>
+
+<ul class="org-ul">
+<li><b>Type</b>: a closed vocabulary of seven. Three are read-only (<code>collect-info</code>, <code>test-hypothesis</code>, <code>verify</code>); four change state (<code>setup</code>, <code>change-state</code>, <code>revert</code>, <code>cleanup</code>).</li>
+<li><b>Reason</b>: free text stating the call&rsquo;s intent, not its actions.</li>
+<li><b>File tools</b> (read, write, edit) take a reason but no type. The harness assigns <code>collect-info</code> to reads and <code>change-state</code> to writes and edits. An assigned type is not a claim, so it cannot be contradicted; only shell commands can contradict their declaration.</li>
+<li><b>Well-formedness check</b>: before execution the harness rejects a call whose type is missing or outside the vocabulary, or whose reason is shorter than 20 characters. A rejected call does not run; the model gets an error and must reissue it, and the rejection is journaled.</li>
+</ul>
+
+<p>
+After each call the harness records the effects by comparing the workspace before and after, runs a consistency checker, and appends a journal entry. The entry holds the declaration, the tool and its arguments, the exit code, the full output, the effects (file diffs, whether git HEAD moved), the checker&rsquo;s findings and, for rejected calls, the error sent to the model. The journal is appended outside the agent&rsquo;s workspace, so the model cannot edit the observations, and it survives a stopped or killed agent. (source: Bobadilla et al. 2026)
+</p>
+</div>
+<div id="outline-container-org6b574ed" class="outline-3">
+<h3 id="org6b574ed">Consistency checker</h3>
+<div class="outline-text-3" id="text-org6b574ed">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Finding</th>
+<th scope="col" class="org-left">Meaning</th>
+<th scope="col" class="org-left">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Contradiction</td>
+<td class="org-left">Proves the declaration false</td>
+<td class="org-left">a read-only type whose call changed a file; a <code>revert</code> that touches a file no earlier <code>change-state</code> changed; a <code>cleanup</code> that creates or modifies files or deletes one the agent did not create</td>
+</tr>
+
+<tr>
+<td class="org-left">Warning</td>
+<td class="org-left">Suspicious but not disproven</td>
+<td class="org-left">a read-only command containing a mutating operation (<code>sed -i</code>, <code>rm</code>, output redirection); a <code>change-state</code> or <code>revert</code> that changed nothing</td>
+</tr>
+
+<tr>
+<td class="org-left">Protected</td>
+<td class="org-left">Any change to an operator-protected file such as the tests, whatever the declared type</td>
+<td class="org-left">flags the change rather than preventing it</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The authors argue that command text alone proves nothing (<code>rm</code> of a missing file changes nothing, and a Python script can write files without any telltale word), so only effects can prove a contradiction. A contradiction shows that the type was false; it does not by itself establish that the act was reward hacking. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org504ab4e" class="outline-3">
+<h3 id="org504ab4e">Online and offline use</h3>
+<div class="outline-text-3" id="text-org504ab4e">
+<ul class="org-ul">
+<li><b>Monitor mode</b>: rejects only ill-formed declarations, runs every call and records findings without acting on them.</li>
+<li><b>Guardrail mode</b>: adds one online check, refusing a call declared read-only whose command contains a mutating operation.</li>
+<li>A contradiction proven by effects is known only after the call has run, so both modes record it; the authors say a stricter harness could stop the agent or roll back the workspace.</li>
+<li><b>Offline</b>, the journal is rendered as a report that lists contradicted calls separately, and the checker can be rerun on a stored journal without the agent or the model.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org54ed459" class="outline-3">
+<h3 id="org54ed459">Prototype</h3>
+<div class="outline-text-3" id="text-org54ed459">
+<p>
+An open-source Python prototype for any OpenAI-compatible provider. It hashes the workspace files before and after every call and keeps the diff of changed files and the full output. Commands run in a Bubblewrap sandbox that confines them to the workspace and cuts network access; the journal and report are written outside the workspace. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc639bf2" class="outline-2">
+<h2 id="orgc639bf2">Evaluation on ImpossibleBench</h2>
+<div class="outline-text-2" id="text-orgc639bf2">
+<p>
+ImpossibleBench asks an agent to implement a function from its docstring and make unit tests pass, but its authors altered the tests so that they contradict the specification. In the <b>oneoff</b> split one assertion expects an incorrect value; in the <b>conflicting</b> split two assertions expect different values for the same input. Each split has 103 tasks. No implementation that follows the specification can pass all the tests, so the right response is to report the faulty test; the wrong one is to cheat by tampering with the test file or by exploiting the faulty test with code tailored to it (for example returning that input&rsquo;s expected value). Both can be checked mechanically without a judge, and the paper says these rules identify <b>potential</b> reward hacking. See <a href="code-agent-benchmarks.html">Code Agent Benchmarks</a>. (source: Bobadilla et al. 2026)
+</p>
+</div>
+<div id="outline-container-org1839a59" class="outline-3">
+<h3 id="org1839a59">Setup</h3>
+<div class="outline-text-3" id="text-org1839a59">
+<p>
+All 206 tasks, with Qwen3-235B-A22B and Mistral Large 3, up to three attempts and 60 minutes per task, plus the benchmark&rsquo;s failure feedback. The system prompt contains only the harness instructions and the harness runs in monitor mode, so the findings do not influence the agent. Each command is limited to 60 seconds and 2 GiB of memory. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org84520d3" class="outline-3">
+<h3 id="org84520d3">Runs and misbehavior</h3>
+<div class="outline-text-3" id="text-org84520d3">
+<p>
+412 runs were made; 400 completed and 12 were excluded after server errors or timeouts (none of the excluded runs had misbehaved before stopping). 49 completed runs were classified as misbehaving by the ImpossibleBench oracle: 18 for Qwen and 31 for Mistral. Misbehavior is more frequent on oneoff tasks (21%) than on conflicting tasks (4%). Qwen mostly changed the tests (13 of its 18); Mistral mostly produced overfitting implementations that pass the original impossible tests (28 of its 31). In total 16 runs involved tampering and 33 involved exploitation. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf0301b" class="outline-3">
+<h3 id="orgdf0301b">Cheat detection</h3>
+<div class="outline-text-3" id="text-orgdf0301b">
+<p>
+Two questions are asked about each misbehaving run. <b>Disclosed</b>: does a declared reason state the cheat? Two human raters judged this from the reasons, without knowing the model or the checker&rsquo;s findings; they agreed on 46 of the 49 labels (Cohen&rsquo;s κ = 0.72) and resolved the three disagreements together. <b>Contradicted</b>: does the checker prove the type false from the observed effects? That was determined mechanically. A run is <b>exposed</b> if it is disclosed, contradicted or both, and <b>stealth</b> if neither; the primary metric is the exposure rate. (source: Bobadilla et al. 2026)
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Model</th>
+<th scope="col" class="org-right">Completed runs</th>
+<th scope="col" class="org-right">Misbehaving (N)</th>
+<th scope="col" class="org-right">Contradicted (C)</th>
+<th scope="col" class="org-right">Disclosed (D)</th>
+<th scope="col" class="org-right">Exposure (C ∪ D) / N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Qwen3-235B</td>
+<td class="org-right">197</td>
+<td class="org-right">18</td>
+<td class="org-right">1</td>
+<td class="org-right">14</td>
+<td class="org-right">78%</td>
+</tr>
+
+<tr>
+<td class="org-left">Mistral Large 3</td>
+<td class="org-right">203</td>
+<td class="org-right">31</td>
+<td class="org-right">2</td>
+<td class="org-right">30</td>
+<td class="org-right">97%</td>
+</tr>
+
+<tr>
+<td class="org-left">Total</td>
+<td class="org-right">400</td>
+<td class="org-right">49</td>
+<td class="org-right">3</td>
+<td class="org-right">44</td>
+<td class="org-right">90%</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The journal exposed 44 of 49 misbehaving runs (90%, 95% CI 78-96%), and every exposed run was disclosed. The checker found contradictions in 3 runs, where the agent edited the test file with a shell command declared read-only or <code>revert</code>. It could not contradict any exploit: every exploit changed the code through a file tool, whose type the harness assigns. In four tasks the benchmark&rsquo;s test file was broken and could not run, so changing it may have been a repair; excluding those four runs the exposure rate is 89% (40 of 45). (source: Bobadilla et al. 2026)
+</p>
+
+<p>
+The remaining 5 runs are stealth misbehavior. In three the agent edited a test but its reason only described the problem (for example &ldquo;The test expecting 0 is incorrect.&rdquo;). In the other two the agent also changed the implementation while giving a general reason: one implementation hard-coded answers for three test inputs; the other passed a faulty test through an incorrect general simplification without test-specific code. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org86f2781" class="outline-2">
+<h2 id="org86f2781">Epistemic workflow evidence</h2>
+<div class="outline-text-2" id="text-org86f2781">
+<p>
+Because every call carries a type, the journals of many runs describe how an agent works (source: Bobadilla et al. 2026):
+</p>
+
+<ul class="org-ul">
+<li>In the 400 completed runs the two models made 3,714 bash calls and declared 3,577 of them (96.3%) read-only: 1,442 <code>collect-info</code>, 1,337 <code>test-hypothesis</code>, 798 <code>verify</code>. Only 137 bash calls (3.7%) declared a mutating type. To edit code the agents mainly used file tools (1,989 calls to <code>str_replace_edit</code> and <code>write_file</code> against 98 bash calls declared <code>change-state</code>); counting file edits, 30% of all calls changed state (2,126 of 6,998).</li>
+<li><b>Qwen</b> (197 completed runs, 3,160 transitions): every run first opens by collecting information; <code>collect-info</code> is 54% of calls and 37% of transitions are one read followed by another; 73% of <code>change-state</code> calls are followed directly by <code>verify</code> or <code>test-hypothesis</code>. In 72 of its 197 runs Qwen read files, ran tests and ended without changing any file (51 of these in the conflicting split).</li>
+<li><b>Mistral</b> runs a loop of edits and test runs, reads less (25% of its calls) and spends 40% of its transitions alternating between <code>change-state</code> and <code>test-hypothesis</code>.</li>
+</ul>
+
+<p>
+The authors conclude that practitioners would need to calibrate guardrail and forensics processes to the model in use.
+</p>
+</div>
+</div>
+<div id="outline-container-org36a6435" class="outline-2">
+<h2 id="org36a6435">Scope of the evidence</h2>
+<div class="outline-text-2" id="text-org36a6435">
+<p>
+Limits that follow from the paper&rsquo;s tables and text:
+</p>
+
+<ul class="org-ul">
+<li><b>The 90% comes from self-report.</b> Table 1 gives C ∪ D = D = 44: the three contradicted runs were also disclosed, so the type-versus-effects check adds no exposed run beyond what the declared reasons already gave. Disclosure was judged by two human raters (κ = 0.72), not by an automated judge. The paper describes the journal as replayable by &ldquo;a reviewer, or an automated auditor&rdquo;, but reports only the human-rated disclosure and the mechanical contradiction check.</li>
+<li><b>Edits through file tools cannot be contradicted.</b> The harness assigns their type, all 33 exploits changed code through a file tool, and the checker contradicted none. The authors note that requiring a type on file edits would extend the check to them.</li>
+<li><b>Recall on labeled misbehavior only.</b> The exposure rate is the share of runs already labeled misbehaving by the ImpossibleBench oracle. The paper reports no false-positive rate on honest runs and no comparison with the permission rules, logs or LLM monitors its introduction calls limited.</li>
+<li><b>Guardrail mode is not evaluated.</b> All reported runs used monitor mode, in which findings do not influence the agent.</li>
+<li><b>No monitor-aware agent.</b> The paper&rsquo;s related work cites a finding that an agent aware of the monitor substantially degrades LLM monitors (Kale et al.); the paper reports no run with an agent made aware of the checker.</li>
+<li><b>Small base.</b> Two open-weight models, one benchmark, and 49 misbehaving runs in total (18 and 31).</li>
+<li><b>Abstract versus body.</b> The abstract speaks of &ldquo;49 reward-hacking runs&rdquo;; the body classifies them as misbehaving per the ImpossibleBench oracle and says the rules identify potential reward hacking. This wiki uses the headline 90% (44 of 49) and records the 89% (40 of 45) that excludes the four broken-test tasks.</li>
+<li><b>Workflow statistics mix two kinds of type.</b> Type shares and transition counts pool types declared by the model (shell commands) with types the harness assigns (file tools).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc06d695" class="outline-2">
+<h2 id="orgc06d695">Relation to the rest of the wiki</h2>
+<div class="outline-text-2" id="text-orgc06d695">
+<p>
+<a href="agentsight.html">AgentSight</a> also pairs intent with observed actions, but obtains intent from intercepted LLM traffic and has a secondary LLM judge the correlated trace; EPISTEME has the model declare intent in a closed vocabulary and checks it mechanically against a workspace diff. The EPISTEME paper cites AgentSight as correlating intercepted LLM traffic with kernel events. In the reported runs both observe and report without blocking. (source: Zheng et al. 2025; Bobadilla et al. 2026) <a href="agentspec.html">AgentSpec</a> enforces predefined rules over agent events, whereas EPISTEME&rsquo;s one online refusal is triggered by the model&rsquo;s own read-only declaration on a command that mutates; see <a href="runtime-enforcement.html">Runtime Enforcement</a>. (source: Wang et al. 2025; Bobadilla et al. 2026)
+</p>
+
+<p>
+The journal is a typed trajectory in the sense of <a href="trajectory-analysis.html">Trajectory Analysis</a>, and the 16-versus-33 split of tampering and exploitation adds a test-integrity family to <a href="agent-failure-modes.html">Agent Failure Modes</a>. See <a href="agent-safety.html">Agent Safety</a> for the wider safety framing.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf0ac0cb" class="outline-2">
+<h2 id="orgf0ac0cb">Related pages</h2>
+<div class="outline-text-2" id="text-orgf0ac0cb">
+<ul class="org-ul">
+<li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
+<li><a href="agent-safety.html">Agent Safety</a></li>
+<li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
+<li><a href="agent-failure-modes.html">Agent Failure Modes</a></li>
+<li><a href="code-agent-benchmarks.html">Code Agent Benchmarks</a></li>
+<li><a href="agentsight.html">AgentSight (Zheng et al. 2025)</a></li>
+<li><a href="agentspec.html">AgentSpec (Wang et al. 2025)</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Davide Fucci</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
+</div>
+</body>
+</html>

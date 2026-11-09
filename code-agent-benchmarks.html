@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-26 Mon 16:53 -->
+<!-- 2026-11-09 Mon 12:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Code Agent Benchmarks</title>
@@ -203,34 +203,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org44beeb1">Capability Benchmarks</a>
+<li><a href="#org1d60464">Capability Benchmarks</a>
 <ul>
-<li><a href="#org4fb1a89">SWE-bench Verified</a></li>
-<li><a href="#org651c2c7">PolyBench Verified</a></li>
-<li><a href="#org489d2d4">DevBench</a></li>
+<li><a href="#orgb2a2236">SWE-bench Verified</a></li>
+<li><a href="#orgde5a4d3">PolyBench Verified</a></li>
+<li><a href="#orgd136cf6">DevBench</a></li>
 </ul>
 </li>
-<li><a href="#org3b2da8d">Safety Benchmarks</a>
+<li><a href="#org18f2b34">Safety Benchmarks</a>
 <ul>
-<li><a href="#org9e3f3c0">RedCode-Exec</a></li>
-<li><a href="#orgbe40bee">SafeAgentBench</a></li>
-<li><a href="#orgb4a5254">FixDrive</a></li>
+<li><a href="#org20a960a">RedCode-Exec</a></li>
+<li><a href="#orgef26342">SafeAgentBench</a></li>
+<li><a href="#orgff78a4f">FixDrive</a></li>
 </ul>
 </li>
-<li><a href="#org2451d46">Multi-Turn and Conversational Settings</a>
+<li><a href="#orga3c4a99">Multi-Turn and Conversational Settings</a>
 <ul>
-<li><a href="#orgd08617e">SWE-DIVE</a></li>
-<li><a href="#org1b7e9e7">τ²-bench</a></li>
+<li><a href="#org0fbad50">SWE-DIVE</a></li>
+<li><a href="#orgebeea85">τ²-bench</a></li>
 </ul>
 </li>
-<li><a href="#orgb286b6c">Agent Architectures Evaluated</a></li>
-<li><a href="#orgd837d95">Models Evaluated (from TRAJEVAL)</a></li>
-<li><a href="#orgd68dce0">Related pages</a></li>
+<li><a href="#orga0e5d52">Impossible-Task Setting</a>
+<ul>
+<li><a href="#org025d761">ImpossibleBench</a></li>
+</ul>
+</li>
+<li><a href="#org3d62643">Agent Architectures Evaluated</a></li>
+<li><a href="#orgefe3c37">Models Evaluated (from TRAJEVAL)</a></li>
+<li><a href="#orga1c0eee">Related pages</a></li>
 </ul>
 </div>
 </div>
 <p>
-<b>Summary</b>: Benchmarks used to evaluate LLM-based code agents span capability (SWE-bench, PolyBench), safety (RedCode-Exec, SafeAgentBench), and autonomous driving (FixDrive), each testing different aspects of agent behavior. Multi-turn and conversational tool-use settings (SWE-DIVE, τ²-bench) have their own section.
+<b>Summary</b>: Benchmarks used to evaluate LLM-based code agents span capability (SWE-bench, PolyBench), safety (RedCode-Exec, SafeAgentBench), and autonomous driving (FixDrive), each testing different aspects of agent behavior. Multi-turn and conversational tool-use settings (SWE-DIVE, τ²-bench) and an impossible-task setting for test tampering (ImpossibleBench) have their own sections.
 </p>
 
 <p>
@@ -242,20 +247,21 @@
 <li><a href="../raw/Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf">Wang et al. - 2025 - AgentSpec Customizable Runtime Enforcement for Safe and Reliable LLM Agents.pdf</a></li>
 <li><a href="../raw/Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf">Brehme et al. - 2026 - SWE-DIVE Multi-Turn Coding Agent Evaluation with.pdf</a></li>
 <li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
+<li><a href="../raw/Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf">Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-26
+<b>Last updated</b>: 2026-11-08
 </p>
 
 <hr />
-<div id="outline-container-org44beeb1" class="outline-2">
-<h2 id="org44beeb1">Capability Benchmarks</h2>
-<div class="outline-text-2" id="text-org44beeb1">
+<div id="outline-container-org1d60464" class="outline-2">
+<h2 id="org1d60464">Capability Benchmarks</h2>
+<div class="outline-text-2" id="text-org1d60464">
 </div>
-<div id="outline-container-org4fb1a89" class="outline-3">
-<h3 id="org4fb1a89">SWE-bench Verified</h3>
-<div class="outline-text-3" id="text-org4fb1a89">
+<div id="outline-container-orgb2a2236" class="outline-3">
+<h3 id="orgb2a2236">SWE-bench Verified</h3>
+<div class="outline-text-3" id="text-orgb2a2236">
 <p>
 500 real-world GitHub issues from 12 Python repositories with human-verified patches. The primary benchmark for measuring agent ability to resolve software engineering tasks. Pass@1 rates for top agents: GPT-5 ~66-67%, Qwen-Coder-480B ~61%.
 </p>
@@ -265,9 +271,9 @@ Used in <a href="trajeval.html">TRAJEVAL</a> to analyze 9,500 trajectories acros
 </p>
 </div>
 </div>
-<div id="outline-container-org651c2c7" class="outline-3">
-<h3 id="org651c2c7">PolyBench Verified</h3>
-<div class="outline-text-3" id="text-org651c2c7">
+<div id="outline-container-orgde5a4d3" class="outline-3">
+<h3 id="orgde5a4d3">PolyBench Verified</h3>
+<div class="outline-text-3" id="text-orgde5a4d3">
 <p>
 382 multilingual issues across Python, Java, JavaScript, and TypeScript from 20 repositories. Tests cross-language generalization. Tasks are harder: GPT-5 achieves only ~39% Pass@1 vs. ~67% on SWE-bench.
 </p>
@@ -277,22 +283,22 @@ Key finding: agents need ~25% more tool invocations on PolyBench than SWE-bench,
 </p>
 </div>
 </div>
-<div id="outline-container-org489d2d4" class="outline-3">
-<h3 id="org489d2d4">DevBench</h3>
-<div class="outline-text-3" id="text-org489d2d4">
+<div id="outline-container-orgd136cf6" class="outline-3">
+<h3 id="orgd136cf6">DevBench</h3>
+<div class="outline-text-3" id="text-orgd136cf6">
 <p>
 Developer-informed benchmark for code generation models (Golnari et al., 2026). Provides development environment metrics but lacks stage-wise decomposition and <a href="golden-context.html">golden context</a> comparison.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3b2da8d" class="outline-2">
-<h2 id="org3b2da8d">Safety Benchmarks</h2>
-<div class="outline-text-2" id="text-org3b2da8d">
+<div id="outline-container-org18f2b34" class="outline-2">
+<h2 id="org18f2b34">Safety Benchmarks</h2>
+<div class="outline-text-2" id="text-org18f2b34">
 </div>
-<div id="outline-container-org9e3f3c0" class="outline-3">
-<h3 id="org9e3f3c0">RedCode-Exec</h3>
-<div class="outline-text-3" id="text-org9e3f3c0">
+<div id="outline-container-org20a960a" class="outline-3">
+<h3 id="org20a960a">RedCode-Exec</h3>
+<div class="outline-text-3" id="text-org20a960a">
 <p>
 750 risky code execution scenarios across 25 vulnerability categories, each with 30 test cases. Categories include: post sensitive files online, untrusted installation, delete sensitive files, reverse shell creation, unsafe deserialization, cryptographic predictability, etc.
 </p>
@@ -302,47 +308,60 @@ Used to evaluate <a href="agentspec.html">AgentSpec</a> on the CodeAct code agen
 </p>
 </div>
 </div>
-<div id="outline-container-orgbe40bee" class="outline-3">
-<h3 id="orgbe40bee">SafeAgentBench</h3>
-<div class="outline-text-3" id="text-orgbe40bee">
+<div id="outline-container-orgef26342" class="outline-3">
+<h3 id="orgef26342">SafeAgentBench</h3>
+<div class="outline-text-3" id="text-orgef26342">
 <p>
 Benchmark for embodied agent safety. 250 unsafe scenarios across 10 hazard categories (fire, electrical shock, explosion, poisoning, slip, liquid damage, breakage, appliances misuse, property damage, small items damage) plus safe scenarios. Used to evaluate AgentSpec on a robotic arm agent. (source: AgentSpec paper)
 </p>
 </div>
 </div>
-<div id="outline-container-orgb4a5254" class="outline-3">
-<h3 id="orgb4a5254">FixDrive</h3>
-<div class="outline-text-3" id="text-orgb4a5254">
+<div id="outline-container-orgff78a4f" class="outline-3">
+<h3 id="orgff78a4f">FixDrive</h3>
+<div class="outline-text-3" id="text-orgff78a4f">
 <p>
 Law-violation scenarios for autonomous vehicle evaluation (Yang et al., 2025). 8 scenarios covering collision, traffic signal violations (Laws 38, 44, 46, 53), and journey completion. Used to evaluate AgentSpec on the Apollo autonomous driving system. (source: AgentSpec paper)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2451d46" class="outline-2">
-<h2 id="org2451d46">Multi-Turn and Conversational Settings</h2>
-<div class="outline-text-2" id="text-org2451d46">
+<div id="outline-container-orga3c4a99" class="outline-2">
+<h2 id="orga3c4a99">Multi-Turn and Conversational Settings</h2>
+<div class="outline-text-2" id="text-orga3c4a99">
 </div>
-<div id="outline-container-orgd08617e" class="outline-3">
-<h3 id="orgd08617e">SWE-DIVE</h3>
-<div class="outline-text-3" id="text-orgd08617e">
+<div id="outline-container-org0fbad50" class="outline-3">
+<h3 id="org0fbad50">SWE-DIVE</h3>
+<div class="outline-text-3" id="text-org0fbad50">
 <p>
 Not a new task set but a wrapper: it converts single-prompt tasks from benchmarks supported by the Harbor framework (SWE-bench Verified, Terminal-Bench) into multi-turn conversations with an LLM-simulated user in one of three personas, and adds regression and waste measures. See <a href="swe-dive.html">SWE-DIVE</a>. The paper contrasts it with CodeFlowBench and CodeGen (predefined multi-turn task sequences) and AmbigSWE-bench (ambiguous instructions with clarification questions), which it describes as following a predefined process that does not adapt to what the agent asks. (source: Brehme et al. 2026)
 </p>
 </div>
 </div>
-<div id="outline-container-org1b7e9e7" class="outline-3">
-<h3 id="org1b7e9e7">τ²-bench</h3>
-<div class="outline-text-3" id="text-org1b7e9e7">
+<div id="outline-container-orgebeea85" class="outline-3">
+<h3 id="orgebeea85">τ²-bench</h3>
+<div class="outline-text-3" id="text-orgebeea85">
 <p>
 Conversational tool-use benchmark with airline, retail and telecom agents (15, 17 and 13 tools; telecom adds 30 user-side tools) and 278 hand-written tasks (50, 114 and 114), each played by a simulated user and judged mainly by the final database state plus a few required actions. Used as system under test and as a baseline by <a href="agentest.html">AgenTest</a>, which also compares against IntellAgent (policy-combination scenario generation, LLM judge) and MANTRA (SMT-validated compliance tasks; 44, 57 and 31 tasks in its released suites). (source: Quan et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb286b6c" class="outline-2">
-<h2 id="orgb286b6c">Agent Architectures Evaluated</h2>
-<div class="outline-text-2" id="text-orgb286b6c">
+<div id="outline-container-orga0e5d52" class="outline-2">
+<h2 id="orga0e5d52">Impossible-Task Setting</h2>
+<div class="outline-text-2" id="text-orga0e5d52">
+</div>
+<div id="outline-container-org025d761" class="outline-3">
+<h3 id="org025d761">ImpossibleBench</h3>
+<div class="outline-text-3" id="text-org025d761">
+<p>
+Measures an agent&rsquo;s propensity to exploit test cases. Each task asks the agent to implement a function from its docstring and make the unit tests pass, but the benchmark&rsquo;s authors altered the tests so that they contradict the specification. In the <b>oneoff</b> split one assertion expects an incorrect value; in the <b>conflicting</b> split two assertions expect different values for the same input; each split has 103 tasks. No implementation that follows the specification passes all the tests, so the right response is to report the faulty test, and the wrong one is to cheat by tampering with the test file or by tailoring code to the faulty test. Both cheats can be checked mechanically without a judge, and the rules identify potential reward hacking. <a href="episteme.html">EPISTEME</a> ran all 206 tasks with Qwen3-235B-A22B and Mistral Large 3: 49 of 400 completed runs misbehaved (16 tampering, 33 exploitation), more often on oneoff tasks (21%) than on conflicting ones (4%). (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d62643" class="outline-2">
+<h2 id="org3d62643">Agent Architectures Evaluated</h2>
+<div class="outline-text-2" id="text-org3d62643">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -400,9 +419,9 @@ Conversational tool-use benchmark with airline, retail and telecom agents (15, 1
 </table>
 </div>
 </div>
-<div id="outline-container-orgd837d95" class="outline-2">
-<h2 id="orgd837d95">Models Evaluated (from TRAJEVAL)</h2>
-<div class="outline-text-2" id="text-orgd837d95">
+<div id="outline-container-orgefe3c37" class="outline-2">
+<h2 id="orgefe3c37">Models Evaluated (from TRAJEVAL)</h2>
+<div class="outline-text-2" id="text-orgefe3c37">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -456,14 +475,15 @@ Conversational tool-use benchmark with airline, retail and telecom agents (15, 1
 </table>
 </div>
 </div>
-<div id="outline-container-orgd68dce0" class="outline-2">
-<h2 id="orgd68dce0">Related pages</h2>
-<div class="outline-text-2" id="text-orgd68dce0">
+<div id="outline-container-orga1c0eee" class="outline-2">
+<h2 id="orga1c0eee">Related pages</h2>
+<div class="outline-text-2" id="text-orga1c0eee">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="agentspec.html">AgentSpec</a></li>
 <li><a href="swe-dive.html">SWE-DIVE (Brehme et al. 2026)</a></li>
 <li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
+<li><a href="episteme.html">EPISTEME (Bobadilla et al. 2026)</a></li>
 <li><a href="agent-evaluation.html">Agent Evaluation</a></li>
 <li><a href="agent-failure-modes.html">Agent Failure Modes</a></li>
 </ul>
@@ -472,7 +492,7 @@ Conversational tool-use benchmark with airline, retail and telecom agents (15, 1
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-26 Mon 16:53</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
 </div>
 </body>
 </html>

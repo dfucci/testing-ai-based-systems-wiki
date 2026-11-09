@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-26 Mon 16:53 -->
+<!-- 2026-11-09 Mon 12:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trajectory Analysis</title>
@@ -203,21 +203,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7a42826">Motivation</a></li>
-<li><a href="#org1181cba">Formal Definition</a></li>
-<li><a href="#org181e1ac">Approaches to Trajectory Analysis</a>
+<li><a href="#org53b89bc">Motivation</a></li>
+<li><a href="#org61339af">Formal Definition</a></li>
+<li><a href="#org675b440">Approaches to Trajectory Analysis</a>
 <ul>
-<li><a href="#orgfdc2e8e">Stage-wise decomposition (TRAJEVAL)</a></li>
-<li><a href="#org10f9123">System-boundary tracing (AgentSight)</a></li>
-<li><a href="#org4eeb0cf">Tool use pattern analysis</a></li>
-<li><a href="#orgdcbedf1">Token consumption analysis</a></li>
+<li><a href="#org03e92ba">Stage-wise decomposition (TRAJEVAL)</a></li>
+<li><a href="#orgd63eafd">System-boundary tracing (AgentSight)</a></li>
+<li><a href="#org34fdfe5">Declared-intent journals (EPISTEME)</a></li>
+<li><a href="#org80f6ca6">Tool use pattern analysis</a></li>
+<li><a href="#org7ee7218">Token consumption analysis</a></li>
 </ul>
 </li>
-<li><a href="#orgfaeba67">Key Empirical Patterns</a></li>
-<li><a href="#org9fe30d4">Actionability</a></li>
-<li><a href="#org8f962aa">Contrast with Static Analysis</a></li>
-<li><a href="#org83d82c6">Relation to Written Test Suites</a></li>
-<li><a href="#org55010c8">Related pages</a></li>
+<li><a href="#org6c56cba">Key Empirical Patterns</a></li>
+<li><a href="#orgb8392dd">Actionability</a></li>
+<li><a href="#orgc328a21">Contrast with Static Analysis</a></li>
+<li><a href="#org1e62fa6">Relation to Written Test Suites</a></li>
+<li><a href="#orgf57a96a">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -232,16 +233,17 @@
 <ul class="org-ul">
 <li><a href="../raw/Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf">Kim et al. - 2026 - TRAJEVAL Decomposing Code Agent Trajectories for Fine-Grained Diagnosis.pdf</a></li>
 <li><a href="../raw/Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf">Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf</a></li>
+<li><a href="../raw/Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf">Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-26
+<b>Last updated</b>: 2026-11-08
 </p>
 
 <hr />
-<div id="outline-container-org7a42826" class="outline-2">
-<h2 id="org7a42826">Motivation</h2>
-<div class="outline-text-2" id="text-org7a42826">
+<div id="outline-container-org53b89bc" class="outline-2">
+<h2 id="org53b89bc">Motivation</h2>
+<div class="outline-text-2" id="text-org53b89bc">
 <p>
 Outcome-only metrics (Pass@1, Pass@k) tell you <b>what</b> happened but not <b>why</b>. Two agents may both fail, but one failed to find the right file while the other found the right file but edited the wrong function. These require different interventions.
 </p>
@@ -251,9 +253,9 @@ Trajectory analysis converts unstructured execution logs into quantitative, inte
 </p>
 </div>
 </div>
-<div id="outline-container-org1181cba" class="outline-2">
-<h2 id="org1181cba">Formal Definition</h2>
-<div class="outline-text-2" id="text-org1181cba">
+<div id="outline-container-org61339af" class="outline-2">
+<h2 id="org61339af">Formal Definition</h2>
+<div class="outline-text-2" id="text-org61339af">
 <p>
 An agent trajectory is T = {(a<sub>t</sub>, o<sub>t</sub>)}<sup>n</sup><sub>t=1</sub> where:
 </p>
@@ -267,13 +269,13 @@ The agent produces a candidate patch P̂. Trajectory analysis compares T against
 </p>
 </div>
 </div>
-<div id="outline-container-org181e1ac" class="outline-2">
-<h2 id="org181e1ac">Approaches to Trajectory Analysis</h2>
-<div class="outline-text-2" id="text-org181e1ac">
+<div id="outline-container-org675b440" class="outline-2">
+<h2 id="org675b440">Approaches to Trajectory Analysis</h2>
+<div class="outline-text-2" id="text-org675b440">
 </div>
-<div id="outline-container-orgfdc2e8e" class="outline-3">
-<h3 id="orgfdc2e8e">Stage-wise decomposition (TRAJEVAL)</h3>
-<div class="outline-text-3" id="text-orgfdc2e8e">
+<div id="outline-container-org03e92ba" class="outline-3">
+<h3 id="org03e92ba">Stage-wise decomposition (TRAJEVAL)</h3>
+<div class="outline-text-3" id="text-org03e92ba">
 <p>
 <a href="trajeval.html">TRAJEVAL</a> maps trajectory events to three stages (Search → Read → Edit) and computes precision/recall at each stage against a <a href="golden-context.html">golden context</a>. This enables:
 </p>
@@ -284,34 +286,42 @@ The agent produces a candidate patch P̂. Trajectory analysis compares T against
 </ul>
 </div>
 </div>
-<div id="outline-container-org10f9123" class="outline-3">
-<h3 id="org10f9123">System-boundary tracing (AgentSight)</h3>
-<div class="outline-text-3" id="text-org10f9123">
+<div id="outline-container-orgd63eafd" class="outline-3">
+<h3 id="orgd63eafd">System-boundary tracing (AgentSight)</h3>
+<div class="outline-text-3" id="text-orgd63eafd">
 <p>
 <a href="agentsight.html">AgentSight</a> builds a trajectory from outside the agent: decrypted LLM requests and responses (intent) and kernel events (actions) are captured with eBPF, filtered to the agent&rsquo;s process tree, and correlated by process lineage, a 100-500 ms temporal window and argument matching; an observer LLM then judges the correlated trace. Unlike <a href="trajeval.html">TRAJEVAL</a> it needs no reference patch and sees actions outside the agent framework (shell commands, network calls). Its verdicts are LLM judgments demonstrated on three case studies rather than validated metrics. Average overhead was 2.9% on three developer workflows. (source: Zheng et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org4eeb0cf" class="outline-3">
-<h3 id="org4eeb0cf">Tool use pattern analysis</h3>
-<div class="outline-text-3" id="text-org4eeb0cf">
+<div id="outline-container-org34fdfe5" class="outline-3">
+<h3 id="org34fdfe5">Declared-intent journals (EPISTEME)</h3>
+<div class="outline-text-3" id="text-org34fdfe5">
+<p>
+<a href="episteme.html">EPISTEME</a> types the trajectory at the source: every shell call carries a model-declared type from a closed vocabulary of seven (<code>collect-info</code>, <code>test-hypothesis</code>, <code>verify</code>, <code>setup</code>, <code>change-state</code>, <code>revert</code>, <code>cleanup</code>) and a free-text reason, while file tools receive a harness-assigned type. The harness journals each call with its observed effects outside the agent&rsquo;s workspace. Like AgentSight it needs no reference patch. Across 400 runs the journals give type shares and transitions: for Qwen3-235B, 54% of calls are <code>collect-info</code> and 73% of <code>change-state</code> calls are followed directly by <code>verify</code> or <code>test-hypothesis</code>; Mistral Large 3 reads less (25% of calls) and spends 40% of its transitions alternating between <code>change-state</code> and <code>test-hypothesis</code>. The type shares pool model-declared and harness-assigned types. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org80f6ca6" class="outline-3">
+<h3 id="org80f6ca6">Tool use pattern analysis</h3>
+<div class="outline-text-3" id="text-org80f6ca6">
 <p>
 Analyzing which tools an agent calls, in what order, and with what frequency. Reveals efficiency patterns (e.g., localization percentage — Xdfraction of tool calls that are navigation vs. modification).
 </p>
 </div>
 </div>
-<div id="outline-container-orgdcbedf1" class="outline-3">
-<h3 id="orgdcbedf1">Token consumption analysis</h3>
-<div class="outline-text-3" id="text-orgdcbedf1">
+<div id="outline-container-org7ee7218" class="outline-3">
+<h3 id="org7ee7218">Token consumption analysis</h3>
+<div class="outline-text-3" id="text-org7ee7218">
 <p>
 Measuring input/output token usage per tool reveals model-specific command strategies. For example, TRAJEVAL found GPT-5-nano generates 26× more bash output tokens than Qwen-30B, reflecting fundamentally different execution strategies. (&ldquo;GPT-5 nano&rdquo; and &ldquo;Qwen-30B&rdquo; are the paper&rsquo;s own shorthand in its appendix token table — likely GPT-5-mini/nano and Qwen3-Coder-30B tiers, distinct from the seven main models listed on the <a href="trajeval.html">TRAJEVAL</a> page.) (source: Kim et al. 2026)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfaeba67" class="outline-2">
-<h2 id="orgfaeba67">Key Empirical Patterns</h2>
-<div class="outline-text-2" id="text-orgfaeba67">
+<div id="outline-container-org6c56cba" class="outline-2">
+<h2 id="org6c56cba">Key Empirical Patterns</h2>
+<div class="outline-text-2" id="text-org6c56cba">
 <p>
 From TRAJEVAL&rsquo;s analysis of 16,758 trajectories:
 </p>
@@ -323,33 +333,33 @@ From TRAJEVAL&rsquo;s analysis of 16,758 trajectories:
 </ul>
 </div>
 </div>
-<div id="outline-container-org9fe30d4" class="outline-2">
-<h2 id="org9fe30d4">Actionability</h2>
-<div class="outline-text-2" id="text-org9fe30d4">
+<div id="outline-container-orgb8392dd" class="outline-2">
+<h2 id="orgb8392dd">Actionability</h2>
+<div class="outline-text-2" id="text-orgb8392dd">
 <p>
 Trajectory analysis enables real-time intervention. TRAJEVAL demonstrates that injecting confirmatory feedback when agents encounter golden-context files improves Pass@1 by 2.2–4.6pp and reduces cost by 20–31%. This shows trajectory signals are exploitable bottlenecks, not merely correlational patterns.
 </p>
 </div>
 </div>
-<div id="outline-container-org8f962aa" class="outline-2">
-<h2 id="org8f962aa">Contrast with Static Analysis</h2>
-<div class="outline-text-2" id="text-org8f962aa">
+<div id="outline-container-orgc328a21" class="outline-2">
+<h2 id="orgc328a21">Contrast with Static Analysis</h2>
+<div class="outline-text-2" id="text-orgc328a21">
 <p>
 Static analysis examines code structure before execution. Trajectory analysis examines agent behavior during execution. They are complementary: static analysis can inform <a href="runtime-enforcement.html">runtime enforcement</a> rules; trajectory analysis can diagnose which agent behaviors to target.
 </p>
 </div>
 </div>
-<div id="outline-container-org83d82c6" class="outline-2">
-<h2 id="org83d82c6">Relation to Written Test Suites</h2>
-<div class="outline-text-2" id="text-org83d82c6">
+<div id="outline-container-org1e62fa6" class="outline-2">
+<h2 id="org1e62fa6">Relation to Written Test Suites</h2>
+<div class="outline-text-2" id="text-org1e62fa6">
 <p>
 Trajectory analysis diagnoses failures <b>after execution</b>, from logs. It is largely orthogonal to what developers write as up-front tests: <a href="tangent.html">Tangent</a>&rsquo;s mining of 2,572 real agent tests found almost no assertions target reasoning/trajectory-level behavior (8.7%, usually presence-only) — see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org55010c8" class="outline-2">
-<h2 id="org55010c8">Related pages</h2>
-<div class="outline-text-2" id="text-org55010c8">
+<div id="outline-container-orgf57a96a" class="outline-2">
+<h2 id="orgf57a96a">Related pages</h2>
+<div class="outline-text-2" id="text-orgf57a96a">
 <ul class="org-ul">
 <li><a href="trajeval.html">TRAJEVAL</a></li>
 <li><a href="golden-context.html">Golden Context</a></li>
@@ -358,13 +368,14 @@ Trajectory analysis diagnoses failures <b>after execution</b>, from logs. It is 
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
 <li><a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a></li>
 <li><a href="agentsight.html">AgentSight (Zheng et al. 2025)</a></li>
+<li><a href="episteme.html">EPISTEME (Bobadilla et al. 2026)</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-26 Mon 16:53</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
 </div>
 </body>
 </html>

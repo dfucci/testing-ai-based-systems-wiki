@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-26 Mon 16:53 -->
+<!-- 2026-11-09 Mon 12:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AgentSight: System-Level Observability for AI Agents Using eBPF (Zheng et al. 2025)</title>
@@ -203,17 +203,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org04dd348">Problem: the semantic gap</a></li>
-<li><a href="#orga40807a">Approach</a></li>
-<li><a href="#org89ff162">Evaluation</a>
+<li><a href="#orgf0d5cc4">Problem: the semantic gap</a></li>
+<li><a href="#org70e9953">Approach</a></li>
+<li><a href="#org72a7d10">Evaluation</a>
 <ul>
-<li><a href="#orga18b2d6">Overhead</a></li>
-<li><a href="#org6fbd7d8">Case studies (one instance each)</a></li>
+<li><a href="#orgd764eed">Overhead</a></li>
+<li><a href="#org594d732">Case studies (one instance each)</a></li>
 </ul>
 </li>
-<li><a href="#orge5d7ac8">Scope of the evidence</a></li>
-<li><a href="#org674c2da">Relation to the rest of the wiki</a></li>
-<li><a href="#orgeee7600">Related pages</a></li>
+<li><a href="#org6bfebd4">Scope of the evidence</a></li>
+<li><a href="#orga129fcc">Relation to the rest of the wiki</a></li>
+<li><a href="#orgc9fd4f3">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -228,16 +228,17 @@
 <ul class="org-ul">
 <li><a href="../raw/Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf">Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf</a> (PACMI &rsquo;25, ACM, 6 pages, doi:10.1145/3766882.3767169)</li>
 <li><a href="../raw/Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf">Pan et al. - 2026 - Tangent An Empirical Study of Testing Practices for LLM-Based Agent Applications.pdf</a></li>
+<li><a href="../raw/Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf">Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-26
+<b>Last updated</b>: 2026-11-08
 </p>
 
 <hr />
-<div id="outline-container-org04dd348" class="outline-2">
-<h2 id="org04dd348">Problem: the semantic gap</h2>
-<div class="outline-text-2" id="text-org04dd348">
+<div id="outline-container-orgf0d5cc4" class="outline-2">
+<h2 id="orgf0d5cc4">Problem: the semantic gap</h2>
+<div class="outline-text-2" id="text-orgf0d5cc4">
 <p>
 An agent couples an LLM with tools that spawn processes, edit files and run commands, so its intent is expressed in natural language and its actions are generated at runtime. Existing observability sits on one side of that gap: (source: Zheng et al. 2025)
 </p>
@@ -252,9 +253,9 @@ The paper&rsquo;s example: an agent that reads a malicious instruction from an e
 </p>
 </div>
 </div>
-<div id="outline-container-orga40807a" class="outline-2">
-<h2 id="orga40807a">Approach</h2>
-<div class="outline-text-2" id="text-orga40807a">
+<div id="outline-container-org70e9953" class="outline-2">
+<h2 id="org70e9953">Approach</h2>
+<div class="outline-text-2" id="text-org70e9953">
 <p>
 <b>Boundary tracing</b>: all interactions pass through the kernel and the network, and those interfaces (syscall ABIs, network protocols) change far more slowly than agent frameworks. Monitoring there is framework-agnostic, needs no instrumentation and does not rely on a cooperative agent. (source: Zheng et al. 2025)
 </p>
@@ -267,13 +268,13 @@ The paper&rsquo;s example: an agent that reads a malicious instruction from an e
 </ul>
 </div>
 </div>
-<div id="outline-container-org89ff162" class="outline-2">
-<h2 id="org89ff162">Evaluation</h2>
-<div class="outline-text-2" id="text-org89ff162">
+<div id="outline-container-org72a7d10" class="outline-2">
+<h2 id="org72a7d10">Evaluation</h2>
+<div class="outline-text-2" id="text-org72a7d10">
 </div>
-<div id="outline-container-orga18b2d6" class="outline-3">
-<h3 id="orga18b2d6">Overhead</h3>
-<div class="outline-text-3" id="text-orga18b2d6">
+<div id="outline-container-orgd764eed" class="outline-3">
+<h3 id="orgd764eed">Overhead</h3>
+<div class="outline-text-3" id="text-orgd764eed">
 <p>
 Ubuntu 22.04, Linux 6.14.0, Claude Code 1.0.62 with Claude 4; three workflows, three runs each with and without AgentSight (source: Zheng et al. 2025):
 </p>
@@ -327,9 +328,9 @@ Average overhead reported: 2.9%.
 </p>
 </div>
 </div>
-<div id="outline-container-org6fbd7d8" class="outline-3">
-<h3 id="org6fbd7d8">Case studies (one instance each)</h3>
-<div class="outline-text-3" id="text-org6fbd7d8">
+<div id="outline-container-org594d732" class="outline-3">
+<h3 id="org594d732">Case studies (one instance each)</h3>
+<div class="outline-text-3" id="text-org594d732">
 <ul class="org-ul">
 <li><b>Indirect prompt injection</b>: an agent told to clone and build a C project follows a README link to a page with a hidden prompt, then reads and sends <code>/etc/passwd</code> to a collection server in a command disguised as a build step. AgentSight captured the chain from URL fetch to exfiltration — 521 raw events merged into 37 by the correlation engine — and the observer LLM returned a high-confidence attack score, concluding the actions were logically inconsistent with the stated goal.</li>
 <li><b>Reasoning loop</b>: a research agent built with crewAI and gpt-4o-mini repeatedly called a web-search tool with incorrect arguments, got an error and retried the same failing call. Real-time monitors flagged the anomalous API consumption; the observer LLM named the cause as a persistent tool error and a &ldquo;try-fail-re-reason&rdquo; loop in which the agent did not learn from the tool&rsquo;s output.</li>
@@ -338,25 +339,29 @@ Average overhead reported: 2.9%.
 </div>
 </div>
 </div>
-<div id="outline-container-orge5d7ac8" class="outline-2">
-<h2 id="orge5d7ac8">Scope of the evidence</h2>
-<div class="outline-text-2" id="text-orge5d7ac8">
+<div id="outline-container-org6bfebd4" class="outline-2">
+<h2 id="org6bfebd4">Scope of the evidence</h2>
+<div class="outline-text-2" id="text-org6bfebd4">
 <p>
 Each case study is a single instance. The paper reports no detection or false-positive rates and no comparison against intent-only or action-only tools, and the observer LLM&rsquo;s verdicts are not independently validated in the paper. Interception probes <code>SSL_read</code> / <code>SSL_write</code> in crypto libraries such as OpenSSL. The paper names the latency and cost of LLM analysis as a challenge, mitigated with asynchronous processing and prompt engineering. AgentSight observes and reports; it does not block actions. (source: Zheng et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-org674c2da" class="outline-2">
-<h2 id="org674c2da">Relation to the rest of the wiki</h2>
-<div class="outline-text-2" id="text-org674c2da">
+<div id="outline-container-orga129fcc" class="outline-2">
+<h2 id="orga129fcc">Relation to the rest of the wiki</h2>
+<div class="outline-text-2" id="text-orga129fcc">
 <p>
 <a href="tangent.html">Tangent</a>&rsquo;s interviewees say they rely on post-deployment observability (OpenTelemetry, LangSmith, Langfuse, Arize AI) instead of formal test suites (see <a href="llm-agent-testing-practice.html">LLM Agent Testing Practice</a>); AgentSight names Langfuse, LangSmith, Datadog and the OpenTelemetry GenAI conventions as intent-side observability and says such tools cannot see out-of-process actions. (source: Pan et al. 2026; Zheng et al. 2025) For comparison, <a href="trajeval.html">TRAJEVAL</a> compares trajectories against a reference patch (<a href="trajectory-analysis.html">Trajectory Analysis</a>), and <a href="agentspec.html">AgentSpec</a> intercepts and blocks actions at runtime (<a href="runtime-enforcement.html">Runtime Enforcement</a>). Indirect prompt injection is also discussed in <a href="agent-safety.html">Agent Safety</a>.
 </p>
+
+<p>
+<a href="episteme.html">EPISTEME</a> (Bobadilla et al. 2026) cites AgentSight as correlating intercepted LLM traffic with kernel events. It obtains intent differently: the model must declare a type and reason for each shell call, and a mechanical checker compares the declared type with the workspace diff, with no observer LLM. (source: Bobadilla et al. 2026)
+</p>
 </div>
 </div>
-<div id="outline-container-orgeee7600" class="outline-2">
-<h2 id="orgeee7600">Related pages</h2>
-<div class="outline-text-2" id="text-orgeee7600">
+<div id="outline-container-orgc9fd4f3" class="outline-2">
+<h2 id="orgc9fd4f3">Related pages</h2>
+<div class="outline-text-2" id="text-orgc9fd4f3">
 <ul class="org-ul">
 <li><a href="trajectory-analysis.html">Trajectory Analysis</a></li>
 <li><a href="runtime-enforcement.html">Runtime Enforcement</a></li>
@@ -366,13 +371,14 @@ Each case study is a single instance. The paper reports no detection or false-po
 <li><a href="agentspec.html">AgentSpec (Wang et al. 2025)</a></li>
 <li><a href="trajeval.html">TRAJEVAL (Kim et al. 2026)</a></li>
 <li><a href="llm-as-judge-evaluation.html">LLM-as-Judge Evaluation</a></li>
+<li><a href="episteme.html">EPISTEME (Bobadilla et al. 2026)</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-26 Mon 16:53</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-26 Mon 16:53 -->
+<!-- 2026-11-09 Mon 12:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Runtime Enforcement</title>
@@ -203,22 +203,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org66fdb1c">Motivation</a></li>
-<li><a href="#orgc8ef2b7">Core Architecture</a></li>
-<li><a href="#orgb898651">AgentSpec Approach</a></li>
-<li><a href="#org30999ae">Enforcement Strategies</a>
+<li><a href="#orgf43e450">Motivation</a></li>
+<li><a href="#org1b42587">Core Architecture</a></li>
+<li><a href="#org5accb1c">AgentSpec Approach</a></li>
+<li><a href="#orge475586">Enforcement Strategies</a>
 <ul>
-<li><a href="#orgfb23b43">Hard stopping (<code>stop</code>)</a></li>
-<li><a href="#orgefe718c">Human-in-the-loop (<code>user_inspection</code>)</a></li>
-<li><a href="#orgbc1d0fb">LLM self-reflection (<code>llm_self_examine</code>)</a></li>
-<li><a href="#orgb3c2da9">Corrective action (<code>invoke_action</code>)</a></li>
+<li><a href="#orgb293de4">Hard stopping (<code>stop</code>)</a></li>
+<li><a href="#org1b585dc">Human-in-the-loop (<code>user_inspection</code>)</a></li>
+<li><a href="#org400954a">LLM self-reflection (<code>llm_self_examine</code>)</a></li>
+<li><a href="#org880f484">Corrective action (<code>invoke_action</code>)</a></li>
 </ul>
 </li>
-<li><a href="#org4e0ffe8">Overhead</a></li>
-<li><a href="#org4f5c443">Relationship to Other Verification Approaches</a></li>
-<li><a href="#orgc21acda">Evidence about where enforcement belongs (from testing)</a></li>
-<li><a href="#orgf7c062b">Limitations</a></li>
-<li><a href="#orga2c1467">Related pages</a></li>
+<li><a href="#org850df8e">Overhead</a></li>
+<li><a href="#orgfcf366e">Relationship to Other Verification Approaches</a></li>
+<li><a href="#orgccbbc51">Evidence about where enforcement belongs (from testing)</a></li>
+<li><a href="#org7a897e5">Declared intent as an input to the check (EPISTEME)</a></li>
+<li><a href="#org34f0e0c">Limitations</a></li>
+<li><a href="#org8811949">Related pages</a></li>
 </ul>
 </div>
 </div>
@@ -235,16 +236,17 @@
 <li><a href="../raw/Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf">Wang et al. - 2026 - Lean4Agent Formal Modeling and Verification for Agent Workflow and Trajectory.pdf</a></li>
 <li><a href="../raw/Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf">Quan et al. - 2026 - AgenTest Mining Business Rules to Test LLM Agents.pdf</a></li>
 <li><a href="../raw/Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf">Zheng et al. - 2025 - AgentSight System-Level Observability for AI Agen.pdf</a></li>
+<li><a href="../raw/Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf">Bobadilla et al. - 2026 - EPISTEME Trustworthy Coding Agents Through Tool Call Intent.pdf</a></li>
 </ul>
 
 <p>
-<b>Last updated</b>: 2026-10-26
+<b>Last updated</b>: 2026-11-08
 </p>
 
 <hr />
-<div id="outline-container-org66fdb1c" class="outline-2">
-<h2 id="org66fdb1c">Motivation</h2>
-<div class="outline-text-2" id="text-org66fdb1c">
+<div id="outline-container-orgf43e450" class="outline-2">
+<h2 id="orgf43e450">Motivation</h2>
+<div class="outline-text-2" id="text-orgf43e450">
 <p>
 LLM agents can deviate from user intent at runtime in ways that are hard to predict statically. Pre-execution risk assessment (e.g., LLM-based sandboxes) can identify potential risks but offer no enforcement mechanism and are susceptible to adversarial manipulation. Post-hoc evaluation identifies failures after damage is done.
 </p>
@@ -254,9 +256,9 @@ Runtime enforcement is the active middle layer: monitor execution as it happens,
 </p>
 </div>
 </div>
-<div id="outline-container-orgc8ef2b7" class="outline-2">
-<h2 id="orgc8ef2b7">Core Architecture</h2>
-<div class="outline-text-2" id="text-orgc8ef2b7">
+<div id="outline-container-org1b42587" class="outline-2">
+<h2 id="org1b42587">Core Architecture</h2>
+<div class="outline-text-2" id="text-org1b42587">
 <p>
 A runtime enforcement system needs:
 </p>
@@ -268,9 +270,9 @@ A runtime enforcement system needs:
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb898651" class="outline-2">
-<h2 id="orgb898651">AgentSpec Approach</h2>
-<div class="outline-text-2" id="text-orgb898651">
+<div id="outline-container-org5accb1c" class="outline-2">
+<h2 id="org5accb1c">AgentSpec Approach</h2>
+<div class="outline-text-2" id="text-org5accb1c">
 <p>
 <a href="agentspec.html">AgentSpec</a> implements runtime enforcement via a DSL. Rules specify:
 </p>
@@ -285,46 +287,46 @@ Integration point: the LangChain <code>iter_next_step</code> function, which is 
 </p>
 </div>
 </div>
-<div id="outline-container-org30999ae" class="outline-2">
-<h2 id="org30999ae">Enforcement Strategies</h2>
-<div class="outline-text-2" id="text-org30999ae">
+<div id="outline-container-orge475586" class="outline-2">
+<h2 id="orge475586">Enforcement Strategies</h2>
+<div class="outline-text-2" id="text-orge475586">
 </div>
-<div id="outline-container-orgfb23b43" class="outline-3">
-<h3 id="orgfb23b43">Hard stopping (<code>stop</code>)</h3>
-<div class="outline-text-3" id="text-orgfb23b43">
+<div id="outline-container-orgb293de4" class="outline-3">
+<h3 id="orgb293de4">Hard stopping (<code>stop</code>)</h3>
+<div class="outline-text-3" id="text-orgb293de4">
 <p>
 Terminate execution immediately. Appropriate for clearly dangerous actions (e.g., pouring onto non-wettable objects, running destructive shell commands).
 </p>
 </div>
 </div>
-<div id="outline-container-orgefe718c" class="outline-3">
-<h3 id="orgefe718c">Human-in-the-loop (<code>user_inspection</code>)</h3>
-<div class="outline-text-3" id="text-orgefe718c">
+<div id="outline-container-org1b585dc" class="outline-3">
+<h3 id="org1b585dc">Human-in-the-loop (<code>user_inspection</code>)</h3>
+<div class="outline-text-3" id="text-org1b585dc">
 <p>
 Pause and request human approval. Appropriate for high-stakes actions that are context-dependent (e.g., financial transfers, sensitive file access).
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc1d0fb" class="outline-3">
-<h3 id="orgbc1d0fb">LLM self-reflection (<code>llm_self_examine</code>)</h3>
-<div class="outline-text-3" id="text-orgbc1d0fb">
+<div id="outline-container-org400954a" class="outline-3">
+<h3 id="org400954a">LLM self-reflection (<code>llm_self_examine</code>)</h3>
+<div class="outline-text-3" id="text-org400954a">
 <p>
 Invoke the agent&rsquo;s own reasoning to generate a corrective response. Appropriate when the right action is context-dependent and an LLM can determine the safe alternative.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb3c2da9" class="outline-3">
-<h3 id="orgb3c2da9">Corrective action (<code>invoke_action</code>)</h3>
-<div class="outline-text-3" id="text-orgb3c2da9">
+<div id="outline-container-org880f484" class="outline-3">
+<h3 id="org880f484">Corrective action (<code>invoke_action</code>)</h3>
+<div class="outline-text-3" id="text-org880f484">
 <p>
 Execute a predefined alternative action. Appropriate for domain-specific responses where the safe alternative is known (e.g., adjusting following distance when vehicle detects obstacle).
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org4e0ffe8" class="outline-2">
-<h2 id="org4e0ffe8">Overhead</h2>
-<div class="outline-text-2" id="text-org4e0ffe8">
+<div id="outline-container-org850df8e" class="outline-2">
+<h2 id="org850df8e">Overhead</h2>
+<div class="outline-text-2" id="text-org850df8e">
 <p>
 AgentSpec demonstrates runtime enforcement is computationally feasible:
 </p>
@@ -339,9 +341,9 @@ AgentSpec demonstrates runtime enforcement is computationally feasible:
 </p>
 </div>
 </div>
-<div id="outline-container-org4f5c443" class="outline-2">
-<h2 id="org4f5c443">Relationship to Other Verification Approaches</h2>
-<div class="outline-text-2" id="text-org4f5c443">
+<div id="outline-container-orgfcf366e" class="outline-2">
+<h2 id="orgfcf366e">Relationship to Other Verification Approaches</h2>
+<div class="outline-text-2" id="text-orgfcf366e">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -389,6 +391,12 @@ AgentSpec demonstrates runtime enforcement is computationally feasible:
 <td class="org-left">During execution (observe and report only)</td>
 <td class="org-left">eBPF captures decrypted LLM traffic and kernel events, correlates them, and an observer LLM flags suspicious chains; nothing is blocked</td>
 </tr>
+
+<tr>
+<td class="org-left">Declared-intent journal (<a href="episteme.html">EPISTEME</a>)</td>
+<td class="org-left">Before each call (declaration format; in guardrail mode, read-only declarations on mutating commands) and after it (declared type vs. workspace diff)</td>
+<td class="org-left">The model declares a type and reason for every shell call; the harness records effects and checker findings in a journal the agent cannot edit</td>
+</tr>
 </tbody>
 </table>
 
@@ -397,17 +405,25 @@ Runtime enforcement and trajectory analysis are complementary: trajectory signal
 </p>
 </div>
 </div>
-<div id="outline-container-orgc21acda" class="outline-2">
-<h2 id="orgc21acda">Evidence about where enforcement belongs (from testing)</h2>
-<div class="outline-text-2" id="text-orgc21acda">
+<div id="outline-container-orgccbbc51" class="outline-2">
+<h2 id="orgccbbc51">Evidence about where enforcement belongs (from testing)</h2>
+<div class="outline-text-2" id="text-orgccbbc51">
 <p>
 <a href="agentest.html">AgenTest</a> (Quan et al. 2026) found that the unauthorized-action bugs it exposed (an agent acting on another user&rsquo;s reservation or line) succeed because the tools accept any user&rsquo;s object, and that they come almost entirely from rules stated in no artifact. 85% of its oracle checks in default-strategy runs (492 of 579) were deterministic predicates over tool calls and state — ownership, argument values, call order — which the authors note could also guard tool execution at runtime. Conversational rules such as confirmation stay with the model, and testing remains their main safeguard. <a href="agentsight.html">AgentSight</a> sits on the other side of the same line: it observes an agent&rsquo;s system-level effects and reports them but does not block. (source: Quan et al. 2026; Zheng et al. 2025)
 </p>
 </div>
 </div>
-<div id="outline-container-orgf7c062b" class="outline-2">
-<h2 id="orgf7c062b">Limitations</h2>
-<div class="outline-text-2" id="text-orgf7c062b">
+<div id="outline-container-org7a897e5" class="outline-2">
+<h2 id="org7a897e5">Declared intent as an input to the check (EPISTEME)</h2>
+<div class="outline-text-2" id="text-org7a897e5">
+<p>
+<a href="episteme.html">EPISTEME</a> (Bobadilla et al. 2026) makes a declaration of intent part of every shell call and checks it against the observed effects. Every shell call must carry a type from a closed vocabulary of seven and a reason of at least 20 characters; ill-formed calls are refused. Guardrail mode adds a single online refusal, for a call declared read-only whose command contains a mutating operation. A contradiction between declared type and observed effects is known only after the call has run, so both modes record it rather than prevent it; the authors say a stricter harness could stop the agent or roll back the workspace. Changes to operator-protected files such as tests are flagged, not blocked. All reported runs used monitor mode, so the online refusal is not evaluated. (source: Bobadilla et al. 2026)
+</p>
+</div>
+</div>
+<div id="outline-container-org34f0e0c" class="outline-2">
+<h2 id="org34f0e0c">Limitations</h2>
+<div class="outline-text-2" id="text-org34f0e0c">
 <ul class="org-ul">
 <li>Deterministic enforcement only — cannot reason about long-term consequences of safe-seeming immediate actions</li>
 <li>Rules must be manually specified or LLM-generated (LLM generation: ~95% precision but only ~71% recall)</li>
@@ -415,9 +431,9 @@ Runtime enforcement and trajectory analysis are complementary: trajectory signal
 </ul>
 </div>
 </div>
-<div id="outline-container-orga2c1467" class="outline-2">
-<h2 id="orga2c1467">Related pages</h2>
-<div class="outline-text-2" id="text-orga2c1467">
+<div id="outline-container-org8811949" class="outline-2">
+<h2 id="org8811949">Related pages</h2>
+<div class="outline-text-2" id="text-org8811949">
 <ul class="org-ul">
 <li><a href="agentspec.html">AgentSpec</a></li>
 <li><a href="agent-safety.html">Agent Safety</a></li>
@@ -426,13 +442,14 @@ Runtime enforcement and trajectory analysis are complementary: trajectory signal
 <li><a href="formal-verification-of-agent-workflows.html">Formal Verification of Agent Workflows</a></li>
 <li><a href="agentest.html">AgenTest (Quan et al. 2026)</a></li>
 <li><a href="agentsight.html">AgentSight (Zheng et al. 2025)</a></li>
+<li><a href="episteme.html">EPISTEME (Bobadilla et al. 2026)</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Davide Fucci</p>
-<p class="date">Created: 2026-10-26 Mon 16:53</p>
+<p class="date">Created: 2026-11-09 Mon 12:19</p>
 </div>
 </body>
 </html>
